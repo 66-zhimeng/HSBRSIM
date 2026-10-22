@@ -1,0 +1,6775 @@
+{
+  "generated_at": "2026-10-18T08:05:05+00:00",
+  "sources": {
+    "official_assembly": "C:\\Program Files (x86)\\Hearthstone\\Hearthstone_Data\\Managed\\Assembly-CSharp.dll",
+    "official_enum": "GAME_TAG",
+    "extracted_enums": "C:\\HSagent\\reversed\\net\\Assembly-CSharp\\enums.json",
+    "engine_tags": "C:\\HSagent\\hsrl2\\tags.py",
+    "extraction_tool": "tools/rea_net_extract.py (Mono.Cecil)"
+  },
+  "game_tag": {
+    "official_count": 1214,
+    "engine_count": 126,
+    "name_matched": 33,
+    "value_mismatch_count": 11,
+    "value_mismatches": [
+      {
+        "name": "BONUS_KEYWORDS",
+        "official": 3423,
+        "engine": 1097
+      },
+      {
+        "name": "CHOOSE_BOTH",
+        "official": 419,
+        "engine": 1058
+      },
+      {
+        "name": "CHOOSE_ONE",
+        "official": 443,
+        "engine": 1050
+      },
+      {
+        "name": "DARK_GIFT",
+        "official": 3627,
+        "engine": 4855
+      },
+      {
+        "name": "ENTITY_ID",
+        "official": 53,
+        "engine": 12
+      },
+      {
+        "name": "EXHAUSTED",
+        "official": 43,
+        "engine": 1026
+      },
+      {
+        "name": "FROZEN",
+        "official": 260,
+        "engine": 1035
+      },
+      {
+        "name": "IMMUNE_WHILE_ATTACKING",
+        "official": 373,
+        "engine": 1044
+      },
+      {
+        "name": "MEGA_WINDFURY",
+        "official": 1207,
+        "engine": 826
+      },
+      {
+        "name": "SILENCED",
+        "official": 188,
+        "engine": 3309
+      },
+      {
+        "name": "STEALTH",
+        "official": 191,
+        "engine": 19
+      }
+    ],
+    "official_only_count": 1181,
+    "official_only": [
+      {
+        "name": "TAG_NOT_SET",
+        "value": 0
+      },
+      {
+        "name": "TAG_SCRIPT_DATA_NUM_1",
+        "value": 2
+      },
+      {
+        "name": "TAG_SCRIPT_DATA_NUM_2",
+        "value": 3
+      },
+      {
+        "name": "TAG_SCRIPT_DATA_ENT_1",
+        "value": 4
+      },
+      {
+        "name": "TAG_SCRIPT_DATA_ENT_2",
+        "value": 5
+      },
+      {
+        "name": "MISSION_EVENT",
+        "value": 6
+      },
+      {
+        "name": "TIMEOUT",
+        "value": 7
+      },
+      {
+        "name": "TURN_START",
+        "value": 8
+      },
+      {
+        "name": "TURN_TIMER_SLUSH",
+        "value": 9
+      },
+      {
+        "name": "PREMIUM",
+        "value": 12
+      },
+      {
+        "name": "PLAYSTATE",
+        "value": 17
+      },
+      {
+        "name": "LAST_AFFECTED_BY",
+        "value": 18
+      },
+      {
+        "name": "STEP",
+        "value": 19
+      },
+      {
+        "name": "TURN",
+        "value": 20
+      },
+      {
+        "name": "FATIGUE",
+        "value": 22
+      },
+      {
+        "name": "CURRENT_PLAYER",
+        "value": 23
+      },
+      {
+        "name": "FIRST_PLAYER",
+        "value": 24
+      },
+      {
+        "name": "RESOURCES_USED",
+        "value": 25
+      },
+      {
+        "name": "RESOURCES",
+        "value": 26
+      },
+      {
+        "name": "HERO_ENTITY",
+        "value": 27
+      },
+      {
+        "name": "MAXHANDSIZE",
+        "value": 28
+      },
+      {
+        "name": "STARTHANDSIZE",
+        "value": 29
+      },
+      {
+        "name": "PLAYER_ID",
+        "value": 30
+      },
+      {
+        "name": "TEAM_ID",
+        "value": 31
+      },
+      {
+        "name": "TRIGGER_VISUAL",
+        "value": 32
+      },
+      {
+        "name": "RECENTLY_ARRIVED",
+        "value": 33
+      },
+      {
+        "name": "PROTECTING",
+        "value": 34
+      },
+      {
+        "name": "PROTECTED",
+        "value": 35
+      },
+      {
+        "name": "DEFENDING",
+        "value": 36
+      },
+      {
+        "name": "PROPOSED_DEFENDER",
+        "value": 37
+      },
+      {
+        "name": "ATTACKING",
+        "value": 38
+      },
+      {
+        "name": "PROPOSED_ATTACKER",
+        "value": 39
+      },
+      {
+        "name": "ATTACHED",
+        "value": 40
+      },
+      {
+        "name": "CONTROLLER",
+        "value": 50
+      },
+      {
+        "name": "OWNER",
+        "value": 51
+      },
+      {
+        "name": "DEFINITION",
+        "value": 52
+      },
+      {
+        "name": "HISTORY_PROXY",
+        "value": 54
+      },
+      {
+        "name": "ELITE",
+        "value": 114
+      },
+      {
+        "name": "MAXRESOURCES",
+        "value": 176
+      },
+      {
+        "name": "CARD_SET",
+        "value": 183
+      },
+      {
+        "name": "CARDTEXT",
+        "value": 184
+      },
+      {
+        "name": "DURABILITY_DEPRECATED",
+        "value": 187
+      },
+      {
+        "name": "SPELLPOWER",
+        "value": 192
+      },
+      {
+        "name": "CHARGE",
+        "value": 197
+      },
+      {
+        "name": "NEXT_STEP",
+        "value": 198
+      },
+      {
+        "name": "CLASS",
+        "value": 199
+      },
+      {
+        "name": "CARDRACE",
+        "value": 200
+      },
+      {
+        "name": "FACTION",
+        "value": 201
+      },
+      {
+        "name": "STATE",
+        "value": 204
+      },
+      {
+        "name": "SUMMONED",
+        "value": 205
+      },
+      {
+        "name": "FREEZE",
+        "value": 208
+      },
+      {
+        "name": "ENRAGED",
+        "value": 212
+      },
+      {
+        "name": "OVERLOAD",
+        "value": 215
+      },
+      {
+        "name": "LOYALTY",
+        "value": 216
+      },
+      {
+        "name": "SECRET",
+        "value": 219
+      },
+      {
+        "name": "COMBO",
+        "value": 220
+      },
+      {
+        "name": "CANT_HEAL",
+        "value": 221
+      },
+      {
+        "name": "CANT_DAMAGE",
+        "value": 222
+      },
+      {
+        "name": "CANT_SET_ASIDE",
+        "value": 223
+      },
+      {
+        "name": "CANT_REMOVE_FROM_GAME",
+        "value": 224
+      },
+      {
+        "name": "CANT_READY",
+        "value": 225
+      },
+      {
+        "name": "CANT_ATTACK",
+        "value": 227
+      },
+      {
+        "name": "CANT_DISCARD",
+        "value": 230
+      },
+      {
+        "name": "CANT_PLAY",
+        "value": 231
+      },
+      {
+        "name": "CANT_DRAW",
+        "value": 232
+      },
+      {
+        "name": "CANT_BE_HEALED",
+        "value": 239
+      },
+      {
+        "name": "CANT_BE_SET_ASIDE",
+        "value": 241
+      },
+      {
+        "name": "CANT_BE_REMOVED_FROM_GAME",
+        "value": 242
+      },
+      {
+        "name": "CANT_BE_READIED",
+        "value": 243
+      },
+      {
+        "name": "CANT_BE_ATTACKED",
+        "value": 245
+      },
+      {
+        "name": "CANT_BE_TARGETED",
+        "value": 246
+      },
+      {
+        "name": "CANT_BE_DESTROYED",
+        "value": 247
+      },
+      {
+        "name": "CANT_BE_SUMMONING_SICK",
+        "value": 253
+      },
+      {
+        "name": "JUST_PLAYED",
+        "value": 261
+      },
+      {
+        "name": "LINKED_ENTITY",
+        "value": 262
+      },
+      {
+        "name": "CANT_BE_FROZEN",
+        "value": 264
+      },
+      {
+        "name": "COMBO_ACTIVE",
+        "value": 266
+      },
+      {
+        "name": "CARD_TARGET",
+        "value": 267
+      },
+      {
+        "name": "NUM_CARDS_PLAYED_THIS_TURN",
+        "value": 269
+      },
+      {
+        "name": "CANT_BE_TARGETED_BY_OPPONENTS",
+        "value": 270
+      },
+      {
+        "name": "NUM_TURNS_IN_PLAY",
+        "value": 271
+      },
+      {
+        "name": "NUM_TURNS_LEFT",
+        "value": 272
+      },
+      {
+        "name": "NUM_TURNS_IN_HAND",
+        "value": 273
+      },
+      {
+        "name": "CURRENT_SPELLPOWER_BASE",
+        "value": 291
+      },
+      {
+        "name": "MORPH",
+        "value": 293
+      },
+      {
+        "name": "IS_MORPHED",
+        "value": 294
+      },
+      {
+        "name": "TEMP_RESOURCES",
+        "value": 295
+      },
+      {
+        "name": "OVERLOAD_OWED",
+        "value": 296
+      },
+      {
+        "name": "NUM_ATTACKS_THIS_TURN",
+        "value": 297
+      },
+      {
+        "name": "NEXT_ALLY_BUFF",
+        "value": 302
+      },
+      {
+        "name": "MAGNET",
+        "value": 303
+      },
+      {
+        "name": "FIRST_CARD_PLAYED_THIS_TURN",
+        "value": 304
+      },
+      {
+        "name": "MULLIGAN_STATE",
+        "value": 305
+      },
+      {
+        "name": "TAUNT_READY",
+        "value": 306
+      },
+      {
+        "name": "STEALTH_READY",
+        "value": 307
+      },
+      {
+        "name": "CHARGE_READY",
+        "value": 308
+      },
+      {
+        "name": "CANT_BE_TARGETED_BY_SPELLS",
+        "value": 311
+      },
+      {
+        "name": "SHOULDEXITCOMBAT",
+        "value": 312
+      },
+      {
+        "name": "CREATOR",
+        "value": 313
+      },
+      {
+        "name": "CANT_BE_SILENCED",
+        "value": 314
+      },
+      {
+        "name": "PARENT_CARD",
+        "value": 316
+      },
+      {
+        "name": "NUM_MINIONS_PLAYED_THIS_TURN",
+        "value": 317
+      },
+      {
+        "name": "PREDAMAGE",
+        "value": 318
+      },
+      {
+        "name": "COLLECTIBLE",
+        "value": 321
+      },
+      {
+        "name": "TARGETING_ARROW_TEXT",
+        "value": 325
+      },
+      {
+        "name": "HEALING_DOES_DAMAGE",
+        "value": 326
+      },
+      {
+        "name": "DATABASE_ID",
+        "value": 327
+      },
+      {
+        "name": "ENCHANTMENT_BIRTH_VISUAL",
+        "value": 330
+      },
+      {
+        "name": "ENCHANTMENT_IDLE_VISUAL",
+        "value": 331
+      },
+      {
+        "name": "CANT_BE_TARGETED_BY_HERO_POWERS",
+        "value": 332
+      },
+      {
+        "name": "MAIN_HAND_WEAPON_ENTITY",
+        "value": 334
+      },
+      {
+        "name": "HEALTH_MINIMUM",
+        "value": 337
+      },
+      {
+        "name": "TAG_ONE_TURN_EFFECT",
+        "value": 338
+      },
+      {
+        "name": "SILENCE",
+        "value": 339
+      },
+      {
+        "name": "COUNTER",
+        "value": 340
+      },
+      {
+        "name": "ZONES_REVEALED",
+        "value": 348
+      },
+      {
+        "name": "ADJACENT_BUFF",
+        "value": 350
+      },
+      {
+        "name": "FORCED_PLAY",
+        "value": 352
+      },
+      {
+        "name": "LOW_HEALTH_THRESHOLD",
+        "value": 353
+      },
+      {
+        "name": "SPELLPOWER_DOUBLE",
+        "value": 356
+      },
+      {
+        "name": "SPELL_HEALING_DOUBLE",
+        "value": 357
+      },
+      {
+        "name": "NUM_OPTIONS_PLAYED_THIS_TURN",
+        "value": 358
+      },
+      {
+        "name": "TO_BE_DESTROYED",
+        "value": 360
+      },
+      {
+        "name": "AURA",
+        "value": 362
+      },
+      {
+        "name": "HERO_POWER_DOUBLE",
+        "value": 366
+      },
+      {
+        "name": "AI_MUST_PLAY",
+        "value": 367
+      },
+      {
+        "name": "NUM_MINIONS_PLAYER_KILLED_THIS_TURN",
+        "value": 368
+      },
+      {
+        "name": "NUM_MINIONS_KILLED_THIS_TURN",
+        "value": 369
+      },
+      {
+        "name": "AFFECTED_BY_SPELL_POWER",
+        "value": 370
+      },
+      {
+        "name": "EXTRA_MINION_DEATHRATTLES_BASE",
+        "value": 371
+      },
+      {
+        "name": "START_WITH_1_HEALTH",
+        "value": 372
+      },
+      {
+        "name": "MULTIPLY_HERO_DAMAGE",
+        "value": 374
+      },
+      {
+        "name": "MULTIPLY_BUFF_VALUE",
+        "value": 375
+      },
+      {
+        "name": "CUSTOM_KEYWORD_EFFECT",
+        "value": 376
+      },
+      {
+        "name": "CANT_BE_TARGETED_BY_BATTLECRIES",
+        "value": 379
+      },
+      {
+        "name": "HERO_POWER",
+        "value": 380
+      },
+      {
+        "name": "DEATHRATTLE_RETURN_ZONE",
+        "value": 382
+      },
+      {
+        "name": "STEADY_SHOT_CAN_TARGET",
+        "value": 383
+      },
+      {
+        "name": "DISPLAYED_CREATOR",
+        "value": 385
+      },
+      {
+        "name": "POWERED_UP",
+        "value": 386
+      },
+      {
+        "name": "SPARE_PART",
+        "value": 388
+      },
+      {
+        "name": "FORGETFUL",
+        "value": 389
+      },
+      {
+        "name": "CAN_SUMMON_MAXPLUSONE_MINION",
+        "value": 390
+      },
+      {
+        "name": "OBFUSCATED",
+        "value": 391
+      },
+      {
+        "name": "BURNING",
+        "value": 392
+      },
+      {
+        "name": "OVERLOAD_LOCKED",
+        "value": 393
+      },
+      {
+        "name": "NUM_TIMES_HERO_POWER_USED_THIS_GAME",
+        "value": 394
+      },
+      {
+        "name": "CURRENT_HEROPOWER_DAMAGE_BONUS",
+        "value": 395
+      },
+      {
+        "name": "HEROPOWER_DAMAGE",
+        "value": 396
+      },
+      {
+        "name": "NUM_FRIENDLY_MINIONS_THAT_DIED_THIS_TURN",
+        "value": 398
+      },
+      {
+        "name": "NUM_CARDS_DRAWN_THIS_TURN",
+        "value": 399
+      },
+      {
+        "name": "AI_ONE_SHOT_KILL",
+        "value": 400
+      },
+      {
+        "name": "EVIL_GLOW",
+        "value": 401
+      },
+      {
+        "name": "HIDE_STATS",
+        "value": 402
+      },
+      {
+        "name": "INSPIRE",
+        "value": 403
+      },
+      {
+        "name": "RECEIVES_DOUBLE_SPELLDAMAGE_BONUS",
+        "value": 404
+      },
+      {
+        "name": "HEROPOWER_ADDITIONAL_ACTIVATIONS",
+        "value": 405
+      },
+      {
+        "name": "HEROPOWER_ACTIVATIONS_THIS_TURN",
+        "value": 406
+      },
+      {
+        "name": "REVEALED",
+        "value": 410
+      },
+      {
+        "name": "EXTRA_BATTLECRIES_BASE",
+        "value": 411
+      },
+      {
+        "name": "NUM_FRIENDLY_MINIONS_THAT_DIED_THIS_GAME",
+        "value": 412
+      },
+      {
+        "name": "CANNOT_ATTACK_HEROES",
+        "value": 413
+      },
+      {
+        "name": "LOCK_AND_LOAD",
+        "value": 414
+      },
+      {
+        "name": "DISCOVER",
+        "value": 415
+      },
+      {
+        "name": "SHADOWFORM",
+        "value": 416
+      },
+      {
+        "name": "NUM_FRIENDLY_MINIONS_THAT_ATTACKED_THIS_TURN",
+        "value": 417
+      },
+      {
+        "name": "NUM_RESOURCES_SPENT_THIS_GAME",
+        "value": 418
+      },
+      {
+        "name": "ELECTRIC_CHARGE_LEVEL",
+        "value": 420
+      },
+      {
+        "name": "HEAVILY_ARMORED",
+        "value": 421
+      },
+      {
+        "name": "DONT_SHOW_IMMUNE",
+        "value": 422
+      },
+      {
+        "name": "PREHEALING",
+        "value": 425
+      },
+      {
+        "name": "APPEAR_FUNCTIONALLY_DEAD",
+        "value": 426
+      },
+      {
+        "name": "OVERLOAD_THIS_GAME",
+        "value": 427
+      },
+      {
+        "name": "HISTORY_PROXY_NO_BIG_CARD",
+        "value": 432
+      },
+      {
+        "name": "IGNORE_TAUNT",
+        "value": 433
+      },
+      {
+        "name": "TRANSFORMED_FROM_CARD",
+        "value": 435
+      },
+      {
+        "name": "CTHUN",
+        "value": 436
+      },
+      {
+        "name": "CAST_RANDOM_SPELLS",
+        "value": 437
+      },
+      {
+        "name": "SHIFTING",
+        "value": 438
+      },
+      {
+        "name": "JADE_GOLEM",
+        "value": 441
+      },
+      {
+        "name": "EMBRACE_THE_SHADOW",
+        "value": 442
+      },
+      {
+        "name": "EXTRA_ATTACKS_THIS_TURN",
+        "value": 444
+      },
+      {
+        "name": "SEEN_CTHUN",
+        "value": 445
+      },
+      {
+        "name": "MINION_TYPE_REFERENCE",
+        "value": 447
+      },
+      {
+        "name": "UNTOUCHABLE",
+        "value": 448
+      },
+      {
+        "name": "RED_MANA_CRYSTALS",
+        "value": 449
+      },
+      {
+        "name": "RED_MANA_GEM",
+        "value": 449
+      },
+      {
+        "name": "SCORE_LABELID_1",
+        "value": 450
+      },
+      {
+        "name": "SCORE_VALUE_1",
+        "value": 451
+      },
+      {
+        "name": "SCORE_LABELID_2",
+        "value": 452
+      },
+      {
+        "name": "SCORE_VALUE_2",
+        "value": 453
+      },
+      {
+        "name": "SCORE_LABELID_3",
+        "value": 454
+      },
+      {
+        "name": "SCORE_VALUE_3",
+        "value": 455
+      },
+      {
+        "name": "CANT_BE_FATIGUED",
+        "value": 456
+      },
+      {
+        "name": "AUTO_ATTACK",
+        "value": 457
+      },
+      {
+        "name": "ARMS_DEALING",
+        "value": 458
+      },
+      {
+        "name": "QUEST",
+        "value": 462
+      },
+      {
+        "name": "TAG_LAST_KNOWN_COST_IN_HAND",
+        "value": 466
+      },
+      {
+        "name": "DEFINING_ENCHANTMENT",
+        "value": 469
+      },
+      {
+        "name": "FINISH_ATTACK_SPELL_ON_DAMAGE",
+        "value": 470
+      },
+      {
+        "name": "MODULAR_ENTITY_PART_1",
+        "value": 471
+      },
+      {
+        "name": "MODULAR_ENTITY_PART_2",
+        "value": 472
+      },
+      {
+        "name": "MODIFY_DEFINITION_ATTACK",
+        "value": 473
+      },
+      {
+        "name": "MODIFY_DEFINITION_HEALTH",
+        "value": 474
+      },
+      {
+        "name": "MODIFY_DEFINITION_COST",
+        "value": 475
+      },
+      {
+        "name": "MULTIPLE_CLASSES",
+        "value": 476
+      },
+      {
+        "name": "ALL_TARGETS_RANDOM",
+        "value": 477
+      },
+      {
+        "name": "GRIMY_GOONS",
+        "value": 482
+      },
+      {
+        "name": "JADE_LOTUS",
+        "value": 483
+      },
+      {
+        "name": "KABAL",
+        "value": 484
+      },
+      {
+        "name": "ADDITIONAL_PLAY_REQS_1",
+        "value": 515
+      },
+      {
+        "name": "ADDITIONAL_PLAY_REQS_2",
+        "value": 516
+      },
+      {
+        "name": "ELEMENTAL_POWERED_UP",
+        "value": 532
+      },
+      {
+        "name": "QUEST_PROGRESS",
+        "value": 534
+      },
+      {
+        "name": "QUEST_PROGRESS_TOTAL",
+        "value": 535
+      },
+      {
+        "name": "QUEST_CONTRIBUTOR",
+        "value": 541
+      },
+      {
+        "name": "ADAPT",
+        "value": 546
+      },
+      {
+        "name": "IS_CURRENT_TURN_AN_EXTRA_TURN",
+        "value": 547
+      },
+      {
+        "name": "EXTRA_TURNS_TAKEN_THIS_GAME",
+        "value": 548
+      },
+      {
+        "name": "SHIFTING_MINION",
+        "value": 549
+      },
+      {
+        "name": "SHIFTING_WEAPON",
+        "value": 550
+      },
+      {
+        "name": "DEATH_KNIGHT",
+        "value": 554
+      },
+      {
+        "name": "BOSS",
+        "value": 556
+      },
+      {
+        "name": "TREASURE",
+        "value": 557
+      },
+      {
+        "name": "TREASURE_DEFINTIONAL_ATTACK",
+        "value": 558
+      },
+      {
+        "name": "TREASURE_DEFINTIONAL_COST",
+        "value": 559
+      },
+      {
+        "name": "TREASURE_DEFINTIONAL_HEALTH",
+        "value": 560
+      },
+      {
+        "name": "ACTS_LIKE_A_SPELL",
+        "value": 561
+      },
+      {
+        "name": "STAMPEDE",
+        "value": 564
+      },
+      {
+        "name": "EMPOWERED_TREASURE",
+        "value": 646
+      },
+      {
+        "name": "ONE_SIDED_GHOSTLY",
+        "value": 648
+      },
+      {
+        "name": "CURRENT_NEGATIVE_SPELLPOWER",
+        "value": 651
+      },
+      {
+        "name": "DONT_PICK_FROM_SUBSETS",
+        "value": 676
+      },
+      {
+        "name": "IS_VAMPIRE",
+        "value": 680
+      },
+      {
+        "name": "CORRUPTED",
+        "value": 681
+      },
+      {
+        "name": "HIDE_HEALTH",
+        "value": 682
+      },
+      {
+        "name": "HIDE_ATTACK",
+        "value": 683
+      },
+      {
+        "name": "HIDE_COST",
+        "value": 684
+      },
+      {
+        "name": "LIFESTEAL",
+        "value": 685
+      },
+      {
+        "name": "OVERRIDE_EMOTE_0",
+        "value": 740
+      },
+      {
+        "name": "OVERRIDE_EMOTE_1",
+        "value": 741
+      },
+      {
+        "name": "OVERRIDE_EMOTE_2",
+        "value": 742
+      },
+      {
+        "name": "OVERRIDE_EMOTE_3",
+        "value": 743
+      },
+      {
+        "name": "OVERRIDE_EMOTE_4",
+        "value": 744
+      },
+      {
+        "name": "OVERRIDE_EMOTE_5",
+        "value": 745
+      },
+      {
+        "name": "SCORE_FOOTERID",
+        "value": 751
+      },
+      {
+        "name": "RECRUIT",
+        "value": 763
+      },
+      {
+        "name": "LOOT_CARD_1",
+        "value": 764
+      },
+      {
+        "name": "LOOT_CARD_2",
+        "value": 765
+      },
+      {
+        "name": "LOOT_CARD_3",
+        "value": 766
+      },
+      {
+        "name": "OFF_HAND_WEAPON_ENTITY",
+        "value": 775
+      },
+      {
+        "name": "HERO_POWER_DISABLED",
+        "value": 777
+      },
+      {
+        "name": "VALEERASHADOW",
+        "value": 779
+      },
+      {
+        "name": "OVERRIDECARDNAME",
+        "value": 781
+      },
+      {
+        "name": "OVERRIDECARDTEXTBUILDER",
+        "value": 782
+      },
+      {
+        "name": "DUNGEON_PASSIVE_BUFF",
+        "value": 783
+      },
+      {
+        "name": "GHOSTLY",
+        "value": 785
+      },
+      {
+        "name": "DISGUISED_TWIN",
+        "value": 788
+      },
+      {
+        "name": "SECRET_DEATHRATTLE",
+        "value": 789
+      },
+      {
+        "name": "RUSH",
+        "value": 791
+      },
+      {
+        "name": "REVEAL_CHOICES",
+        "value": 792
+      },
+      {
+        "name": "HERO_DECK_ID",
+        "value": 793
+      },
+      {
+        "name": "HIDDEN_CHOICE",
+        "value": 813
+      },
+      {
+        "name": "ZOMBEAST",
+        "value": 823
+      },
+      {
+        "name": "HERO_EMOTE_SILENCED",
+        "value": 832
+      },
+      {
+        "name": "MINION_IN_HAND_BUFF",
+        "value": 845
+      },
+      {
+        "name": "ECHO",
+        "value": 846
+      },
+      {
+        "name": "MODULAR",
+        "value": 849
+      },
+      {
+        "name": "IGNORE_HIDE_STATS_FOR_BIG_CARD",
+        "value": 857
+      },
+      {
+        "name": "REAL_TIME_TRANSFORM",
+        "value": 859
+      },
+      {
+        "name": "WAIT_FOR_PLAYER_RECONNECT_PERIOD",
+        "value": 860
+      },
+      {
+        "name": "ETHEREAL",
+        "value": 880
+      },
+      {
+        "name": "EXTRA_DEATHRATTLES_BASE",
+        "value": 882
+      },
+      {
+        "name": "PHASED_RESTART",
+        "value": 888
+      },
+      {
+        "name": "HEALTH_DISPLAY",
+        "value": 917
+      },
+      {
+        "name": "ENABLE_HEALTH_DISPLAY",
+        "value": 920
+      },
+      {
+        "name": "VOODOO_LINK",
+        "value": 921
+      },
+      {
+        "name": "OVERKILL",
+        "value": 923
+      },
+      {
+        "name": "PROPHECY",
+        "value": 924
+      },
+      {
+        "name": "ATTACKABLE_BY_RUSH",
+        "value": 930
+      },
+      {
+        "name": "SHIFTING_SPELL",
+        "value": 936
+      },
+      {
+        "name": "USE_ALTERNATE_CARD_TEXT",
+        "value": 955
+      },
+      {
+        "name": "COLLECTIONMANAGER_FILTER_MANA_EVEN",
+        "value": 956
+      },
+      {
+        "name": "COLLECTIONMANAGER_FILTER_MANA_ODD",
+        "value": 957
+      },
+      {
+        "name": "AMOUNT_HEALED_THIS_GAME",
+        "value": 958
+      },
+      {
+        "name": "SUPPRESS_DEATH_SOUND",
+        "value": 959
+      },
+      {
+        "name": "ECHOING_OOZE_SPELL",
+        "value": 963
+      },
+      {
+        "name": "ZOMBEAST_DEBUG_CURRENT_BEAST_DATABASE_ID",
+        "value": 964
+      },
+      {
+        "name": "ZOMBEAST_DEBUG_CURRENT_ITERATION",
+        "value": 965
+      },
+      {
+        "name": "ZOMBEAST_DEBUG_MAX_ITERATIONS",
+        "value": 966
+      },
+      {
+        "name": "START_OF_GAME_KEYWORD",
+        "value": 968
+      },
+      {
+        "name": "ENCHANTMENT_INVISIBLE",
+        "value": 976
+      },
+      {
+        "name": "PUZZLE",
+        "value": 979
+      },
+      {
+        "name": "PUZZLE_PROGRESS",
+        "value": 980
+      },
+      {
+        "name": "PUZZLE_PROGRESS_TOTAL",
+        "value": 981
+      },
+      {
+        "name": "PUZZLE_TYPE",
+        "value": 982
+      },
+      {
+        "name": "PUZZLE_COMPLETED",
+        "value": 984
+      },
+      {
+        "name": "CONCEDE_BUTTON_ALTERNATIVE_TEXT",
+        "value": 985
+      },
+      {
+        "name": "HIDE_RESTART_BUTTON",
+        "value": 990
+      },
+      {
+        "name": "WILD",
+        "value": 991
+      },
+      {
+        "name": "HALL_OF_FAME",
+        "value": 992
+      },
+      {
+        "name": "EVILZUG",
+        "value": 994
+      },
+      {
+        "name": "MARK_OF_EVIL",
+        "value": 994
+      },
+      {
+        "name": "DECK_RULE_MOD_DECK_SIZE",
+        "value": 997
+      },
+      {
+        "name": "FAST_BATTLECRY",
+        "value": 998
+      },
+      {
+        "name": "END_TURN_BUTTON_ALTERNATIVE_APPEARANCE",
+        "value": 1000
+      },
+      {
+        "name": "WAND",
+        "value": 1015
+      },
+      {
+        "name": "TREAT_AS_PLAYED_HERO_CARD",
+        "value": 1016
+      },
+      {
+        "name": "LITERALLY_UNPLAYABLE",
+        "value": 1020
+      },
+      {
+        "name": "NUM_HERO_POWER_DAMAGE_THIS_GAME",
+        "value": 1025
+      },
+      {
+        "name": "PUZZLE_NAME",
+        "value": 1026
+      },
+      {
+        "name": "TURN_INDICATOR_ALTERNATIVE_APPEARANCE",
+        "value": 1027
+      },
+      {
+        "name": "PREVIOUS_PUZZLE_COMPLETED",
+        "value": 1042
+      },
+      {
+        "name": "GLORIOUSGLOOP",
+        "value": 1044
+      },
+      {
+        "name": "HEALTH_DISPLAY_COLOR",
+        "value": 1046
+      },
+      {
+        "name": "HEALTH_DISPLAY_NEGATIVE",
+        "value": 1047
+      },
+      {
+        "name": "WHIZBANG_DECK_ID",
+        "value": 1048
+      },
+      {
+        "name": "HIDE_OUT_OF_CARDS_WARNING",
+        "value": 1050
+      },
+      {
+        "name": "GEARS",
+        "value": 1052
+      },
+      {
+        "name": "LUNAHIGHLIGHTHINT",
+        "value": 1054
+      },
+      {
+        "name": "SUPPRESS_JOBS_DONE_VO",
+        "value": 1055
+      },
+      {
+        "name": "SHRINE",
+        "value": 1057
+      },
+      {
+        "name": "ALL_HEALING_DOUBLE",
+        "value": 1058
+      },
+      {
+        "name": "BLOCK_ALL_INPUT",
+        "value": 1071
+      },
+      {
+        "name": "PUZZLE_MODE",
+        "value": 1073
+      },
+      {
+        "name": "CARD_DOES_NOTHING",
+        "value": 1075
+      },
+      {
+        "name": "CASTS_WHEN_DRAWN",
+        "value": 1077
+      },
+      {
+        "name": "DISPLAY_CARD_ON_MOUSEOVER",
+        "value": 1078
+      },
+      {
+        "name": "DECK_POWER_UP",
+        "value": 1080
+      },
+      {
+        "name": "SIDEKICK",
+        "value": 1081
+      },
+      {
+        "name": "SIDEKICK_HERO_POWER",
+        "value": 1082
+      },
+      {
+        "name": "SQUELCH_NON_GAME_TRIGGERS_AND_MODIFIERS",
+        "value": 1087
+      },
+      {
+        "name": "QUEST_REWARD_DATABASE_ID",
+        "value": 1089
+      },
+      {
+        "name": "DORMANT_VISUAL",
+        "value": 1090
+      },
+      {
+        "name": "CUSTOMTEXT1",
+        "value": 1093
+      },
+      {
+        "name": "CUSTOMTEXT2",
+        "value": 1094
+      },
+      {
+        "name": "CUSTOMTEXT3",
+        "value": 1095
+      },
+      {
+        "name": "FLOOPY",
+        "value": 1097
+      },
+      {
+        "name": "PLAYER_BASE_SHRINE_DECK_ID",
+        "value": 1099
+      },
+      {
+        "name": "HIDE_WATERMARK",
+        "value": 1107
+      },
+      {
+        "name": "EXTRA_MINION_BATTLECRIES_BASE",
+        "value": 1112
+      },
+      {
+        "name": "RUN_PROGRESS",
+        "value": 1113
+      },
+      {
+        "name": "NON_KEYWORD_ECHO",
+        "value": 1114
+      },
+      {
+        "name": "PLAYER_TAG_THRESHOLD_TAG_ID",
+        "value": 1115
+      },
+      {
+        "name": "PLAYER_TAG_THRESHOLD_VALUE",
+        "value": 1116
+      },
+      {
+        "name": "HEALING_DOES_DAMAGE_HINT",
+        "value": 1117
+      },
+      {
+        "name": "AFFECTED_BY_HEALING_DOES_DAMAGE",
+        "value": 1118
+      },
+      {
+        "name": "DECK_LIST_SORT_ORDER",
+        "value": 1125
+      },
+      {
+        "name": "EXTRA_BATTLECRIES_ADDITIONAL",
+        "value": 1126
+      },
+      {
+        "name": "EXTRA_DEATHRATTLES_ADDITIONAL",
+        "value": 1131
+      },
+      {
+        "name": "ALTERNATE_MOUSE_OVER_CARD",
+        "value": 1132
+      },
+      {
+        "name": "ENCHANTMENT_BANNER_TEXT",
+        "value": 1135
+      },
+      {
+        "name": "MOUSE_OVER_CARD_APPEARANCE",
+        "value": 1142
+      },
+      {
+        "name": "IS_ADVENTURE_SCENARIO",
+        "value": 1172
+      },
+      {
+        "name": "DEPRECATED_TWINSPELL_COPY",
+        "value": 1186
+      },
+      {
+        "name": "PROXY_GALAKROND",
+        "value": 1190
+      },
+      {
+        "name": "SIDE_QUEST",
+        "value": 1192
+      },
+      {
+        "name": "TWINSPELL",
+        "value": 1193
+      },
+      {
+        "name": "GALAKROND_IN_PLAY",
+        "value": 1194
+      },
+      {
+        "name": "COIN_MANA_GEM",
+        "value": 1199
+      },
+      {
+        "name": "ELUSIVE",
+        "value": 1211
+      },
+      {
+        "name": "EMPOWER",
+        "value": 1263
+      },
+      {
+        "name": "EMPOWER_PRIEST",
+        "value": 1264
+      },
+      {
+        "name": "EMPOWER_ROGUE",
+        "value": 1265
+      },
+      {
+        "name": "EMPOWER_SHAMAN",
+        "value": 1266
+      },
+      {
+        "name": "EMPOWER_WARLOCK",
+        "value": 1267
+      },
+      {
+        "name": "EMPOWER_WARRIOR",
+        "value": 1268
+      },
+      {
+        "name": "TWINSPELLPENDING",
+        "value": 1269
+      },
+      {
+        "name": "DRUSTVAR_HORROR_DEBUG_CURRENT_SPELL_DATABASE_ID",
+        "value": 1280
+      },
+      {
+        "name": "DRUSTVAR_HORROR_DEBUG_CURRENT_ITERATION",
+        "value": 1281
+      },
+      {
+        "name": "HEROIC_HERO_POWER",
+        "value": 1282
+      },
+      {
+        "name": "DRUSTVAR_HORROR_DEBUG_MAX_ITERATIONS",
+        "value": 1283
+      },
+      {
+        "name": "CREATOR_DBID",
+        "value": 1284
+      },
+      {
+        "name": "FATIGUE_REFERENCE",
+        "value": 1290
+      },
+      {
+        "name": "HERO_FLYING",
+        "value": 1293
+      },
+      {
+        "name": "UI_BUFF_HEALTH_UP",
+        "value": 1294
+      },
+      {
+        "name": "UI_BUFF_SET_COST_ZERO",
+        "value": 1295
+      },
+      {
+        "name": "UI_BUFF_COST_DOWN",
+        "value": 1296
+      },
+      {
+        "name": "UI_BUFF_ATK_UP",
+        "value": 1297
+      },
+      {
+        "name": "UI_BUFF_COST_UP",
+        "value": 1298
+      },
+      {
+        "name": "DEBUG_DISPLAY_TAG_BOTTOM_RIGHT",
+        "value": 1313
+      },
+      {
+        "name": "DEBUG_DISPLAY_TAG_TOP_RIGHT",
+        "value": 1314
+      },
+      {
+        "name": "SMART_DISCOVER_DEBUG_ENTITY_1",
+        "value": 1318
+      },
+      {
+        "name": "SMART_DISCOVER_DEBUG_ENTITY_2",
+        "value": 1319
+      },
+      {
+        "name": "SMART_DISCOVER_DEBUG_ENTITY_3",
+        "value": 1320
+      },
+      {
+        "name": "SMART_DISCOVER_DEBUG_TEST_COMPLETE",
+        "value": 1324
+      },
+      {
+        "name": "COPIED_BY_KHADGAR",
+        "value": 1326
+      },
+      {
+        "name": "SMART_DISCOVER_DEBUG_PASSIVE_EVAL_RESULT_1",
+        "value": 1328
+      },
+      {
+        "name": "SMART_DISCOVER_DEBUG_PASSIVE_EVAL_RESULT_2",
+        "value": 1329
+      },
+      {
+        "name": "SMART_DISCOVER_DEBUG_PASSIVE_EVAL_RESULT_3",
+        "value": 1330
+      },
+      {
+        "name": "OUTCAST",
+        "value": 1333
+      },
+      {
+        "name": "ALTERNATE_CHAPTER_VO",
+        "value": 1334
+      },
+      {
+        "name": "AI_MAKES_DECISIONS_FOR_PLAYER",
+        "value": 1335
+      },
+      {
+        "name": "HAS_BEEN_REBORN",
+        "value": 1336
+      },
+      {
+        "name": "USE_DISCOVER_VISUALS",
+        "value": 1342
+      },
+      {
+        "name": "DOUBLE_FATIGUE_DAMAGE",
+        "value": 1346
+      },
+      {
+        "name": "BOARD_VISUAL_STATE",
+        "value": 1347
+      },
+      {
+        "name": "BACON_DUMMY_PLAYER",
+        "value": 1349
+      },
+      {
+        "name": "SQUELCH_LIFETIME_EFFECTS",
+        "value": 1350
+      },
+      {
+        "name": "ALLOW_MOVE_MINION",
+        "value": 1356
+      },
+      {
+        "name": "TAG_TB_RANDOM_DECK_TIME_ID",
+        "value": 1358
+      },
+      {
+        "name": "NEXT_OPPONENT_PLAYER_ID",
+        "value": 1360
+      },
+      {
+        "name": "MAIN_GALAKROND",
+        "value": 1361
+      },
+      {
+        "name": "GOOD_OL_GENERIC_FRIENDLY_DRAGON_DISCOVER_VISUALS",
+        "value": 1364
+      },
+      {
+        "name": "GALAKROND_HERO_CARD",
+        "value": 1365
+      },
+      {
+        "name": "INVOKE_COUNTER",
+        "value": 1366
+      },
+      {
+        "name": "PLAYER_LEADERBOARD_PLACE",
+        "value": 1373
+      },
+      {
+        "name": "PLAYER_TECH_LEVEL",
+        "value": 1377
+      },
+      {
+        "name": "BACON_HERO_POWER_ACTIVATED",
+        "value": 1398
+      },
+      {
+        "name": "USE_FAST_ACTOR_TRANSITION_ANIMATIONS",
+        "value": 1402
+      },
+      {
+        "name": "STUDY",
+        "value": 1414
+      },
+      {
+        "name": "BACON_ODD_PLAYER_OUT",
+        "value": 1415
+      },
+      {
+        "name": "BACON_WON_LAST_COMBAT",
+        "value": 1422
+      },
+      {
+        "name": "BACON_IS_KEL_THUZAD",
+        "value": 1423
+      },
+      {
+        "name": "HIGHLIGHT_ATTACKING_MINION_DURING_COMBAT",
+        "value": 1424
+      },
+      {
+        "name": "SPELLBURST",
+        "value": 1427
+      },
+      {
+        "name": "BACON_TRIPLE_UPGRADE_MINION_ID",
+        "value": 1429
+      },
+      {
+        "name": "RULEBOOK",
+        "value": 1430
+      },
+      {
+        "name": "FX_DATANUM_1",
+        "value": 1436
+      },
+      {
+        "name": "BACON_ACTION_CARD",
+        "value": 1437
+      },
+      {
+        "name": "GAME_MODE_BUTTON_SLOT",
+        "value": 1438
+      },
+      {
+        "name": "TECH_LEVEL_MANA_GEM",
+        "value": 1442
+      },
+      {
+        "name": "UI_BUFF_DURABILITY_UP",
+        "value": 1443
+      },
+      {
+        "name": "PLAYER_TRIPLES",
+        "value": 1447
+      },
+      {
+        "name": "DISABLE_TURN_INDICATORS",
+        "value": 1448
+      },
+      {
+        "name": "COLLECTION_RELATED_CARD_DATABASE_ID",
+        "value": 1452
+      },
+      {
+        "name": "IS_BACON_POOL_MINION",
+        "value": 1456
+      },
+      {
+        "name": "SUPPRESS_ALL_SUMMON_VO",
+        "value": 1458
+      },
+      {
+        "name": "BACON_TRIPLE_CANDIDATE",
+        "value": 1460
+      },
+      {
+        "name": "BATTLEGROUNDS_PREMIUM_EMOTES",
+        "value": 1463
+      },
+      {
+        "name": "MOVE_MINION_HOVER_TARGET_SLOT",
+        "value": 1464
+      },
+      {
+        "name": "BACON_COIN_ON_ENEMY_MINIONS",
+        "value": 1467
+      },
+      {
+        "name": "BACON_TRIPLED_BASE_MINION_ID",
+        "value": 1471
+      },
+      {
+        "name": "ALWAYS_USE_FAST_ACTOR_TRIGGERS",
+        "value": 1473
+      },
+      {
+        "name": "BACON_HERO_CAN_BE_DRAFTED",
+        "value": 1491
+      },
+      {
+        "name": "TRANSIENT_ENTITY",
+        "value": 1493
+      },
+      {
+        "name": "BACON_MAX_PLAYER_TECH_LEVEL",
+        "value": 1494
+      },
+      {
+        "name": "CAN_TARGET_CARDS_IN_HAND",
+        "value": 1508
+      },
+      {
+        "name": "DISABLE_NONHERO_GOLDEN_ANIMATIONS",
+        "value": 1514
+      },
+      {
+        "name": "WATERMARK_OVERRIDE_CARD_SET",
+        "value": 1517
+      },
+      {
+        "name": "DORMANT",
+        "value": 1518
+      },
+      {
+        "name": "DORMANT_AWAKEN_CONDITION_ENCHANT",
+        "value": 1519
+      },
+      {
+        "name": "SUPPRESS_SUMMON_VO_FOR_PLAYER",
+        "value": 1521
+      },
+      {
+        "name": "BACON_IN_COMBAT_PHASE",
+        "value": 1522
+      },
+      {
+        "name": "CORRUPT",
+        "value": 1524
+      },
+      {
+        "name": "ALLOW_GAME_SPEEDUP",
+        "value": 1526
+      },
+      {
+        "name": "POISONOUS_INSTANT",
+        "value": 1528
+      },
+      {
+        "name": "FORCE_NO_CUSTOM_SPELLS",
+        "value": 1529
+      },
+      {
+        "name": "CORRUPTED_CARD",
+        "value": 1551
+      },
+      {
+        "name": "BACON_HERO_EARLY_ACCESS",
+        "value": 1554
+      },
+      {
+        "name": "SPAWN_TIME_COUNT",
+        "value": 1556
+      },
+      {
+        "name": "SKIP_MULLIGAN",
+        "value": 1561
+      },
+      {
+        "name": "COPIED_FROM_ENTITY_ID",
+        "value": 1565
+      },
+      {
+        "name": "BATTLEGROUNDS_HERO_OVERRIDE_1",
+        "value": 1577
+      },
+      {
+        "name": "BATTLEGROUNDS_HERO_OVERRIDE_2",
+        "value": 1578
+      },
+      {
+        "name": "BATTLEGROUNDS_HERO_OVERRIDE_3",
+        "value": 1579
+      },
+      {
+        "name": "BATTLEGROUNDS_HERO_OVERRIDE_4",
+        "value": 1580
+      },
+      {
+        "name": "BACON_SELL_VALUE",
+        "value": 1587
+      },
+      {
+        "name": "BACON_SUBSET_DRAGON",
+        "value": 1591
+      },
+      {
+        "name": "BACON_SUBSET_MURLOC",
+        "value": 1592
+      },
+      {
+        "name": "BACON_SUBSET_DEMON",
+        "value": 1593
+      },
+      {
+        "name": "BACON_SUBSET_BEAST",
+        "value": 1594
+      },
+      {
+        "name": "BACON_SUBSET_MECH",
+        "value": 1595
+      },
+      {
+        "name": "BACON_SUBSET_PIRATE",
+        "value": 1596
+      },
+      {
+        "name": "BACON_VERDANTSPHERES",
+        "value": 1598
+      },
+      {
+        "name": "OPPONENT_SIDE_GHOSTLY",
+        "value": 1609
+      },
+      {
+        "name": "FORCE_NO_CUSTOM_LIFETIME_SPELLS",
+        "value": 1613
+      },
+      {
+        "name": "FORCE_NO_CUSTOM_SUMMON_SPELLS",
+        "value": 1614
+      },
+      {
+        "name": "FORCE_NO_CUSTOM_KEYWORD_SPELLS",
+        "value": 1615
+      },
+      {
+        "name": "USE_LEADERBOARD_AS_SPAWN_ORIGIN",
+        "value": 1628
+      },
+      {
+        "name": "BACON_MUKLA_BANANA_SPAWN_COUNT",
+        "value": 1629
+      },
+      {
+        "name": "REPLACEMENT_ENTITY",
+        "value": 1632
+      },
+      {
+        "name": "SPELL_SCHOOL",
+        "value": 1635
+      },
+      {
+        "name": "FRENZY",
+        "value": 1637
+      },
+      {
+        "name": "COIN_MANA_GEM_FOR_CHOICE_CARDS",
+        "value": 1643
+      },
+      {
+        "name": "METAMORPHOSIS",
+        "value": 1644
+      },
+      {
+        "name": "HERO_POWER_ENTITY",
+        "value": 1646
+      },
+      {
+        "name": "BACON_PLAYER_RESULTS_HERO_OVERRIDE",
+        "value": 1649
+      },
+      {
+        "name": "DISCOVER_STUDIES_VISUAL",
+        "value": 1650
+      },
+      {
+        "name": "LETTUCE_CONTROLLER",
+        "value": 1653
+      },
+      {
+        "name": "LETTUCE_ABILITY_OWNER",
+        "value": 1654
+      },
+      {
+        "name": "LETTUCE_SELECTED_TARGET",
+        "value": 1657
+      },
+      {
+        "name": "LETTUCE_SELECTED_SUBCARD_INDEX",
+        "value": 1661
+      },
+      {
+        "name": "LETTUCE_MERCENARY",
+        "value": 1665
+      },
+      {
+        "name": "LETTUCE_ROLE",
+        "value": 1666
+      },
+      {
+        "name": "LETTUCE_IS_COMBAT_ACTION_TAKEN",
+        "value": 1668
+      },
+      {
+        "name": "LETTUCE_COOLDOWN_CONFIG",
+        "value": 1669
+      },
+      {
+        "name": "LETTUCE_CURRENT_COOLDOWN",
+        "value": 1670
+      },
+      {
+        "name": "LETTUCE_PASSIVE_ABILITY",
+        "value": 1671
+      },
+      {
+        "name": "LIFESTEAL_DAMAGES_OPPOSING_HERO",
+        "value": 1675
+      },
+      {
+        "name": "LETTUCE_ABILITY_SUMMONED_MINION",
+        "value": 1676
+      },
+      {
+        "name": "SPELLS_CAST_TWICE",
+        "value": 1681
+      },
+      {
+        "name": "CHOICE_NAME_DISPLAY_TYPE",
+        "value": 1687
+      },
+      {
+        "name": "BACON_SUBSET_ELEMENTALS",
+        "value": 1688
+      },
+      {
+        "name": "CHOICE_ACTOR_TYPE",
+        "value": 1692
+      },
+      {
+        "name": "FORCE_GREEN_GLOW_ACTIVE",
+        "value": 1693
+      },
+      {
+        "name": "SOURCE_OVERRIDE_FOR_MODIFIER_TEXT",
+        "value": 1694
+      },
+      {
+        "name": "LETTUCE_ABILITY_TILE_VISUAL_SELF_ONLY",
+        "value": 1697
+      },
+      {
+        "name": "LETTUCE_ABILITY_TILE_VISUAL_ALL_VISIBLE",
+        "value": 1698
+      },
+      {
+        "name": "ACTION_STEP_TYPE",
+        "value": 1700
+      },
+      {
+        "name": "FAKE_ZONE",
+        "value": 1702
+      },
+      {
+        "name": "FAKE_ZONE_POSITION",
+        "value": 1703
+      },
+      {
+        "name": "LETTUCE_MAX_IN_PLAY_MERCENARIES",
+        "value": 1704
+      },
+      {
+        "name": "LETTUCE_MERCENARIES_TO_NOMINATE",
+        "value": 1705
+      },
+      {
+        "name": "LETTUCE_COOLDOWN_WHILE_BENCHED",
+        "value": 1708
+      },
+      {
+        "name": "LETTUCE_COMBAT_FROM_HIGH_TO_LOW",
+        "value": 1712
+      },
+      {
+        "name": "PENDING_TRANSFORM_TO_CARD",
+        "value": 1716
+      },
+      {
+        "name": "TRANSFORMED_FROM_CARD_VISUAL_TYPE",
+        "value": 1719
+      },
+      {
+        "name": "TRADEABLE",
+        "value": 1720
+      },
+      {
+        "name": "TOOL",
+        "value": 1722
+      },
+      {
+        "name": "QUESTLINE",
+        "value": 1725
+      },
+      {
+        "name": "LETTUCE_MERCENARY_RESERVE",
+        "value": 1731
+      },
+      {
+        "name": "LETTUCE_SKIP_MERCENARY_RESERVE",
+        "value": 1732
+      },
+      {
+        "name": "PLAYER_ID_LOOKUP",
+        "value": 1740
+      },
+      {
+        "name": "DECK_ACTION_COST",
+        "value": 1743
+      },
+      {
+        "name": "BACON_AVALANCHE",
+        "value": 1744
+      },
+      {
+        "name": "SIGIL",
+        "value": 1749
+      },
+      {
+        "name": "LETTUCE_DISABLE_AUTO_SELECT_NEXT_MERC",
+        "value": 1753
+      },
+      {
+        "name": "PLAYED_CTHUN_EYE",
+        "value": 1764
+      },
+      {
+        "name": "PLAYED_CTHUN_BODY",
+        "value": 1765
+      },
+      {
+        "name": "PLAYED_CTHUN_MAW",
+        "value": 1766
+      },
+      {
+        "name": "PLAYED_CTHUN_HEART",
+        "value": 1767
+      },
+      {
+        "name": "PROXY_CTHUN_SHATTERED",
+        "value": 1768
+      },
+      {
+        "name": "PROGRESSBAR_TOTAL",
+        "value": 1769
+      },
+      {
+        "name": "PROGRESSBAR_PROGRESS",
+        "value": 1770
+      },
+      {
+        "name": "PROGRESSBAR_CARDID",
+        "value": 1771
+      },
+      {
+        "name": "PROGRESSBAR_SHOW",
+        "value": 1772
+      },
+      {
+        "name": "PROGRESSBAR_TEXT",
+        "value": 1773
+      },
+      {
+        "name": "LIFESTEAL_DOES_DAMAGE_HINT",
+        "value": 1774
+      },
+      {
+        "name": "DARKMOON_TICKET",
+        "value": 1776
+      },
+      {
+        "name": "NUM_SPELLS_PLAYED_THIS_GAME",
+        "value": 1780
+      },
+      {
+        "name": "BACON_COMEONECOMEALL",
+        "value": 1789
+      },
+      {
+        "name": "LETTUCE_ABILITY_USED_LAST_TURN",
+        "value": 1807
+      },
+      {
+        "name": "LETTUCE_NODE_TYPE",
+        "value": 1808
+      },
+      {
+        "name": "SHOW_DISCOVER_FROM_DECK",
+        "value": 1816
+      },
+      {
+        "name": "MINI_SET",
+        "value": 1824
+      },
+      {
+        "name": "ARMOR_GAINED_THIS_GAME",
+        "value": 1828
+      },
+      {
+        "name": "CANT_TRIGGER_DEATHRATTLE",
+        "value": 1831
+      },
+      {
+        "name": "BACON_BLOODGEMBUFFATKVALUE",
+        "value": 1844
+      },
+      {
+        "name": "BACON_SUBSET_QUILLBOAR",
+        "value": 1845
+      },
+      {
+        "name": "CANT_MOVE_MINION",
+        "value": 1848
+      },
+      {
+        "name": "LETTUCE_MERCENARY_EXPERIENCE",
+        "value": 1852
+      },
+      {
+        "name": "LETTUCE_IS_EQUPIMENT",
+        "value": 1855
+      },
+      {
+        "name": "LETTUCE_EQUIPMENT_ID",
+        "value": 1856
+      },
+      {
+        "name": "DARKMOON_FAIRE_PRIZES_ACTIVE",
+        "value": 1895
+      },
+      {
+        "name": "IGNORE_DECK_RULESET",
+        "value": 1896
+      },
+      {
+        "name": "HONORABLE_KILL",
+        "value": 1920
+      },
+      {
+        "name": "HAS_DIAMOND_QUALITY",
+        "value": 1932
+      },
+      {
+        "name": "CURRENT_SPELLPOWER_ARCANE",
+        "value": 1936
+      },
+      {
+        "name": "CURRENT_SPELLPOWER_FIRE",
+        "value": 1937
+      },
+      {
+        "name": "CURRENT_SPELLPOWER_FROST",
+        "value": 1938
+      },
+      {
+        "name": "CURRENT_SPELLPOWER_NATURE",
+        "value": 1939
+      },
+      {
+        "name": "CURRENT_SPELLPOWER_HOLY",
+        "value": 1940
+      },
+      {
+        "name": "CURRENT_SPELLPOWER_SHADOW",
+        "value": 1941
+      },
+      {
+        "name": "CURRENT_SPELLPOWER_FEL",
+        "value": 1942
+      },
+      {
+        "name": "CURRENT_SPELLPOWER_PHYSICAL",
+        "value": 1943
+      },
+      {
+        "name": "NON_KEYWORD_POISONOUS",
+        "value": 1944
+      },
+      {
+        "name": "SPELLPOWER_ARCANE",
+        "value": 1945
+      },
+      {
+        "name": "SPELLPOWER_FIRE",
+        "value": 1946
+      },
+      {
+        "name": "SPELLPOWER_FROST",
+        "value": 1947
+      },
+      {
+        "name": "SPELLPOWER_NATURE",
+        "value": 1948
+      },
+      {
+        "name": "SPELLPOWER_HOLY",
+        "value": 1949
+      },
+      {
+        "name": "SPELLPOWER_SHADOW",
+        "value": 1950
+      },
+      {
+        "name": "SPELLPOWER_FEL",
+        "value": 1951
+      },
+      {
+        "name": "SPELLPOWER_PHYSICAL",
+        "value": 1952
+      },
+      {
+        "name": "ENRAGE_TOOLTIP",
+        "value": 1954
+      },
+      {
+        "name": "IMP",
+        "value": 1965
+      },
+      {
+        "name": "BACON_BLOOD_GEM_TOOLTIP",
+        "value": 1966
+      },
+      {
+        "name": "LETTUCE_HAS_MANUALLY_SELECTED_ABILITY",
+        "value": 1967
+      },
+      {
+        "name": "LETTUCE_KEEP_LAST_STANDING_MINION_ACTOR",
+        "value": 1976
+      },
+      {
+        "name": "GOLDSPARKLES_HINT",
+        "value": 1984
+      },
+      {
+        "name": "LETTUCE_USE_DETERMINISTIC_TEAM_ABILITY_QUEUING",
+        "value": 1990
+      },
+      {
+        "name": "LETTUCE_SELECTED_ABILITY_QUEUE_ORDER",
+        "value": 1991
+      },
+      {
+        "name": "QUESTLINE_FINAL_REWARD_DATABASE_ID",
+        "value": 1992
+      },
+      {
+        "name": "QUESTLINE_PART",
+        "value": 1993
+      },
+      {
+        "name": "QUESTLINE_REQUIREMENT_MET_1",
+        "value": 1994
+      },
+      {
+        "name": "QUESTLINE_REQUIREMENT_MET_2",
+        "value": 1995
+      },
+      {
+        "name": "QUESTLINE_REQUIREMENT_MET_3",
+        "value": 1996
+      },
+      {
+        "name": "DONT_SHOW_IN_HISTORY",
+        "value": 2015
+      },
+      {
+        "name": "MAX_SLOTS_PER_PLAYER_OVERRIDE",
+        "value": 2017
+      },
+      {
+        "name": "FAKE_CONTROLLER",
+        "value": 2032
+      },
+      {
+        "name": "BACON_SKIN",
+        "value": 2038
+      },
+      {
+        "name": "BACON_SKIN_PARENT_ID",
+        "value": 2039
+      },
+      {
+        "name": "GAME_SEED",
+        "value": 2042
+      },
+      {
+        "name": "IS_USING_TRADE_OPTION",
+        "value": 2045
+      },
+      {
+        "name": "BACON_BOB_SKIN",
+        "value": 2049
+      },
+      {
+        "name": "BACON_BARTENDER_CARD_ID",
+        "value": 2053
+      },
+      {
+        "name": "COIN_CARD",
+        "value": 2088
+      },
+      {
+        "name": "BACON_COMBAT_DAMAGE_CAP",
+        "value": 2089
+      },
+      {
+        "name": "BACON_REFRESH_TOOLTIP",
+        "value": 2104
+      },
+      {
+        "name": "TARGETING_ARROW_TYPE",
+        "value": 2108
+      },
+      {
+        "name": "LETTUCE_CURRENT_BOUNTY_ID",
+        "value": 2120
+      },
+      {
+        "name": "LETTUCE_OVERTIME",
+        "value": 2123
+      },
+      {
+        "name": "BACON_COMPANION_ID",
+        "value": 2130
+      },
+      {
+        "name": "SPELL_RESISTANCE_ARCANE",
+        "value": 2138
+      },
+      {
+        "name": "SPELL_RESISTANCE_FIRE",
+        "value": 2139
+      },
+      {
+        "name": "SPELL_RESISTANCE_FROST",
+        "value": 2140
+      },
+      {
+        "name": "SPELL_RESISTANCE_NATURE",
+        "value": 2141
+      },
+      {
+        "name": "SPELL_RESISTANCE_HOLY",
+        "value": 2142
+      },
+      {
+        "name": "SPELL_RESISTANCE_SHADOW",
+        "value": 2143
+      },
+      {
+        "name": "SPELL_RESISTANCE_FEL",
+        "value": 2144
+      },
+      {
+        "name": "SPELL_WEAKNESS_ARCANE",
+        "value": 2145
+      },
+      {
+        "name": "SPELL_WEAKNESS_FIRE",
+        "value": 2146
+      },
+      {
+        "name": "SPELL_WEAKNESS_FROST",
+        "value": 2147
+      },
+      {
+        "name": "SPELL_WEAKNESS_NATURE",
+        "value": 2148
+      },
+      {
+        "name": "SPELL_WEAKNESS_HOLY",
+        "value": 2149
+      },
+      {
+        "name": "SPELL_WEAKNESS_SHADOW",
+        "value": 2150
+      },
+      {
+        "name": "SPELL_WEAKNESS_FEL",
+        "value": 2151
+      },
+      {
+        "name": "BACON_BUDDY",
+        "value": 2154
+      },
+      {
+        "name": "BACON_STARSTOBOUNCEOFF",
+        "value": 2155
+      },
+      {
+        "name": "LETTUCE_KEYWORD_ATTACK",
+        "value": 2159
+      },
+      {
+        "name": "LETTUCE_KEYWORD_SPELL_COMBO",
+        "value": 2160
+      },
+      {
+        "name": "LETTUCE_BOUNTY_BOSS",
+        "value": 2168
+      },
+      {
+        "name": "LETTUCE_IS_TREASURE_CARD",
+        "value": 2170
+      },
+      {
+        "name": "LETTUCE_SPELLDAMAGEARCANE",
+        "value": 2171
+      },
+      {
+        "name": "LETTUCE_SPELLDAMAGEFEL",
+        "value": 2172
+      },
+      {
+        "name": "LETTUCE_SPELLDAMAGEFIRE",
+        "value": 2173
+      },
+      {
+        "name": "LETTUCE_SPELLDAMAGEFROST",
+        "value": 2174
+      },
+      {
+        "name": "LETTUCE_SPELLDAMAGEHOLY",
+        "value": 2175
+      },
+      {
+        "name": "LETTUCE_SPELLDAMAGENATURE",
+        "value": 2176
+      },
+      {
+        "name": "LETTUCE_SPELLDAMAGESHADOW",
+        "value": 2177
+      },
+      {
+        "name": "ROOTED",
+        "value": 2179
+      },
+      {
+        "name": "VULNERABLE",
+        "value": 2180
+      },
+      {
+        "name": "DEATHBLOW",
+        "value": 2185
+      },
+      {
+        "name": "CORPSES",
+        "value": 2186
+      },
+      {
+        "name": "MAXRESOURCES_BLOOD",
+        "value": 2188
+      },
+      {
+        "name": "MAXRESOURCES_FROST",
+        "value": 2189
+      },
+      {
+        "name": "MAXRESOURCES_UNHOLY",
+        "value": 2190
+      },
+      {
+        "name": "MAXRESOURCES_DEATH",
+        "value": 2191
+      },
+      {
+        "name": "RESOURCES_BLOOD",
+        "value": 2192
+      },
+      {
+        "name": "RESOURCES_FROST",
+        "value": 2193
+      },
+      {
+        "name": "RESOURCES_UNHOLY",
+        "value": 2194
+      },
+      {
+        "name": "RESOURCES_DEATH",
+        "value": 2195
+      },
+      {
+        "name": "COST_BLOOD",
+        "value": 2196
+      },
+      {
+        "name": "COST_FROST",
+        "value": 2197
+      },
+      {
+        "name": "COST_UNHOLY",
+        "value": 2198
+      },
+      {
+        "name": "COST_DEATH",
+        "value": 2199
+      },
+      {
+        "name": "HAS_BLOOD_PLAGUE",
+        "value": 2211
+      },
+      {
+        "name": "HAS_FROST_PLAGUE",
+        "value": 2212
+      },
+      {
+        "name": "HAS_UNHOLY_PLAGUE",
+        "value": 2213
+      },
+      {
+        "name": "LETTUCE_BLEED",
+        "value": 2214
+      },
+      {
+        "name": "LETTUCE_KEYWORD_CRITICAL_DAMAGE",
+        "value": 2219
+      },
+      {
+        "name": "LETTUCE_KEYWORD_ROOT",
+        "value": 2220
+      },
+      {
+        "name": "LETTUCE_SHOW_OPPOSING_FAKE_HAND",
+        "value": 2224
+      },
+      {
+        "name": "BACON_DIABLO_FIGHT_DIABLO_PLAYER_ID",
+        "value": 2226
+      },
+      {
+        "name": "LETTUCE_VERSUS_SPELL_STATE",
+        "value": 2228
+      },
+      {
+        "name": "LETTUCE_START_OF_GAME_ABILITY",
+        "value": 2241
+      },
+      {
+        "name": "COLOSSAL",
+        "value": 2247
+      },
+      {
+        "name": "COLOSSAL_LIMB",
+        "value": 2248
+      },
+      {
+        "name": "CURRENT_TEMP_SPELLPOWER_ARCANE",
+        "value": 2250
+      },
+      {
+        "name": "CURRENT_TEMP_SPELLPOWER_FEL",
+        "value": 2251
+      },
+      {
+        "name": "CURRENT_TEMP_SPELLPOWER_FIRE",
+        "value": 2252
+      },
+      {
+        "name": "CURRENT_TEMP_SPELLPOWER_FROST",
+        "value": 2253
+      },
+      {
+        "name": "CURRENT_TEMP_SPELLPOWER_NATURE",
+        "value": 2254
+      },
+      {
+        "name": "CURRENT_TEMP_SPELLPOWER_HOLY",
+        "value": 2255
+      },
+      {
+        "name": "CURRENT_TEMP_SPELLPOWER_PHYSICAL",
+        "value": 2256
+      },
+      {
+        "name": "CURRENT_TEMP_SPELLPOWER_SHADOW",
+        "value": 2257
+      },
+      {
+        "name": "CURRENT_TEMP_SPELLPOWER_BASE",
+        "value": 2258
+      },
+      {
+        "name": "BACON_CHOSEN_BOARD_SKIN_ID",
+        "value": 2264
+      },
+      {
+        "name": "BACON_SUBSET_NAGA",
+        "value": 2272
+      },
+      {
+        "name": "LETTUCE_ALLIANCE",
+        "value": 2279
+      },
+      {
+        "name": "LETTUCE_HORDE",
+        "value": 2280
+      },
+      {
+        "name": "OBJECTIVE",
+        "value": 2311
+      },
+      {
+        "name": "LETTUCE_REFRESH",
+        "value": 2312
+      },
+      {
+        "name": "TIMES_BEEN_TRANSFORMED",
+        "value": 2321
+      },
+      {
+        "name": "LETTUCE_ELVES",
+        "value": 2322
+      },
+      {
+        "name": "OBJECTIVE_AURA",
+        "value": 2329
+      },
+      {
+        "name": "DREDGE",
+        "value": 2332
+      },
+      {
+        "name": "CURRENT_HEALING_POWER",
+        "value": 2333
+      },
+      {
+        "name": "EARLY_CONCEDE_POPUP_AVAILABLE",
+        "value": 2340
+      },
+      {
+        "name": "BACON_PLAYER_NUM_HERO_BUDDIES_GAINED",
+        "value": 2346
+      },
+      {
+        "name": "BACON_SUBSET_UNDEAD",
+        "value": 2347
+      },
+      {
+        "name": "BATTLEGROUNDS_FAVORITE_FINISHER",
+        "value": 2348
+      },
+      {
+        "name": "DAMAGE_DEALT_TO_HERO_LAST_TURN",
+        "value": 2349
+      },
+      {
+        "name": "LOCATION_ACTION_COST",
+        "value": 2352
+      },
+      {
+        "name": "LOCATION_ACTION_COOLDOWN",
+        "value": 2353
+      },
+      {
+        "name": "WHELP",
+        "value": 2355
+      },
+      {
+        "name": "BACON_SPELLCRAFT_ID",
+        "value": 2359
+      },
+      {
+        "name": "BACON_HERO_BUDDY_PROGRESS",
+        "value": 2364
+      },
+      {
+        "name": "REVIVE",
+        "value": 2369
+      },
+      {
+        "name": "BACON_HEROPOWER_BASE_HERO_ID",
+        "value": 2376
+      },
+      {
+        "name": "LETTUCE_CURSED_ABILITY_VISUAL",
+        "value": 2381
+      },
+      {
+        "name": "BACON_OMIT_WHEN_OUT_OF_ROTATION",
+        "value": 2387
+      },
+      {
+        "name": "ALLIED",
+        "value": 2388
+      },
+      {
+        "name": "LETTUCE_KEYWORD_HEALING_POWER",
+        "value": 2434
+      },
+      {
+        "name": "BACON_OVERRIDE_BG_COST",
+        "value": 2437
+      },
+      {
+        "name": "BACON_REDUCE_BUY_COST",
+        "value": 2438
+      },
+      {
+        "name": "DONT_SUPPRESS_SUMMON_VO",
+        "value": 2440
+      },
+      {
+        "name": "BACON_NUMBER_HERO_REFRESH_AVAILABLE",
+        "value": 2452
+      },
+      {
+        "name": "BACON_FREEZE_TOOLTIP",
+        "value": 2455
+      },
+      {
+        "name": "INFUSE",
+        "value": 2456
+      },
+      {
+        "name": "INFUSED",
+        "value": 2457
+      },
+      {
+        "name": "HAS_DRAG_TO_BUY",
+        "value": 2458
+      },
+      {
+        "name": "ENTITY_TAG_THRESHOLD_TAG_ID",
+        "value": 2459
+      },
+      {
+        "name": "ENTITY_TAG_THRESHOLD_VALUE",
+        "value": 2460
+      },
+      {
+        "name": "MERCENARIES_SPELL_WEAKNESS",
+        "value": 2464
+      },
+      {
+        "name": "MERCENARIES_SPELL_RESISTANCE",
+        "value": 2465
+      },
+      {
+        "name": "BACON_QUESTS_ACTIVE",
+        "value": 2468
+      },
+      {
+        "name": "COLOSSAL_LIMB_ON_LEFT",
+        "value": 2469
+      },
+      {
+        "name": "LETTUCE_ABILITY_TILE_VISUAL_PUBLIC_SPEED",
+        "value": 2470
+      },
+      {
+        "name": "BACON_DIED_LAST_COMBAT",
+        "value": 2483
+      },
+      {
+        "name": "LETTUCE_ABILITY_TIER",
+        "value": 2493
+      },
+      {
+        "name": "LETTUCE_EQUIPMENT_TIER",
+        "value": 2494
+      },
+      {
+        "name": "MANATHIRST",
+        "value": 2498
+      },
+      {
+        "name": "IMMOLATING",
+        "value": 2505
+      },
+      {
+        "name": "WAS_DISCOVER_OPTION",
+        "value": 2509
+      },
+      {
+        "name": "MERCS_EXPLORER",
+        "value": 2510
+      },
+      {
+        "name": "BACON_BUDDY_ENABLED",
+        "value": 2518
+      },
+      {
+        "name": "BACON_EVOLUTION_CARD_ID",
+        "value": 2519
+      },
+      {
+        "name": "SPELLCRAFT_HINT",
+        "value": 2557
+      },
+      {
+        "name": "CORPSE",
+        "value": 2559
+      },
+      {
+        "name": "MERCS_BENCH",
+        "value": 2570
+      },
+      {
+        "name": "BACON_MINION_TYPE_REWARD",
+        "value": 2571
+      },
+      {
+        "name": "COPIED_HINT",
+        "value": 2572
+      },
+      {
+        "name": "BLEEDING",
+        "value": 2575
+      },
+      {
+        "name": "HAS_SIGNATURE_QUALITY",
+        "value": 2589
+      },
+      {
+        "name": "IMMOLATESTAGE",
+        "value": 2600
+      },
+      {
+        "name": "EVIL_TWIN_MUSTACHE",
+        "value": 2611
+      },
+      {
+        "name": "SINFUL_BRAND",
+        "value": 2613
+      },
+      {
+        "name": "BACON_SUBSET_TOTEM",
+        "value": 2630
+      },
+      {
+        "name": "LETTUCE_KEYWORD_SILENCE",
+        "value": 2631
+      },
+      {
+        "name": "BACON_QUEST_COMPLETED",
+        "value": 2633
+      },
+      {
+        "name": "HAUNTED_SECRET",
+        "value": 2634
+      },
+      {
+        "name": "DONT_SUPPRESS_KEYWORD_VO",
+        "value": 2636
+      },
+      {
+        "name": "CARD_BACK_OVERRIDE",
+        "value": 2637
+      },
+      {
+        "name": "CORPSES_SPENT_THIS_GAME",
+        "value": 2639
+      },
+      {
+        "name": "CARDTEXT_ENTITY_0",
+        "value": 2655
+      },
+      {
+        "name": "CARDTEXT_ENTITY_1",
+        "value": 2656
+      },
+      {
+        "name": "CARDTEXT_ENTITY_2",
+        "value": 2657
+      },
+      {
+        "name": "CARDTEXT_ENTITY_3",
+        "value": 2658
+      },
+      {
+        "name": "CARDTEXT_ENTITY_4",
+        "value": 2659
+      },
+      {
+        "name": "CARDTEXT_ENTITY_5",
+        "value": 2660
+      },
+      {
+        "name": "CARDTEXT_ENTITY_6",
+        "value": 2661
+      },
+      {
+        "name": "CARDTEXT_ENTITY_7",
+        "value": 2662
+      },
+      {
+        "name": "CARDTEXT_ENTITY_8",
+        "value": 2663
+      },
+      {
+        "name": "CARDTEXT_ENTITY_9",
+        "value": 2664
+      },
+      {
+        "name": "NON_KEYWORD_SPELLBURST",
+        "value": 2672
+      },
+      {
+        "name": "BACON_CARD_DBID_REWARD",
+        "value": 2673
+      },
+      {
+        "name": "SECRET_LOCKED",
+        "value": 2676
+      },
+      {
+        "name": "BACON_STEALTH_TOOLTIP",
+        "value": 2704
+      },
+      {
+        "name": "BACON_QUEST_TOOLTIP",
+        "value": 2705
+      },
+      {
+        "name": "BACON_IS_HEROPOWER_QUESTREWARD",
+        "value": 2706
+      },
+      {
+        "name": "BACON_HERO_QUEST_REWARD_DATABASE_ID",
+        "value": 2713
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_QUEST_REWARD_DATABASE_ID",
+        "value": 2714
+      },
+      {
+        "name": "BACON_HERO_QUEST_REWARD_COMPLETED",
+        "value": 2715
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_QUEST_REWARD_COMPLETED",
+        "value": 2716
+      },
+      {
+        "name": "LETTUCE_FACTION",
+        "value": 2720
+      },
+      {
+        "name": "DEATH_SPELL_OVERRIDE",
+        "value": 2722
+      },
+      {
+        "name": "BACON_IS_BOB_QUEST",
+        "value": 2732
+      },
+      {
+        "name": "BACON_HERO_REWARD_CARD_DBID",
+        "value": 2748
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_REWARD_CARD_DBID",
+        "value": 2749
+      },
+      {
+        "name": "BACON_HERO_REWARD_MINION_TYPE",
+        "value": 2750
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_REWARD_MINION_TYPE",
+        "value": 2751
+      },
+      {
+        "name": "MERCENARIES_DISCOVER_SOURCE",
+        "value": 2752
+      },
+      {
+        "name": "TITAN",
+        "value": 2772
+      },
+      {
+        "name": "HERO_ATTACK_GIVEN_ADDITIONAL",
+        "value": 2776
+      },
+      {
+        "name": "HERO_ARMOR_GIVEN_ADDITIONAL",
+        "value": 2778
+      },
+      {
+        "name": "LETTUCE_CHARGE",
+        "value": 2779
+      },
+      {
+        "name": "BACON_DIED_LAST_COMBAT_HINT",
+        "value": 2780
+      },
+      {
+        "name": "SHIFTING_LOCATION",
+        "value": 2783
+      },
+      {
+        "name": "FORGE",
+        "value": 2785
+      },
+      {
+        "name": "UNPLAYABLE_VISUALS",
+        "value": 2798
+      },
+      {
+        "name": "CARDTEXT_ENTITY_AS_NUMBERS",
+        "value": 2802
+      },
+      {
+        "name": "BACON_DOUBLE_QUEST_HERO_POWER",
+        "value": 2803
+      },
+      {
+        "name": "MERCENARIES_TREASURE_SCALE_LEVEL",
+        "value": 2810
+      },
+      {
+        "name": "FINALE",
+        "value": 2820
+      },
+      {
+        "name": "OVERHEAL",
+        "value": 2821
+      },
+      {
+        "name": "BACON_BLOODGEMBUFFHEALTHVALUE",
+        "value": 2827
+      },
+      {
+        "name": "CARD_ALTERNATE_COST",
+        "value": 2837
+      },
+      {
+        "name": "EMOTECHARACTER",
+        "value": 2839
+      },
+      {
+        "name": "HAS_ACTIVATE_POWER",
+        "value": 2840
+      },
+      {
+        "name": "BACON_DEEP_BLUE",
+        "value": 2850
+      },
+      {
+        "name": "EMOTECLASS",
+        "value": 2851
+      },
+      {
+        "name": "MAGNETIC_TO_RACE",
+        "value": 2859
+      },
+      {
+        "name": "BACON_MAX_LEADERBOARD_ARMOR",
+        "value": 2867
+      },
+      {
+        "name": "IS_USING_FORGE_OPTION",
+        "value": 2869
+      },
+      {
+        "name": "BACON_REBORN_TOOLTIP",
+        "value": 2870
+      },
+      {
+        "name": "BACON_PUTRICIDES_CREATION_TOOLTIP",
+        "value": 2875
+      },
+      {
+        "name": "TAG_SCRIPT_DATA_NUM_3",
+        "value": 2889
+      },
+      {
+        "name": "CARD_NAME_DATA_1",
+        "value": 2890
+      },
+      {
+        "name": "BACON_GLOBAL_ANOMALY_DBID",
+        "value": 2897
+      },
+      {
+        "name": "QUICKDRAW",
+        "value": 2905
+      },
+      {
+        "name": "BACON_COSTS_HEALTH_TO_BUY",
+        "value": 2911
+      },
+      {
+        "name": "TAG_SCRIPT_DATA_NUM_4",
+        "value": 2919
+      },
+      {
+        "name": "TAG_SCRIPT_DATA_NUM_5",
+        "value": 2920
+      },
+      {
+        "name": "TAG_SCRIPT_DATA_NUM_6",
+        "value": 2921
+      },
+      {
+        "name": "DECK_SWAP_ACTIVE",
+        "value": 2929
+      },
+      {
+        "name": "MAX_SIDEBOARD_CARDS",
+        "value": 2931
+      },
+      {
+        "name": "BONUS_EFFECTS",
+        "value": 2934
+      },
+      {
+        "name": "BACON_USE_COIN_BASED_BUDDY_METER",
+        "value": 2935
+      },
+      {
+        "name": "BACON_BUY_BUDDY",
+        "value": 2937
+      },
+      {
+        "name": "BACON_BUY_BUDDY_2",
+        "value": 2938
+      },
+      {
+        "name": "BACON_DUO_TEAMMATE_PLAYER_ID",
+        "value": 2939
+      },
+      {
+        "name": "BACON_SHOW_HEROPOWER_BUDDY_AS_EVOLVING_BIG_CARD",
+        "value": 2943
+      },
+      {
+        "name": "HIDDEN_CHOICE_OVERRIDE",
+        "value": 2946
+      },
+      {
+        "name": "BACON_DUO_PLAYER_FIGHTS_FIRST_NEXT_COMBAT",
+        "value": 2975
+      },
+      {
+        "name": "NEXT_OPPONENT_TEAMMATE_PLAYER_ID",
+        "value": 2988
+      },
+      {
+        "name": "BACON_CURRENT_COMBAT_PLAYER_ID",
+        "value": 2989
+      },
+      {
+        "name": "FORGED",
+        "value": 3011
+      },
+      {
+        "name": "BUILDING_UP",
+        "value": 3016
+      },
+      {
+        "name": "BACON_PAIR_CANDIDATE",
+        "value": 3031
+      },
+      {
+        "name": "CTHUN_TAUNT_BUFF",
+        "value": 3034
+      },
+      {
+        "name": "BACON_TRIGGER_UPBEAT",
+        "value": 3046
+      },
+      {
+        "name": "BACON_TRIGGER_XY",
+        "value": 3047
+      },
+      {
+        "name": "BACON_COMBAT_PHASE_HERO",
+        "value": 3048
+      },
+      {
+        "name": "FAN_LINK",
+        "value": 3052
+      },
+      {
+        "name": "CTHUN_HEALTH_BUFF",
+        "value": 3053
+      },
+      {
+        "name": "CTHUN_ATTACK_BUFF",
+        "value": 3054
+      },
+      {
+        "name": "FORGE_REVEALED",
+        "value": 3070
+      },
+      {
+        "name": "FORGES_INTO",
+        "value": 3074
+      },
+      {
+        "name": "FX_DATANUM_2",
+        "value": 3077
+      },
+      {
+        "name": "RITUALIST_MINION",
+        "value": 3078
+      },
+      {
+        "name": "SUPPRES_ALL_SOUNDS_FOR_ENTITY",
+        "value": 3093
+      },
+      {
+        "name": "BACON_DUO_TEAM_ID",
+        "value": 3095
+      },
+      {
+        "name": "FX_DATANUM_3",
+        "value": 3109
+      },
+      {
+        "name": "ALLOW_MOVE_BACON_SPELL",
+        "value": 3111
+      },
+      {
+        "name": "EXCAVATE",
+        "value": 3114
+      },
+      {
+        "name": "SUMMONED_WHEN_DRAWN",
+        "value": 3128
+      },
+      {
+        "name": "IS_ALTERNATE_HEROPOWER",
+        "value": 3130
+      },
+      {
+        "name": "ACTIVATABLE_MINION_ABILITY_USED_1",
+        "value": 3140
+      },
+      {
+        "name": "ACTIVATABLE_MINION_ABILITY_USED_2",
+        "value": 3141
+      },
+      {
+        "name": "ACTIVATABLE_MINION_ABILITY_USED_3",
+        "value": 3142
+      },
+      {
+        "name": "BACON_DUO_TRIPLE_CANDIDATE_TEAMMATE",
+        "value": 3145
+      },
+      {
+        "name": "BACON_DUO_PAIR_CANDIDATE_TEAMMATE",
+        "value": 3146
+      },
+      {
+        "name": "BACON_DUO_PASSABLE",
+        "value": 3178
+      },
+      {
+        "name": "BACON_DUO_NOTPASSABLE",
+        "value": 3179
+      },
+      {
+        "name": "ANOMALY1",
+        "value": 3182
+      },
+      {
+        "name": "ANOMALY2",
+        "value": 3183
+      },
+      {
+        "name": "IS_USING_PASS_OPTION",
+        "value": 3185
+      },
+      {
+        "name": "TUTORIAL_TARGET_OPPONENT_ANIM",
+        "value": 3192
+      },
+      {
+        "name": "TUTORIAL_TARGET_MINION_ANIM",
+        "value": 3193
+      },
+      {
+        "name": "TUTORIAL_PLAY_MINION_ANIM",
+        "value": 3195
+      },
+      {
+        "name": "TUTORIAL_HERO_POWER_TARGET_MINION_ANIM",
+        "value": 3196
+      },
+      {
+        "name": "TUTORIAL_HERO_POWER_TARGET_OPPONENT_ANIM",
+        "value": 3197
+      },
+      {
+        "name": "SUPPRESS_EVIL_TWIN_MUSTACHE_SOUND",
+        "value": 3198
+      },
+      {
+        "name": "BACON_ANOMALY_ALL_HEROES_ARE_THIS_DBID",
+        "value": 3208
+      },
+      {
+        "name": "HERO_DOESNT_MOVE_ON_ATTACK",
+        "value": 3211
+      },
+      {
+        "name": "BACON_NO_TIER_UP_BUTTON",
+        "value": 3220
+      },
+      {
+        "name": "TOURIST",
+        "value": 3228
+      },
+      {
+        "name": "CURRENT_EXCAVATE_TIER",
+        "value": 3249
+      },
+      {
+        "name": "BACON_CONSUME_TOOLTIP",
+        "value": 3254
+      },
+      {
+        "name": "ALONE_RANGER",
+        "value": 3258
+      },
+      {
+        "name": "CUTSCENE_CARD_TYPE",
+        "value": 3265
+      },
+      {
+        "name": "MINIATURIZE",
+        "value": 3318
+      },
+      {
+        "name": "MINI",
+        "value": 3319
+      },
+      {
+        "name": "BACON_PASS_TOOLTIP",
+        "value": 3321
+      },
+      {
+        "name": "MAX_EXCAVATE_TIER",
+        "value": 3326
+      },
+      {
+        "name": "ZILLIAX_CUSTOMIZABLE_COSMETICMODULE",
+        "value": 3376
+      },
+      {
+        "name": "ZILLIAX_CUSTOMIZABLE_FUNCTIONALMODULE",
+        "value": 3377
+      },
+      {
+        "name": "KEEP_HERO_CLASS",
+        "value": 3382
+      },
+      {
+        "name": "GIGANTIFY",
+        "value": 3399
+      },
+      {
+        "name": "GIGANTIC",
+        "value": 3400
+      },
+      {
+        "name": "BACON_COMBAT_DAMAGE_CAP_ENABLED",
+        "value": 3403
+      },
+      {
+        "name": "BACON_TRINKET",
+        "value": 3407
+      },
+      {
+        "name": "SIDEBOARD_TYPE",
+        "value": 3427
+      },
+      {
+        "name": "PALADIN_AURA",
+        "value": 3429
+      },
+      {
+        "name": "CREATED_BY_TWINSPELL",
+        "value": 3432
+      },
+      {
+        "name": "CREATED_BY_MINIATURIZE",
+        "value": 3433
+      },
+      {
+        "name": "CREATED_BY_GIGANTIFY",
+        "value": 3434
+      },
+      {
+        "name": "BACON_SUBSET_ALL",
+        "value": 3436
+      },
+      {
+        "name": "SUPPRESS_HERO_STANDARD_SUMMON_FX",
+        "value": 3438
+      },
+      {
+        "name": "ZILLIAX_CUSTOMIZABLE_LINKED_COSMETICMOUDLE",
+        "value": 3450
+      },
+      {
+        "name": "BACON_SHOW_COST_ON_DISCOVER",
+        "value": 3456
+      },
+      {
+        "name": "ZERG",
+        "value": 3457
+      },
+      {
+        "name": "TERRAN",
+        "value": 3458
+      },
+      {
+        "name": "MIN_SIDEBOARD_CARDS",
+        "value": 3459
+      },
+      {
+        "name": "FORGETFUL_ATTACK_VISUAL",
+        "value": 3460
+      },
+      {
+        "name": "SHUDDERWOCKHIGHLIGHTHINT",
+        "value": 3463
+      },
+      {
+        "name": "NUM_TURNS_LAST_AFFECTED_BY",
+        "value": 3464
+      },
+      {
+        "name": "EXTRA_TURNS_SPELL_OVERRIDE",
+        "value": 3465
+      },
+      {
+        "name": "PROTOSS",
+        "value": 3469
+      },
+      {
+        "name": "ZILLIAX_CUSTOMIZABLE_LINKED_FUNCTIONALMOUDLE",
+        "value": 3470
+      },
+      {
+        "name": "HIDE_HEALTH_NUMBER",
+        "value": 3471
+      },
+      {
+        "name": "HIDE_ATTACK_NUMBER",
+        "value": 3472
+      },
+      {
+        "name": "ALLOWED_SIDEBOARD_SUBSET",
+        "value": 3476
+      },
+      {
+        "name": "ZILLIAX_CUSTOMIZABLE_SAVED_VERSION",
+        "value": 3477
+      },
+      {
+        "name": "DUOS_QUEUED_NOT_ON_TEAM",
+        "value": 3478
+      },
+      {
+        "name": "PLAYER_ABANDONED_BY_TEAMMATE",
+        "value": 3480
+      },
+      {
+        "name": "SUPPRESS_MILL_ANIMATION",
+        "value": 3481
+      },
+      {
+        "name": "IGNORE_SUPPRESS_MILL_ANIMATION",
+        "value": 3482
+      },
+      {
+        "name": "HERO_PASSIVE_ID",
+        "value": 3487
+      },
+      {
+        "name": "BACON_TEAMMATE_BONUS_MINION_DAMAGE_LAST_COMBAT",
+        "value": 3492
+      },
+      {
+        "name": "BACON_DUOS_PUNISH_LEAVERS",
+        "value": 3494
+      },
+      {
+        "name": "HERO_FRAME_TYPE",
+        "value": 3495
+      },
+      {
+        "name": "BACON_TRIPLED_BASE_MINION_ID2",
+        "value": 3499
+      },
+      {
+        "name": "BACON_TRIPLED_BASE_MINION_ID3",
+        "value": 3500
+      },
+      {
+        "name": "QUEST_HIDE_PROGRESS",
+        "value": 3523
+      },
+      {
+        "name": "STARSHIP",
+        "value": 3555
+      },
+      {
+        "name": "TRANSFORM",
+        "value": 3562
+      },
+      {
+        "name": "LAUNCHPAD",
+        "value": 3563
+      },
+      {
+        "name": "CORNER_REPLACEMENT_TYPE",
+        "value": 3564
+      },
+      {
+        "name": "BACON_IS_MAGIC_ITEM_DISCOVER",
+        "value": 3565
+      },
+      {
+        "name": "IS_NIGHTMARE_BONUS",
+        "value": 3567
+      },
+      {
+        "name": "STARSHIP_PIECE",
+        "value": 3568
+      },
+      {
+        "name": "ROGUE_TOURIST",
+        "value": 3597
+      },
+      {
+        "name": "WARLOCK_TOURIST",
+        "value": 3598
+      },
+      {
+        "name": "DEATH_KNIGHT_TOURIST",
+        "value": 3599
+      },
+      {
+        "name": "SHAMAN_TOURIST",
+        "value": 3600
+      },
+      {
+        "name": "DEMON_HUNTER_TOURIST",
+        "value": 3601
+      },
+      {
+        "name": "PRIEST_TOURIST",
+        "value": 3602
+      },
+      {
+        "name": "HUNTER_TOURIST",
+        "value": 3603
+      },
+      {
+        "name": "WARRIOR_TOURIST",
+        "value": 3604
+      },
+      {
+        "name": "DRUID_TOURIST",
+        "value": 3605
+      },
+      {
+        "name": "MAGE_TOURIST",
+        "value": 3606
+      },
+      {
+        "name": "PALADIN_TOURIST",
+        "value": 3607
+      },
+      {
+        "name": "IMBUE",
+        "value": 3626
+      },
+      {
+        "name": "TAG_LAUNCHPAD_ABILITY",
+        "value": 3628
+      },
+      {
+        "name": "STARSHIP_LAUNCH_COST_DISCOUNT",
+        "value": 3640
+      },
+      {
+        "name": "BACON_DONT_SHOW_PAIR_TRIPLE_DISCOVER_VFX",
+        "value": 3661
+      },
+      {
+        "name": "FALLBACK_ENCHANTMENT_PORTRAIT_DBID",
+        "value": 3664
+      },
+      {
+        "name": "BACON_FODDER",
+        "value": 3668
+      },
+      {
+        "name": "SHOW_SLEEP_ZZZ_OVERRIDE",
+        "value": 3672
+      },
+      {
+        "name": "CLIENT_LIST_REPLACEMENTS_WHEN_PLAYED",
+        "value": 3677
+      },
+      {
+        "name": "CARES_ABOUT_IMBUE_CARDS",
+        "value": 3692
+      },
+      {
+        "name": "BACON_IS_POTENTIAL_TRINKET",
+        "value": 3705
+      },
+      {
+        "name": "OUROBOSDEATHRATTLE",
+        "value": 3716
+      },
+      {
+        "name": "BACON_TURNS_LEFT_TO_DISCOVER_TRINKET",
+        "value": 3738
+      },
+      {
+        "name": "BACON_TRINKETS_ACTIVE",
+        "value": 3740
+      },
+      {
+        "name": "BACON_FIRST_TRINKET_DATABASE_ID",
+        "value": 3741
+      },
+      {
+        "name": "BACON_SECOND_TRINKET_DATABASE_ID",
+        "value": 3742
+      },
+      {
+        "name": "BACON_HEROPOWER_TRINKET_DATABASE_ID",
+        "value": 3743
+      },
+      {
+        "name": "END_OF_TURN_TRIGGER",
+        "value": 3744
+      },
+      {
+        "name": "BACON_OVERRIDE_COST_COLOR",
+        "value": 3777
+      },
+      {
+        "name": "BACON_EVOLUTION_CARD_ID_2",
+        "value": 3778
+      },
+      {
+        "name": "MINION_TYPE_MASK",
+        "value": 3802
+      },
+      {
+        "name": "BACON_HERO_FIRST_TRINKET_LEADERBOARD_SDN1",
+        "value": 3805
+      },
+      {
+        "name": "BACON_HERO_SECOND_TRINKET_LEADERBOARD_SDN1",
+        "value": 3806
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_TRINKET_LEADERBOARD_SDN1",
+        "value": 3807
+      },
+      {
+        "name": "DEMON_PORTAL_DECK",
+        "value": 3808
+      },
+      {
+        "name": "BACON_HERO_FIRST_TRINKET_LEADERBOARD_SDN2",
+        "value": 3812
+      },
+      {
+        "name": "BACON_HERO_SECOND_TRINKET_LEADERBOARD_SDN2",
+        "value": 3813
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_TRINKET_LEADERBOARD_SDN2",
+        "value": 3814
+      },
+      {
+        "name": "BACON_HERO_FIRST_TRINKET_LEADERBOARD_ALT_TEXT",
+        "value": 3815
+      },
+      {
+        "name": "BACON_HERO_SECOND_TRINKET_LEADERBOARD_ALT_TEXT",
+        "value": 3816
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_TRINKET_LEADERBOARD_ALT_TEXT",
+        "value": 3817
+      },
+      {
+        "name": "SKIP_ARMOR_ANIMATION",
+        "value": 3837
+      },
+      {
+        "name": "DRAW_SPELL_OVERRIDE",
+        "value": 3841
+      },
+      {
+        "name": "BACON_NUM_MULLIGAN_REFRESH_USED",
+        "value": 3842
+      },
+      {
+        "name": "DRAENEI_TRIGGER_HINT",
+        "value": 3847
+      },
+      {
+        "name": "BACON_NUM_MAX_REROLL_PER_HERO",
+        "value": 3848
+      },
+      {
+        "name": "MILL_SPELL_OVERRIDE",
+        "value": 3854
+      },
+      {
+        "name": "DIVINE_SHIELD_DAMAGE",
+        "value": 3859
+      },
+      {
+        "name": "BACON_LOCKED_MULLIGAN_HERO",
+        "value": 3877
+      },
+      {
+        "name": "HAS_DARK_GIFT",
+        "value": 3880
+      },
+      {
+        "name": "CREATED_AS_ON_PLAY_REPLACEMENT",
+        "value": 3882
+      },
+      {
+        "name": "SHIFTING_TOP",
+        "value": 3894
+      },
+      {
+        "name": "BACON_UNLOCK_MULLIGAN_HERO_ENABLED",
+        "value": 3896
+      },
+      {
+        "name": "BACON_PREMIUM_FREE_REROLLS",
+        "value": 3901
+      },
+      {
+        "name": "BACON_NUM_FREE_REROLLS_USED",
+        "value": 3904
+      },
+      {
+        "name": "BACON_NUM_PAID_REROLLS_USED",
+        "value": 3905
+      },
+      {
+        "name": "BACON_PLAYER_MULLIGAN_HERO_BEEN_REROLLED",
+        "value": 3906
+      },
+      {
+        "name": "BG_COMBAT_SPEED_START_TIME",
+        "value": 3909
+      },
+      {
+        "name": "BG_COMBAT_SPEED_ACCELERATION",
+        "value": 3910
+      },
+      {
+        "name": "BG_COMBAT_SPEED_DECELERATION",
+        "value": 3911
+      },
+      {
+        "name": "BG_COMBAT_SPEED_MAX_SPEED",
+        "value": 3912
+      },
+      {
+        "name": "BG_COMBAT_SPEED_ATTACKS_REMAINING_BEFORE_SLOW_DOWN_MIN",
+        "value": 3913
+      },
+      {
+        "name": "BACON_MULLIGAN_HERO_REROLL_ACTIVE",
+        "value": 3914
+      },
+      {
+        "name": "STABILIZED",
+        "value": 3916
+      },
+      {
+        "name": "UNSTABLE",
+        "value": 3917
+      },
+      {
+        "name": "ADDITIONAL_HERO_POWER_INDEX",
+        "value": 3919
+      },
+      {
+        "name": "BACON_PORTAL_IN_SOLO",
+        "value": 3925
+      },
+      {
+        "name": "BACON_TRIGGER_XY_STAY",
+        "value": 3932
+      },
+      {
+        "name": "REWIND",
+        "value": 3934
+      },
+      {
+        "name": "MYTHIC",
+        "value": 3935
+      },
+      {
+        "name": "USED_REWIND",
+        "value": 3945
+      },
+      {
+        "name": "NON_KEYWORD_CHARGE",
+        "value": 3968
+      },
+      {
+        "name": "BACON_SHOW_OVERRIDEN_MINION_COST",
+        "value": 3973
+      },
+      {
+        "name": "BACON_SHOW_REFRESH_LEFT_BANNER",
+        "value": 3982
+      },
+      {
+        "name": "SUPPRESS_SPELL_POWER_IN_TEXT",
+        "value": 3986
+      },
+      {
+        "name": "TAVERN_SPELL_ATTACK_INCREASE",
+        "value": 3989
+      },
+      {
+        "name": "TAVERN_SPELL_HEALTH_INCREASE",
+        "value": 3990
+      },
+      {
+        "name": "BACON_ELEMENTAL_BUFFHEALTHVALUE",
+        "value": 4001
+      },
+      {
+        "name": "BACON_ELEMENTAL_BUFFATKVALUE",
+        "value": 4002
+      },
+      {
+        "name": "STARSHIP_LAUNCH_TRIGGER",
+        "value": 4013
+      },
+      {
+        "name": "PET_ENTITY",
+        "value": 4017
+      },
+      {
+        "name": "KINDRED",
+        "value": 4028
+      },
+      {
+        "name": "ADDITIONAL_HERO_POWER_ENTITY_1",
+        "value": 4029
+      },
+      {
+        "name": "IS_RELAUNCHED_STARSHIP",
+        "value": 4030
+      },
+      {
+        "name": "BG_COMBAT_SPEED_MIN_COMBAT_EVENTS_REMAINING_TO_START",
+        "value": 4035
+      },
+      {
+        "name": "BACON_YAMATO_CANNON",
+        "value": 4036
+      },
+      {
+        "name": "PET_VARIANT_ID",
+        "value": 4037
+      },
+      {
+        "name": "PET_EVENT_ID",
+        "value": 4038
+      },
+      {
+        "name": "AGAMAGGAN_CURSE",
+        "value": 4056
+      },
+      {
+        "name": "CORPSE_SPENDER",
+        "value": 4058
+      },
+      {
+        "name": "BACON_YAMATO_CANNON_TOOLTIP",
+        "value": 4061
+      },
+      {
+        "name": "BACON_LIBERATOR_TOOLTIP",
+        "value": 4062
+      },
+      {
+        "name": "BACON_MEDIVAC_TOOLTIP",
+        "value": 4063
+      },
+      {
+        "name": "IMMUNE_TO_FIRE_SPELLS",
+        "value": 4066
+      },
+      {
+        "name": "BACON_TURNS_TILL_ACTIVE",
+        "value": 4069
+      },
+      {
+        "name": "BG_COMBAT_SPEED_ATTACKS_REMAINING_BEFORE_SLOW_DOWN_MAX",
+        "value": 4072
+      },
+      {
+        "name": "PET_SMALL_XP_TRIGGER_COUNT",
+        "value": 4076
+      },
+      {
+        "name": "PET_MEDIUM_XP_TRIGGER_COUNT",
+        "value": 4077
+      },
+      {
+        "name": "PET_LARGE_XP_TRIGGER_COUNT",
+        "value": 4078
+      },
+      {
+        "name": "PET_ID",
+        "value": 4079
+      },
+      {
+        "name": "FABLED",
+        "value": 4085
+      },
+      {
+        "name": "BACON_DONT_DISPLAY_HP_IN_LEADERBOARD_OR_STATS",
+        "value": 4087
+      },
+      {
+        "name": "HEROPOWER_UNLIMITED_USES",
+        "value": 4088
+      },
+      {
+        "name": "INTERACTABLE_OBJECT",
+        "value": 4089
+      },
+      {
+        "name": "INTERACTABLE_OBJECT_COST",
+        "value": 4090
+      },
+      {
+        "name": "ARCANE_TICKET",
+        "value": 4091
+      },
+      {
+        "name": "BACON_MAGICSHOP",
+        "value": 4097
+      },
+      {
+        "name": "GOLDRINN_MULTIPLIER",
+        "value": 4118
+      },
+      {
+        "name": "DYNAMIC_KEYWORD1",
+        "value": 4161
+      },
+      {
+        "name": "DYNAMIC_KEYWORD2",
+        "value": 4162
+      },
+      {
+        "name": "HAMUUL_ACTIVE",
+        "value": 4167
+      },
+      {
+        "name": "IMBUE_SUB_COUNTER",
+        "value": 4168
+      },
+      {
+        "name": "IS_EXTRA_TRIGGERED_POWER",
+        "value": 4169
+      },
+      {
+        "name": "DONT_PLAY_VFX_FROM_EXTRA_TRIGGERED_POWER",
+        "value": 4174
+      },
+      {
+        "name": "FABLED_PLUS",
+        "value": 4184
+      },
+      {
+        "name": "SPELL_SHIELD",
+        "value": 4195
+      },
+      {
+        "name": "BACON_ELEMENTAL_TOOLTIP",
+        "value": 4197
+      },
+      {
+        "name": "BACON_TAVERN_SPELL_TOOLTIP",
+        "value": 4198
+      },
+      {
+        "name": "BACON_RALLY",
+        "value": 4204
+      },
+      {
+        "name": "SUPPRESS_IMMOLATE_VISUAL_FOR_OPPONENT",
+        "value": 4213
+      },
+      {
+        "name": "BACON_HERO_FIRST_TRINKET_LEADERBOARD_SDN3",
+        "value": 4218
+      },
+      {
+        "name": "BACON_HERO_SECOND_TRINKET_LEADERBOARD_SDN3",
+        "value": 4219
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_TRINKET_LEADERBOARD_SDN3",
+        "value": 4220
+      },
+      {
+        "name": "DISPLAY_ENTITY_IN_PLAY_ID",
+        "value": 4225
+      },
+      {
+        "name": "REPEATABLE",
+        "value": 4238
+      },
+      {
+        "name": "SHATTER",
+        "value": 4239
+      },
+      {
+        "name": "SHATTERED",
+        "value": 4240
+      },
+      {
+        "name": "BACON_BUDDY_3_TIMES",
+        "value": 4248
+      },
+      {
+        "name": "USES_CHARGES",
+        "value": 4257
+      },
+      {
+        "name": "PET_TREATS_FED",
+        "value": 4280
+      },
+      {
+        "name": "PET_TREATS_GENERATED",
+        "value": 4281
+      },
+      {
+        "name": "BACON_PLAYER_EXTRA_GOLD_NEXT_TURN",
+        "value": 4286
+      },
+      {
+        "name": "BACON_PLAYER_OVERDRAWN_GOLD_NEXT_TURN",
+        "value": 4287
+      },
+      {
+        "name": "SUPPRESS_ALT_CARD_TEXT_FOR_OPPONENT",
+        "value": 4300
+      },
+      {
+        "name": "BACON_PLAYER_ENCHANTMENT_DISPLAY_ENABLED",
+        "value": 4308
+      },
+      {
+        "name": "HERALD",
+        "value": 4309
+      },
+      {
+        "name": "BACON_GUIDE_RELATED_CARD",
+        "value": 4314
+      },
+      {
+        "name": "THO_ALLY_ENDED_TURN",
+        "value": 4317
+      },
+      {
+        "name": "THO_DEFEATED_OPPOSING_ALLY",
+        "value": 4318
+      },
+      {
+        "name": "THO_DEFEATED_ALLY",
+        "value": 4320
+      },
+      {
+        "name": "HERALD_COLOSSAL_AMOUNT",
+        "value": 4327
+      },
+      {
+        "name": "THO_LOCAL_ENDED_TURN",
+        "value": 4333
+      },
+      {
+        "name": "THO_TEAMMATE_PLAYER_ID",
+        "value": 4334
+      },
+      {
+        "name": "LOCKED",
+        "value": 4352
+      },
+      {
+        "name": "CONTRABAND",
+        "value": 4353
+      },
+      {
+        "name": "PREPARE",
+        "value": 4354
+      },
+      {
+        "name": "THO_UNPASSABLE",
+        "value": 4355
+      },
+      {
+        "name": "THO_PORTAL_ID",
+        "value": 4358
+      },
+      {
+        "name": "HAMUUL_REQUIREMENT",
+        "value": 4359
+      },
+      {
+        "name": "BACON_FACTION_BANNERS_ENABLED",
+        "value": 4383
+      },
+      {
+        "name": "PLAYER_DEATHRATTLE",
+        "value": 4398
+      },
+      {
+        "name": "NOZDORMU_HINT",
+        "value": 4406
+      },
+      {
+        "name": "DISPLAY_ENTITY_IN_PLAY_HAS_BLUE_GLOW",
+        "value": 4407
+      },
+      {
+        "name": "NOZDORMU_DORMANT_EFFECT_HELPER",
+        "value": 4409
+      },
+      {
+        "name": "NOZDORMU_DORMANT_EFFECT_WATCHER",
+        "value": 4410
+      },
+      {
+        "name": "LOCK_VISUAL",
+        "value": 4414
+      },
+      {
+        "name": "LOCK_VISUAL_STATE",
+        "value": 4415
+      },
+      {
+        "name": "BACON_HERO_QUEST_REWARD_SDN1",
+        "value": 4423
+      },
+      {
+        "name": "BACON_HERO_QUEST_REWARD_SDN2",
+        "value": 4424
+      },
+      {
+        "name": "BACON_HERO_QUEST_REWARD_ALT_TEXT",
+        "value": 4425
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_QUEST_REWARD_SDN1",
+        "value": 4426
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_QUEST_REWARD_SDN2",
+        "value": 4427
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_QUEST_REWARD_ALT_TEXT",
+        "value": 4428
+      },
+      {
+        "name": "HERO_CANT_BE_DESTROYED",
+        "value": 4439
+      },
+      {
+        "name": "BACON_ALT_TAVERN_COIN",
+        "value": 4443
+      },
+      {
+        "name": "BACON_ALT_TAVERN_COIN_USED",
+        "value": 4444
+      },
+      {
+        "name": "IS_FABLED_BUNDLE_CARD",
+        "value": 4445
+      },
+      {
+        "name": "AZURE_ARCANE_SPELL_BUFF",
+        "value": 4448
+      },
+      {
+        "name": "IS_USING_PREPARE_OPTION",
+        "value": 4450
+      },
+      {
+        "name": "BACON_ALT_TAVERN_IN_PROGRESS",
+        "value": 4451
+      },
+      {
+        "name": "PET_LEVELOVERRIDE",
+        "value": 4452
+      },
+      {
+        "name": "PREPARE_REVEALED",
+        "value": 4459
+      },
+      {
+        "name": "IS_SHOP_CHOICE",
+        "value": 4480
+      },
+      {
+        "name": "SIDEBOARD_IGNORES_CLASS_RULE",
+        "value": 4483
+      },
+      {
+        "name": "IS_A_SHOP_CHOICE_CARD",
+        "value": 4486
+      },
+      {
+        "name": "BACON_TIMEWARPED",
+        "value": 4503
+      },
+      {
+        "name": "VISIBLE_PLAYER_ENCHANTMENT_CARD",
+        "value": 4508
+      },
+      {
+        "name": "BACON_TIMES_VISITED_ALT_TAVERN",
+        "value": 4514
+      },
+      {
+        "name": "MADNESS",
+        "value": 4515
+      },
+      {
+        "name": "DISPLAY_ENTITY_ON_MOUSEOVER",
+        "value": 4516
+      },
+      {
+        "name": "BACON_TIMEWARP_TOOLTIP",
+        "value": 4517
+      },
+      {
+        "name": "BACON_ALT_TAVERN_SYSTEM_ACTIVE",
+        "value": 4519
+      },
+      {
+        "name": "CTHUN_ABILITY1_USED",
+        "value": 4527
+      },
+      {
+        "name": "OLD_GOD_TEXT",
+        "value": 4528
+      },
+      {
+        "name": "UNDECIPHERED",
+        "value": 4528
+      },
+      {
+        "name": "BACON_TURNS_UNTIL_ALT_TAVERN",
+        "value": 4529
+      },
+      {
+        "name": "CRAFTABLE_OUTPUT_POWER",
+        "value": 4533
+      },
+      {
+        "name": "HERALD_COLOSSAL_CLASS",
+        "value": 4534
+      },
+      {
+        "name": "BACON_FREE_REFRESH_COUNT",
+        "value": 4536
+      },
+      {
+        "name": "BACON_BLACK_MARKET_EXTRA_CHRONUM",
+        "value": 4542
+      },
+      {
+        "name": "BIG_CARD_AS_TOOLTIP_USE_TOOKTIP_SYSTEM",
+        "value": 4544
+      },
+      {
+        "name": "MADNESS_CARD",
+        "value": 4555
+      },
+      {
+        "name": "CRAFT",
+        "value": 4556
+      },
+      {
+        "name": "ASSEMBLE",
+        "value": 4556
+      },
+      {
+        "name": "BACON_PIRATE_BUFFATKVALUE",
+        "value": 4567
+      },
+      {
+        "name": "BACON_PIRATE_BUFFHEALTHVALUE",
+        "value": 4568
+      },
+      {
+        "name": "CRAFTABLE_FIRST_HALF_DBID",
+        "value": 4572
+      },
+      {
+        "name": "CRAFTABLE_SECOND_HALF_DBID",
+        "value": 4573
+      },
+      {
+        "name": "HAS_TIMEWARPED_TAVERN_ALT_TEXT",
+        "value": 4579
+      },
+      {
+        "name": "DECK_BUILDER_BAR_AMOUNT",
+        "value": 4601
+      },
+      {
+        "name": "HERALD_COLOSSAL_PREMIUM",
+        "value": 4602
+      },
+      {
+        "name": "BACON_MANEUVER",
+        "value": 4605
+      },
+      {
+        "name": "DORMANT_AWAKENED_THIS_TURN",
+        "value": 4606
+      },
+      {
+        "name": "BACON_PIRATE_TOOLTIP",
+        "value": 4613
+      },
+      {
+        "name": "CAN_NOT_BE_REDRAFTED",
+        "value": 4620
+      },
+      {
+        "name": "SHOULD_TRACK_DECK_COST",
+        "value": 4626
+      },
+      {
+        "name": "SKIP_HERO_TWEEN",
+        "value": 4628
+      },
+      {
+        "name": "BACON_TIMEWARP_TURN1_TOOLTIP",
+        "value": 4635
+      },
+      {
+        "name": "BACON_TIMEWARP_TURN2_TOOLTIP",
+        "value": 4636
+      },
+      {
+        "name": "BACON_TOTAL_TIMEWARPS_FOR_GAME",
+        "value": 4637
+      },
+      {
+        "name": "BACON_TIMEWARP_CHRONUM_TOOLTIP",
+        "value": 4638
+      },
+      {
+        "name": "ALEXSTRASZA_HEALTHTRACKER",
+        "value": 4650
+      },
+      {
+        "name": "SIDEBOARD_IGNORES_COLLECTIBLE_RULE",
+        "value": 4659
+      },
+      {
+        "name": "BACON_FODDERS_IN_REFRESH",
+        "value": 4664
+      },
+      {
+        "name": "BACON_FODDER_TOOLTIP",
+        "value": 4664
+      },
+      {
+        "name": "BACON_CHROMADRAKE",
+        "value": 4689
+      },
+      {
+        "name": "DISGUISED",
+        "value": 4690
+      },
+      {
+        "name": "IS_USING_DISGUISED_OPTION",
+        "value": 4693
+      },
+      {
+        "name": "ASSEMBLE_TARGET",
+        "value": 4694
+      },
+      {
+        "name": "SHOULD_TRACK_DECK_COST_COUNT",
+        "value": 4700
+      },
+      {
+        "name": "BACON_AWAITING_HAND_PROTECTED_SPAWN",
+        "value": 4708
+      },
+      {
+        "name": "BACON_EVOLUTION_CARD_TEXT_ADDITIONAL_ATK",
+        "value": 4711
+      },
+      {
+        "name": "BACON_EVOLUTION_CARD_TEXT_ADDITIONAL_HEALTH",
+        "value": 4712
+      },
+      {
+        "name": "GODFREY_OVERDRAW_PROTECTION",
+        "value": 4717
+      },
+      {
+        "name": "HANDFULL_SPELL_OVERRIDE",
+        "value": 4722
+      },
+      {
+        "name": "PREPARING",
+        "value": 4726
+      },
+      {
+        "name": "PREPARED",
+        "value": 4727
+      },
+      {
+        "name": "FORCE_DISPLAY_CLASS_UI",
+        "value": 4731
+      },
+      {
+        "name": "BACON_OLD_GOD",
+        "value": 4744
+      },
+      {
+        "name": "OLD_GOD",
+        "value": 4754
+      },
+      {
+        "name": "BACON_SUBSET_ABERRATION",
+        "value": 4757
+      },
+      {
+        "name": "CTHUN_ABILITY2_USED",
+        "value": 4760
+      },
+      {
+        "name": "CTHUN_ABILITY3_USED",
+        "value": 4769
+      },
+      {
+        "name": "CTHUN_ABILITY4_USED",
+        "value": 4770
+      },
+      {
+        "name": "WAR_MODE_ACTIVE",
+        "value": 4785
+      },
+      {
+        "name": "ACTIVATABLE_MINION",
+        "value": 4786
+      },
+      {
+        "name": "ACTIVATABLE_MINION_ABILITY_USED_4",
+        "value": 4790
+      },
+      {
+        "name": "COSMETIC_ACTION",
+        "value": 4800
+      },
+      {
+        "name": "MUG_ZEE",
+        "value": 4801
+      },
+      {
+        "name": "SIDEBOARD_CARDS_COUNT_AS_MAX",
+        "value": 4802
+      },
+      {
+        "name": "SILVER_HAND_RECRUIT_ATK_BUFF",
+        "value": 4805
+      },
+      {
+        "name": "SILVER_HAND_RECRUIT_HP_BUFF",
+        "value": 4806
+      },
+      {
+        "name": "RACE_ALSO_UPDATE_COUNT",
+        "value": 4816
+      },
+      {
+        "name": "DISPLAY_CUSTOM_UI_TYPE_ON_MOUSEOVER",
+        "value": 4820
+      },
+      {
+        "name": "HIDDEN_SCRIPT_DATA_1",
+        "value": 4827
+      },
+      {
+        "name": "HIDDEN_SCRIPT_DATA_2",
+        "value": 4828
+      },
+      {
+        "name": "HIDDEN_SCRIPT_DATA_3",
+        "value": 4829
+      },
+      {
+        "name": "HIDDEN_SCRIPT_DATA_4",
+        "value": 4830
+      },
+      {
+        "name": "HIDDEN_SCRIPT_DATA_5",
+        "value": 4831
+      },
+      {
+        "name": "HIDDEN_SCRIPT_DATA_6",
+        "value": 4832
+      },
+      {
+        "name": "CHEF_NETHREK_REQUIREMENT",
+        "value": 4835
+      },
+      {
+        "name": "INTERACTABLE_OBJECT_PASSIVE_ANIMATION_TYPE",
+        "value": 4839
+      },
+      {
+        "name": "DARKBISHOP_REQUIREMENT",
+        "value": 4840
+      },
+      {
+        "name": "GENN_EVEN_REQUIREMENT",
+        "value": 4841
+      },
+      {
+        "name": "BAKU_ODD_REQUIREMENT",
+        "value": 4842
+      },
+      {
+        "name": "BACON_DARK_GIFTS_ACTIVE",
+        "value": 4845
+      },
+      {
+        "name": "GAME_MODE_BUTTON_TYPE",
+        "value": 4846
+      },
+      {
+        "name": "DARK_GIFT_ENTITY",
+        "value": 4865
+      },
+      {
+        "name": "GAME_MODE_BUTTON_IS_EXHAUSTABLE",
+        "value": 4873
+      },
+      {
+        "name": "BACON_RALLY_CANT_BE_ARTIFICIALLY_TRIGGERED",
+        "value": 4876
+      },
+      {
+        "name": "WAS_EVER_AN_INTERACTABLE_OBJECT",
+        "value": 4877
+      },
+      {
+        "name": "BACON_DARK_GIFT_PRESSABLE_VFX",
+        "value": 4891
+      },
+      {
+        "name": "ALLOW_TARGETING_ARROW_WITH_NO_TARGET",
+        "value": 4893
+      },
+      {
+        "name": "ONLY_GOLD_IN_GUIDE",
+        "value": 4897
+      },
+      {
+        "name": "BACON_GLOBAL_OLD_GOD_DBID",
+        "value": 4902
+      },
+      {
+        "name": "BACON_EVOLUTION_CARD_OVERWRITE_ATK",
+        "value": 4906
+      },
+      {
+        "name": "BACON_EVOLUTION_CARD_OVERWRITE_HEALTH",
+        "value": 4907
+      },
+      {
+        "name": "BLACK_EMPIRE_WEAPON_VFX_IDLE",
+        "value": 4909
+      },
+      {
+        "name": "BLACK_EMPIRE_WEAPON_VFX_ACTIVE",
+        "value": 4910
+      },
+      {
+        "name": "OLD_GOD_CTHUN_TOOLTIP",
+        "value": 4911
+      },
+      {
+        "name": "BACON_LINKED_CARD_IN_HAND_ID",
+        "value": 4913
+      },
+      {
+        "name": "BACON_OLD_GOD_ATTACK",
+        "value": 4914
+      },
+      {
+        "name": "BACON_OLD_GOD_HEALTH",
+        "value": 4915
+      },
+      {
+        "name": "USE_EVOLUITON_BIG_CARD_AS_PRIMARY",
+        "value": 4916
+      },
+      {
+        "name": "BACON_DEITY_SIGIL",
+        "value": 4922
+      },
+      {
+        "name": "BACON_MYSTERY_ATTACK_IN_CARD_EXPORT",
+        "value": 4933
+      },
+      {
+        "name": "BACON_MYSTERY_HEALTH_IN_CARD_EXPORT",
+        "value": 4934
+      },
+      {
+        "name": "BACON_MYSTERY_TIER_IN_CARD_EXPORT",
+        "value": 4935
+      },
+      {
+        "name": "BMEC_EARLY_CONCEDE_WARNING_AVAILABLE",
+        "value": 4942
+      },
+      {
+        "name": "ULDIR_QUARANTINE_TRACKER",
+        "value": 4947
+      },
+      {
+        "name": "ULDIR_QUARANTINE_PIP_BLOOD",
+        "value": 4948
+      },
+      {
+        "name": "ULDIR_QUARANTINE_PIP_FROST",
+        "value": 4949
+      },
+      {
+        "name": "ULDIR_QUARANTINE_PIP_UNHOLY",
+        "value": 4950
+      },
+      {
+        "name": "ASSEMBLED_MINION",
+        "value": 4957
+      },
+      {
+        "name": "OBJECTIVE_COUNTDOWN",
+        "value": 4960
+      },
+      {
+        "name": "REPLACE_NAMEPLATE",
+        "value": 4978
+      },
+      {
+        "name": "YOGG_FOG",
+        "value": 4981
+      }
+    ],
+    "engine_only_count": 93,
+    "engine_only": [
+      {
+        "name": "RACE",
+        "value": 200
+      },
+      {
+        "name": "NAME",
+        "value": 1000
+      },
+      {
+        "name": "TEXT",
+        "value": 1001
+      },
+      {
+        "name": "BASE_ATK",
+        "value": 1010
+      },
+      {
+        "name": "BASE_HEALTH",
+        "value": 1011
+      },
+      {
+        "name": "MAX_HEALTH",
+        "value": 1012
+      },
+      {
+        "name": "GOLD",
+        "value": 1013
+      },
+      {
+        "name": "TAVERN_TIER",
+        "value": 1014
+      },
+      {
+        "name": "UPGRADE_COST",
+        "value": 1015
+      },
+      {
+        "name": "HEALTH2",
+        "value": 1016
+      },
+      {
+        "name": "CLEAVE",
+        "value": 1017
+      },
+      {
+        "name": "START_OF_TURN",
+        "value": 1018
+      },
+      {
+        "name": "END_OF_TURN",
+        "value": 1019
+      },
+      {
+        "name": "AVENGE_TARGET",
+        "value": 1020
+      },
+      {
+        "name": "ON_SELL",
+        "value": 1021
+      },
+      {
+        "name": "ACTIVATE_USED_THIS_TURN",
+        "value": 1022
+      },
+      {
+        "name": "GOLDEN",
+        "value": 1023
+      },
+      {
+        "name": "TRIPLE_REWARD_TIER",
+        "value": 1024
+      },
+      {
+        "name": "GOLDEN_NO_TRIPLE_REWARD",
+        "value": 1025
+      },
+      {
+        "name": "WINDFURY_ATTACKS",
+        "value": 1027
+      },
+      {
+        "name": "VENOMOUS_CONSUMED",
+        "value": 1028
+      },
+      {
+        "name": "DIVINE_SHIELD_HITS",
+        "value": 1029
+      },
+      {
+        "name": "GOLD_SPENT_THIS_TURN",
+        "value": 1030
+      },
+      {
+        "name": "CARDS_PLAYED_THIS_TURN",
+        "value": 1031
+      },
+      {
+        "name": "TAVERN_SPELLS_CAST_THIS_TURN",
+        "value": 1032
+      },
+      {
+        "name": "TAVERN_SPELLS_CAST_THIS_GAME",
+        "value": 1033
+      },
+      {
+        "name": "FREE_REFRESH_REMAINING",
+        "value": 1034
+      },
+      {
+        "name": "DEAD",
+        "value": 1036
+      },
+      {
+        "name": "KILLER",
+        "value": 1037
+      },
+      {
+        "name": "JUST_DIED",
+        "value": 1038
+      },
+      {
+        "name": "SHIELD_HITS_TAKEN",
+        "value": 1039
+      },
+      {
+        "name": "SELL_VALUE",
+        "value": 1040
+      },
+      {
+        "name": "BATTLECRY_DOUBLER",
+        "value": 1041
+      },
+      {
+        "name": "AVENGE_COUNTER",
+        "value": 1042
+      },
+      {
+        "name": "TRIPLE_BASE_CARD_ID",
+        "value": 1043
+      },
+      {
+        "name": "PERSIST_COMBAT_CHANGES",
+        "value": 1045
+      },
+      {
+        "name": "COUNTER_BATTLECRIES",
+        "value": 1046
+      },
+      {
+        "name": "COUNTER_DEATHRATTLES",
+        "value": 1047
+      },
+      {
+        "name": "LOCKBOX_TURNS_LEFT",
+        "value": 1048
+      },
+      {
+        "name": "TRIPLE_REWARD_PENDING",
+        "value": 1049
+      },
+      {
+        "name": "BLOOD_GEM_BONUS_ATK",
+        "value": 1051
+      },
+      {
+        "name": "BLOOD_GEM_BONUS_HEALTH",
+        "value": 1052
+      },
+      {
+        "name": "TAVERN_SPELL_EXTRA_ATK",
+        "value": 1053
+      },
+      {
+        "name": "TAVERN_SPELL_EXTRA_HEALTH",
+        "value": 1054
+      },
+      {
+        "name": "ELEMENTAL_EXTRA_HEALTH",
+        "value": 1055
+      },
+      {
+        "name": "NEXT_SPELL_COST_REDUCTION",
+        "value": 1056
+      },
+      {
+        "name": "ELEMENTAL_EXTRA_ATK",
+        "value": 1057
+      },
+      {
+        "name": "INCOME_CAP_BONUS",
+        "value": 1059
+      },
+      {
+        "name": "GEMS_PLAYED_ON",
+        "value": 1060
+      },
+      {
+        "name": "END_OF_TURN_DOUBLER",
+        "value": 1061
+      },
+      {
+        "name": "DEATHRATTLE_DOUBLER",
+        "value": 1062
+      },
+      {
+        "name": "GOLDEN_MINIONS_PLAYED",
+        "value": 1063
+      },
+      {
+        "name": "HEALTH_REFRESHES_LEFT",
+        "value": 1064
+      },
+      {
+        "name": "SPELL_DOUBLER",
+        "value": 1065
+      },
+      {
+        "name": "ADJACENT_PERSIST_SOURCE",
+        "value": 1066
+      },
+      {
+        "name": "ENCHANT_IMMUNE",
+        "value": 1067
+      },
+      {
+        "name": "LOCKED_IN_HAND",
+        "value": 1068
+      },
+      {
+        "name": "PERSIST_DOUBLE",
+        "value": 1069
+      },
+      {
+        "name": "GILDED_NOT_TRIPLED",
+        "value": 1070
+      },
+      {
+        "name": "HERO_POWER_USED_THIS_TURN",
+        "value": 1071
+      },
+      {
+        "name": "HERO_POWER_USES_THIS_GAME",
+        "value": 1072
+      },
+      {
+        "name": "TAVERN_MINION_COST_OVERRIDE",
+        "value": 1073
+      },
+      {
+        "name": "REFRESH_COST_OVERRIDE",
+        "value": 1074
+      },
+      {
+        "name": "FREE_MINION_BUYS_THIS_TURN",
+        "value": 1075
+      },
+      {
+        "name": "TRIPLE_THRESHOLD",
+        "value": 1076
+      },
+      {
+        "name": "TRIPLE_REWARD_COINS",
+        "value": 1077
+      },
+      {
+        "name": "TURN_SKIPPED",
+        "value": 1078
+      },
+      {
+        "name": "UPGRADE_COST_MOD",
+        "value": 1079
+      },
+      {
+        "name": "TAVERN_OFFER_MOD",
+        "value": 1080
+      },
+      {
+        "name": "HERO_POWER_NEXT_DISCOUNT",
+        "value": 1081
+      },
+      {
+        "name": "TRIPLE_NO_REWARD",
+        "value": 1082
+      },
+      {
+        "name": "FREE_SPELL_BUYS_THIS_TURN",
+        "value": 1083
+      },
+      {
+        "name": "FREE_MINION_BUY_RACE",
+        "value": 1084
+      },
+      {
+        "name": "FREE_MINION_BUY_KEYWORD",
+        "value": 1085
+      },
+      {
+        "name": "TAVERN_SPELL_COST_MOD",
+        "value": 1086
+      },
+      {
+        "name": "SELL_VALUE_OVERRIDE",
+        "value": 1087
+      },
+      {
+        "name": "HEALTH_MINION_BUYS_THIS_TURN",
+        "value": 1088
+      },
+      {
+        "name": "HEALTH_BUY_RACE",
+        "value": 1089
+      },
+      {
+        "name": "HEALTH_SPELL_BUYS_THIS_TURN",
+        "value": 1090
+      },
+      {
+        "name": "HEALTH_BUY",
+        "value": 1091
+      },
+      {
+        "name": "COUNTER_ELEMENTALS_PLAYED",
+        "value": 1092
+      },
+      {
+        "name": "MINIONS_SOLD_THIS_TURN",
+        "value": 1093
+      },
+      {
+        "name": "TAVERN_OFFER_TIER_EXACT",
+        "value": 1094
+      },
+      {
+        "name": "TAVERN_EXTRA_TIER_SLOTS",
+        "value": 1095
+      },
+      {
+        "name": "TAVERN_EXTRA_TIER",
+        "value": 1096
+      },
+      {
+        "name": "PERSIST_BONUS_ONLY",
+        "value": 1098
+      },
+      {
+        "name": "RACES",
+        "value": 1099
+      },
+      {
+        "name": "CARD_ID",
+        "value": 1225
+      },
+      {
+        "name": "SPELLCRAFT",
+        "value": 2359
+      },
+      {
+        "name": "EVOLUTION_CARD_ID",
+        "value": 2519
+      },
+      {
+        "name": "ACTIVATE",
+        "value": 4089
+      },
+      {
+        "name": "ACTIVATE_COST",
+        "value": 4090
+      },
+      {
+        "name": "RALLY",
+        "value": 4204
+      }
+    ],
+    "engine_only_numeric_collision_count": 36,
+    "engine_only_numeric_collisions": [
+      {
+        "name": "RACE",
+        "value": 200,
+        "official_names": [
+          "CARDRACE"
+        ]
+      },
+      {
+        "name": "NAME",
+        "value": 1000,
+        "official_names": [
+          "END_TURN_BUTTON_ALTERNATIVE_APPEARANCE"
+        ]
+      },
+      {
+        "name": "UPGRADE_COST",
+        "value": 1015,
+        "official_names": [
+          "WAND"
+        ]
+      },
+      {
+        "name": "HEALTH2",
+        "value": 1016,
+        "official_names": [
+          "TREAT_AS_PLAYED_HERO_CARD"
+        ]
+      },
+      {
+        "name": "AVENGE_TARGET",
+        "value": 1020,
+        "official_names": [
+          "LITERALLY_UNPLAYABLE"
+        ]
+      },
+      {
+        "name": "GOLDEN_NO_TRIPLE_REWARD",
+        "value": 1025,
+        "official_names": [
+          "NUM_HERO_POWER_DAMAGE_THIS_GAME"
+        ]
+      },
+      {
+        "name": "WINDFURY_ATTACKS",
+        "value": 1027,
+        "official_names": [
+          "TURN_INDICATOR_ALTERNATIVE_APPEARANCE"
+        ]
+      },
+      {
+        "name": "AVENGE_COUNTER",
+        "value": 1042,
+        "official_names": [
+          "PREVIOUS_PUZZLE_COMPLETED"
+        ]
+      },
+      {
+        "name": "COUNTER_BATTLECRIES",
+        "value": 1046,
+        "official_names": [
+          "HEALTH_DISPLAY_COLOR"
+        ]
+      },
+      {
+        "name": "COUNTER_DEATHRATTLES",
+        "value": 1047,
+        "official_names": [
+          "HEALTH_DISPLAY_NEGATIVE"
+        ]
+      },
+      {
+        "name": "LOCKBOX_TURNS_LEFT",
+        "value": 1048,
+        "official_names": [
+          "WHIZBANG_DECK_ID"
+        ]
+      },
+      {
+        "name": "BLOOD_GEM_BONUS_HEALTH",
+        "value": 1052,
+        "official_names": [
+          "GEARS"
+        ]
+      },
+      {
+        "name": "TAVERN_SPELL_EXTRA_HEALTH",
+        "value": 1054,
+        "official_names": [
+          "LUNAHIGHLIGHTHINT"
+        ]
+      },
+      {
+        "name": "ELEMENTAL_EXTRA_HEALTH",
+        "value": 1055,
+        "official_names": [
+          "SUPPRESS_JOBS_DONE_VO"
+        ]
+      },
+      {
+        "name": "ELEMENTAL_EXTRA_ATK",
+        "value": 1057,
+        "official_names": [
+          "SHRINE"
+        ]
+      },
+      {
+        "name": "HERO_POWER_USED_THIS_TURN",
+        "value": 1071,
+        "official_names": [
+          "BLOCK_ALL_INPUT"
+        ]
+      },
+      {
+        "name": "TAVERN_MINION_COST_OVERRIDE",
+        "value": 1073,
+        "official_names": [
+          "PUZZLE_MODE"
+        ]
+      },
+      {
+        "name": "FREE_MINION_BUYS_THIS_TURN",
+        "value": 1075,
+        "official_names": [
+          "CARD_DOES_NOTHING"
+        ]
+      },
+      {
+        "name": "TRIPLE_REWARD_COINS",
+        "value": 1077,
+        "official_names": [
+          "CASTS_WHEN_DRAWN"
+        ]
+      },
+      {
+        "name": "TURN_SKIPPED",
+        "value": 1078,
+        "official_names": [
+          "DISPLAY_CARD_ON_MOUSEOVER"
+        ]
+      },
+      {
+        "name": "TAVERN_OFFER_MOD",
+        "value": 1080,
+        "official_names": [
+          "DECK_POWER_UP"
+        ]
+      },
+      {
+        "name": "HERO_POWER_NEXT_DISCOUNT",
+        "value": 1081,
+        "official_names": [
+          "SIDEKICK"
+        ]
+      },
+      {
+        "name": "TRIPLE_NO_REWARD",
+        "value": 1082,
+        "official_names": [
+          "SIDEKICK_HERO_POWER"
+        ]
+      },
+      {
+        "name": "FREE_MINION_BUY_KEYWORD",
+        "value": 1085,
+        "official_names": [
+          "REBORN"
+        ]
+      },
+      {
+        "name": "SELL_VALUE_OVERRIDE",
+        "value": 1087,
+        "official_names": [
+          "SQUELCH_NON_GAME_TRIGGERS_AND_MODIFIERS"
+        ]
+      },
+      {
+        "name": "HEALTH_BUY_RACE",
+        "value": 1089,
+        "official_names": [
+          "QUEST_REWARD_DATABASE_ID"
+        ]
+      },
+      {
+        "name": "HEALTH_SPELL_BUYS_THIS_TURN",
+        "value": 1090,
+        "official_names": [
+          "DORMANT_VISUAL"
+        ]
+      },
+      {
+        "name": "MINIONS_SOLD_THIS_TURN",
+        "value": 1093,
+        "official_names": [
+          "CUSTOMTEXT1"
+        ]
+      },
+      {
+        "name": "TAVERN_OFFER_TIER_EXACT",
+        "value": 1094,
+        "official_names": [
+          "CUSTOMTEXT2"
+        ]
+      },
+      {
+        "name": "TAVERN_EXTRA_TIER_SLOTS",
+        "value": 1095,
+        "official_names": [
+          "CUSTOMTEXT3"
+        ]
+      },
+      {
+        "name": "RACES",
+        "value": 1099,
+        "official_names": [
+          "PLAYER_BASE_SHRINE_DECK_ID"
+        ]
+      },
+      {
+        "name": "SPELLCRAFT",
+        "value": 2359,
+        "official_names": [
+          "BACON_SPELLCRAFT_ID"
+        ]
+      },
+      {
+        "name": "EVOLUTION_CARD_ID",
+        "value": 2519,
+        "official_names": [
+          "BACON_EVOLUTION_CARD_ID"
+        ]
+      },
+      {
+        "name": "ACTIVATE",
+        "value": 4089,
+        "official_names": [
+          "INTERACTABLE_OBJECT"
+        ]
+      },
+      {
+        "name": "ACTIVATE_COST",
+        "value": 4090,
+        "official_names": [
+          "INTERACTABLE_OBJECT_COST"
+        ]
+      },
+      {
+        "name": "RALLY",
+        "value": 4204,
+        "official_names": [
+          "BACON_RALLY"
+        ]
+      }
+    ],
+    "engine_internal_only_count": 46,
+    "official_only_bg_relevant": [
+      {
+        "name": "QUEST",
+        "value": 462
+      },
+      {
+        "name": "QUEST_PROGRESS",
+        "value": 534
+      },
+      {
+        "name": "QUEST_PROGRESS_TOTAL",
+        "value": 535
+      },
+      {
+        "name": "QUEST_CONTRIBUTOR",
+        "value": 541
+      },
+      {
+        "name": "QUEST_REWARD_DATABASE_ID",
+        "value": 1089
+      },
+      {
+        "name": "SIDE_QUEST",
+        "value": 1192
+      },
+      {
+        "name": "BACON_DUMMY_PLAYER",
+        "value": 1349
+      },
+      {
+        "name": "BACON_HERO_POWER_ACTIVATED",
+        "value": 1398
+      },
+      {
+        "name": "BACON_ODD_PLAYER_OUT",
+        "value": 1415
+      },
+      {
+        "name": "BACON_WON_LAST_COMBAT",
+        "value": 1422
+      },
+      {
+        "name": "BACON_IS_KEL_THUZAD",
+        "value": 1423
+      },
+      {
+        "name": "BACON_TRIPLE_UPGRADE_MINION_ID",
+        "value": 1429
+      },
+      {
+        "name": "BACON_ACTION_CARD",
+        "value": 1437
+      },
+      {
+        "name": "IS_BACON_POOL_MINION",
+        "value": 1456
+      },
+      {
+        "name": "BACON_TRIPLE_CANDIDATE",
+        "value": 1460
+      },
+      {
+        "name": "BATTLEGROUNDS_PREMIUM_EMOTES",
+        "value": 1463
+      },
+      {
+        "name": "BACON_COIN_ON_ENEMY_MINIONS",
+        "value": 1467
+      },
+      {
+        "name": "BACON_TRIPLED_BASE_MINION_ID",
+        "value": 1471
+      },
+      {
+        "name": "BACON_HERO_CAN_BE_DRAFTED",
+        "value": 1491
+      },
+      {
+        "name": "BACON_MAX_PLAYER_TECH_LEVEL",
+        "value": 1494
+      },
+      {
+        "name": "BACON_IN_COMBAT_PHASE",
+        "value": 1522
+      },
+      {
+        "name": "BACON_HERO_EARLY_ACCESS",
+        "value": 1554
+      },
+      {
+        "name": "BATTLEGROUNDS_HERO_OVERRIDE_1",
+        "value": 1577
+      },
+      {
+        "name": "BATTLEGROUNDS_HERO_OVERRIDE_2",
+        "value": 1578
+      },
+      {
+        "name": "BATTLEGROUNDS_HERO_OVERRIDE_3",
+        "value": 1579
+      },
+      {
+        "name": "BATTLEGROUNDS_HERO_OVERRIDE_4",
+        "value": 1580
+      },
+      {
+        "name": "BACON_SELL_VALUE",
+        "value": 1587
+      },
+      {
+        "name": "BACON_SUBSET_DRAGON",
+        "value": 1591
+      },
+      {
+        "name": "BACON_SUBSET_MURLOC",
+        "value": 1592
+      },
+      {
+        "name": "BACON_SUBSET_DEMON",
+        "value": 1593
+      },
+      {
+        "name": "BACON_SUBSET_BEAST",
+        "value": 1594
+      },
+      {
+        "name": "BACON_SUBSET_MECH",
+        "value": 1595
+      },
+      {
+        "name": "BACON_SUBSET_PIRATE",
+        "value": 1596
+      },
+      {
+        "name": "BACON_VERDANTSPHERES",
+        "value": 1598
+      },
+      {
+        "name": "BACON_MUKLA_BANANA_SPAWN_COUNT",
+        "value": 1629
+      },
+      {
+        "name": "BACON_PLAYER_RESULTS_HERO_OVERRIDE",
+        "value": 1649
+      },
+      {
+        "name": "BACON_SUBSET_ELEMENTALS",
+        "value": 1688
+      },
+      {
+        "name": "QUESTLINE",
+        "value": 1725
+      },
+      {
+        "name": "BACON_AVALANCHE",
+        "value": 1744
+      },
+      {
+        "name": "BACON_COMEONECOMEALL",
+        "value": 1789
+      },
+      {
+        "name": "BACON_BLOODGEMBUFFATKVALUE",
+        "value": 1844
+      },
+      {
+        "name": "BACON_SUBSET_QUILLBOAR",
+        "value": 1845
+      },
+      {
+        "name": "BACON_BLOOD_GEM_TOOLTIP",
+        "value": 1966
+      },
+      {
+        "name": "QUESTLINE_FINAL_REWARD_DATABASE_ID",
+        "value": 1992
+      },
+      {
+        "name": "QUESTLINE_PART",
+        "value": 1993
+      },
+      {
+        "name": "QUESTLINE_REQUIREMENT_MET_1",
+        "value": 1994
+      },
+      {
+        "name": "QUESTLINE_REQUIREMENT_MET_2",
+        "value": 1995
+      },
+      {
+        "name": "QUESTLINE_REQUIREMENT_MET_3",
+        "value": 1996
+      },
+      {
+        "name": "BACON_SKIN",
+        "value": 2038
+      },
+      {
+        "name": "BACON_SKIN_PARENT_ID",
+        "value": 2039
+      },
+      {
+        "name": "BACON_BOB_SKIN",
+        "value": 2049
+      },
+      {
+        "name": "BACON_BARTENDER_CARD_ID",
+        "value": 2053
+      },
+      {
+        "name": "BACON_COMBAT_DAMAGE_CAP",
+        "value": 2089
+      },
+      {
+        "name": "BACON_REFRESH_TOOLTIP",
+        "value": 2104
+      },
+      {
+        "name": "BACON_COMPANION_ID",
+        "value": 2130
+      },
+      {
+        "name": "BACON_BUDDY",
+        "value": 2154
+      },
+      {
+        "name": "BACON_STARSTOBOUNCEOFF",
+        "value": 2155
+      },
+      {
+        "name": "BACON_DIABLO_FIGHT_DIABLO_PLAYER_ID",
+        "value": 2226
+      },
+      {
+        "name": "BACON_CHOSEN_BOARD_SKIN_ID",
+        "value": 2264
+      },
+      {
+        "name": "BACON_SUBSET_NAGA",
+        "value": 2272
+      },
+      {
+        "name": "BACON_PLAYER_NUM_HERO_BUDDIES_GAINED",
+        "value": 2346
+      },
+      {
+        "name": "BACON_SUBSET_UNDEAD",
+        "value": 2347
+      },
+      {
+        "name": "BATTLEGROUNDS_FAVORITE_FINISHER",
+        "value": 2348
+      },
+      {
+        "name": "BACON_SPELLCRAFT_ID",
+        "value": 2359
+      },
+      {
+        "name": "BACON_HERO_BUDDY_PROGRESS",
+        "value": 2364
+      },
+      {
+        "name": "BACON_HEROPOWER_BASE_HERO_ID",
+        "value": 2376
+      },
+      {
+        "name": "BACON_OMIT_WHEN_OUT_OF_ROTATION",
+        "value": 2387
+      },
+      {
+        "name": "BACON_OVERRIDE_BG_COST",
+        "value": 2437
+      },
+      {
+        "name": "BACON_REDUCE_BUY_COST",
+        "value": 2438
+      },
+      {
+        "name": "BACON_NUMBER_HERO_REFRESH_AVAILABLE",
+        "value": 2452
+      },
+      {
+        "name": "BACON_FREEZE_TOOLTIP",
+        "value": 2455
+      },
+      {
+        "name": "BACON_QUESTS_ACTIVE",
+        "value": 2468
+      },
+      {
+        "name": "BACON_DIED_LAST_COMBAT",
+        "value": 2483
+      },
+      {
+        "name": "BACON_BUDDY_ENABLED",
+        "value": 2518
+      },
+      {
+        "name": "BACON_EVOLUTION_CARD_ID",
+        "value": 2519
+      },
+      {
+        "name": "SPELLCRAFT_HINT",
+        "value": 2557
+      },
+      {
+        "name": "BACON_MINION_TYPE_REWARD",
+        "value": 2571
+      },
+      {
+        "name": "BACON_SUBSET_TOTEM",
+        "value": 2630
+      },
+      {
+        "name": "BACON_QUEST_COMPLETED",
+        "value": 2633
+      },
+      {
+        "name": "BACON_CARD_DBID_REWARD",
+        "value": 2673
+      },
+      {
+        "name": "BACON_STEALTH_TOOLTIP",
+        "value": 2704
+      },
+      {
+        "name": "BACON_QUEST_TOOLTIP",
+        "value": 2705
+      },
+      {
+        "name": "BACON_IS_HEROPOWER_QUESTREWARD",
+        "value": 2706
+      },
+      {
+        "name": "BACON_HERO_QUEST_REWARD_DATABASE_ID",
+        "value": 2713
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_QUEST_REWARD_DATABASE_ID",
+        "value": 2714
+      },
+      {
+        "name": "BACON_HERO_QUEST_REWARD_COMPLETED",
+        "value": 2715
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_QUEST_REWARD_COMPLETED",
+        "value": 2716
+      },
+      {
+        "name": "BACON_IS_BOB_QUEST",
+        "value": 2732
+      },
+      {
+        "name": "BACON_HERO_REWARD_CARD_DBID",
+        "value": 2748
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_REWARD_CARD_DBID",
+        "value": 2749
+      },
+      {
+        "name": "BACON_HERO_REWARD_MINION_TYPE",
+        "value": 2750
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_REWARD_MINION_TYPE",
+        "value": 2751
+      },
+      {
+        "name": "BACON_DIED_LAST_COMBAT_HINT",
+        "value": 2780
+      },
+      {
+        "name": "BACON_DOUBLE_QUEST_HERO_POWER",
+        "value": 2803
+      },
+      {
+        "name": "BACON_BLOODGEMBUFFHEALTHVALUE",
+        "value": 2827
+      },
+      {
+        "name": "BACON_DEEP_BLUE",
+        "value": 2850
+      },
+      {
+        "name": "BACON_MAX_LEADERBOARD_ARMOR",
+        "value": 2867
+      },
+      {
+        "name": "BACON_REBORN_TOOLTIP",
+        "value": 2870
+      },
+      {
+        "name": "BACON_PUTRICIDES_CREATION_TOOLTIP",
+        "value": 2875
+      },
+      {
+        "name": "BACON_GLOBAL_ANOMALY_DBID",
+        "value": 2897
+      },
+      {
+        "name": "BACON_COSTS_HEALTH_TO_BUY",
+        "value": 2911
+      },
+      {
+        "name": "BACON_USE_COIN_BASED_BUDDY_METER",
+        "value": 2935
+      },
+      {
+        "name": "BACON_BUY_BUDDY",
+        "value": 2937
+      },
+      {
+        "name": "BACON_BUY_BUDDY_2",
+        "value": 2938
+      },
+      {
+        "name": "BACON_DUO_TEAMMATE_PLAYER_ID",
+        "value": 2939
+      },
+      {
+        "name": "BACON_SHOW_HEROPOWER_BUDDY_AS_EVOLVING_BIG_CARD",
+        "value": 2943
+      },
+      {
+        "name": "BACON_DUO_PLAYER_FIGHTS_FIRST_NEXT_COMBAT",
+        "value": 2975
+      },
+      {
+        "name": "BACON_CURRENT_COMBAT_PLAYER_ID",
+        "value": 2989
+      },
+      {
+        "name": "BACON_PAIR_CANDIDATE",
+        "value": 3031
+      },
+      {
+        "name": "BACON_TRIGGER_UPBEAT",
+        "value": 3046
+      },
+      {
+        "name": "BACON_TRIGGER_XY",
+        "value": 3047
+      },
+      {
+        "name": "BACON_COMBAT_PHASE_HERO",
+        "value": 3048
+      },
+      {
+        "name": "BACON_DUO_TEAM_ID",
+        "value": 3095
+      },
+      {
+        "name": "ALLOW_MOVE_BACON_SPELL",
+        "value": 3111
+      },
+      {
+        "name": "BACON_DUO_TRIPLE_CANDIDATE_TEAMMATE",
+        "value": 3145
+      },
+      {
+        "name": "BACON_DUO_PAIR_CANDIDATE_TEAMMATE",
+        "value": 3146
+      },
+      {
+        "name": "BACON_DUO_PASSABLE",
+        "value": 3178
+      },
+      {
+        "name": "BACON_DUO_NOTPASSABLE",
+        "value": 3179
+      },
+      {
+        "name": "ANOMALY1",
+        "value": 3182
+      },
+      {
+        "name": "ANOMALY2",
+        "value": 3183
+      },
+      {
+        "name": "BACON_ANOMALY_ALL_HEROES_ARE_THIS_DBID",
+        "value": 3208
+      },
+      {
+        "name": "BACON_NO_TIER_UP_BUTTON",
+        "value": 3220
+      },
+      {
+        "name": "BACON_CONSUME_TOOLTIP",
+        "value": 3254
+      },
+      {
+        "name": "BACON_PASS_TOOLTIP",
+        "value": 3321
+      },
+      {
+        "name": "BACON_COMBAT_DAMAGE_CAP_ENABLED",
+        "value": 3403
+      },
+      {
+        "name": "BACON_TRINKET",
+        "value": 3407
+      },
+      {
+        "name": "BACON_SUBSET_ALL",
+        "value": 3436
+      },
+      {
+        "name": "BACON_SHOW_COST_ON_DISCOVER",
+        "value": 3456
+      },
+      {
+        "name": "DUOS_QUEUED_NOT_ON_TEAM",
+        "value": 3478
+      },
+      {
+        "name": "BACON_TEAMMATE_BONUS_MINION_DAMAGE_LAST_COMBAT",
+        "value": 3492
+      },
+      {
+        "name": "BACON_DUOS_PUNISH_LEAVERS",
+        "value": 3494
+      },
+      {
+        "name": "BACON_TRIPLED_BASE_MINION_ID2",
+        "value": 3499
+      },
+      {
+        "name": "BACON_TRIPLED_BASE_MINION_ID3",
+        "value": 3500
+      },
+      {
+        "name": "QUEST_HIDE_PROGRESS",
+        "value": 3523
+      },
+      {
+        "name": "BACON_IS_MAGIC_ITEM_DISCOVER",
+        "value": 3565
+      },
+      {
+        "name": "BACON_DONT_SHOW_PAIR_TRIPLE_DISCOVER_VFX",
+        "value": 3661
+      },
+      {
+        "name": "BACON_FODDER",
+        "value": 3668
+      },
+      {
+        "name": "BACON_IS_POTENTIAL_TRINKET",
+        "value": 3705
+      },
+      {
+        "name": "BACON_TURNS_LEFT_TO_DISCOVER_TRINKET",
+        "value": 3738
+      },
+      {
+        "name": "BACON_TRINKETS_ACTIVE",
+        "value": 3740
+      },
+      {
+        "name": "BACON_FIRST_TRINKET_DATABASE_ID",
+        "value": 3741
+      },
+      {
+        "name": "BACON_SECOND_TRINKET_DATABASE_ID",
+        "value": 3742
+      },
+      {
+        "name": "BACON_HEROPOWER_TRINKET_DATABASE_ID",
+        "value": 3743
+      },
+      {
+        "name": "BACON_OVERRIDE_COST_COLOR",
+        "value": 3777
+      },
+      {
+        "name": "BACON_EVOLUTION_CARD_ID_2",
+        "value": 3778
+      },
+      {
+        "name": "BACON_HERO_FIRST_TRINKET_LEADERBOARD_SDN1",
+        "value": 3805
+      },
+      {
+        "name": "BACON_HERO_SECOND_TRINKET_LEADERBOARD_SDN1",
+        "value": 3806
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_TRINKET_LEADERBOARD_SDN1",
+        "value": 3807
+      },
+      {
+        "name": "BACON_HERO_FIRST_TRINKET_LEADERBOARD_SDN2",
+        "value": 3812
+      },
+      {
+        "name": "BACON_HERO_SECOND_TRINKET_LEADERBOARD_SDN2",
+        "value": 3813
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_TRINKET_LEADERBOARD_SDN2",
+        "value": 3814
+      },
+      {
+        "name": "BACON_HERO_FIRST_TRINKET_LEADERBOARD_ALT_TEXT",
+        "value": 3815
+      },
+      {
+        "name": "BACON_HERO_SECOND_TRINKET_LEADERBOARD_ALT_TEXT",
+        "value": 3816
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_TRINKET_LEADERBOARD_ALT_TEXT",
+        "value": 3817
+      },
+      {
+        "name": "BACON_NUM_MULLIGAN_REFRESH_USED",
+        "value": 3842
+      },
+      {
+        "name": "BACON_NUM_MAX_REROLL_PER_HERO",
+        "value": 3848
+      },
+      {
+        "name": "BACON_LOCKED_MULLIGAN_HERO",
+        "value": 3877
+      },
+      {
+        "name": "BACON_UNLOCK_MULLIGAN_HERO_ENABLED",
+        "value": 3896
+      },
+      {
+        "name": "BACON_PREMIUM_FREE_REROLLS",
+        "value": 3901
+      },
+      {
+        "name": "BACON_NUM_FREE_REROLLS_USED",
+        "value": 3904
+      },
+      {
+        "name": "BACON_NUM_PAID_REROLLS_USED",
+        "value": 3905
+      },
+      {
+        "name": "BACON_PLAYER_MULLIGAN_HERO_BEEN_REROLLED",
+        "value": 3906
+      },
+      {
+        "name": "BACON_MULLIGAN_HERO_REROLL_ACTIVE",
+        "value": 3914
+      },
+      {
+        "name": "BACON_PORTAL_IN_SOLO",
+        "value": 3925
+      },
+      {
+        "name": "BACON_TRIGGER_XY_STAY",
+        "value": 3932
+      },
+      {
+        "name": "BACON_SHOW_OVERRIDEN_MINION_COST",
+        "value": 3973
+      },
+      {
+        "name": "BACON_SHOW_REFRESH_LEFT_BANNER",
+        "value": 3982
+      },
+      {
+        "name": "TAVERN_SPELL_ATTACK_INCREASE",
+        "value": 3989
+      },
+      {
+        "name": "TAVERN_SPELL_HEALTH_INCREASE",
+        "value": 3990
+      },
+      {
+        "name": "BACON_ELEMENTAL_BUFFHEALTHVALUE",
+        "value": 4001
+      },
+      {
+        "name": "BACON_ELEMENTAL_BUFFATKVALUE",
+        "value": 4002
+      },
+      {
+        "name": "BACON_YAMATO_CANNON",
+        "value": 4036
+      },
+      {
+        "name": "BACON_YAMATO_CANNON_TOOLTIP",
+        "value": 4061
+      },
+      {
+        "name": "BACON_LIBERATOR_TOOLTIP",
+        "value": 4062
+      },
+      {
+        "name": "BACON_MEDIVAC_TOOLTIP",
+        "value": 4063
+      },
+      {
+        "name": "BACON_TURNS_TILL_ACTIVE",
+        "value": 4069
+      },
+      {
+        "name": "BACON_DONT_DISPLAY_HP_IN_LEADERBOARD_OR_STATS",
+        "value": 4087
+      },
+      {
+        "name": "BACON_MAGICSHOP",
+        "value": 4097
+      },
+      {
+        "name": "BACON_ELEMENTAL_TOOLTIP",
+        "value": 4197
+      },
+      {
+        "name": "BACON_TAVERN_SPELL_TOOLTIP",
+        "value": 4198
+      },
+      {
+        "name": "BACON_RALLY",
+        "value": 4204
+      },
+      {
+        "name": "BACON_HERO_FIRST_TRINKET_LEADERBOARD_SDN3",
+        "value": 4218
+      },
+      {
+        "name": "BACON_HERO_SECOND_TRINKET_LEADERBOARD_SDN3",
+        "value": 4219
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_TRINKET_LEADERBOARD_SDN3",
+        "value": 4220
+      },
+      {
+        "name": "BACON_BUDDY_3_TIMES",
+        "value": 4248
+      },
+      {
+        "name": "BACON_PLAYER_EXTRA_GOLD_NEXT_TURN",
+        "value": 4286
+      },
+      {
+        "name": "BACON_PLAYER_OVERDRAWN_GOLD_NEXT_TURN",
+        "value": 4287
+      },
+      {
+        "name": "BACON_PLAYER_ENCHANTMENT_DISPLAY_ENABLED",
+        "value": 4308
+      },
+      {
+        "name": "BACON_GUIDE_RELATED_CARD",
+        "value": 4314
+      },
+      {
+        "name": "BACON_FACTION_BANNERS_ENABLED",
+        "value": 4383
+      },
+      {
+        "name": "BACON_HERO_QUEST_REWARD_SDN1",
+        "value": 4423
+      },
+      {
+        "name": "BACON_HERO_QUEST_REWARD_SDN2",
+        "value": 4424
+      },
+      {
+        "name": "BACON_HERO_QUEST_REWARD_ALT_TEXT",
+        "value": 4425
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_QUEST_REWARD_SDN1",
+        "value": 4426
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_QUEST_REWARD_SDN2",
+        "value": 4427
+      },
+      {
+        "name": "BACON_HERO_HEROPOWER_QUEST_REWARD_ALT_TEXT",
+        "value": 4428
+      },
+      {
+        "name": "BACON_ALT_TAVERN_COIN",
+        "value": 4443
+      },
+      {
+        "name": "BACON_ALT_TAVERN_COIN_USED",
+        "value": 4444
+      },
+      {
+        "name": "BACON_ALT_TAVERN_IN_PROGRESS",
+        "value": 4451
+      },
+      {
+        "name": "BACON_TIMEWARPED",
+        "value": 4503
+      },
+      {
+        "name": "BACON_TIMES_VISITED_ALT_TAVERN",
+        "value": 4514
+      },
+      {
+        "name": "BACON_TIMEWARP_TOOLTIP",
+        "value": 4517
+      },
+      {
+        "name": "BACON_ALT_TAVERN_SYSTEM_ACTIVE",
+        "value": 4519
+      },
+      {
+        "name": "BACON_TURNS_UNTIL_ALT_TAVERN",
+        "value": 4529
+      },
+      {
+        "name": "BACON_FREE_REFRESH_COUNT",
+        "value": 4536
+      },
+      {
+        "name": "BACON_BLACK_MARKET_EXTRA_CHRONUM",
+        "value": 4542
+      },
+      {
+        "name": "BACON_PIRATE_BUFFATKVALUE",
+        "value": 4567
+      },
+      {
+        "name": "BACON_PIRATE_BUFFHEALTHVALUE",
+        "value": 4568
+      },
+      {
+        "name": "HAS_TIMEWARPED_TAVERN_ALT_TEXT",
+        "value": 4579
+      },
+      {
+        "name": "BACON_MANEUVER",
+        "value": 4605
+      },
+      {
+        "name": "BACON_PIRATE_TOOLTIP",
+        "value": 4613
+      },
+      {
+        "name": "BACON_TIMEWARP_TURN1_TOOLTIP",
+        "value": 4635
+      },
+      {
+        "name": "BACON_TIMEWARP_TURN2_TOOLTIP",
+        "value": 4636
+      },
+      {
+        "name": "BACON_TOTAL_TIMEWARPS_FOR_GAME",
+        "value": 4637
+      },
+      {
+        "name": "BACON_TIMEWARP_CHRONUM_TOOLTIP",
+        "value": 4638
+      },
+      {
+        "name": "BACON_FODDERS_IN_REFRESH",
+        "value": 4664
+      },
+      {
+        "name": "BACON_FODDER_TOOLTIP",
+        "value": 4664
+      },
+      {
+        "name": "BACON_CHROMADRAKE",
+        "value": 4689
+      },
+      {
+        "name": "BACON_AWAITING_HAND_PROTECTED_SPAWN",
+        "value": 4708
+      },
+      {
+        "name": "BACON_EVOLUTION_CARD_TEXT_ADDITIONAL_ATK",
+        "value": 4711
+      },
+      {
+        "name": "BACON_EVOLUTION_CARD_TEXT_ADDITIONAL_HEALTH",
+        "value": 4712
+      },
+      {
+        "name": "BACON_OLD_GOD",
+        "value": 4744
+      },
+      {
+        "name": "BACON_SUBSET_ABERRATION",
+        "value": 4757
+      },
+      {
+        "name": "BACON_DARK_GIFTS_ACTIVE",
+        "value": 4845
+      },
+      {
+        "name": "BACON_RALLY_CANT_BE_ARTIFICIALLY_TRIGGERED",
+        "value": 4876
+      },
+      {
+        "name": "BACON_DARK_GIFT_PRESSABLE_VFX",
+        "value": 4891
+      },
+      {
+        "name": "BACON_GLOBAL_OLD_GOD_DBID",
+        "value": 4902
+      },
+      {
+        "name": "BACON_EVOLUTION_CARD_OVERWRITE_ATK",
+        "value": 4906
+      },
+      {
+        "name": "BACON_EVOLUTION_CARD_OVERWRITE_HEALTH",
+        "value": 4907
+      },
+      {
+        "name": "BACON_LINKED_CARD_IN_HAND_ID",
+        "value": 4913
+      },
+      {
+        "name": "BACON_OLD_GOD_ATTACK",
+        "value": 4914
+      },
+      {
+        "name": "BACON_OLD_GOD_HEALTH",
+        "value": 4915
+      },
+      {
+        "name": "BACON_DEITY_SIGIL",
+        "value": 4922
+      },
+      {
+        "name": "BACON_MYSTERY_ATTACK_IN_CARD_EXPORT",
+        "value": 4933
+      },
+      {
+        "name": "BACON_MYSTERY_HEALTH_IN_CARD_EXPORT",
+        "value": 4934
+      },
+      {
+        "name": "BACON_MYSTERY_TIER_IN_CARD_EXPORT",
+        "value": 4935
+      }
+    ]
+  },
+  "other_enums": {
+    "card_type": {
+      "official_count": 22,
+      "engine_count": 15,
+      "name_matched": 15,
+      "value_mismatch_count": 0,
+      "value_mismatches": [],
+      "official_only_count": 7,
+      "official_only": [
+        {
+          "name": "BLANK",
+          "value": 11
+        },
+        {
+          "name": "GAME_MODE_BUTTON",
+          "value": 12
+        },
+        {
+          "name": "MOVE_MINION_HOVER_TARGET",
+          "value": 22
+        },
+        {
+          "name": "LETTUCE_ABILITY",
+          "value": 23
+        },
+        {
+          "name": "BATTLEGROUND_HERO_BUDDY",
+          "value": 24
+        },
+        {
+          "name": "LOCATION",
+          "value": 39
+        },
+        {
+          "name": "PET",
+          "value": 45
+        }
+      ],
+      "engine_only_count": 0,
+      "engine_only": [],
+      "engine_only_numeric_collision_count": 0,
+      "engine_only_numeric_collisions": [],
+      "engine_internal_only_count": 0,
+      "rename_applied": {
+        "BACON_TRINKET": "BATTLEGROUND_TRINKET",
+        "BACON_ANOMALY": "BATTLEGROUND_ANOMALY",
+        "BACON_SPELL": "BATTLEGROUND_SPELL",
+        "BACON_QUEST_REWARD": "BATTLEGROUND_QUEST_REWARD"
+      }
+    },
+    "zone": {
+      "official_count": 10,
+      "engine_count": 7,
+      "name_matched": 6,
+      "value_mismatch_count": 3,
+      "value_mismatches": [
+        {
+          "name": "HAND",
+          "official": 3,
+          "engine": 2
+        },
+        {
+          "name": "REMOVEDFROMGAME",
+          "official": 5,
+          "engine": 6
+        },
+        {
+          "name": "SETASIDE",
+          "official": 6,
+          "engine": 5
+        }
+      ],
+      "official_only_count": 4,
+      "official_only": [
+        {
+          "name": "DECK",
+          "value": 2
+        },
+        {
+          "name": "SECRET",
+          "value": 7
+        },
+        {
+          "name": "LETTUCE_ABILITY",
+          "value": 8
+        },
+        {
+          "name": "COSMETIC",
+          "value": 9
+        }
+      ],
+      "engine_only_count": 1,
+      "engine_only": [
+        {
+          "name": "TAVERN",
+          "value": 3
+        }
+      ],
+      "engine_only_numeric_collision_count": 1,
+      "engine_only_numeric_collisions": [
+        {
+          "name": "TAVERN",
+          "value": 3,
+          "official_names": [
+            "HAND"
+          ]
+        }
+      ],
+      "engine_internal_only_count": 0,
+      "rename_applied": {
+        "REMOVED": "REMOVEDFROMGAME"
+      }
+    },
+    "race": {
+      "official_count": 46,
+      "engine_count": 12,
+      "name_matched": 12,
+      "value_mismatch_count": 0,
+      "value_mismatches": [],
+      "official_only_count": 34,
+      "official_only": [
+        {
+          "name": "BLOODELF",
+          "value": 1
+        },
+        {
+          "name": "DRAENEI",
+          "value": 2
+        },
+        {
+          "name": "DWARF",
+          "value": 3
+        },
+        {
+          "name": "GNOME",
+          "value": 4
+        },
+        {
+          "name": "GOBLIN",
+          "value": 5
+        },
+        {
+          "name": "HUMAN",
+          "value": 6
+        },
+        {
+          "name": "NIGHTELF",
+          "value": 7
+        },
+        {
+          "name": "ORC",
+          "value": 8
+        },
+        {
+          "name": "TAUREN",
+          "value": 9
+        },
+        {
+          "name": "TROLL",
+          "value": 10
+        },
+        {
+          "name": "WORGEN",
+          "value": 12
+        },
+        {
+          "name": "GOBLIN2",
+          "value": 13
+        },
+        {
+          "name": "SCOURGE",
+          "value": 16
+        },
+        {
+          "name": "OGRE",
+          "value": 19
+        },
+        {
+          "name": "TOTEM",
+          "value": 21
+        },
+        {
+          "name": "NERUBIAN",
+          "value": 22
+        },
+        {
+          "name": "BLANK",
+          "value": 25
+        },
+        {
+          "name": "EGG",
+          "value": 38
+        },
+        {
+          "name": "CENTAUR",
+          "value": 80
+        },
+        {
+          "name": "FURBOLG",
+          "value": 81
+        },
+        {
+          "name": "HIGHELF",
+          "value": 83
+        },
+        {
+          "name": "TREANT",
+          "value": 84
+        },
+        {
+          "name": "OWLKIN",
+          "value": 85
+        },
+        {
+          "name": "HALFORC",
+          "value": 88
+        },
+        {
+          "name": "LOCK",
+          "value": 89
+        },
+        {
+          "name": "OLDGOD",
+          "value": 93
+        },
+        {
+          "name": "PANDAREN",
+          "value": 94
+        },
+        {
+          "name": "GRONN",
+          "value": 95
+        },
+        {
+          "name": "CELESTIAL",
+          "value": 96
+        },
+        {
+          "name": "GNOLL",
+          "value": 97
+        },
+        {
+          "name": "GOLEM",
+          "value": 98
+        },
+        {
+          "name": "HARPY",
+          "value": 99
+        },
+        {
+          "name": "VULPERA",
+          "value": 100
+        },
+        {
+          "name": "ABERRATION",
+          "value": 126
+        }
+      ],
+      "engine_only_count": 0,
+      "engine_only": [],
+      "engine_only_numeric_collision_count": 0,
+      "engine_only_numeric_collisions": [],
+      "engine_internal_only_count": 0,
+      "rename_applied": {
+        "MECH": "MECHANICAL"
+      }
+    },
+    "spell_school": {
+      "official_name": "TAG_SPELL_SCHOOL",
+      "names": [
+        "NONE",
+        "ARCANE",
+        "FIRE",
+        "FROST",
+        "NATURE",
+        "HOLY",
+        "SHADOW",
+        "FEL",
+        "PHYSICAL_COMBAT",
+        "TAVERN",
+        "SPELLCRAFT",
+        "LESSER_TRINKET",
+        "GREATER_TRINKET",
+        "UPGRADE"
+      ],
+      "values": {
+        "NONE": 0,
+        "ARCANE": 1,
+        "FIRE": 2,
+        "FROST": 3,
+        "NATURE": 4,
+        "HOLY": 5,
+        "SHADOW": 6,
+        "FEL": 7,
+        "PHYSICAL_COMBAT": 8,
+        "TAVERN": 9,
+        "SPELLCRAFT": 10,
+        "LESSER_TRINKET": 11,
+        "GREATER_TRINKET": 12,
+        "UPGRADE": 13
+      },
+      "engine_has_enum": false
+    },
+    "play_state": {
+      "official_name": "TAG_PLAYSTATE",
+      "names": [
+        "INVALID",
+        "PLAYING",
+        "WINNING",
+        "LOSING",
+        "WON",
+        "LOST",
+        "TIED",
+        "DISCONNECTED",
+        "CONCEDED"
+      ],
+      "values": {
+        "INVALID": 0,
+        "PLAYING": 1,
+        "WINNING": 2,
+        "LOSING": 3,
+        "WON": 4,
+        "LOST": 5,
+        "TIED": 6,
+        "DISCONNECTED": 7,
+        "CONCEDED": 8
+      },
+      "engine_has_enum": false
+    },
+    "step": {
+      "official_name": "TAG_STEP",
+      "names": [
+        "INVALID",
+        "BEGIN_FIRST",
+        "BEGIN_SHUFFLE",
+        "BEGIN_DRAW",
+        "BEGIN_MULLIGAN",
+        "MAIN_BEGIN",
+        "MAIN_READY",
+        "MAIN_RESOURCE",
+        "MAIN_DRAW",
+        "MAIN_START",
+        "MAIN_ACTION",
+        "MAIN_COMBAT",
+        "MAIN_END",
+        "MAIN_NEXT",
+        "FINAL_WRAPUP",
+        "FINAL_GAMEOVER",
+        "MAIN_CLEANUP",
+        "MAIN_START_TRIGGERS",
+        "MAIN_SET_ACTION_STEP_TYPE",
+        "MAIN_PRE_ACTION",
+        "MAIN_POST_ACTION"
+      ],
+      "values": {
+        "INVALID": 0,
+        "BEGIN_FIRST": 1,
+        "BEGIN_SHUFFLE": 2,
+        "BEGIN_DRAW": 3,
+        "BEGIN_MULLIGAN": 4,
+        "MAIN_BEGIN": 5,
+        "MAIN_READY": 6,
+        "MAIN_RESOURCE": 7,
+        "MAIN_DRAW": 8,
+        "MAIN_START": 9,
+        "MAIN_ACTION": 10,
+        "MAIN_COMBAT": 11,
+        "MAIN_END": 12,
+        "MAIN_NEXT": 13,
+        "FINAL_WRAPUP": 14,
+        "FINAL_GAMEOVER": 15,
+        "MAIN_CLEANUP": 16,
+        "MAIN_START_TRIGGERS": 17,
+        "MAIN_SET_ACTION_STEP_TYPE": 18,
+        "MAIN_PRE_ACTION": 19,
+        "MAIN_POST_ACTION": 20
+      },
+      "engine_has_enum": false
+    },
+    "premium": {
+      "official_name": "TAG_PREMIUM",
+      "names": [
+        "NORMAL",
+        "GOLDEN",
+        "DIAMOND",
+        "SIGNATURE",
+        "MAX"
+      ],
+      "values": {
+        "NORMAL": 0,
+        "GOLDEN": 1,
+        "DIAMOND": 2,
+        "SIGNATURE": 3,
+        "MAX": 4
+      },
+      "engine_has_enum": false
+    }
+  }
+}

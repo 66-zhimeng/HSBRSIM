@@ -1,0 +1,537 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using BobsBuddy;
+using BobsBuddy.Enchantments;
+using BobsBuddy.Factory;
+using BobsBuddy.HeroPowers;
+using BobsBuddy.Minions.Beast;
+using BobsBuddy.Minions.Buddy;
+using BobsBuddy.Minions.Mech;
+using BobsBuddy.Minions.Pirate;
+using BobsBuddy.Minions.Undead;
+using BobsBuddy.Simulation;
+using BobsBuddy.Spells;
+using BobsBuddy.Trinkets;
+using HearthDb.Enums;
+using Hearthstone_Deck_Tracker.Hearthstone;
+using Hearthstone_Deck_Tracker.Utility.Extensions;
+using static HearthDb.CardIds;
+using Entity = Hearthstone_Deck_Tracker.Hearthstone.Entities.Entity;
+
+namespace Hearthstone_Deck_Tracker.BobsBuddy
+{
+	internal static class BobsBuddyUtils
+	{
+		private const string ReplicatingMenace_Normal = NonCollectible.Neutral.ReplicatingMenace_ReplicatingMenaceEnchantmentBATTLEGROUNDS;
+		private const string ReplicatingMenace_Golden = NonCollectible.Neutral.ReplicatingMenace_ReplicatingMenaceEnchantmentTavernBrawl;
+		private const string WhirringProtector_Normal = NonCollectible.Neutral.WhirringProtector_WhirringProtectorEnchantment;
+		private const string WhirringProtector_Golden = NonCollectible.Neutral.WhirringProtector_WhirringProtector2;
+		private const string LivingSpores = NonCollectible.Neutral.LivingSporesToken2;
+		public const string RebornRiteEnchmantment = NonCollectible.Neutral.RebornRites_RebornRiteEnchantmentTavernBrawl;
+		public const string SneedsEnchantment = NonCollectible.Neutral.Sneed_Replicate;
+		internal const string RebornRite = NonCollectible.Neutral.RebornRitesTavernBrawl;
+
+		internal static Minion GetMinionFromEntity(Simulator sim, bool player, Entity entity, IEnumerable<Entity> attachedEntities, IReadOnlyDictionary<int, Entity>? allEntities = null)
+		{
+			var cardId = entity.Info.LatestCardId ?? "Unknown";
+			var minion = sim.MinionFactory.CreateFromCardId(cardId, player);
+
+			minion.PrimaryRace = (Race)entity.GetTag(GameTag.CARDRACE);
+			minion.baseAttack = entity.GetTag(GameTag.ATK);
+			minion.baseHealth = entity.GetTag(GameTag.HEALTH) - entity.GetTag(GameTag.DAMAGE);
+			minion.maxAttack = entity.GetTag(GameTag.ATK);
+			minion.maxHealth = entity.GetTag(GameTag.HEALTH);
+			minion.taunt = entity.HasTag(GameTag.TAUNT);
+			minion.div = entity.GetTag(GameTag.DIVINE_SHIELD);
+			minion.cleave = MinionFactory.cardIDsWithCleave.Contains(minion.CardID);
+			minion.poisonous = entity.HasTag(GameTag.POISONOUS);
+			minion.venomous = entity.HasTag(GameTag.VENOMOUS);
+			minion.windfury = entity.HasTag(GameTag.WINDFURY);
+			minion.megaWindfury = entity.HasTag(GameTag.MEGA_WINDFURY) || MinionFactory.cardIdsWithMegaWindfury.Contains(cardId);
+			minion.stealth = entity.HasTag(GameTag.STEALTH);
+			minion.golden = entity.HasTag(GameTag.PREMIUM);
+			minion.tier = entity.GetTag(GameTag.TECH_LEVEL);
+			minion.reborn = entity.HasTag(GameTag.REBORN);
+			minion.ScriptDataNum1 = entity.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1);
+			minion.ScriptDataNum2 = entity.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_2);
+			minion.ScriptDataNum3 = entity.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_3);
+			minion.ScriptDataNum4 = entity.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_4);
+
+			// Eclipsion Illidari: SCORE_VALUE_2 is the number of "Immune while Attacking" grants left this turn
+			if(minion is EclipsionIllidari illidari && entity.Tags.ContainsKey(GameTag.SCORE_VALUE_2))
+				illidari.ScoreValue2 = entity.GetTag(GameTag.SCORE_VALUE_2);
+
+			// LatestCard, not Card: MODULAR_ENTITY_PART tags hold the dbf id of what the entity
+			// currently is, which differs from Card for in-place transforms via CHANGE_ENTITY
+			var dbfId = entity.LatestCard.DbfId;
+			var m1 = entity.GetTag(GameTag.MODULAR_ENTITY_PART_1);
+			var m2 = entity.GetTag(GameTag.MODULAR_ENTITY_PART_2);
+			if(m1 > 0 && m2 > 0 && (m1 == dbfId || m2 == dbfId))
+			{
+				var modularCard = Database.GetCardFromDbfId(m1 == dbfId ? m2 : m1, false);
+				if(modularCard != null)
+				{
+					var modularMinion = sim.MinionFactory.CreateFromCardId(modularCard.Id, player);
+					minion.AttachedModularEntity = modularMinion;
+					modularMinion.AttachedTo = minion;
+				}
+			}
+
+			foreach(var attached in attachedEntities)
+			{
+				switch(attached.CardId)
+				{
+					case ReplicatingMenace_Normal:
+						minion.AdditionalDeathrattles.Add(ReplicatingMenace.Deathrattle(false));
+						break;
+					case ReplicatingMenace_Golden:
+						minion.AdditionalDeathrattles.Add(ReplicatingMenace.Deathrattle(true));
+						break;
+					case WhirringProtector_Normal:
+						minion.AdditionalRallies.Add(WhirringProtector.Rally(false));
+						break;
+					case WhirringProtector_Golden:
+						minion.AdditionalRallies.Add(WhirringProtector.Rally(true));
+						break;
+					case LivingSpores:
+						minion.AdditionalDeathrattles.Add(GenericDeathrattles.Plants);
+						break;
+					case SneedsEnchantment:
+						minion.AdditionalDeathrattles.Add(GenericDeathrattles.SneedHeroPower);
+						break;
+					case NonCollectible.Neutral.Brukan_ElementEarth:
+						minion.AdditionalDeathrattles.Add(GenericDeathrattles.EarthInvocationDeathrattle);
+						break;
+					case NonCollectible.Neutral.SurfnSurf_CrabRidingEnchantment:
+						minion.AdditionalDeathrattles.Add(GenericDeathrattles.Crab);
+						break;
+					case NonCollectible.Neutral.SurfnSurf_CrabRiding:
+						minion.AdditionalDeathrattles.Add(GenericDeathrattles.CrabGolden);
+						break;
+					case NonCollectible.Neutral.Brukan_EarthRecollection:
+						minion.AdditionalDeathrattles.Add(BrukanInvocationDeathrattles.Earth);
+						break;
+					case NonCollectible.Neutral.Brukan_FireRecollection:
+						minion.AdditionalDeathrattles.Add(BrukanInvocationDeathrattles.Fire);
+						break;
+					case NonCollectible.Neutral.Brukan_WaterRecollection:
+						minion.AdditionalDeathrattles.Add(BrukanInvocationDeathrattles.Water);
+						break;
+					case NonCollectible.Neutral.Brukan_LightningRecollection:
+						minion.AdditionalDeathrattles.Add(BrukanInvocationDeathrattles.Lightning);
+						break;
+					case NonCollectible.Neutral.Wingmen_WingmenEnchantmentTavernBrawl:
+						minion.HasWingmen = true;
+						break;
+					case NonCollectible.Neutral.SkyPirateFlagbearer_FlagbearingEnchantment:
+						minion.AdditionalDeathrattles.Add(Scallywag.Deathrattle(false));
+						break;
+					case NonCollectible.Neutral.SkyPirateFlagbearer_Flagbearing:
+						minion.AdditionalDeathrattles.Add(Scallywag.Deathrattle(true));
+						break;
+					case NonCollectible.Neutral.Leapfrogger_LeapfrogginEnchantment:
+						minion.AdditionalDeathrattles.Add(Leapfrogger.Deathrattle(false));
+						break;
+					case NonCollectible.Neutral.Leapfrogger_Leapfroggin:
+						minion.AdditionalDeathrattles.Add(Leapfrogger.Deathrattle(true));
+						break;
+					case NonCollectible.Neutral.RustyTrident_TridentsTreasureEnchantment:
+						minion.AdditionalDeathrattles.Add(RustyTrident.Deathrattle());
+						break;
+					case NonCollectible.Neutral.HoggyBank_GemInTheBankEnchantment:
+						minion.AdditionalDeathrattles.Add(HoggyBank.Deathrattle());
+						break;
+					case NonCollectible.Neutral.JarredFrostling_FrostyGlobeEnchantment:
+						minion.AdditionalDeathrattles.Add(JarredFrostling.Deathrattle());
+						break;
+					case NonCollectible.Neutral.BloodGems:
+						var atk = attached.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1);
+						var health = attached.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_2);
+						minion.SetBloodGemStats(atk, health);
+						break;
+					case TorethsBlessing.CardId:
+						var torethsBlessing = sim.EnchantmentFactory.Create(TorethsBlessing.CardId, minion.ControlledByPlayer);
+						if(torethsBlessing != null)
+						{
+							// The engine keeps the shield's remaining-hit count in the minion's
+							// DIVINE_SHIELD tag (not always 3 at combat start — can be lower
+							// due to card effects like persist poet);
+							torethsBlessing.ScriptDataNum1 = entity.GetTag(GameTag.DIVINE_SHIELD);
+							minion.AttachEnchantment(torethsBlessing);
+						}
+						break;
+					case BoomingEnchantment.CardId:
+						var boomingModule = attachedEntities.FirstOrDefault(e => e.CardId == NonCollectible.Neutral.DrBoomsMonster_DrBoomsMonsterEnchantment
+							|| e.CardId == NonCollectible.Neutral.DrBoomsMonster_DrBoomsMonster2);
+						var booming = sim.EnchantmentFactory.Create(BoomingEnchantment.CardId, minion.ControlledByPlayer);
+						if(boomingModule != null && booming != null)
+						{
+							booming.ScriptDataNum1 = boomingModule.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1);
+							booming.ScriptDataNum2 = boomingModule.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_2);
+							minion.AttachEnchantment(booming);
+						}
+						break;
+					case PreservedInBronze.CardId:
+						// Bronze Timepiece trinket adds to a minion's existing Preserved in Bronze enchantment
+						// only when no stat-setting enchantment (tag 3224) was attached after it; otherwise the
+						// game creates a new one. Attach it only in the first case.
+						// When attached, this enchantment is necessary to resolve trigger resolution order
+						var lastPreservedInBronzeId = attachedEntities.Where(e => e.CardId == PreservedInBronze.CardId).Max(e => e.Id);
+						var statSetAfterIt = attachedEntities.Any(e => e.GetTag((GameTag)3224) > 0 && e.Id > lastPreservedInBronzeId);
+						if(attached.Id != lastPreservedInBronzeId || statSetAfterIt)
+							break;
+						var preservedInBronze = sim.EnchantmentFactory.Create(PreservedInBronze.CardId, minion.ControlledByPlayer);
+						if(preservedInBronze != null)
+						{
+							minion.AttachEnchantment(preservedInBronze);
+						}
+						break;
+					case Graduated.CardId:
+						// A Graduated enchantment from a prior combat Training Certificate buff (typically Tarecgosa).
+						// When attached, this enchantment is necessary to resolve trigger resolution order
+						if(minion.Enchantments.Any(e => e is Graduated))
+							break;
+						var graduated = sim.EnchantmentFactory.Create(Graduated.CardId, minion.ControlledByPlayer);
+						if(graduated != null)
+							minion.AttachEnchantment(graduated);
+						break;
+					default:
+						if(attached.LatestCard.TypeEnum == CardType.ENCHANTMENT && attached.Info.LatestCardId != null)
+						{
+							var enchantment = sim.EnchantmentFactory.Create(attached.Info.LatestCardId, minion.ControlledByPlayer);
+							if(enchantment != null)
+							{
+								enchantment.ScriptDataNum1 = attached.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1);
+								enchantment.ScriptDataNum2 = attached.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_2);
+								minion.AttachEnchantment(enchantment);
+							}
+						}
+						break;
+				}
+			}
+
+			if(attachedEntities.Any(e => e.HasTag(GameTag.MAGNETIC)))
+			{
+				if(minion.IsMech())
+					CheckForMagnetizedDeathrattles(minion, entity, attachedEntities, allEntities);
+				// Not just mech here, because Technical Element can magnetize to Elementals
+				CheckForSurfnSurfFromMagnetizedModules(minion, entity, allEntities);
+				CheckForRepeatedMagnetizedAutoAssemblers(minion, entity, attachedEntities, allEntities);
+				CheckForDarkGiftsOnMagnetizedModules(sim, minion, entity, attachedEntities, allEntities);
+			}
+
+			minion.game_id = entity.Id;
+
+			return minion;
+		}
+
+		// Magnetized deathrattles (e.g., Auto Assembler) can be *hiding* if initially attached
+		// to a magnetic minion that was then tripled and magnetized to another mech.
+		private static void CheckForMagnetizedDeathrattles(Minion minion, Entity host, IEnumerable<Entity> attachedEntities, IReadOnlyDictionary<int, Entity>? allEntities)
+		{
+			// Required to resolve the chain of magnetized
+			if(allEntities == null)
+				return;
+
+			// Specific handling for: Auto Assembler
+			// Each attached enchantment's CREATOR is the magnetic card that produced it; take each distinct id once.
+			// Exclude the HOST: an enchantment the host created on itself is already turned into an
+			// AutoAssemblerEnchantment by the attachedEntities above (only magnetized modules are hidden).
+			// Only MAGNETIC enchantments are followed
+			foreach(var magneticId in attachedEntities
+				.Where(e => e.HasTag(GameTag.MAGNETIC))
+				.Select(e => e.GetTag(GameTag.CREATOR))
+				.Where(id => id > 0 && id != host.Id)
+				.Distinct())
+			{
+				if(!allEntities.TryGetValue(magneticId, out var magnetic))
+					continue;
+
+				var enchantCount = allEntities.Values.Count(x => x.IsAttachedTo(magneticId) && x.CardId == AutoAssemblerEnchantment.CardId);
+				var goldenEnchantCount = allEntities.Values.Count(x => x.IsAttachedTo(magneticId) && x.CardId == AutoAssemblerEnchantmentGolden.CardId);
+
+				for(var i = 0; i < enchantCount; i++)
+					minion.AdditionalDeathrattles.Add(AutoAssembler.Deathrattle());
+				for(var i = 0; i < goldenEnchantCount; i++)
+					minion.AdditionalDeathrattles.Add(AutoAssembler.GoldenDeathrattle());
+			}
+
+			// Future magnetic deathrattles can be added/handled here.
+		}
+
+		// Count the Auto Assembler modules fused into this host. TAG_SCRIPT_DATA_NUM_1 on the
+		// enchantment cannot give the count: repeated magnetizations accumulate into ONE enchantment
+		// and that tag holds the stats each module carried when it fused.
+		// Each module stays in the entity tree as its own REMOVEDFROMGAME minion instead,
+		// and two cases find them:
+		//   - a magnetic enchantment on the host names its module in CREATOR
+		//   - a module records its host in TAG_SCRIPT_DATA_NUM_1 when it magnetizes
+		private static void CheckForRepeatedMagnetizedAutoAssemblers(Minion minion, Entity host, IEnumerable<Entity> attachedEntities, IReadOnlyDictionary<int, Entity>? allEntities)
+		{
+			if(allEntities == null)
+				return;
+
+			var modules = new Dictionary<int, bool>();  // module entity id -> is golden
+
+			foreach(var attached in attachedEntities)
+			{
+				if(!attached.HasTag(GameTag.MAGNETIC))
+					continue;
+
+				var module = Database.GetCardFromDbfId(attached.GetTag(GameTag.CREATOR_DBID), false);
+				if(module == null)
+					continue;
+
+				if(module.Id != AutoAssembler.CardId && module.Id != NonCollectible.Neutral.AutoAssembler_AutoAssembler1)
+					continue;
+
+				var isGolden = module.Id == NonCollectible.Neutral.AutoAssembler_AutoAssembler1;
+
+				var moduleId = attached.GetTag(GameTag.CREATOR);
+				if(moduleId > 0)
+					modules[moduleId] = isGolden;  // one entry per magnetic enchantment's CREATOR
+			}
+
+			foreach(var entity in allEntities.Values)
+			{
+				// The played module is left in the entity tree as a REMOVEDFROMGAME minion whose CREATOR
+				// is the card that initiated the magnetization.
+				// Only a module's own record of where it fused (TAG_SCRIPT_DATA_NUM_1) identifies this host.
+				if(entity.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1) != host.Id)
+					continue;
+
+				if(entity.GetTag(GameTag.ZONE) != (int)Zone.REMOVEDFROMGAME)
+					continue;
+
+				if(entity.CardId != AutoAssembler.CardId && entity.CardId != NonCollectible.Neutral.AutoAssembler_AutoAssembler1)
+					continue;
+
+				var isGolden = entity.CardId == NonCollectible.Neutral.AutoAssembler_AutoAssembler1;
+
+				modules[entity.Id] = isGolden;
+			}
+
+			if(modules.Count == 0)
+				return;
+
+			// Exclude one counted module per BG32_172e the host carries, because EnchantmentFactory
+			// resolves that card id to an AutoAssemblerEnchantment which already summons one Automaton.
+			// A host can carry more than one instance (a golden formed by tripling brings each copy's).
+			var carried = attachedEntities.Count(e => e.CardId == AutoAssemblerEnchantment.CardId
+				|| e.CardId == AutoAssemblerEnchantmentGolden.CardId);
+
+			// An Auto Assembler minion directly on the board also has an innate deathrattle.
+			if(host.CardId == AutoAssembler.CardId || host.CardId == NonCollectible.Neutral.AutoAssembler_AutoAssembler1)
+				carried += 1;
+
+			foreach(var module in modules.OrderBy(x => x.Key).Skip(carried))
+				minion.AdditionalDeathrattles.Add(module.Value ? AutoAssembler.GoldenDeathrattle() : AutoAssembler.Deathrattle());
+		}
+
+		// A magnetized module keeps its own attached enchantments, including Surf n' Surf Spellcraft spells
+		// cast on a Technical Element, which is then magnetized to another host minion.
+		// The magnetized module records its host in TAG_SCRIPT_DATA_NUM_1 when it magnetizes.
+		private static void CheckForSurfnSurfFromMagnetizedModules(Minion minion, Entity host, IReadOnlyDictionary<int, Entity>? allEntities)
+		{
+			if(allEntities == null)
+				return;
+
+			var magnetizedModules = allEntities.Values
+				.Where(x => x.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1) == host.Id
+					&& x.HasTag(GameTag.MAGNETIC)
+					&& x.LatestCard.TypeEnum == CardType.MINION)
+				.OrderBy(x => x.Id);
+
+			foreach(var module in magnetizedModules)
+			{
+				var granted = allEntities.Values
+					.Where(x => x.IsAttachedTo(module.Id))
+					.OrderBy(x => x.Id);
+				foreach(var attached in granted)
+				{
+					switch(attached.CardId)
+					{
+						case NonCollectible.Neutral.SurfnSurf_CrabRidingEnchantment:
+							minion.AdditionalDeathrattles.Add(GenericDeathrattles.Crab);
+							break;
+						case NonCollectible.Neutral.SurfnSurf_CrabRiding:
+							minion.AdditionalDeathrattles.Add(GenericDeathrattles.CrabGolden);
+							break;
+					}
+				}
+			}
+		}
+
+		// Only specific Dark Gifts (Jaws of Death, Offensive Sacrifice) offered on a magnetic minion can be obtained
+		// from Ominous Stone. The enchantment might be attached to magnetized minion.
+		private static void CheckForDarkGiftsOnMagnetizedModules(Simulator sim, Minion minion, Entity host, IEnumerable<Entity> attachedEntities, IReadOnlyDictionary<int, Entity>? allEntities)
+		{
+			if(allEntities == null)
+				return;
+
+			foreach(var magneticId in attachedEntities
+				.Where(e => e.HasTag(GameTag.MAGNETIC))
+				.Select(e => e.GetTag(GameTag.CREATOR))
+				.Where(id => id > 0 && id != host.Id)
+				.Distinct())
+			{
+				var gifts = allEntities.Values
+					.Where(x => x.IsAttachedTo(magneticId))
+					.OrderBy(x => x.Id);
+
+				foreach(var gift in gifts)
+				{
+					switch(gift.CardId)
+					{
+						case JawsOfDeath.CardId:
+							// Do not attach if START_OF_COMBAT tag was cleared
+							if(host.GetTag(GameTag.START_OF_COMBAT) == 0)
+								break;
+							var enchantment = sim.EnchantmentFactory.Create(JawsOfDeath.CardId, minion.ControlledByPlayer);
+							if(enchantment != null)
+								minion.AttachEnchantment(enchantment);
+							break;
+						case OffensiveSacrifice.CardId:
+							var offensiveSacrifice = sim.EnchantmentFactory.Create(OffensiveSacrifice.CardId, minion.ControlledByPlayer);
+							if(offensiveSacrifice != null)
+								minion.AttachEnchantment(offensiveSacrifice);
+							break;
+						case DefensiveSacrifice.CardId:
+							var defensiveSacrifice = sim.EnchantmentFactory.Create(DefensiveSacrifice.CardId, minion.ControlledByPlayer);
+							if(defensiveSacrifice != null)
+								minion.AttachEnchantment(defensiveSacrifice);
+							break;
+						case Invulnerability.CardId:
+							var invulnerability = sim.EnchantmentFactory.Create(Invulnerability.CardId, minion.ControlledByPlayer);
+							if(invulnerability != null)
+								minion.AttachEnchantment(invulnerability);
+							break;
+					}
+				}
+			}
+		}
+
+		private static void SetScriptDataProperties(dynamic item, Entity entity)
+		{
+			var scriptDataNum1 = entity.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1);
+			var scriptDataNum2 = entity.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_2);
+			if(scriptDataNum1 > 0)
+				item.ScriptDataNum1 = scriptDataNum1;
+			if(scriptDataNum2 > 0)
+				item.ScriptDataNum2 = scriptDataNum2;
+		}
+
+		internal static Objective GetObjectiveFromEntity(ObjectiveFactory factory, bool player, Entity entity)
+		{
+			var objective = factory.Create(entity.CardId ?? "", player);
+			SetScriptDataProperties(objective, entity);
+			var scriptDataNum3 = entity.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_3);
+			if(scriptDataNum3 > 0)
+				objective.ScriptDataNum3 = scriptDataNum3;
+			return objective;
+		}
+
+		/// <summary>
+		/// Builds the Deity that a Deity Sigil will summon. The Deity has no entity of its own until it
+		/// awakens, so until then it exists only as tags on the sigil: the card it is going to be, plus
+		/// the stats it has accumulated.
+		/// </summary>
+		internal static Minion? GetDeityFromSigil(Simulator sim, bool player, Entity sigil)
+		{
+			var card = Database.GetCardFromDbfId(sigil.GetTag(GameTag.BACON_EVOLUTION_CARD_ID), false);
+			if(card == null)
+				return null;
+
+			var deity = sim.MinionFactory.CreateFromCardId(card.Id, player);
+
+			// Mask of Ancient Ones sets BACON_EVOLUTION_CARD_ID to the premium Deity dbf_id, and it stays premium
+			// even after the trinket is gone (e.g., Buttons' Growing Collection is replaced by another
+			// hero power).
+			if(HearthDb.Cards.TripleToNormalCardIds.ContainsKey(card.Id))
+				deity.golden = true;
+
+			// These are the Deity's current total stats, not a bonus on top of the printed ones: they
+			// start at 1/1 when the sigil is created and grow with every "Give your Deity +X/+Y". The
+			// player entity carries the same pair as BACON_OLD_GOD_ATTACK/BACON_OLD_GOD_HEALTH, but the
+			// sigil-local tags stay correct per player in duos.
+			var attack = sigil.GetTag(GameTag.BACON_EVOLUTION_CARD_OVERWRITE_ATK);
+			var health = sigil.GetTag(GameTag.BACON_EVOLUTION_CARD_OVERWRITE_HEALTH);
+			deity.baseAttack = attack;
+			deity.maxAttack = attack;
+			deity.baseHealth = health;
+			deity.maxHealth = health;
+
+			return deity;
+		}
+
+		internal static Trinket GetTrinketFromEntity(TrinketFactory factory, bool player, Entity entity)
+		{
+			// Use LatestCardId, not CardId. A Lesser/Greater Crystal Ball that has transformed into a
+			// copy of a trinket keeps its stale token CardId (BACON trinket entities are not updated by
+			// CHANGE_ENTITY), while LatestCardId always reflects the copied card.
+			var cardId = entity.Info.LatestCardId ?? entity.CardId ?? "";
+			var trinket = factory.Create(cardId, player);
+			SetScriptDataProperties(trinket, entity);
+
+			// Set slot that holds the trinket (i.e., Fantastic Treasure, Growing Collection,
+			// Lesser Trinket, Greater Trinket); necessary to order friendly start of combat triggers
+			var containerCardId = entity.Info.CardIdBeforeReveal ?? entity.CardId;
+			if(containerCardId != null && containerCardId != cardId)
+				trinket.ContainerCardId = containerCardId;
+
+			// Special handling for replica cathedral
+			if(cardId == NonCollectible.Neutral.ReplicaCathedral)
+				trinket.ScriptDataNum1 = entity.GetTag((GameTag)4696);
+
+			trinket.game_id = entity.Id;
+
+			return trinket;
+		}
+
+		internal static bool IsOpponentHeroKelThuzad()
+		{
+			var heroEntityId = Core.Game.OpponentEntity?.GetTag(GameTag.HERO_ENTITY);
+			var heroEntity = Core.Game.Opponent.PlayerEntities?.FirstOrDefault(x => x.Id == heroEntityId);
+			return heroEntity?.CardId == NonCollectible.Neutral.KelthuzadTavernBrawl2;
+		}
+
+		// NUM_RESOURCES_SPENT_THIS_GAME is never set for the opponent, but can be inferred from Malorne
+		internal static int GetResourcesSpentThisGameFromMalorne(Entity malorne, IEnumerable<Entity> attachedEntities)
+		{
+			var enchantments = attachedEntities
+				.Where(x => x.CardId != NonCollectible.Neutral.ForestLordCenarius_PowerOfAncients)
+				.ToList();
+			var attackBuffs = enchantments.Sum(x => x.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1));
+			var healthBuffs = enchantments.Sum(x => x.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_2));
+			// GetTag(HEALTH) is the max health, unaffected by damage. Taking the min of the two increases accuracy
+			// in case there is a buff that never appears as an enchantment attached to the minion.
+			var aura = Math.Min(
+				malorne.GetTag(GameTag.ATK) - malorne.LatestCard.Attack - attackBuffs,
+				malorne.GetTag(GameTag.HEALTH) - malorne.LatestCard.Health - healthBuffs);
+			if(malorne.CardId == NonCollectible.Neutral.ForestLordCenarius_Malorne2)
+				aura /= 2;
+			return aura > 0 ? aura * 3 : 0;
+		}
+
+		internal static bool WasHeroPowerActivated(Entity? heroPower, bool isDuos = false)
+		{
+			if(heroPower == null)
+				return false;
+			// In Duos, there is a repeat issue with "Embrace Your Rage" and BACON_HERO_POWER_ACTIVATED=1,
+			// but no trigger happens in combat; EXHAUSTED=0 is likely a more reliable signal.
+			if(isDuos && heroPower.CardId == NonCollectible.Neutral.EmbraceYourRageTavernBrawl)
+				return heroPower.HasTag(GameTag.EXHAUSTED);
+			return heroPower.HasTag(GameTag.EXHAUSTED) || heroPower.HasTag(GameTag.BACON_HERO_POWER_ACTIVATED);
+		}
+
+		internal static IOrderedEnumerable<Entity> GetOrderedMinions(IEnumerable<Entity> board)
+			=> board.Where(x => x.IsMinion).Select(x => x.Clone()).OrderBy(x => x.GetTag(GameTag.ZONE_POSITION));
+
+		internal static IOrderedEnumerable<Entity> GetOrderedHandEntities(IEnumerable<Entity> hand)
+			=> hand.OrderBy(x => x.GetTag(GameTag.ZONE_POSITION));
+
+		private static string? _versionString;
+		internal static string VersionString => _versionString ??= "v" + typeof(SimulationRunner).Assembly.GetName().Version.ToVersionString();
+	}
+}

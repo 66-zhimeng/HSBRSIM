@@ -1,0 +1,2287 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using HearthDb.Enums;
+using Hearthstone_Deck_Tracker.Controls.Overlay;
+using Hearthstone_Deck_Tracker.Hearthstone;
+using Hearthstone_Deck_Tracker.Utility;
+using Hearthstone_Deck_Tracker.Utility.Analytics;
+using Hearthstone_Deck_Tracker.Utility.Logging;
+using static HearthDb.CardIds;
+using static Hearthstone_Deck_Tracker.BobsBuddy.BobsBuddyUtils;
+using BobsBuddy.Simulation;
+using Hearthstone_Deck_Tracker.Utility.RemoteData;
+using Hearthstone_Deck_Tracker.Utility.Extensions;
+using Entity = Hearthstone_Deck_Tracker.Hearthstone.Entities.Entity;
+using BobsBuddy;
+using BobsBuddy.Enchantments;
+using BobsBuddy.Minions.Dual;
+using BobsBuddy.Minions.Duos;
+using BobsBuddy.Minions.Buddy;
+using BobsBuddy.Minions.Mech;
+using BobsBuddy.Minions.Neutral;
+using BobsBuddy.Minions.Quilboar;
+using BobsBuddy.Trinkets;
+using BobsBuddy.Utils;
+using BobsBuddyPlayer = BobsBuddy.Simulation.Player;
+
+namespace Hearthstone_Deck_Tracker.BobsBuddy
+{
+	internal class BobsBuddyInvoker
+	{
+		private const int Iterations = 10_000;
+		private const int StateChangeDelay = 500;
+		private const int MaxTime = 1_500;
+		private const int MinimumSpinTime = 500;
+		private const int MaxTimeForComplexBoards = 3_000;
+		private const int MaxTimeForLeapfrogger = 5_000;
+		private const int MinimumSimulationsToReportSentry = 2500;
+		private const int LichKingDelay = 2000;
+
+		internal static int ThreadCount => Environment.ProcessorCount / 2;
+
+		private readonly GameV2 _game;
+
+		private static BobsBuddyPanel BobsBuddyDisplay => Core.Overlay.BobsBuddyDisplay;
+		private static bool ReportErrors
+		{
+			get
+			{
+				var verStr = Remote.Config.Data?.BobsBuddy?.SentryMinRequiredVersion ?? string.Empty;
+				if(Version.TryParse(verStr, out var requiredVersion))
+					return Helper.GetCurrentVersion() >= requiredVersion;
+				return false;
+			}
+		}
+
+		private Input? _input;
+
+		// True in games where an opponent Malorne can be summoned during the current combat (the Bring in the Buddies anomaly)
+		internal static bool CurrentCombatMayHaveOpponentMalorne;
+
+		// True while at least one magnetized AutoAssembler deathrattle observation awaits flushing
+		internal static bool CurrentCombatHasPendingAutoAssemblerObservations;
+
+		// True while at least one granted Surf n' Surf Crab deathrattle observation awaits flushing
+		internal static bool CurrentCombatHasPendingCrabObservations;
+
+		// Incremented on every detected game reconnect. Each combat snapshot records the current value;
+		// a mismatch at validation time means the reconnect happened after this combat started, so we
+		// lost the state the simulation was based on. Such a combat is not validated at all: it reports
+		// no terminal case and goes to a separate Influx measurement.
+		private static int _reconnectCounter;
+		internal static void OnGameReconnect() => _reconnectCounter++;
+		private int _reconnectCounterAtSnapshot;
+		private bool DidReconnect => _reconnectCounterAtSnapshot != _reconnectCounter;
+
+		internal BobsBuddySentryReportContext ReportContext => new BobsBuddySentryReportContext(
+			IsDuosPartialCombat: State is BobsBuddyState.ShoppingAfterPartial or BobsBuddyState.GameOverAfterPartial,
+			ReRunCount: _reRunCount
+		);
+
+		private int _turn;
+		private Entity? _attackingHero;
+		private Entity? _defendingHero;
+		public Entity? LastAttackingHero = null;
+		public int LastAttackingHeroAttack;
+
+		private List<Entity> _opponentHand = new();
+		private List<Entity> _opponentTeammateHand = new();
+		private readonly Dictionary<Entity, Entity> _opponentHandMap = new();
+		private List<Entity> _opponentSecrets = new();
+
+		private static Guid _currentGameId;
+		private static readonly Dictionary<string, BobsBuddyInvoker> _instances = new Dictionary<string, BobsBuddyInvoker>();
+
+		private BobsBuddyPlayer DuosInputPlayer = new BobsBuddyPlayer(null);
+		private BobsBuddyPlayer DuosInputOpponent = new BobsBuddyPlayer(null);
+		private BobsBuddyPlayer? DuosInputPlayerTeammate;
+		private BobsBuddyPlayer? DuosInputOpponentTeammate;
+
+		public static BobsBuddyInvoker GetInstance(Guid gameId, int turn, bool createInstanceIfNoneFound = true)
+		{
+			if(_currentGameId != gameId)
+			{
+				Log.Debug("New GameId. Clearing instances...");
+				_instances.Clear();
+			}
+			_currentGameId = gameId;
+
+			var key = $"{gameId}_{turn}";
+
+			if(!_instances.TryGetValue(key, out var instance) && createInstanceIfNoneFound)
+			{
+				instance = new BobsBuddyInvoker(key);
+				_instances[key] = instance;
+			}
+			return instance;
+		}
+
+		public void DebugLog(string msg, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "")
+		{
+			Log.Info(msg, memberName, sourceFilePath);
+		}
+
+		private readonly string _instanceKey;
+
+		private BobsBuddyInvoker(string key)
+		{
+			_game = Core.Game;
+			_instanceKey = key;
+			_reconnectCounterAtSnapshot = _reconnectCounter;
+		}
+
+
+		public Output? Output { get; private set; }
+
+		private bool DoNotReport { get; set; } = true;
+
+		// The unsupported interaction (if any) from the most recently completed simulation run.
+		// If TryRerun() is triggered by newer game state, the latest run's outcome supersedes
+		// all earlier ones; i.e., every new completion overwrites these fields.
+		private UnsupportedInteractionException? _pendingUnsupportedInteractionException;
+		private string _pendingUnsupportedInteractionMessage = string.Empty;
+
+		// Whether an unsupported interaction was already reported for this combat round.
+		// A rerun still in flight when shopping starts could fail with the same exception.
+		private bool _unsupportedInteractionReported;
+
+		public BobsBuddyErrorState ErrorState { get; private set; }
+
+		private BobsBuddyState _state;
+
+		public BobsBuddyState State
+		{
+			get => _state;
+			set
+			{
+				_state = value;
+				Core.Overlay.ChinaModuleVM.BobsBuddyState = value;
+				DebugLog($"New State: {value}");
+			}
+		}
+
+		// BobsBuddy states during which a revealed card can be added to simulator input
+		private bool UpdateRevealedEntityValidStates => State is BobsBuddyState.Initial or BobsBuddyState.Combat or BobsBuddyState.CombatPartial;
+
+		public bool ShouldRun()
+		{
+			if(!Config.Instance.RunBobsBuddy)
+				return false;
+			if(Remote.Config.Data?.BobsBuddy?.Disabled ?? false)
+				return false;
+			if(ErrorState == BobsBuddyErrorState.None)
+			{
+				var verStr = Remote.Config.Data?.BobsBuddy?.MinRequiredVersion;
+				if(Version.TryParse(verStr, out var requiredVersion))
+				{
+					if(requiredVersion > Helper.GetCurrentVersion())
+					{
+						DebugLog($"Update to {requiredVersion} required. Not running simulations.");
+						ErrorState = BobsBuddyErrorState.UpdateRequired;
+						BobsBuddyDisplay.SetErrorState(BobsBuddyErrorState.UpdateRequired);
+					}
+				}
+			}
+			if(ErrorState == BobsBuddyErrorState.UpdateRequired)
+				return false;
+			return true;
+		}
+
+		public async void StartCombat()
+		{
+			// A duos teammate pass re-enters StartCombat after the primary snapshot. Clearing here would drop
+			// the opponent's own hand entities, which UpdateCardOpponentHand still rebuilds its hand from.
+			if(_input == null || !_game.IsBattlegroundsDuosMatch)
+			{
+				_opponentHand = new();
+				_opponentTeammateHand = new();
+				_opponentSecrets = new();
+			}
+
+			try
+			{
+				if(!ShouldRun())
+					return;
+				DebugLog(_instanceKey);
+				if(_game.IsBattlegroundsDuosMatch)
+				{
+					SnapshotBoardState(_game.GetTurnNumber());
+
+					BobsBuddyDisplay.SetState(BobsBuddyState.WaitingForTeammates);
+					BobsBuddyDisplay.ResetText();
+
+					if(_input != null && (DuosInputPlayerTeammate == null || DuosInputOpponentTeammate == null))
+					{
+						DebugLog("Waiting Teammates. Exiting.");
+						return;
+					}
+				}
+				else if(State >= BobsBuddyState.Combat)
+				{
+					DebugLog($"{_instanceKey} already in {State} state. Exiting");
+					return;
+				} else
+					SnapshotBoardState(_game.GetTurnNumber());
+
+
+				State = BobsBuddyState.Combat;
+				DebugLog($"{_instanceKey} Waiting for state changes...");
+				await Task.Delay(StateChangeDelay);
+				if(State != BobsBuddyState.Combat)
+				{
+					DebugLog($"{_instanceKey} no longer in combat: State={State}. Exiting");
+					return;
+				}
+				DebugLog($"{_instanceKey} continuing...");
+
+				if(HasErrorState())
+					return;
+
+				DebugLog("Setting UI state to combat...");
+				BobsBuddyDisplay.SetState(BobsBuddyState.Combat);
+				BobsBuddyDisplay.ResetText();
+
+				if(_input != null &&
+				   (_input.Player.HeroPowers.Any(hp => hp.CardId == RebornRite && hp.IsActivated) ||
+				    _input.Opponent.HeroPowers.Any(hp => hp.CardId == RebornRite && hp.IsActivated))
+				   )
+					await Task.Delay(LichKingDelay);
+
+				await RunAndDisplaySimulationAsync();
+			}
+			catch(Exception e)
+			{
+				DebugLog(e.ToString());
+				Log.Error(e);
+				if(ReportErrors)
+					SentryReporter.CaptureBobsBuddyException(e, _input, _turn, _game.IsBattlegroundsDuosMatch || (_input?.InputContainsDuosCards ?? false), ReportContext);
+				return;
+			}
+		}
+
+		public async void MaybeRunDuosPartialCombat()
+		{
+			if(_input != null && !(DuosInputPlayerTeammate == null || DuosInputOpponentTeammate == null))
+			{
+				DebugLog("No need to run partial combat, all teammates found. Exiting.");
+				return;
+			}
+			try
+			{
+				if(!ShouldRun())
+					return;
+				DebugLog(_instanceKey);
+
+				if(HasErrorState())
+					return;
+
+				State = BobsBuddyState.CombatPartial;
+				DebugLog("Setting UI state to combat...");
+				BobsBuddyDisplay.SetState(BobsBuddyState.CombatPartial);
+				BobsBuddyDisplay.ResetText();
+
+				// Enforce input teammate to be null if teammate was not snapshot
+				if(_input != null && DuosInputPlayerTeammate == null)
+					_input.PlayerTeammate = null;
+				if(_input != null && DuosInputOpponentTeammate == null)
+					_input.OpponentTeammate = null;
+
+				await RunAndDisplaySimulationAsync();
+			}
+			catch(Exception e)
+			{
+				DebugLog(e.ToString());
+				Log.Error(e);
+				if(ReportErrors)
+					SentryReporter.CaptureBobsBuddyException(e, _input, _turn, isDuos: true, ReportContext);
+				return;
+			}
+		}
+
+		private async Task RunAndDisplaySimulationAsync()
+		{
+			DebugLog("Running simulation...");
+			BobsBuddyDisplay.HidePercentagesShowSpinners();
+			var start = DateTime.Now;
+			var result = await RunSimulation();
+			if(result == null || _input == null)
+			{
+				DebugLog("Simulation returned no result. Exiting.");
+				return;
+			}
+
+			// extremely fast simulations otherwise make the spinner disappear quickly, making the result feel unreliable
+			var remainingSpinTime = MinimumSpinTime - (int)(DateTime.Now - start).TotalMilliseconds;
+			if(remainingSpinTime > 0)
+				await Task.Delay(remainingSpinTime);
+
+			if(result.simulationCount <= 500 && result.myExitCondition == Simulator.ExitConditions.Time)
+			{
+				DebugLog("Could not perform enough simulations. Displaying error state and exiting.");
+				ErrorState = BobsBuddyErrorState.NotEnoughData;
+				BobsBuddyDisplay.SetErrorState(BobsBuddyErrorState.NotEnoughData);
+			}
+			else if(State == BobsBuddyState.CombatPartial)
+			{
+				DebugLog("Displaying partial simulation results");
+				BobsBuddyDisplay.ShowPartialDuosSimulation(
+					result.winRate,
+					result.tieRate,
+					result.lossRate,
+					result.theirDeathRate,
+					result.myDeathRate,
+					result.damageResults.ToList(),
+					friendlyWon: DuosInputPlayerTeammate == null,
+					playerCanDie: _input.Player.Health <= _input.DamageCap,
+					opponentCanDie: _input.Opponent.Health <= _input.DamageCap
+				);
+			}
+			else
+			{
+				DebugLog("Displaying simulation results");
+				BobsBuddyDisplay.ShowCompletedSimulation(
+					result.winRate,
+					result.tieRate,
+					result.lossRate,
+					result.theirDeathRate,
+					result.myDeathRate,
+					result.damageResults.ToList()
+				);
+			}
+		}
+
+		public async Task StartShoppingAsync(bool isGameOver = false)
+		{
+			try
+			{
+				// Combat is over, report if there's an unsupported interaction and it wasn't resolved by TryRerun()
+				ReportPendingUnsupportedInteraction();
+
+				if(!ShouldRun())
+					return;
+				DebugLog(_instanceKey);
+				if(State == BobsBuddyState.Shopping || State == BobsBuddyState.ShoppingAfterPartial)
+				{
+					DebugLog($"{_instanceKey} already in shopping state. Exiting");
+					return;
+				}
+				var wasPreviousStateParcial = State == BobsBuddyState.CombatPartial;
+
+				// The last death of the combat has no following attack to trigger a potential flush.
+				if(CurrentCombatHasPendingAutoAssemblerObservations)
+					await FlushAndUpdateObservedAutoAssemblerDeathrattlesAsync();
+				if(CurrentCombatHasPendingCrabObservations)
+					await FlushAndUpdateObservedCrabDeathrattlesAsync();
+
+				if(isGameOver)
+				{
+					if(State != BobsBuddyState.Initial)
+					{
+						DebugLog("Setting UI state to GameOver");
+						State = wasPreviousStateParcial ? BobsBuddyState.GameOverAfterPartial : BobsBuddyState.GameOver;
+					}
+				}
+				else
+				{
+					DebugLog("Setting UI state to Shopping");
+					State = wasPreviousStateParcial ? BobsBuddyState.ShoppingAfterPartial : BobsBuddyState.Shopping;
+				}
+
+				if(HasErrorState())
+					return;
+
+				BobsBuddyDisplay.SetLastOutcome(GetLastCombatDamageDealt());
+				BobsBuddyDisplay.SetState(State);
+				ValidateSimulationResultAsync().Forget();
+			}
+			catch(Exception e)
+			{
+				DebugLog(e.ToString());
+				Log.Error(e);
+				if(ReportErrors)
+					SentryReporter.CaptureBobsBuddyException(e, _input, _turn, _game.IsBattlegroundsDuosMatch || (_input?.InputContainsDuosCards ?? false), ReportContext);
+				return;
+			}
+		}
+
+		// Reports an unsupported interaction that was deferred during combat and never resolved by TryRerun()
+		// Note: if combat never reaches StartShoppingAsync (e.g. disconnect, or game abandoned
+		// mid-combat) the pending report is silently dropped.
+		private void ReportPendingUnsupportedInteraction()
+		{
+			if(_pendingUnsupportedInteractionException is not {} pendingException)
+				return;
+			var pendingMessage = _pendingUnsupportedInteractionMessage;
+			_pendingUnsupportedInteractionException = null;
+			_pendingUnsupportedInteractionMessage = string.Empty;
+
+			// Only ever report once per combat - a failing rerun that was still in flight when the
+			// first report went out could potentially be reported again on a later flush.
+			if(_unsupportedInteractionReported)
+				return;
+			_unsupportedInteractionReported = true;
+
+			var isDuos = _game.IsBattlegroundsDuosMatch || (_input?.InputContainsDuosCards ?? false);
+			if(ReportErrors)
+				SentryReporter.CaptureBobsBuddyException(pendingException, _input, _turn, isDuos, ReportContext);
+			Influx.OnBobsBuddyUnsupportedInteraction(
+				pendingException.Entity?.CardID, pendingMessage, _turn, isDuos, pendingException.Entity?.ControlledByPlayer);
+		}
+
+		private bool HasErrorState([CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "")
+		{
+			if(ErrorState == BobsBuddyErrorState.None)
+				return false;
+			BobsBuddyDisplay.SetErrorState(ErrorState);
+			DebugLog($"ErrorState={ErrorState}");
+			return true;
+		}
+
+		internal void UpdateAttackingEntities(Entity attacker, Entity defender)
+		{
+			if(!attacker.IsHero || !defender.IsHero)
+				return;
+			DebugLog($"Updating entities with attacker={attacker.Card.Name}, defender={defender.Card.Name}");
+			_defendingHero = defender;
+			_attackingHero = attacker;
+		}
+
+		private void SetupInputPlayer(
+			Simulator simulator,
+			Hearthstone.Player gamePlayer,
+			BobsBuddyPlayer inputPlayer,
+			Entity? playerEntity,
+			bool friendly,
+			bool isTeammate = false
+			)
+		{
+			var playerGameHero = gamePlayer.Hero;
+
+			if(playerEntity == null)
+			{
+				throw new ArgumentException(friendly ? "Player" : "Opponent" + " Entity could not be found. Exiting.");
+			}
+
+			foreach(var entity in gamePlayer.Board)
+			{
+				if(string.IsNullOrWhiteSpace(entity.CardId))
+					continue;
+
+				// LatestCard, not Card: the entity may have transformed in place via CHANGE_ENTITY
+				// (e.g. a Lockbox turning into a minion), where Card keeps the pre-transform card.
+				var card = entity.LatestCard;
+				if(!card.IsKnownCard)
+				{
+					ErrorState = BobsBuddyErrorState.UnknownCards;
+					throw new ArgumentException("Board has unknown cards. Exiting.");
+				}
+
+				// SupportedCards.VerifyCardIsSupported currently only works with TECH_LEVEL > 0.
+				if(card.Data != null && entity.IsMinion)
+				{
+					// Results other than "Supported" mean HDT has data about the card via dynamic CardDefs updates
+					// (otherwise we would have exited above), but BobsBuddy has not yet been updated.
+					var result = SupportedCards.VerifyCardIsSupported(card.Data);
+
+					// Unknown cards have two issues: 1) If they have effects they have not been implemented yet,
+					// and 2) even if they don't have effects, we would be unable to summon instances of the card
+					// with the correct stats during combat.
+					if(result == SupportedCards.Result.UnknownCard)
+					{
+						ErrorState = BobsBuddyErrorState.UnknownCards;
+						throw new ArgumentException("Board has unknown cards. Exiting.");
+					}
+
+					// For the most part we only care about text changes to cards if we previously had an implementation
+					// for a card. While there can in theory be edge cases where a card is changed in a way where the
+					// old text did not need an implementation, but the new text does, this seems very unlikely.
+					if(result == SupportedCards.Result.TextChanged && simulator.MinionFactory.HasImplementationFor(entity.Info.LatestCardId!))
+					{
+						ErrorState = BobsBuddyErrorState.UnknownCards;
+						throw new ArgumentException("Board has cards with changed text. Exiting.");
+					}
+				}
+			}
+
+			if(playerGameHero == null)
+			{
+				throw new ArgumentException("Hero(es) could not be found. Exiting.");
+			}
+
+
+			if(!friendly && inputPlayer.Health <= 0)
+			{
+				inputPlayer.Health = 1000;
+			}
+
+			inputPlayer.Health = playerGameHero.Health + playerGameHero.GetTag(GameTag.ARMOR);
+			inputPlayer.DamageTaken = playerGameHero.GetTag(GameTag.DAMAGE);
+			inputPlayer.Tier = playerGameHero.GetTag(GameTag.PLAYER_TECH_LEVEL);
+
+			var playerHeroPowers = gamePlayer.Board.Where(x => x.IsHeroPower).Take(2).ToList();
+			var claimedHeroPowerTargets = new HashSet<int>();
+			foreach(var heroPower in playerHeroPowers)
+			{
+				var pHpData = heroPower?.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1) ?? 0;
+				var pHpData2 = heroPower?.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_2) ?? 0;
+				var pHpData3 = heroPower?.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_3) ?? 0;
+				Minion? pHpAttachedMinion = null;
+
+				if(heroPower?.CardId == NonCollectible.Neutral.TeronGorefiend_RapidReanimation)
+				{
+					var minionsInPlay = gamePlayer.Board.Where(e => e.IsMinion && e.IsControlledBy(gamePlayer.Id)).Select(x => x.Id);
+					var attachedToEntityId = gamePlayer.PlayerEntities
+						.Where(x => x.CardId == NonCollectible.Neutral.TeronGorefiend_ImpendingDeath && (!friendly || (x.IsInPlay && friendly)))
+						.Select(x => x.GetTag(GameTag.ATTACHED))
+						.FirstOrDefault(x => minionsInPlay.Any(y => y == x) && !claimedHeroPowerTargets.Contains(x));
+					if(attachedToEntityId > 0)
+					{
+						pHpData = attachedToEntityId;
+						claimedHeroPowerTargets.Add(attachedToEntityId);
+					}
+				}
+
+				if(heroPower?.CardId == NonCollectible.Neutral.FlobbidinousFloop_GloriousGloop)
+				{
+					var minionsInPlay = gamePlayer.Board.Where(e => e.IsMinion && e.IsControlledBy(gamePlayer.Id)).Select(x => x.Id);
+					var attachedToEntityId = gamePlayer.PlayerEntities
+						.Where(x => x.CardId == NonCollectible.Neutral.FlobbidinousFloop_InTheGloop && (!friendly || (x.IsInPlay && friendly)))
+						.Select(x => x.GetTag(GameTag.ATTACHED))
+						.FirstOrDefault(x => minionsInPlay.Any(y => y == x) && !claimedHeroPowerTargets.Contains(x));
+					if(attachedToEntityId > 0)
+					{
+						pHpData = attachedToEntityId;
+						claimedHeroPowerTargets.Add(attachedToEntityId);
+					}
+				}
+
+				if(heroPower?.CardId == NonCollectible.Neutral.TavishStormpike_LockAndLoad)
+				{
+					var attachedEntityId = heroPower.GetTag(GameTag.TAG_SCRIPT_DATA_ENT_1);
+					var attachedEntity = gamePlayer.SetAside.FirstOrDefault(e => e.Id == attachedEntityId);
+
+					if(attachedEntity != null)
+					{
+						pHpAttachedMinion = GetMinionFromEntity(simulator, friendly, attachedEntity,
+							GetAttachedEntities(attachedEntityId));
+					}
+					else
+					{
+						// If Lock and Load fired before snapshot assigned _input, UpdateLockAndLoadHeroPower does
+						// nor run if _input == null; for those cases, we can simply check here for free.
+						var firedEntity = _game.Entities.Values
+							.Where(e =>
+								e.GetTag(GameTag.CARDTYPE) == (int)CardType.MINION &&
+								e.GetTag(GameTag.CREATOR) == heroPower.Id &&
+								e.Info.Turn == _game.GetTurnNumber() &&
+								(
+									e.GetTag(GameTag.ZONE) == (int)Zone.PLAY ||
+									e.GetTag(GameTag.ZONE) == (int)Zone.GRAVEYARD ||
+									e.GetTag(GameTag.ZONE) == (int)Zone.REMOVEDFROMGAME
+								)
+							).ToArray().FirstOrDefault();
+						if(firedEntity != null)
+						{
+							// A minion fired at the front of the combat can end in REMOVEDFROMGAME.
+							// Reconstruct from the card id instead.
+							if(firedEntity.GetTag(GameTag.ZONE) == (int)Zone.REMOVEDFROMGAME)
+								pHpData3 = firedEntity.LatestCard.DbfId;
+							else
+								pHpAttachedMinion = GetMinionFromEntity(simulator, friendly, firedEntity,
+									GetAttachedEntities(firedEntity.Id));
+						}
+					}
+				}
+				inputPlayer.AddHeroPower(heroPower?.CardId ?? "", friendly, WasHeroPowerActivated(heroPower, _game.IsBattlegroundsDuosMatch), pHpData, pHpData2, pHpData3, pHpAttachedMinion, heroPower?.Id ?? 0);
+			}
+
+			foreach(var quest in gamePlayer.Quests)
+			{
+				var rewardDbfId = quest.GetTag(GameTag.QUEST_REWARD_DATABASE_ID);
+				var reward = Database.GetCardFromDbfId(rewardDbfId, false);
+				inputPlayer.Quests.Add(new QuestData()
+				{
+					QuestProgress = quest.GetTag(GameTag.QUEST_PROGRESS),
+					QuestProgressTotal = quest.GetTag(GameTag.QUEST_PROGRESS_TOTAL),
+					QuestCardId = quest.CardId ?? "",
+					RewardCardId = reward?.Id ?? ""
+				});
+			}
+
+			foreach(var reward in gamePlayer.QuestRewards)
+			{
+				inputPlayer.Quests.Add(new QuestData()
+				{
+					RewardCardId = reward.Info.LatestCardId ?? "",
+					RewardScriptDataNum1 = reward.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1),
+					RewardScriptDataNum2 = reward.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_2)
+				});
+			}
+
+			foreach(var trinket in gamePlayer.Trinkets)
+			{
+				inputPlayer.Trinkets.Add(GetTrinketFromEntity(simulator.TrinketFactory, friendly, trinket));
+			}
+
+			foreach(var objective in gamePlayer.Objectives)
+			{
+				//TODO: [Duos] Check if friendly translates to player correctly
+				var inputObjective = GetObjectiveFromEntity(simulator.ObjectiveFactory, friendly, objective);
+
+				// The Deity Sigil carries the Deity it will summon, which is not an entity anywhere in
+				// the game until it awakens mid-combat.
+				if(objective.CardId == NonCollectible.Neutral.SecretDeityDnt && inputObjective is IOnAttachedMinion sigil)
+					sigil.AttachedMinion = GetDeityFromSigil(simulator, friendly, objective);
+
+				inputPlayer.Objectives.Add(inputObjective);
+			}
+
+			var playerSide = GetOrderedMinions(gamePlayer.Board)
+				.Where(e => e.IsControlledBy(gamePlayer.Id))
+				.Select(e => GetMinionFromEntity(simulator, friendly, e, GetAttachedEntities(e.Id), _game.Entities));
+			foreach(var m in playerSide)
+				inputPlayer.Side.Add(m);
+
+			if(friendly)
+			{
+				inputPlayer.SetSecrets(gamePlayer.Secrets.Select(x => (int?)x.LatestCard.DbfId).ToList());
+
+				var friendlyHandEntities = GetOrderedHandEntities(gamePlayer.Hand);
+				foreach(var e in friendlyHandEntities)
+				{
+					if(e.IsMinion)
+					{
+						var minionEntity = new MinionCardEntity(GetMinionFromEntity(simulator, true, e, GetAttachedEntities(e.Id)), null, simulator)
+						{
+							CanSummon = !e.HasTag(GameTag.LITERALLY_UNPLAYABLE),
+						};
+						inputPlayer.Hand.Add(minionEntity);
+					}
+					else if(e.CardId == NonCollectible.Neutral.BloodGem1)
+						inputPlayer.Hand.Add(new BloodGem(null, simulator));
+					else if(e.CardId == NonCollectible.Neutral.BilgewaterBreakout_LockboxToken)
+						inputPlayer.Hand.Add(new LockboxCardEntity(null, simulator)
+						{
+							// Turns until the Lockbox opens
+							ScriptDataNum1 = e.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1),
+						});
+					else if(e.IsSpell)
+						inputPlayer.Hand.Add(new SpellCardEntity(null, simulator));
+					else
+						inputPlayer.Hand.Add(new CardEntity(e.CardId ?? "", null, simulator)); // Not Unknown
+				}
+			}
+			else
+			{
+				if(IsOpponentHeroKelThuzad())
+					inputPlayer.SetHeroIsKelThuzad();
+
+				var secrets = gamePlayer.Secrets.ToList();
+				_opponentSecrets = secrets;
+				inputPlayer.SetSecrets(
+					secrets
+						.Select(x => !string.IsNullOrEmpty(x.CardId) ? (int?)x.LatestCard.DbfId : null)
+						.Distinct(new SecretDbfIdComparer())
+						.ToList()
+				);
+
+				var opponentHandEntities = GetOrderedHandEntities(gamePlayer.Hand).ToList();
+				if(isTeammate)
+					_opponentTeammateHand = opponentHandEntities;
+				else
+					_opponentHand = opponentHandEntities;
+				inputPlayer.Hand.Clear();
+				inputPlayer.Hand.AddRange(GetOpponentHandEntities(opponentHandEntities, simulator));
+			}
+
+			// DUOS TEAMMATE (validated/verified against 276 duos combats):
+			// Per-player enchants only ever attach to the two Player entities (Player and Opponent). When the
+			// displayed warband swaps to the teammate's, the game creates FRESH copies of the teammate's per-player
+			// enchants attached to the same Player entity in zone PLAY, and moves the local player's own copies
+			// to SETASIDE; therefore filter to to IsInPlay.
+			// Both the LOCAL player and teammate need the same filter in duos: the copies that are not in play
+			// belong to the teammate, so an unfiltered lookup returns the teammate's enchant whenever the
+			// local player has no copy of its own.
+			var playerAttached = _game.IsBattlegroundsDuosMatch
+				? GetAttachedEntities(playerEntity.Id).Where(x => x.IsInPlay).ToList()
+				: GetAttachedEntities(playerEntity.Id).ToList();
+
+			// captured inputPlayer values below are marked as: 'attached', 'direct' or 'transfer'
+			// - attached: obtained from GetAttachedEntities (required to read correct player/teammate in duos games)
+			// - direct: comes directly from the playerEntity using GetTag (no special handling needed for duos)
+			// - transfer: from the opponent's TagTransferPlayerEnchant when one is attached, otherwise direct
+
+			// Each combat the game attaches a TagTransferPlayerEnchant to the OPPONENT player entity, carrying the
+			// opponent's per-game counters under the same tag ids as the player entity.
+			// This matter when opponent is ghost, since the killed opponent entity's own copies of those tags can
+			// still hold the previous combat's values at the snapshot.
+			var pTagTransfer = friendly ? null : playerAttached.FirstOrDefault(x => x.CardId == NonCollectible.Neutral.TagtransferplayerenchantDnt && x.IsInPlay);   // attached
+			int ReadPlayerCounter(GameTag tag) => !_game.IsBattlegroundsDuosMatch && pTagTransfer != null
+				? pTagTransfer.GetTag(tag)  // pTagTransfer when opponent (transfer)
+				: playerEntity.GetTag(tag);  // playerEntity otherwise (direct)
+
+			var pEternalLegion = playerAttached.FirstOrDefault(x => x.CardId == NonCollectible.Neutral.EternalKnight_EternalKnightPlayerEnchantDnt);
+			if(pEternalLegion != null)
+			{
+				inputPlayer.EternalKnightCounter = pEternalLegion.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1);   // attached
+				inputPlayer.EternalLegionCounter = pEternalLegion.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_3);   // attached
+			}
+
+			var pSanlaynScribe = playerAttached.FirstOrDefault(x => x.CardId == NonCollectible.Neutral.SanlaynScribe_SanlaynScribePlayerEnchantDnt);
+			if(pSanlaynScribe != null)
+				inputPlayer.SanlaynScribeCounter = pSanlaynScribe.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1);   // attached
+
+			// The accumulated count now also lives on the Greater Eternal Portrait player enchant.
+			if(inputPlayer.EternalLegionCounter == 0)
+			{
+				var pGreaterPortrait = playerAttached.FirstOrDefault(x => x.CardId == NonCollectible.Neutral.EternalPortrait_GreaterEternalPortraitPlayerEnchDnt);
+				if(pGreaterPortrait != null)
+					inputPlayer.EternalLegionCounter = pGreaterPortrait.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1);   // attached
+			}
+
+			// Eternal Portrait trinket's accumulated grant is also on a per-Knight enchantment.
+			// If it's missing from the attached player, read it here from an Eternal Knight.
+			if(inputPlayer.EternalLegionCounter == 0)
+			{
+				foreach(var boardEntity in gamePlayer.Board)
+				{
+					var legion = GetAttachedEntities(boardEntity.Id)
+						.FirstOrDefault(x => x.CardId == NonCollectible.Neutral.EternalPortrait_GreaterEternalLegionEnchantment);
+					if(legion != null && legion.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1) > 0)
+					{
+						inputPlayer.EternalLegionCounter = legion.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1) / 4;
+						break;
+					}
+				}
+			}
+
+			var pUndeadBonus = playerAttached.FirstOrDefault(x => x.CardId == NonCollectible.Neutral.NerubianDeathswarmer_UndeadBonusAttackPlayerEnchantDnt);
+			if(pUndeadBonus != null)
+			{
+				inputPlayer.UndeadAttackBonus = pUndeadBonus.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1);   // attached
+				inputPlayer.UndeadHealthBonus = pUndeadBonus.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_2);   // attached
+			}
+
+			var pBeastBonus = playerAttached.FirstOrDefault(x => x.CardId == NonCollectible.Neutral.TimewarpedGoldrinn_TimewarpedGoldrinnPlayerEnchantDnt);
+			if(pBeastBonus != null)
+			{
+				inputPlayer.BeastAttackBonus = pBeastBonus.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1);   // attached
+				inputPlayer.BeastHealthBonus = pBeastBonus.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_2);   // attached
+				Log.Info($"pBeastAttack={inputPlayer.BeastAttackBonus}, pBeastHealth={inputPlayer.BeastHealthBonus}, friendly={friendly}");
+			}
+
+			// Cards like Floating Candle Set can trigger Goldrinn one or more times during shopping phase.
+			// Add any bonuses to BeastAttackBonus/BeastHealthBonus
+			var goldrinnAttackBonus = 0;
+			var goldrinnHealthBonus = 0;
+			foreach(var pGoldrinnBonus in playerAttached)
+			{
+				if(pGoldrinnBonus.CardId != NonCollectible.Neutral.GoldrinntheGreatWolf_GoldrinnPlayerEnchantDnt)
+					continue;
+				if(!pGoldrinnBonus.IsInPlay)
+					continue;
+				goldrinnAttackBonus += pGoldrinnBonus.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1);   // attached
+				goldrinnHealthBonus += pGoldrinnBonus.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_2);   // attached
+			}
+			if(goldrinnAttackBonus > 0 || goldrinnHealthBonus > 0)
+			{
+				inputPlayer.BeastAttackBonus += goldrinnAttackBonus;
+				inputPlayer.BeastHealthBonus += goldrinnHealthBonus;
+				Log.Info($"pGoldrinnBeastAttack={goldrinnAttackBonus}, pGoldrinnBeastHealth={goldrinnHealthBonus}, friendly={friendly}");
+			}
+
+			var pAncestralAutomaton = playerAttached.FirstOrDefault(x => x.CardId == NonCollectible.Neutral.AncestralAutomaton_AncestralAutomatonPlayerEnchantDnt);
+			if(pAncestralAutomaton != null)
+				inputPlayer.AncestralAutomatonCounter = pAncestralAutomaton.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1);   // attached
+			var pBeetle = playerAttached.FirstOrDefault(x => x.CardId == NonCollectible.Neutral.RunedProgenitor_BeetleArmyPlayerEnchantDnt);
+			if(pBeetle != null)
+			{
+				inputPlayer.BeetlesAtkBuff = pBeetle.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1);   // attached
+				inputPlayer.BeetlesHealthBuff = pBeetle.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_2);   // attached
+				Log.Info($"pBeetleAtk={inputPlayer.BeetlesAtkBuff}, pBeetleHealth={inputPlayer.BeetlesHealthBuff}, friendly={friendly}");
+			}
+			var pWhelpBonus = playerAttached.FirstOrDefault(x =>
+				x.CardId == NonCollectible.Neutral.BurgeoningWhelp_WhelpBuffPlayerEnchantDnt);
+			if(pWhelpBonus != null)
+			{
+				inputPlayer.WhelpAttackBonus = pWhelpBonus.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1);   // attached
+				inputPlayer.WhelpHealthBonus = pWhelpBonus.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_2);   // attached
+				Log.Info($"pWhelpAttack={inputPlayer.WhelpAttackBonus}, pWhelpHealth={inputPlayer.WhelpHealthBonus}, friendly={friendly}");
+			}
+
+			inputPlayer.ElementalPlayCounter = ReadPlayerCounter((GameTag)2878);   // direct or transfer
+
+			inputPlayer.ElementalsGiveExtraAttack = ReadPlayerCounter(GameTag.BACON_ELEMENTAL_BUFFATKVALUE);   // direct or transfer
+			inputPlayer.ElementalsGiveExtraHealth = ReadPlayerCounter(GameTag.BACON_ELEMENTAL_BUFFHEALTHVALUE);   // direct or transfer
+
+			Log.Info($"pEternal={inputPlayer.EternalKnightCounter}, pEternalLegion={inputPlayer.EternalLegionCounter}, pUndead={inputPlayer.UndeadAttackBonus}, pElemental={inputPlayer.ElementalPlayCounter}, pElementalExtraAtk={inputPlayer.ElementalsGiveExtraAttack}, pElementalExtraHealth={inputPlayer.ElementalsGiveExtraHealth}, friendly={friendly}");
+
+			inputPlayer.PiratesSummonCounter = ReadPlayerCounter((GameTag)2358);   // direct or transfer
+
+			// Number of times this player has Magnetized this game.
+			inputPlayer.MagnetizeCounter = ReadPlayerCounter((GameTag)3670);   // direct or transfer
+
+			inputPlayer.ResourcesSpentThisGame = playerEntity.GetTag(GameTag.NUM_RESOURCES_SPENT_THIS_GAME);   // direct
+
+			// The tag is never sent for the opponent — derive the value if there is a Malorne on their board.
+			if(inputPlayer.ResourcesSpentThisGame == 0 && !friendly)
+			{
+				var malorne = gamePlayer.Board.FirstOrDefault(e => e.CardId == NonCollectible.Neutral.ForestLordCenarius_Malorne1
+					|| e.CardId == NonCollectible.Neutral.ForestLordCenarius_Malorne2);
+				if(malorne != null)
+					inputPlayer.ResourcesSpentThisGame = GetResourcesSpentThisGameFromMalorne(malorne, GetAttachedEntities(malorne.Id));   // derived
+			}
+
+			inputPlayer.BeastsSummonCounter = ReadPlayerCounter((GameTag)3962);   // direct or transfer
+
+			inputPlayer.TastyLobsterCounter = ReadPlayerCounter((GameTag)4803);   // direct or transfer
+
+			inputPlayer.GoldenMinionsPlayedCounter = ReadPlayerCounter((GameTag)4799);   // direct or transfer
+
+			inputPlayer.FriendlyMinionsDeadLastCombatCounter = ReadPlayerCounter((GameTag)2717);   // direct or transfer
+
+			// GameTag 3236 is Battlecries "played", whereas GameTag 3873 is Battlecries Triggered (correct one)
+			inputPlayer.BattlecryCounter = ReadPlayerCounter((GameTag)3873);   // direct or transfer
+
+			Log.Info($"pPirates={inputPlayer.PiratesSummonCounter}, pBeasts={inputPlayer.BeastsSummonCounter}, pDeadLastCombat={inputPlayer.FriendlyMinionsDeadLastCombatCounter}, pBattlecry={inputPlayer.BattlecryCounter}, friendly={friendly}");
+
+			// Two places carry the Blood Gem buff and each has a measured way to under-count;
+			// both only ever accumulate, so take the per-source maximum.
+			var pBloodGemBonus = playerAttached.FirstOrDefault(x => x.CardId == NonCollectible.Neutral.MoonBaconJazzer_BloodGemPlayerEnchantDnt);
+			var bloodGemAtkFromEnchant = pBloodGemBonus?.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1) ?? 0;   // attached
+			var bloodGemHealthFromEnchant = pBloodGemBonus?.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_2) ?? 0;   // attached
+			var bloodGemAtkFromTag = playerEntity.GetTag(GameTag.BACON_BLOODGEMBUFFATKVALUE);   // direct
+			var bloodGemHealthFromTag = playerEntity.GetTag(GameTag.BACON_BLOODGEMBUFFHEALTHVALUE);   // direct
+			inputPlayer.BloodGemAtkBuff = Math.Max(bloodGemAtkFromEnchant, bloodGemAtkFromTag);
+			inputPlayer.BloodGemHealthBuff = Math.Max(bloodGemHealthFromEnchant, bloodGemHealthFromTag);
+
+			Log.Info($"pBloodGem=+{inputPlayer.BloodGemAtkBuff}/+{inputPlayer.BloodGemHealthBuff}, friendly={friendly}");
+
+			// Direct first: the game writes these two on the player entity again after the transfer.
+			inputPlayer.TavernSpellAtkBuff = playerEntity.HasTag(GameTag.TAVERN_SPELL_ATTACK_INCREASE)
+				? playerEntity.GetTag(GameTag.TAVERN_SPELL_ATTACK_INCREASE)   // direct
+				: pTagTransfer?.GetTag(GameTag.TAVERN_SPELL_ATTACK_INCREASE) ?? 0;   // attached (fallback)
+			inputPlayer.TavernSpellHealthBuff = playerEntity.HasTag(GameTag.TAVERN_SPELL_HEALTH_INCREASE)
+				? playerEntity.GetTag(GameTag.TAVERN_SPELL_HEALTH_INCREASE)   // direct
+				: pTagTransfer?.GetTag(GameTag.TAVERN_SPELL_HEALTH_INCREASE) ?? 0;   // attached (fallback)
+			Log.Info($"pTavernSpell=+{inputPlayer.TavernSpellAtkBuff}/+{inputPlayer.TavernSpellHealthBuff} (opponentTransferEnchant={pTagTransfer != null}), friendly={friendly}");
+
+			inputPlayer.TavernSpellCounter = ReadPlayerCounter((GameTag)3088);   // direct or transfer
+
+			inputPlayer.DeathrattleCounter = ReadPlayerCounter((GameTag)4639);   // direct or transfer
+
+			// Number of cards discarded
+			inputPlayer.DiscardCounter = ReadPlayerCounter((GameTag)4768);   // direct or transfer
+
+			inputPlayer.VolumizerAtkBuff = ReadPlayerCounter((GameTag)4468);   // direct or transfer
+			inputPlayer.VolumizerHealthBuff = ReadPlayerCounter((GameTag)4469);   // direct or transfer
+
+			var pHaunted = playerAttached.FirstOrDefault(x => x.CardId == NonCollectible.Neutral.HauntedCarapace_HauntedCarapacePlayerEnchantDnt);
+			if(pHaunted != null)
+			{
+				inputPlayer.HauntedAtkBuff = pHaunted.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1);   // attached
+				inputPlayer.HauntedHealthBuff = pHaunted.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_2);   // attached
+				Log.Info($"pHauntedAtk={inputPlayer.HauntedAtkBuff}, pHauntedHealth={inputPlayer.HauntedHealthBuff}, friendly={friendly}");
+			}
+		}
+
+		private void SnapshotBoardState(int turn)
+		{
+			DebugLog("Snapshotting board state...");
+
+			_observedAutoAssemblerFirings.Clear();
+			_pendingAutoAssemblerDeathrattleSources.Clear();
+			_pendingCrabDeathrattleSources.Clear();
+
+			LastAttackingHero = null;
+			_attackingHero = null;
+			_defendingHero = null;
+			_reconnectCounterAtSnapshot = _reconnectCounter;
+			var simulator = new Simulator();
+			var input = new Input();
+
+			if(_game.GameEntity == null)
+			{
+				DebugLog("GameEntity could not be found. Exiting.");
+				return;
+			}
+
+			input.availableRaces = BattlegroundsUtils.GetAvailableRaces(_currentGameId).ToList();
+			if(_game.GameEntity.GetTag(GameTag.BACON_COMBAT_DAMAGE_CAP_ENABLED) > 0)
+				input.DamageCap = _game.GameEntity.GetTag(GameTag.BACON_COMBAT_DAMAGE_CAP);
+
+			try
+			{
+				// In solos, each invoker instance snapshots exactly once, and _input=null here is the expected case.
+				// Only a duos teammate re-snapshot will legitimately arrive with _input set.
+				// However, a non-null solos _input CAN occur from a third-party plugin that saves/restores input
+				// mid-combat. Allowing setup to always proceed for solos, regardless of _input, solves this.
+				if(_input == null || !_game.IsBattlegroundsDuosMatch)
+				{
+					if(_input != null)
+						DebugLog("Input was already set before this instance's first snapshot; Rebuilding the input from the current game state.");
+					SetupInputPlayer(simulator, _game.Player, input.Player, _game.PlayerEntity, true);
+					SetupInputPlayer(simulator, _game.Opponent, input.Opponent, _game.OpponentEntity, false);
+					DuosInputPlayer = input.Player;
+					DuosInputOpponent = input.Opponent;
+
+					DuosInputPlayerTeammate = null;
+					DuosInputOpponentTeammate = null;
+				}
+				else
+				{
+					if(_game.DuosWasPlayerHeroModified && DuosInputPlayerTeammate == null && input.PlayerTeammate != null)
+					{
+						SetupInputPlayer(simulator, _game.Player, input.PlayerTeammate, _game.PlayerEntity, true, isTeammate: true);
+						DuosInputPlayerTeammate = input.PlayerTeammate;
+					}
+					if(_game.DuosWasOpponentHeroModified && DuosInputOpponentTeammate == null && input.OpponentTeammate != null)
+					{
+						SetupInputPlayer(simulator, _game.Opponent, input.OpponentTeammate, _game.OpponentEntity, false, isTeammate: true);
+						DuosInputOpponentTeammate = input.OpponentTeammate;
+					}
+				}
+
+				if(_game.IsBattlegroundsDuosMatch)
+				{
+					input.isDuos = true;
+					input.Player = DuosInputPlayer;
+					input.Opponent = DuosInputOpponent;
+					input.PlayerTeammate = DuosInputPlayerTeammate ?? input.PlayerTeammate;
+					input.OpponentTeammate = DuosInputOpponentTeammate ?? input.OpponentTeammate;
+				}
+			} catch(Exception e)
+			{
+				DebugLog(e.ToString());
+				return;
+			}
+
+			var anomalyDbfId = BattlegroundsUtils.GetBattlegroundsAnomalyDbfId(_game.GameEntity);
+			var anomalyCardId = anomalyDbfId.HasValue ? Database.GetCardFromDbfId(anomalyDbfId.Value, false)?.Id : null;
+			if(anomalyCardId != null)
+				input.Anomaly = simulator.AnomalyFactory.Create(anomalyCardId);
+
+			input.SetTurn(turn);
+
+			_input = input;
+			_turn = turn;
+
+			// Flag checking it's possible to summon Malorne during combat (to optimize redundantly checking in TagChangeAction).
+			CurrentCombatMayHaveOpponentMalorne = input.Anomaly?.CardID == NonCollectible.Neutral.BringInTheBuddies;
+
+			// A stale observation from a combat that never reached StartShoppingAsync (e.g., disconnect) must not trigger flushes in the next combat.
+			CurrentCombatHasPendingAutoAssemblerObservations = false;
+			CurrentCombatHasPendingCrabObservations = false;
+
+			DebugLog("Successfully snapshotted board state");
+		}
+
+		private int _reRunCount;
+
+		private Task TryRerun()
+		{
+			if(State == BobsBuddyState.Initial)
+				// For duos, revealed cards can happen during BobsBuddyState.Initial since the entire first
+				// fight parses before any state is assigned. The upcoming partial/full simulator run will have
+				// this updated input, so there is no need to continue with TryRerun()
+				return Task.CompletedTask;
+			if(_reRunCount++ <= 10)
+			{
+				DebugLog($"Input changed, re-running simulation! (#{_reRunCount})");
+				if(ShouldRun())
+				{
+					var expandAfterError = ErrorState == BobsBuddyErrorState.None && Config.Instance.ShowBobsBuddyDuringCombat;
+					ErrorState = BobsBuddyErrorState.None;
+					BobsBuddyDisplay.SetErrorState(BobsBuddyErrorState.None, null, BobsBuddyDisplay.ResultsPanelExpanded || expandAfterError);
+					Output = null;
+					return RunAndDisplaySimulationAsync();
+				}
+			}
+			else
+			{
+				DebugLog("Input changed, but the simulation already re-ran ten times");
+			}
+
+			return Task.CompletedTask;
+		}
+
+		internal async void UpdateCardOpponentHand(Entity entity, Entity copy)
+		{
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+
+			_opponentHandMap[entity] = copy;
+
+			// Wait for attached entities to be logged. This should happen at the exact same timestamp.
+			//await _game.GameTime.WaitForDuration(1);
+
+			// In duos both opponent-side players are set up from _game.Opponent, so a revealed card is
+			// attributed by the list it was captured in. Rebuilding the other one would write the
+			// opponent teammate's cards into the hand of the opponent fighting first.
+			var handEntities = _opponentHand;
+			var handOwner = _input.Opponent;
+			if(_input.OpponentTeammate != null && !_opponentHand.Contains(entity) && _opponentTeammateHand.Contains(entity))
+			{
+				handEntities = _opponentTeammateHand;
+				handOwner = _input.OpponentTeammate;
+			}
+
+			var entities = GetOpponentHandEntities(handEntities, new Simulator()).ToList();
+			if(entities.Count(x => x is MinionCardEntity) <= handOwner.Hand.Count(x => x is MinionCardEntity))
+				return;
+
+			handOwner.Hand = entities;
+
+			await TryRerun();
+		}
+
+		internal async void UpdateOpponentSecret(Entity entity)
+		{
+			if(_input == null || State != BobsBuddyState.Combat ||_game.IsBattlegroundsDuosMatch)
+				return;
+
+			_input.Opponent.SetSecrets(
+				_opponentSecrets
+					.Select(x => !string.IsNullOrEmpty(x.CardId) ? (int?)x.LatestCard.DbfId : null)
+					.Distinct(new SecretDbfIdComparer())
+					.ToList()
+			);
+
+			await TryRerun();
+		}
+
+		internal async void UpdateLockAndLoadHeroPower(Entity attachedEntity, bool isOpponent)
+		{
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+
+			var tryDuos = _game.IsBattlegroundsDuosMatch;
+			var tryRerun = false;
+			if(isOpponent && !tryDuos){  // Try to obtain for opponent when not duos
+				var tavishLockAndLoad = _input.Opponent.HeroPowers.FirstOrDefault(hp => hp.CardId == NonCollectible.Neutral.TavishStormpike_LockAndLoad);
+				if(tavishLockAndLoad == null)
+					tryDuos = true; // Will fallback and try duos anyways
+				else if(tavishLockAndLoad.AttachedMinion == null && tavishLockAndLoad.Data3 == 0)
+				{
+					tavishLockAndLoad.AttachedMinion = GetMinionFromEntity(new Simulator(), false, attachedEntity, GetAttachedEntities(attachedEntity.Id));
+					tavishLockAndLoad.AttachedMinionCapturedDuringCombat = true;
+					tryRerun = true;
+				}
+			}
+			if(tryDuos)
+				UpdateDuosLockAndLoadHeroPower(attachedEntity);
+			if(tryRerun)
+				await TryRerun();
+		}
+
+		internal async void UpdateDuosLockAndLoadHeroPower(Entity firedMinionEntity)
+		{
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+
+			var creatorId = firedMinionEntity.GetTag(GameTag.CREATOR);
+			var sides = new (IEnumerable<HeroPowerData>? heroPowers, bool friendly)[]
+			{
+				(_input.Player.HeroPowers, true),
+				(_input.PlayerTeammate?.HeroPowers, true),
+				(_input.Opponent.HeroPowers, false),
+				(_input.OpponentTeammate?.HeroPowers, false),
+			};
+
+			HeroPowerData? tavishLockAndLoad = null;
+			var friendly = true;
+			foreach(var (heroPowers, sideFriendly) in sides)
+			{
+				var match = heroPowers?.FirstOrDefault(hp => hp.CardId == NonCollectible.Neutral.TavishStormpike_LockAndLoad && hp.game_id == creatorId);
+				if(match != null)
+				{
+					tavishLockAndLoad = match;
+					friendly = sideFriendly;
+					break;
+				}
+			}
+			if(tavishLockAndLoad == null)
+			{
+				foreach(var (heroPowers, sideFriendly) in sides)
+				{
+					var match = heroPowers?.FirstOrDefault(hp => hp.CardId == NonCollectible.Neutral.TavishStormpike_LockAndLoad);
+					if(match != null)
+					{
+						tavishLockAndLoad = match;
+						friendly = sideFriendly;
+						break;
+					}
+				}
+			}
+			if(tavishLockAndLoad == null)
+				return;
+			if(tavishLockAndLoad.AttachedMinion != null || tavishLockAndLoad.Data3 > 0)
+				return;
+
+			// COPIED_FROM_ENTITY_ID capture (TagChangeActions) fires before the fired minion attacks,
+			// so its stats are clean. The BLOCK_END capture (PowerHandler) can run after the shot, and the minion
+			// may carry damage or already be dead, and the simulation replays the shot, if so, fall back to dbf_id.
+			if(firedMinionEntity.GetTag(GameTag.DAMAGE) == 0 && firedMinionEntity.IsInZone(Zone.PLAY))
+			{
+				tavishLockAndLoad.AttachedMinion = GetMinionFromEntity(new Simulator(), friendly, firedMinionEntity, GetAttachedEntities(firedMinionEntity.Id));
+				tavishLockAndLoad.AttachedMinionCapturedDuringCombat = true;
+			}
+			else if(tavishLockAndLoad.Data3 == 0)
+				tavishLockAndLoad.Data3 = firedMinionEntity.LatestCard.DbfId;
+			else
+				return;
+
+			await TryRerun();
+		}
+
+		internal async void UpdateBackToBackSpellBonus(Entity backToBackEnchantmentEntity, bool isOpponent)
+		{
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+
+			if(isOpponent){
+				if(_input.Opponent.BackToBackAtk == 0 && _input.Opponent.BackToBackHealth == 0)
+				{
+					_input.Opponent.BackToBackAtk = backToBackEnchantmentEntity.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1);
+					_input.Opponent.BackToBackHealth = backToBackEnchantmentEntity.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_2);
+				}
+				else
+					return;
+			}
+			else
+			{
+				if(_input.Player.BackToBackAtk == 0 && _input.Player.BackToBackHealth == 0)
+				{
+					_input.Player.BackToBackAtk = backToBackEnchantmentEntity.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1);
+					_input.Player.BackToBackHealth = backToBackEnchantmentEntity.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_2);
+				}
+				else
+					return;
+			}
+
+			await TryRerun();
+		}
+
+		internal async void UpdateSandyTransformDuos(Entity transformedSandyEntity)
+		{
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+
+			var friendly = true;
+			// True to a "transform", transformedSandyEntity has the same Id as the original Sandy
+			// A duos teammate board can be snapshot after its Sandy already transformed, so the entity id
+			// resolves to the transformed copy instead (match on the type, not just the id).
+			var sandyMinion = _input.Player.Side.OfType<Sandy>().FirstOrDefault(m => m.game_id == transformedSandyEntity.Id);
+			if(sandyMinion == null && _input.PlayerTeammate != null)
+				sandyMinion = _input.PlayerTeammate.Side.OfType<Sandy>().FirstOrDefault(m => m.game_id == transformedSandyEntity.Id);
+			if(sandyMinion == null)
+			{
+				friendly = false;
+				sandyMinion = _input.Opponent.Side.OfType<Sandy>().FirstOrDefault(m => m.game_id == transformedSandyEntity.Id);
+			}
+			if(sandyMinion == null && _input.OpponentTeammate != null)
+				sandyMinion = _input.OpponentTeammate.Side.OfType<Sandy>().FirstOrDefault(m => m.game_id == transformedSandyEntity.Id);
+			if(sandyMinion == null)
+				return;
+			if(sandyMinion.AttachedMinion != null)
+				return;
+
+			sandyMinion.AttachedMinion = GetMinionFromEntity(new Simulator(), friendly, transformedSandyEntity, GetAttachedEntities(transformedSandyEntity.Id));
+			sandyMinion.MinionUpdatedDuringCombat = true;
+
+			await TryRerun();
+		}
+
+		internal async void UpdateFlobbidinousFloopTransformDuos(Entity attachedEntity, int floopEntityId)
+		{
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+
+			var friendly = true;
+			var flobbidinousFloop = _input.Player.HeroPowers.FirstOrDefault(hp => hp.game_id == floopEntityId && hp.CardId == NonCollectible.Neutral.FlobbidinousFloop_GloriousGloop);
+			if(flobbidinousFloop == null && _input.PlayerTeammate != null)
+				flobbidinousFloop = _input.PlayerTeammate.HeroPowers.FirstOrDefault(hp => hp.game_id == floopEntityId && hp.CardId == NonCollectible.Neutral.FlobbidinousFloop_GloriousGloop);
+			if(flobbidinousFloop == null)
+			{
+				friendly = false;
+				flobbidinousFloop = _input.Opponent.HeroPowers.FirstOrDefault(hp => hp.game_id == floopEntityId && hp.CardId == NonCollectible.Neutral.FlobbidinousFloop_GloriousGloop);
+			}
+			if(flobbidinousFloop == null && _input.OpponentTeammate != null)
+				flobbidinousFloop = _input.OpponentTeammate.HeroPowers.FirstOrDefault(hp => hp.game_id == floopEntityId && hp.CardId == NonCollectible.Neutral.FlobbidinousFloop_GloriousGloop);
+			if(flobbidinousFloop == null || flobbidinousFloop.AttachedMinion != null)
+				return;
+
+			flobbidinousFloop.AttachedMinion = GetMinionFromEntity(new Simulator(), friendly, attachedEntity, GetAttachedEntities(attachedEntity.Id));
+
+			await TryRerun();
+		}
+
+		// Invoked at the END of Glorious Gloop's Start of Combat trigger block. Set AttachedMinionCapturedDuringCombat
+		// with AttachedMinion still null, so the simulator skips UnsupportedInteractionException.
+		internal async void UpdateFlobbidinousFloopConfirmedNoTransformDuos(int floopEntityId)
+		{
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+
+			var flobbidinousFloop = _input.Player.HeroPowers.FirstOrDefault(hp => hp.game_id == floopEntityId && hp.CardId == NonCollectible.Neutral.FlobbidinousFloop_GloriousGloop);
+			if(flobbidinousFloop == null && _input.PlayerTeammate != null)
+				flobbidinousFloop = _input.PlayerTeammate.HeroPowers.FirstOrDefault(hp => hp.game_id == floopEntityId && hp.CardId == NonCollectible.Neutral.FlobbidinousFloop_GloriousGloop);
+			if(flobbidinousFloop == null)
+				flobbidinousFloop = _input.Opponent.HeroPowers.FirstOrDefault(hp => hp.game_id == floopEntityId && hp.CardId == NonCollectible.Neutral.FlobbidinousFloop_GloriousGloop);
+			if(flobbidinousFloop == null && _input.OpponentTeammate != null)
+				flobbidinousFloop = _input.OpponentTeammate.HeroPowers.FirstOrDefault(hp => hp.game_id == floopEntityId && hp.CardId == NonCollectible.Neutral.FlobbidinousFloop_GloriousGloop);
+			if(flobbidinousFloop == null || flobbidinousFloop.AttachedMinion != null || flobbidinousFloop.AttachedMinionCapturedDuringCombat)
+				return;
+
+			flobbidinousFloop.AttachedMinionCapturedDuringCombat = true;
+
+			await TryRerun();
+		}
+
+		internal async void UpdateSummoningSphereDuos(Entity attachedEntity, int trinketEntityId)
+		{
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+
+			var friendly = true;
+			var summoningSphereTrinket = _input.Player.Trinkets.FirstOrDefault(t => t.game_id == trinketEntityId && t.CardID == NonCollectible.Neutral.SummoningSphere);
+			if(summoningSphereTrinket == null && _input.PlayerTeammate != null)
+				summoningSphereTrinket = _input.PlayerTeammate.Trinkets.FirstOrDefault(t => t.game_id == trinketEntityId && t.CardID == NonCollectible.Neutral.SummoningSphere);
+			if(summoningSphereTrinket == null)
+			{
+				friendly = false;
+				summoningSphereTrinket = _input.Opponent.Trinkets.FirstOrDefault(t => t.game_id == trinketEntityId && t.CardID == NonCollectible.Neutral.SummoningSphere);
+			}
+			if(summoningSphereTrinket == null && _input.OpponentTeammate != null)
+				summoningSphereTrinket = _input.OpponentTeammate.Trinkets.FirstOrDefault(t => t.game_id == trinketEntityId && t.CardID == NonCollectible.Neutral.SummoningSphere);
+			if(summoningSphereTrinket == null)
+				return;
+			if(((SummoningSphere)summoningSphereTrinket).AttachedMinion != null)
+				return;
+
+			((SummoningSphere)summoningSphereTrinket).AttachedMinion = GetMinionFromEntity(new Simulator(), friendly, attachedEntity, GetAttachedEntities(attachedEntity.Id));
+
+			await TryRerun();
+		}
+
+		internal async void UpdateSummoningSphereConfirmedNoSummonDuos(int trinketEntityId)
+		{
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+
+			var summoningSphereTrinket = _input.Player.Trinkets.FirstOrDefault(t => t.game_id == trinketEntityId && t.CardID == NonCollectible.Neutral.SummoningSphere);
+			if(summoningSphereTrinket == null && _input.PlayerTeammate != null)
+				summoningSphereTrinket = _input.PlayerTeammate.Trinkets.FirstOrDefault(t => t.game_id == trinketEntityId && t.CardID == NonCollectible.Neutral.SummoningSphere);
+			if(summoningSphereTrinket == null)
+				summoningSphereTrinket = _input.Opponent.Trinkets.FirstOrDefault(t => t.game_id == trinketEntityId && t.CardID == NonCollectible.Neutral.SummoningSphere);
+			if(summoningSphereTrinket == null && _input.OpponentTeammate != null)
+				summoningSphereTrinket = _input.OpponentTeammate.Trinkets.FirstOrDefault(t => t.game_id == trinketEntityId && t.CardID == NonCollectible.Neutral.SummoningSphere);
+			if(summoningSphereTrinket == null || ((SummoningSphere)summoningSphereTrinket).AttachedMinion != null
+				|| summoningSphereTrinket.TrinketUpdatedDuringCombat)
+				return;
+
+			summoningSphereTrinket.TrinketUpdatedDuringCombat = true;
+
+			await TryRerun();
+		}
+
+		internal async void UpdateMagnanimooseSummonPoolDuos(List<Entity> summonedEntities, int magnanimooseEntityId, bool isPlayerMinion)
+		{
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+
+			// Determine which of the four players owns this Magnanimoose by finding its entity id on one of the captured boards.
+			BobsBuddyPlayer? playerToUpdate = null;
+			if(isPlayerMinion)
+			{
+				if(_input.Player.Side.FirstOrDefault(m => m.game_id == magnanimooseEntityId) != null)
+					playerToUpdate = _input.Player;
+				else if(_input.PlayerTeammate?.Side.FirstOrDefault(m => m.game_id == magnanimooseEntityId) != null)
+					playerToUpdate = _input.PlayerTeammate;
+			}
+			else
+			{
+				if(_input.Opponent.Side.FirstOrDefault(m => m.game_id == magnanimooseEntityId) != null)
+					playerToUpdate = _input.Opponent;
+				else if(_input.OpponentTeammate?.Side.FirstOrDefault(m => m.game_id == magnanimooseEntityId) != null)
+					playerToUpdate = _input.OpponentTeammate;
+			}
+
+			if(playerToUpdate == null)
+			{
+				// A Magnanimoose summoned during combat is not on any captured board; match its controller to the correct player.
+				var controller = _game.Entities.TryGetValue(magnanimooseEntityId, out var mEnt)
+					? mEnt.GetTag(GameTag.CONTROLLER) : 0;
+				playerToUpdate = ControllingPlayer(controller, isPlayerMinion);
+			}
+
+			// Last resort if the controller could not be matched (e.g. a teammate board not yet snapshot).
+			playerToUpdate ??= isPlayerMinion ? _input.Player : _input.Opponent;
+
+			var simulator = new Simulator();
+			var summonedMinions = summonedEntities
+				.Select(e =>
+				{
+					var minion = GetMinionFromEntity(simulator, isPlayerMinion, e, GetAttachedEntities(e.Id));
+					var copiedFrom = e.GetTag(GameTag.COPIED_FROM_ENTITY_ID);
+
+					// The game writes a minion's aggregate ATK/HEALTH when it enters PLAY. A copy that did not
+					// fit stays in SETASIDE holding the card's printed stats, so read the real values off the
+					// entity it was copied from.
+					if(!e.IsInPlay && copiedFrom > 0
+						&& _game.Entities.TryGetValue(copiedFrom, out var copySource)
+						&& (copySource.IsInPlay || copySource.IsInSetAside))
+					{
+						minion.baseAttack = copySource.GetTag(GameTag.ATK);
+						minion.maxAttack = copySource.GetTag(GameTag.ATK);
+						minion.baseHealth = copySource.GetTag(GameTag.HEALTH) - copySource.GetTag(GameTag.DAMAGE);
+						minion.maxHealth = copySource.GetTag(GameTag.HEALTH);
+					}
+
+					if(copiedFrom > 0)
+						minion.game_id = copiedFrom;
+					return minion;
+				})
+				.ToList();
+			playerToUpdate.MagnanimooseSummonPoolDuos.AddRange(summonedMinions);
+
+			await TryRerun();
+		}
+
+		private BobsBuddyPlayer? ControllingPlayer(int controller, bool isPlayerMinion)
+		{
+			if(_input == null || controller == 0)
+				return null;
+			var relevantSides = isPlayerMinion
+				? new[] { _input.Player, _input.PlayerTeammate }
+				: new[] { _input.Opponent, _input.OpponentTeammate };
+			foreach(var player in relevantSides)
+			{
+				if(player == null)
+					continue;
+				foreach(var minion in player.Side)
+					if(_game.Entities.TryGetValue(minion.game_id, out var entity) && entity.GetTag(GameTag.CONTROLLER) == controller)
+						return player;
+			}
+			return null;
+		}
+
+		internal async void UpdateMinionEnchantment(Entity enchantmentEntity, int attachedToEntityId, bool isPlayerMinion)
+		{
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+
+			var targetPlayer = isPlayerMinion ? _input.Player : _input.Opponent;
+			var minion = targetPlayer.Side.FirstOrDefault(m => m.game_id == attachedToEntityId);
+
+			if(minion == null || minion.MinionUpdatedDuringCombat)
+				return;
+
+			// Attach enchant to the minion
+			if(enchantmentEntity.LatestCard.TypeEnum == CardType.ENCHANTMENT && enchantmentEntity.Info.LatestCardId != null)
+			{
+				var enchantment = new Simulator().EnchantmentFactory.Create(enchantmentEntity.Info.LatestCardId, minion.ControlledByPlayer);
+				if(enchantment != null)
+				{
+					enchantment.ScriptDataNum1 = enchantmentEntity.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1);
+					enchantment.ScriptDataNum2 = enchantmentEntity.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_2);
+					minion.AttachEnchantment(enchantment);
+					minion.MinionUpdatedDuringCombat = true;
+				}
+			}
+
+			await TryRerun();
+		}
+
+		internal async void UpdateGolemancyEnchantment(int sourceEntityId)
+		{
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+
+			var sides = new[] { _input.Player, _input.PlayerTeammate, _input.Opponent, _input.OpponentTeammate };
+			var minion = sides.Where(p => p != null).SelectMany(p => p!.Side).FirstOrDefault(m => m.game_id == sourceEntityId);
+			if(minion == null)
+				return;
+
+			// Do not proceed if Golemancy dark gift was already captured
+			if(minion.Enchantments.Any(e => e is Golemancy))
+				return;
+
+			// Ignore minions whose innate Deathrattle summons a Golem with the same enchantment
+			if(minion is DarkParadox9)
+				return;
+
+			if(minion is ICopiesDeathrattles)
+				return;
+
+			var enchantment = new Simulator().EnchantmentFactory.Create(Golemancy.CardId, minion.ControlledByPlayer);
+			if(enchantment == null)
+				return;
+
+			enchantment.EnchantmentUpdatedDuringCombat = true;
+			minion.AttachEnchantment(enchantment);
+
+			await TryRerun();
+		}
+
+		internal async void UpdateOffensiveSacrificeEnchantment(int sourceEntityId)
+		{
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+
+			var sides = new[] { _input.Player, _input.PlayerTeammate, _input.Opponent, _input.OpponentTeammate };
+			var minion = sides.Where(p => p != null).SelectMany(p => p!.Side).FirstOrDefault(m => m.game_id == sourceEntityId);
+			if(minion == null)
+				return;
+
+			// Do not proceed if Offensive Sacrifice was already captured
+			if(minion.Enchantments.Any(e => e is OffensiveSacrifice))
+				return;
+
+			if(minion is ICopiesDeathrattles)
+				return;
+
+			var enchantment = new Simulator().EnchantmentFactory.Create(OffensiveSacrifice.CardId, minion.ControlledByPlayer);
+			if(enchantment == null)
+				return;
+
+			enchantment.EnchantmentUpdatedDuringCombat = true;
+			minion.AttachEnchantment(enchantment);
+
+			await TryRerun();
+		}
+
+		internal async void UpdateDefensiveSacrificeEnchantment(int sourceEntityId)
+		{
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+
+			var sides = new[] { _input.Player, _input.PlayerTeammate, _input.Opponent, _input.OpponentTeammate };
+			var minion = sides.Where(p => p != null).SelectMany(p => p!.Side).FirstOrDefault(m => m.game_id == sourceEntityId);
+			if(minion == null)
+				return;
+
+			// Do not proceed if Defensive Sacrifice was already captured
+			if(minion.Enchantments.Any(e => e is DefensiveSacrifice))
+				return;
+
+			if(minion is ICopiesDeathrattles)
+				return;
+
+			var enchantment = new Simulator().EnchantmentFactory.Create(DefensiveSacrifice.CardId, minion.ControlledByPlayer);
+			if(enchantment == null)
+				return;
+
+			enchantment.EnchantmentUpdatedDuringCombat = true;
+			minion.AttachEnchantment(enchantment);
+
+			await TryRerun();
+		}
+
+		internal async void UpdateSoulFermenterSavedMinions(int trinketEntityId, List<Entity> resummonedEntities)
+		{
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+
+			var players = new[] { _input.Player, _input.PlayerTeammate, _input.Opponent, _input.OpponentTeammate };
+			var side = players.FirstOrDefault(p => p != null && p.Trinkets.OfType<SoulFermenter>().Any(t => t.game_id == trinketEntityId));
+			var soulFermenter = side?.Trinkets.OfType<SoulFermenter>().First(t => t.game_id == trinketEntityId);
+			if(side == null || soulFermenter == null || soulFermenter.TrinketUpdatedDuringCombat)
+				return;
+
+			// Each soul Fermenter accounts for up to 3 minions from THIS combat
+			var extraCount = resummonedEntities.Count - (3 * side.Trinkets.OfType<SoulFermenter>().Count());
+			if(extraCount <= 0)
+				return;
+
+			var simulator = new Simulator();
+			foreach(var savedEntity in resummonedEntities.Take(extraCount))
+				soulFermenter.ExtraSavedMinions.Add(GetMinionFromEntity(simulator, soulFermenter.ControlledByPlayer, savedEntity, Enumerable.Empty<Entity>()));
+			soulFermenter.TrinketUpdatedDuringCombat = true;
+
+			await TryRerun();
+		}
+
+		internal async void UpdateTrinketEnchantment(Entity enchantmentEntity, int trinketEntityId, bool isPlayerTrinket)
+		{
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+
+			var targetPlayer = isPlayerTrinket ? _input.Player : _input.Opponent;
+			var trinket = targetPlayer.Trinkets.FirstOrDefault(t => t.game_id == trinketEntityId);
+
+			if(trinket == null || trinket.TrinketUpdatedDuringCombat)
+				return;
+
+			// Attach enchant to the trinket
+			if(enchantmentEntity.LatestCard.TypeEnum == CardType.ENCHANTMENT && enchantmentEntity.Info.LatestCardId != null)
+			{
+				var enchantment = new Simulator().EnchantmentFactory.Create(enchantmentEntity.Info.LatestCardId, trinket.ControlledByPlayer);
+				if(enchantment != null)
+				{
+					enchantment.ScriptDataNum1 = enchantmentEntity.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1);
+					enchantment.ScriptDataNum2 = enchantmentEntity.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_2);
+					trinket.AttachEnchantment(enchantment);
+					trinket.TrinketUpdatedDuringCombat = true;
+				}
+			}
+
+			await TryRerun();
+		}
+
+		internal async void UpdateOpponentResourcesSpentThisGame(int malorneEntityId, int prevAtk, int atk, bool golden)
+		{
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+			if(_input.Opponent.ResourcesSpentThisGame > 0)
+				return;
+
+			// The entity's creation also carries as tag change (prevAtk=0 -> atk=base_attack).
+			// The buff we care about is the first ATK change after that (once Power of Ancients is attached).
+			if(prevAtk <= 0)
+				return;
+			if(!GetAttachedEntities(malorneEntityId).Any(x => x.CardId == NonCollectible.Neutral.ForestLordCenarius_PowerOfAncients))
+				return;
+
+			var powerOfAncientsbuff = atk - prevAtk;
+			if(golden)
+				powerOfAncientsbuff /= 2;
+			if(powerOfAncientsbuff <= 0)
+				return;
+
+			_input.Opponent.ResourcesSpentThisGame = powerOfAncientsbuff * 3;
+			await TryRerun();
+		}
+
+		internal async void UpdateTimewarpedMagnanimoose(List<Entity> summonedEntities, int magnanimooseEntityId, bool isPlayerMinion)
+		{
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+
+			var targetPlayer = isPlayerMinion ? _input.Player : _input.Opponent;
+			var minion = targetPlayer.Side.FirstOrDefault(m => m.game_id == magnanimooseEntityId);
+
+			if(minion == null)
+				return;
+
+			if(minion.Enchantments.Any(e => e is TimewarpedMagnanimooseEnchantment))
+				return;
+
+			var simulator = new Simulator();
+			var summonedMinions = summonedEntities
+				.Select(e => GetMinionFromEntity(simulator, isPlayerMinion, e, GetAttachedEntities(e.Id)))
+				.ToList();
+			if(simulator.EnchantmentFactory.Create(TimewarpedMagnanimooseEnchantment.CardId, minion.ControlledByPlayer) is TimewarpedMagnanimooseEnchantment enchantment)   			{
+				enchantment.SummonedMinions = summonedMinions;
+				minion.AttachEnchantment(enchantment);
+				minion.MinionUpdatedDuringCombat = true;
+			}
+
+			await TryRerun();
+		}
+
+		internal async void UpdateNelliesShipEnchantment(int[] cardDbfids, int attachedToEntityId, bool isPlayerMinion)
+		{
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+
+			var targetPlayer = isPlayerMinion ? _input.Player : _input.Opponent;
+			var minion = targetPlayer.Side.FirstOrDefault(m => m.game_id == attachedToEntityId);
+
+			if(minion == null)
+				return;
+
+			if(minion.Enchantments.Any(e => e is TimewarpedNelliesShipEnchantment))
+				return;
+
+			var enchantment = new Simulator().EnchantmentFactory.Create(TimewarpedNelliesShipEnchantment.CardId, minion.ControlledByPlayer);
+			if(enchantment != null)
+			{
+				enchantment.ScriptDataNum1 = cardDbfids.ElementAtOrDefault(0);
+				enchantment.ScriptDataNum2 = cardDbfids.ElementAtOrDefault(1);
+				minion.AttachEnchantment(enchantment);
+				minion.MinionUpdatedDuringCombat = true;
+			}
+
+			await TryRerun();
+		}
+
+		// Minions whose death firings summoned Ancestral Automatons, awaiting reconciliation:
+		// source entity id -> (trigger multiplier, summoned Automatons in creation order)
+		private readonly Dictionary<int, (int TriggerMultiplier, List<bool> SummonedIsPremium)> _pendingAutoAssemblerDeathrattleSources =
+			new Dictionary<int, (int, List<bool>)>();
+
+		// All Auto Assembler deathrattle FIRINGS observed per host minion.
+		private readonly Dictionary<int, int> _observedAutoAssemblerFirings = new Dictionary<int, int>();
+
+		internal void ObserveAutoAssemblerDeathrattleFiring(int sourceEntityId)
+		{
+			// Counted unconditionally: DEATHRATTLE blocks that resolve before the first observed Automaton
+			// summon (the minion's innate deathrattle) must be in the count that
+			// ReconcileAutoAssemblerDeathrattles subtracts otherDeathrattles from.
+			_observedAutoAssemblerFirings.TryGetValue(sourceEntityId, out var firings);
+			_observedAutoAssemblerFirings[sourceEntityId] = firings + 1;
+			CurrentCombatHasPendingAutoAssemblerObservations = true;
+		}
+
+		internal void ObserveMagnetizedAutoAssemblerDeathrattles(int sourceEntityId, int extraDeathrattles, bool isGolden)
+		{
+			if(!_pendingAutoAssemblerDeathrattleSources.TryGetValue(sourceEntityId, out var observation))
+			{
+				observation = (1 + extraDeathrattles, new List<bool>());
+				_pendingAutoAssemblerDeathrattleSources[sourceEntityId] = observation;
+			}
+			observation.SummonedIsPremium.Add(isGolden);
+			CurrentCombatHasPendingAutoAssemblerObservations = true;
+		}
+
+		internal async Task FlushAndUpdateObservedAutoAssemblerDeathrattlesAsync()
+		{
+			CurrentCombatHasPendingAutoAssemblerObservations = false;
+			if(_pendingAutoAssemblerDeathrattleSources.Count == 0)
+			{
+				// A firing with no summon to reconcile must still be dropped here, or it is counted again
+				// alongside a later firing by the same minion.
+				_observedAutoAssemblerFirings.Clear();
+				return;
+			}
+			var sourceThatSummoned = _pendingAutoAssemblerDeathrattleSources.ToList();
+			_pendingAutoAssemblerDeathrattleSources.Clear();
+
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+
+			var changed = false;
+			foreach(var kv_pair in sourceThatSummoned)
+				changed |= ReconcileAutoAssemblerDeathrattles(kv_pair.Key, kv_pair.Value.TriggerMultiplier, kv_pair.Value.SummonedIsPremium);
+
+			_observedAutoAssemblerFirings.Clear();
+
+			if(changed)
+				await TryRerun();
+		}
+
+		private bool ReconcileAutoAssemblerDeathrattles(int sourceEntityId, int triggerMultiplier, List<bool> summonedByIsPremium)
+		{
+			var sides = new[] { _input!.Player, _input.PlayerTeammate, _input.Opponent, _input.OpponentTeammate };
+			var minion = sides.Where(p => p != null).SelectMany(p => p!.Side).FirstOrDefault(m => m.game_id == sourceEntityId);
+			if(minion == null || minion.MinionUpdatedDuringCombat)
+				return false;
+
+			// Ignore minions that copy/gain deathrattles during combat (e.g., Fish of N'Zoth, Timewraped Whirl-O-Tron)
+			if(minion is ICopiesDeathrattles)
+				return false;
+
+			if(minion is SneedsNewShredder or KangorsApprentice)
+				return false;
+
+			// Deathly Phylactery transiently adds +1 to EXTRA_DEATHRATTLES_ADDITIONAL and then removes it;
+			// Read the tag now, when the phylactery's +1 has been subtracted (titus values do not reduce)
+			var multiplierNow = 1;
+			if(_game.Entities.TryGetValue(sourceEntityId, out var source))
+			{
+				var controller = source.GetTag(GameTag.CONTROLLER);
+				var controllerEntity = _game.Entities.Values.FirstOrDefault(e => e.HasTag(GameTag.PLAYER_ID) && e.GetTag(GameTag.PLAYER_ID) == controller);
+				multiplierNow += controllerEntity?.GetTag(GameTag.EXTRA_DEATHRATTLES_ADDITIONAL) ?? 0;
+			}
+
+			// The stored multiplier was read at the first trigger; if it was higher than now, attribute it to Deathly Phylactery
+			var phylacteryExtra = triggerMultiplier > multiplierNow ? 1 : 0;
+
+			// Use the current value for the divisions below
+			triggerMultiplier = multiplierNow;
+
+			// Extra deathrattles (e.g., Titus Rivendare) resolve as full repeats of the whole deathrattle list —
+			// so the first (observed / triggerMultiplier) are the distinct deathrattles in their real order.
+			_observedAutoAssemblerFirings.TryGetValue(sourceEntityId, out var observedFirings);
+			var firedDeathrattles = (observedFirings - phylacteryExtra) / triggerMultiplier;
+			var summonedDeathrattles = (summonedByIsPremium.Count - phylacteryExtra) / triggerMultiplier;
+			var automatons = summonedByIsPremium.Take(Math.Max(summonedDeathrattles, firedDeathrattles)).ToList();
+
+			// A firing the board had no space for leaves no summon to read the premium flag from; repeat the last
+			// observed one, because every module fused into one host grants the same Automaton.
+			while(automatons.Count < firedDeathrattles && summonedByIsPremium.Count > 0)
+				automatons.Add(summonedByIsPremium[summonedByIsPremium.Count - 1]);
+
+			// A minion's own innate deathrattles and deathrattles from attached enchantments resolve before these
+			// AdditionalDeathrattles, and appear as the leading elements; drop them so automatons map to AdditionalDeathrattles only.
+			var leadingCaptured = (minion is AutoAssembler ? 1 : 0)
+				+ minion.Enchantments.Count(e => e is AutoAssemblerEnchantment or AutoAssemblerEnchantmentGolden);
+			if(leadingCaptured > 0)
+				automatons = automatons.Skip(leadingCaptured).ToList();
+
+			// Get any existing AutoAssembler deathrattles already tracked on AdditionalDeathrattles
+			var currentIndices = new List<int>();
+			for(var i = 0; i < minion.AdditionalDeathrattles.Count; i++)
+			{
+				var deathrattleAction = minion.AdditionalDeathrattles[i].Method;
+				if(deathrattleAction == AutoAssembler.Deathrattle().Method)
+					currentIndices.Add(i);
+				else if(deathrattleAction == AutoAssembler.GoldenDeathrattle().Method)
+					currentIndices.Add(i);
+			}
+
+			// If observed summons not more than entries already captured — nothing to add.
+			if(automatons.Count <= currentIndices.Count)
+				return false;
+
+			// Replace the Auto Assembler entries with the observed sequence, in place: the simulator
+			// fires AdditionalDeathrattles in list order, so the order decides summon order — board
+			// positions, and which summons no longer fit once the board fills.
+			var insertAt = currentIndices.Count > 0 ? currentIndices[0] : minion.AdditionalDeathrattles.Count;
+			for(var i = currentIndices.Count - 1; i >= 0; i--)
+				minion.AdditionalDeathrattles.RemoveAt(currentIndices[i]);
+			minion.AdditionalDeathrattles.InsertRange(insertAt,
+				automatons.Select(golden => golden ? AutoAssembler.GoldenDeathrattle() : AutoAssembler.Deathrattle()));
+			minion.MinionUpdatedDuringCombat = true;
+
+			DebugLog($"Set {automatons.Count} Auto Assembler deathrattles ({automatons.Count(g => g)} golden) on {minion.CardID} (entity {sourceEntityId}, {summonedByIsPremium.Count} Automatons observed, {triggerMultiplier} triggers per deathrattle)");
+
+			return true;
+		}
+
+		// Minions whose death firings summoned Crabs (granted Surf n' Surf "Crab Riding"), awaiting reconciliation:
+		// source entity id -> (trigger multiplier, summoned Crabs in creation order)
+		private readonly Dictionary<int, (int TriggerMultiplier, List<bool> SummonedIsPremium)> _pendingCrabDeathrattleSources =
+			new Dictionary<int, (int, List<bool>)>();
+
+		internal void ObserveGrantedCrabDeathrattles(int sourceEntityId, int extraDeathrattles, bool isGolden)
+		{
+			if(!_pendingCrabDeathrattleSources.TryGetValue(sourceEntityId, out var observation))
+			{
+				observation = (1 + extraDeathrattles, new List<bool>());
+				_pendingCrabDeathrattleSources[sourceEntityId] = observation;
+			}
+			observation.SummonedIsPremium.Add(isGolden);
+			CurrentCombatHasPendingCrabObservations = true;
+		}
+
+		internal async Task FlushAndUpdateObservedCrabDeathrattlesAsync()
+		{
+			CurrentCombatHasPendingCrabObservations = false;
+			if(_pendingCrabDeathrattleSources.Count == 0)
+				return;
+			var sourceThatSummoned = _pendingCrabDeathrattleSources.ToList();
+			_pendingCrabDeathrattleSources.Clear();
+
+			if(_input == null || !UpdateRevealedEntityValidStates)
+				return;
+
+			var changed = false;
+			foreach(var kv_pair in sourceThatSummoned)
+				changed |= ReconcileCrabDeathrattles(kv_pair.Key, kv_pair.Value.TriggerMultiplier, kv_pair.Value.SummonedIsPremium);
+
+			if(changed)
+				await TryRerun();
+		}
+
+		private bool ReconcileCrabDeathrattles(int sourceEntityId, int triggerMultiplier, List<bool> summonedByIsPremium)
+		{
+			var sides = new[] { _input!.Player, _input.PlayerTeammate, _input.Opponent, _input.OpponentTeammate };
+			var minion = sides.Where(p => p != null).SelectMany(p => p!.Side).FirstOrDefault(m => m.game_id == sourceEntityId);
+			if(minion == null || minion.MinionUpdatedDuringCombat)
+				return false;
+
+			// Ignore minions that copy/gain deathrattles during combat (e.g., Fish of N'Zoth, Timewraped Whirl-O-Tron)
+			if(minion is ICopiesDeathrattles)
+				return false;
+
+			// Extra deathrattles (e.g., Titus Rivendare) resolve as full repeats of the whole deathrattle list —
+			// so the first (observed / triggerMultiplier) summons are the distinct deathrattles in their real order.
+			// Unlike Auto Assembler there is no innate summoner of Crabs to skip: every observed firing maps to
+			// one granted "Crab Riding" entry on AdditionalDeathrattles.
+			var crabs = summonedByIsPremium.Take(summonedByIsPremium.Count / triggerMultiplier).ToList();
+
+			// Get any Crab deathrattles already captured on AdditionalDeathrattles (visible grant enchantments)
+			var currentIndices = new List<int>();
+			for(var i = 0; i < minion.AdditionalDeathrattles.Count; i++)
+			{
+				var deathrattleAction = minion.AdditionalDeathrattles[i].Method;
+				if(deathrattleAction == GenericDeathrattleActions.Crab.Method)
+					currentIndices.Add(i);
+				else if(deathrattleAction == GenericDeathrattleActions.CrabGolden.Method)
+					currentIndices.Add(i);
+			}
+
+			// If observed summons not more than entries already captured — nothing to add.
+			if(crabs.Count <= currentIndices.Count)
+				return false;
+
+			// Replace the Crab entries with the observed sequence, in place: the simulator fires
+			// AdditionalDeathrattles in list order, so the order decides summon order — board
+			// positions, and which summons no longer fit once the board fills.
+			var insertAt = currentIndices.Count > 0 ? currentIndices[0] : minion.AdditionalDeathrattles.Count;
+			for(var i = currentIndices.Count - 1; i >= 0; i--)
+				minion.AdditionalDeathrattles.RemoveAt(currentIndices[i]);
+			minion.AdditionalDeathrattles.InsertRange(insertAt,
+				crabs.Select(golden => golden ? GenericDeathrattleActions.CrabGolden : GenericDeathrattleActions.Crab));
+			minion.MinionUpdatedDuringCombat = true;
+
+			DebugLog($"Set {crabs.Count} Crab deathrattles ({crabs.Count(g => g)} golden) on {minion.CardID} (entity {sourceEntityId}, {summonedByIsPremium.Count} Crabs observed, {triggerMultiplier} triggers per deathrattle)");
+
+			return true;
+		}
+
+		private IEnumerable<CardEntity> GetOpponentHandEntities(List<Entity> handEntities, Simulator simulator)
+		{
+			foreach(var _e in handEntities)
+			{
+				var e = _opponentHandMap.TryGetValue(_e, out var copy) ? copy : _e;
+				if(e.IsMinion)
+				{
+					var attached = GetAttachedEntities(e.Id);
+					yield return new MinionCardEntity(GetMinionFromEntity(simulator, false, e, attached), null, simulator)
+					{
+						CanSummon = !e.HasTag(GameTag.LITERALLY_UNPLAYABLE)
+					};
+				}
+				else if(e.CardId == NonCollectible.Neutral.BloodGem1)
+					yield return new BloodGem(null, simulator);
+				else if(e.CardId == NonCollectible.Neutral.BilgewaterBreakout_LockboxToken)
+					yield return new LockboxCardEntity(null, simulator)
+					{
+						// Turns until the Lockbox opens
+						ScriptDataNum1 = e.GetTag(GameTag.TAG_SCRIPT_DATA_NUM_1),
+					};
+				else if(e.IsSpell)
+					yield return new SpellCardEntity(null, simulator);
+				else if(!string.IsNullOrEmpty(e.CardId))
+					yield return new CardEntity(e.CardId ?? "", null, simulator); // Not Unknown
+				else
+					yield return new UnknownCardEntity(null, simulator);
+			}
+		}
+
+		private IEnumerable<Entity> GetAttachedEntities(int entityId)
+			=> _game.Entities.Values
+				.Where(x => x.IsAttachedTo(entityId) && (x.IsInPlay || x.IsInSetAside || x.IsInGraveyard))
+				.Select(x => x.Clone());
+
+		private async Task<Output?> RunSimulation()
+		{
+			DebugLog("Running simulations...");
+			if(_input == null)
+			{
+				DebugLog("No input. Exiting.");
+				return null;
+			}
+
+			try
+			{
+				DebugLog("----- Simulation Input -----");
+				if(_input.Player.HeroPowers.Any())
+				{
+					DebugLog(
+						$"Player: heroPower={_input.Player.HeroPowers[0].CardId}, used={_input.Player.HeroPowers[0].IsActivated}, data={_input.Player.HeroPowers[0].Data}");
+					if(_input.Player.HeroPowers.Count > 1)
+						DebugLog(
+							$"Player: extraHeroPower={_input.Player.HeroPowers[1].CardId}, used={_input.Player.HeroPowers[1].IsActivated}, data={_input.Player.HeroPowers[1].Data}");
+				}
+
+				DebugLog($"Hand: {string.Join(", ",_input.Player.Hand.Select(x => x.ToString()))}");
+
+				foreach(var minion in _input.Player.Side)
+					DebugLog(minion.ToString());
+
+				foreach(var quest in _input.Player.Quests)
+					DebugLog($"[{quest.QuestCardId} ({quest.QuestProgress}/{quest.QuestProgressTotal}): {quest.RewardCardId}, {quest.RewardScriptDataNum1}, {quest.RewardScriptDataNum2}]");
+
+				DebugLog("---");
+				if (_input.Opponent.HeroPowers.Any())
+				{
+					DebugLog($"Opponent: heroPower={_input.Opponent.HeroPowers[0].CardId}, used={_input.Opponent.HeroPowers[0].IsActivated}, data={_input.Opponent.HeroPowers[0].Data}");
+					if (_input.Opponent.HeroPowers.Count > 1)
+					{
+						DebugLog($"Opponent: extraHeroPower={_input.Opponent.HeroPowers[1].CardId}, used={_input.Opponent.HeroPowers[1].IsActivated}, data={_input.Opponent.HeroPowers[1].Data}");
+					}
+				}
+
+				DebugLog($"Hand: {string.Join(", ",_input.Opponent.Hand.Select(x => x.ToString()))}");
+				foreach(var minion in _input.Opponent.Side)
+					DebugLog(minion.ToString());
+
+				foreach(var quest in _input.Opponent.Quests)
+					DebugLog($"[{quest.QuestCardId} ({quest.QuestProgress}/{quest.QuestProgressTotal}): {quest.RewardCardId}, {quest.RewardScriptDataNum1}, {quest.RewardScriptDataNum2}]");
+
+				if(_input.isDuos)
+				{
+					DebugLog("---");
+					if(_input.PlayerTeammate != null)
+					{
+						DebugLog("---");
+						if(_input.PlayerTeammate.HeroPowers.Any())
+						{
+							DebugLog("PlayerTeammate: heroPower=" + _input.PlayerTeammate.HeroPowers[0].CardId
+							                                      + ", used="
+							                                      + _input.PlayerTeammate.HeroPowers[0].IsActivated
+							                                      + ", data="
+							                                      + _input.PlayerTeammate.HeroPowers[0].Data);
+							if(_input.PlayerTeammate.HeroPowers.Count > 1)
+								DebugLog("PlayerTeammate: extraHeroPower=" + _input.PlayerTeammate.HeroPowers[1].CardId
+								                                           + ", used="
+								                                           + _input.PlayerTeammate.HeroPowers[1]
+									                                           .IsActivated + ", data="
+								                                           + _input.PlayerTeammate.HeroPowers[1].Data);
+						}
+
+						DebugLog("Hand: " + string.Join(", ", _input.PlayerTeammate.Hand.Select(x => x.ToString())));
+						foreach(var minion in _input.PlayerTeammate.Side)
+							DebugLog(minion.ToString());
+
+						foreach(var quest in _input.PlayerTeammate.Quests)
+							DebugLog(
+								$"[{quest.QuestCardId} ({quest.QuestProgress}/{quest.QuestProgressTotal}): {quest.RewardCardId}, {quest.RewardScriptDataNum1}, {quest.RewardScriptDataNum2}]");
+					}
+					else
+					{
+						DebugLog("PlayerTeammate: null");
+					}
+
+					if(_input.OpponentTeammate != null)
+					{
+						DebugLog("---");
+						if(_input.OpponentTeammate.HeroPowers.Any())
+						{
+							DebugLog("OpponentTeammate: heroPower=" + _input.OpponentTeammate.HeroPowers[0].CardId
+							                                        + ", used="
+							                                        + _input.OpponentTeammate.HeroPowers[0].IsActivated
+							                                        + ", data="
+							                                        + _input.OpponentTeammate.HeroPowers[0].Data);
+							if(_input.OpponentTeammate.HeroPowers.Count > 1)
+								DebugLog("OpponentTeammate: extraHeroPower="
+								         + _input.OpponentTeammate.HeroPowers[1].CardId + ", used="
+								         + _input.OpponentTeammate.HeroPowers[1].IsActivated + ", data="
+								         + _input.OpponentTeammate.HeroPowers[1].Data);
+						}
+
+						DebugLog("Hand: " + string.Join(", ", _input.OpponentTeammate.Hand.Select(x => x.ToString())));
+						foreach(var minion in _input.OpponentTeammate.Side)
+							DebugLog(minion.ToString());
+
+						foreach(var quest in _input.OpponentTeammate.Quests)
+							DebugLog(
+								$"[{quest.QuestCardId} ({quest.QuestProgress}/{quest.QuestProgressTotal}): {quest.RewardCardId}, {quest.RewardScriptDataNum1}, {quest.RewardScriptDataNum2}]");
+					}
+					else
+					{
+						DebugLog("OpponentTeammate: null");
+					}
+				}
+
+				DebugLog("---");
+
+				if(_input.Player.Secrets.Any())
+				{
+					DebugLog("Detected the following player S.");
+					foreach(var s in _input.Player.Secrets)
+						DebugLog(s.ToString());
+				}
+
+				if(_input.Opponent.Secrets.Any())
+				{
+					DebugLog("Detected the following opponent S.");
+					foreach(var s in _input.Opponent.Secrets)
+						DebugLog(s.ToString());
+				}
+
+				if(_input.isDuos) {
+					if(_input.OpponentTeammate != null && _input.OpponentTeammate.Secrets.Any())
+					{
+						DebugLog("Detected the following opponent teammate S.");
+						foreach(var s in _input.OpponentTeammate.Secrets)
+							DebugLog(s.ToString());
+					}
+
+					if(_input.PlayerTeammate != null && _input.PlayerTeammate.Secrets.Any())
+					{
+						DebugLog("Detected the following player teammate S.");
+						foreach(var s in _input.PlayerTeammate.Secrets)
+							DebugLog(s.ToString());
+					}
+				}
+
+				DebugLog("----- End of Input -----");
+
+				DebugLog($"Running simulations with MaxIterations={Iterations} and ThreadCount={ThreadCount}...");
+
+				var start = DateTime.Now;
+
+				var timeAlloted = MaxTime;
+
+				bool IsLeapfroggerCombo(IEnumerable<Minion>? side)
+				{
+					if(side == null)
+						return false;
+					var list = side.ToList();
+					return list.Count() >= 3 && list.Any(x => x.CardID == NonCollectible.Neutral.Leapfrogger);
+				}
+
+				if(
+					IsLeapfroggerCombo(_input.Player.Side) ||
+					IsLeapfroggerCombo(_input.PlayerTeammate?.Side) ||
+					IsLeapfroggerCombo(_input.Opponent.Side) ||
+					IsLeapfroggerCombo(_input.OpponentTeammate?.Side)
+				)
+				{
+					timeAlloted = MaxTimeForLeapfrogger;
+				}
+				else if(_input.Player.Side.Count >= 6 || _input.Opponent.Side.Count >= 6)
+				{
+					timeAlloted = MaxTimeForComplexBoards;
+				}
+				Output = await new SimulationRunner().SimulateMultiThreaded(_input, Iterations, ThreadCount, timeAlloted);
+				DoNotReport = false;
+
+				// Simulation completed without an unsupported interaction, any previously deferred unsupported
+				// interaction (i.e. prior to a possible TryRerun() this combat) was a false positive. Discard it.
+				_pendingUnsupportedInteractionException = null;
+				_pendingUnsupportedInteractionMessage = string.Empty;
+
+				DebugLog("----- Simulation Output -----");
+				DebugLog($"Duration={(DateTime.Now - start).TotalMilliseconds}ms, " +
+					$"ExitCondition={Output.myExitCondition}, " +
+					$"Iterations={Output.simulationCount}");
+				DebugLog($"WinRate={Output.winRate * 100}% " +
+					$"(Lethal={Output.theirDeathRate * 100}%), " +
+					$"TieRate={Output.tieRate * 100}%, " +
+					$"LossRate={Output.lossRate * 100}% " +
+					$"(Lethal={Output.myDeathRate * 100}%)");
+				DebugLog("----- End of Output -----");
+
+				return Output;
+			}
+			catch(AggregateException aggregateEx)
+			{
+				if(aggregateEx.InnerExceptions.FirstOrDefault(x => x is UnsupportedInteractionException) is not UnsupportedInteractionException ex)
+					throw;
+				DebugLog($"Unsupported interaction: {ex.Entity?.ToString()}: {ex.Message}");
+				Log.Error(ex);
+				var cardName = Database.GetCardFromId(ex.Entity?.CardID)?.LocalizedName;
+				var message = (cardName != null ? $"{cardName}: " : "") + ex.Message;
+				BobsBuddyDisplay.SetErrorState(BobsBuddyErrorState.UnsupportedInteraction, message);
+
+				// Defer sending the unsupported interaction to influx and sentry since a later TryRerun() may resolve it.
+				// If resolved, the pending message will be cleared; otherwise they will be sent once combat ends.
+				_pendingUnsupportedInteractionException = ex;
+				_pendingUnsupportedInteractionMessage = message;
+				Output = null;
+				return null;
+			}
+			catch(Exception e)
+			{
+				DebugLog(e.ToString());
+				Log.Error(e);
+				if(ReportErrors)
+					SentryReporter.CaptureBobsBuddyException(e, _input, _turn, _game.IsBattlegroundsDuosMatch || (_input?.InputContainsDuosCards ?? false), ReportContext);
+				Output = null;
+				return null;
+			}
+		}
+
+		public void HandleNewAttackingEntity(Entity newAttacker)
+		{
+			if(newAttacker.IsHero)
+			{
+				LastAttackingHero = newAttacker;
+				LastAttackingHeroAttack = newAttacker.Attack;
+			}
+		}
+
+		private int GetLastCombatDamageDealt()
+		{
+			if(LastAttackingHero != null)
+				return LastAttackingHeroAttack;
+			return 0;
+		}
+
+		private CombatResult GetLastCombatResult()
+		{
+			if(LastAttackingHero == null)
+			{
+				if(DidReconnect)
+					return CombatResult.Reconnect;
+				return CombatResult.Tie;
+			}
+			if(LastAttackingHero.IsControlledBy(_game.Player.Id))
+				return CombatResult.Win;
+			else
+				return CombatResult.Loss;
+		}
+
+		private LethalResult GetLastLethalResult()
+		{
+			if(_defendingHero == null || _attackingHero == null)
+				return LethalResult.NoOneDied;  // No damage dealt, defender still alive (was a tie)
+			var totalDefenderHealth = _defendingHero.Health + _defendingHero.GetTag(GameTag.ARMOR);
+			if(_game.IsBattlegroundsDuosMatch && _input != null)
+			{
+				// A duos pair shares one health pool. _defendingHero holds the last hero-vs-hero strike of the
+				// combat; when the other partner has been eliminated that strike lands on Lady Deathwhisper,
+				// which has HEALTH=30 DAMAGE=30 before it is hit. Its Health+ARMOR is therefore 0, so every strike
+				// compares as lethal. Use GetDuosStartingHealth instead - which is the value the simulation used.
+				if(_attackingHero.IsControlledBy(_game.Player.Id))
+					totalDefenderHealth = Simulator.GetDuosStartingHealth(_input.Opponent.Health, _input.OpponentTeammate?.Health);
+				else
+					totalDefenderHealth = Simulator.GetDuosStartingHealth(_input.Player.Health, _input.PlayerTeammate?.Health);
+			}
+			if(_attackingHero.Attack >= totalDefenderHealth)
+			{
+				if(_attackingHero.IsControlledBy(_game.Player.Id))
+					return LethalResult.OpponentDied;
+				else
+					return LethalResult.FriendlyDied;
+			}
+			return LethalResult.NoOneDied;  // damage was dealt, but defender still alive
+		}
+
+		private async Task ValidateSimulationResultAsync()
+		{
+			DebugLog("Validating results...");
+			if(Output == null)
+			{
+				DebugLog("Output is null. Exiting");
+				return;
+			}
+
+			if(DoNotReport)
+			{
+				DebugLog("Output was invalidated. Exiting");
+				return;
+			}
+
+			if(Output.simulationCount < MinimumSimulationsToReportSentry)
+			{
+				DebugLog("Did not complete enough simulations to report terminal cases. Exiting.");
+				return;
+			}
+
+			var metricSampling = Remote.Config.Data?.BobsBuddy?.MetricSampling ?? 0;
+
+			DebugLog($"metricSampling={metricSampling}, reportErrors={ReportErrors}");
+
+			if(!ReportErrors && metricSampling == 0)
+			{
+				DebugLog("Nothing to report. Exiting.");
+				return;
+			}
+
+			//We delay checking the combat results because the tag changes can sometimes be read by the parser with a bit of delay after they're printed in the log.
+			//Without this delay they can occasionally be missed.
+
+			await Task.Delay(50);
+			var result = GetLastCombatResult();
+			var lethalResult = GetLastLethalResult();
+
+			DebugLog($"result={result}, lethalResult={lethalResult}");
+
+			if(lethalResult == LethalResult.FriendlyDied && (_game.CurrentGameStats?.WasConceded ?? false))
+			{
+				DebugLog($"Game was conceded. Not reporting.");
+				return;
+			}
+
+			var terminalCase = false;
+
+			if (IsIncorrectCombatResult(result))
+			{
+				terminalCase = true;
+				if (!DidReconnect && ReportErrors && Sampling.ShouldSample(metricSampling))
+					AlertWithLastInputOutput(result.ToString());
+			}
+
+			if(IsIncorrectLethalResult(lethalResult) && !OpposingKelThuzadDied(lethalResult))
+			{
+				// There should never be relevant lethals this early in the game.
+				// These missed lethals are likely caused by some bug.
+				if(_turn <= 5)
+				{
+					DebugLog($"There should not be missed lethals on turn ${_turn}, this is probably a bug. This won't be reported.");
+					return;
+				}
+
+				terminalCase = true;
+				if(!DidReconnect && ReportErrors && Sampling.ShouldSample(metricSampling))
+					AlertWithLastInputOutput(lethalResult.ToString());
+			}
+
+			Influx.OnBobsBuddySimulationCompleted(
+				result, Output, _turn, _game.CurrentRegion.ToString(), _input?.Anomaly, terminalCase,
+				isDuos:_game.IsBattlegroundsDuosMatch || (_input?.InputContainsDuosCards ?? false), isOpposingAkazamzarak: IsOpposingAkazamzarak(),
+				isOpposingKelThuzad: (_input?.Opponent?.HeroIsKelThuzad ?? false), reconnected: DidReconnect
+			);
+
+			if(DidReconnect)
+				return;
+
+			Core.Game.Metrics.IncrementBobsBuddyValidatedCombat();
+
+			if(terminalCase)
+				Core.Game.Metrics.IncrementBobsBuddyTerminalCase();
+		}
+
+		private bool IsIncorrectCombatResult(CombatResult result)
+			=> result == CombatResult.Tie && Output?.tieRate == 0
+			|| result == CombatResult.Win && Output?.winRate == 0
+			|| result == CombatResult.Loss && Output?.lossRate == 0;
+
+		private bool IsIncorrectLethalResult(LethalResult result)
+			=> result == LethalResult.FriendlyDied && Output?.myDeathRate == 0
+			|| result == LethalResult.OpponentDied && Output?.theirDeathRate == 0;
+
+		private bool OpposingKelThuzadDied(LethalResult result)
+		{
+			if(
+				result == LethalResult.OpponentDied && _input != null
+				&& (
+					(_input?.OpponentTeammate?.HeroPowers.Any(hp => hp.CardId == HeroPowerIds.KelThuzad) ?? false)
+					|| (_input?.Opponent?.HeroIsKelThuzad ?? false)
+				)
+			) return true;
+			return false;
+		}
+
+		private bool IsOpposingAkazamzarak()
+			=> (_input?.Opponent?.HeroPowers.Any(hp => hp.CardId == HeroPowerIds.Azamarak) ?? false)
+			   || (_input?.OpponentTeammate?.HeroPowers.Any(hp => hp.CardId == HeroPowerIds.Azamarak) ?? false);
+
+		private void AlertWithLastInputOutput(string result)
+		{
+			DebugLog($"Queueing alert... (valid input: {_input != null})");
+			if(_input != null && Output != null)
+				SentryReporter.QueueBobsBuddyTerminalCase(
+					_input, Output, result, _turn, _game.CurrentRegion,
+					isDuos: _game.IsBattlegroundsDuosMatch || (_input?.InputContainsDuosCards ?? false), isOpposingAkazamzarak: IsOpposingAkazamzarak(),
+					reportContext: ReportContext
+				);
+		}
+
+		/**
+		 * A comparer that keeps unknown secrets (null) and de-duplicates dbf ids otherwise.
+		 * For example { 1, null, 3, 3, null} will be deduplicated to {1, null, 3, null}.
+		 */
+		private class SecretDbfIdComparer : IEqualityComparer<int?>
+		{
+			public bool Equals(int? x, int? y)
+			{
+				if (x == null || y == null)
+				{
+					return false;
+				}
+
+				return x == y;
+			}
+
+			public int GetHashCode(int? obj)
+			{
+				if (obj == null)
+				{
+					return 0;
+				}
+				return obj.GetHashCode();
+			}
+		}
+	}
+}

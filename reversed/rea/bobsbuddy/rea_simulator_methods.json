@@ -1,0 +1,2660 @@
+{
+ "source": {
+  "subject": {
+   "name": "BobsBuddy.dll",
+   "digest": {
+    "sha256": "26dd65ca3db6eb548b4d689def280d125fc6d63d7bb873955e1f58df19dd822a"
+   },
+   "local_path": "%USERPROFILE%\\AppData\\Local\\HearthstoneDeckTracker\\app-1.53.0\\BobsBuddy.dll",
+   "format": "pe",
+   "architecture": "x86"
+  },
+  "provider": {
+   "id": "rea-dotnet-static",
+   "name": "REA managed static analysis provider",
+   "version": "1"
+  },
+  "confidence": "observed",
+  "authority": "shipped-artifact",
+  "coverage": {
+   "state": "complete",
+   "issues": []
+  }
+ },
+ "types": [
+  "BobsBuddy.Simulation.Simulator"
+ ],
+ "methods": [
+  {
+   "name": "AttackWithMinion",
+   "token": "0x060003af",
+   "il_sha256": "51736f88c8c55f7fa2662b742ac15cc614f1cbefec964afa26e65acd8e7b3c58",
+   "instruction_count": 124,
+   "signature": {
+    "raw_length": 8,
+    "raw_sha256": "7b4a0e6c933c48fb51f7b3c6cca068d6c29897a58550c730b80890ec408aaf77",
+    "resolved_sha256": "f9982f36c6ab76737813fe757039747fffe3ab73b22ee012b1c09760f094648d",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 3,
+    "return_type": "void",
+    "parameter_types": [
+     "class:80",
+     "class:80",
+     "bool"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "get_CurrentAttackTarget",
+   "token": "0x060003b0",
+   "il_sha256": "08fcaf54de19f2e18d7f5b250617062e75254f8ecc727a066e8642acf5f33688",
+   "instruction_count": 11,
+   "signature": {
+    "raw_length": 4,
+    "raw_sha256": "84ad94f4688ada11bde3f76244ee82ab1c5602b1154d9ae3de011fb534f9760c",
+    "resolved_sha256": "bc72dccda629b594429e10876e0ce011e47af7605ed0ce7eeb3207ac468d5653",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "class:80",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "IsActiveAttacker",
+   "token": "0x060003b1",
+   "il_sha256": "6984f3fa810a3e5cfb3e7f8c02fde36ea208affa338f47cbede63ada78ca0252",
+   "instruction_count": 5,
+   "signature": {
+    "raw_length": 5,
+    "raw_sha256": "c3f87eda180215f9f66f886b0e1396256825a6a7e960b9d6850ddbcff9bc0457",
+    "resolved_sha256": "d92b32edcde8de172981226d229ba8a55fa4f81304a79ae9c2e403003bd15641",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "bool",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "PerformAttack",
+   "token": "0x060003b2",
+   "il_sha256": "2965ec887f08e37b544d2a8f86c03c562d69885dc7ac90e9683045fd034ea342",
+   "instruction_count": 575,
+   "signature": {
+    "raw_length": 7,
+    "raw_sha256": "79c07604b2417e03c3755ad652b67d60924034d20bca65b75eb8a285bb419ba1",
+    "resolved_sha256": "6d201c0134e6c1f6a3b7555e7b703303c6986a834e531e253c7169b3d0656c4d",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 2,
+    "return_type": "bool",
+    "parameter_types": [
+     "class:80",
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "IsLastAttackerOnSide",
+   "token": "0x060003b3",
+   "il_sha256": "280bdec30ed68f735b376b1e016014499febff81b03119ab1a8039b17b9f1972",
+   "instruction_count": 19,
+   "signature": {
+    "raw_length": 5,
+    "raw_sha256": "c3f87eda180215f9f66f886b0e1396256825a6a7e960b9d6850ddbcff9bc0457",
+    "resolved_sha256": "d92b32edcde8de172981226d229ba8a55fa4f81304a79ae9c2e403003bd15641",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "bool",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "MinionHasMegaWindfury",
+   "token": "0x060003b4",
+   "il_sha256": "68794607a77860a2c2d306390c58cacbae6448d05c6fdff7652939ee1058dfad",
+   "instruction_count": 34,
+   "signature": {
+    "raw_length": 5,
+    "raw_sha256": "c3f87eda180215f9f66f886b0e1396256825a6a7e960b9d6850ddbcff9bc0457",
+    "resolved_sha256": "d92b32edcde8de172981226d229ba8a55fa4f81304a79ae9c2e403003bd15641",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "bool",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "TriggerRally",
+   "token": "0x060003b5",
+   "il_sha256": "f0b70753abb619f850e5132f26de74287627d3d221ab8e5b9aacecb061950149",
+   "instruction_count": 114,
+   "signature": {
+    "raw_length": 5,
+    "raw_sha256": "721d7c1a64b95ea3dcbfb88434a94c30a49fa48264157a211c05b58e7d94e7da",
+    "resolved_sha256": "80de9e049139ea9faf7902e9c57f5d0b0abd0f1ca71e1b5ef6c4e70dfcdc974f",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "void",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "get_PlayerState",
+   "token": "0x060003b6",
+   "il_sha256": "ae4e53fb35de31feadec4a81984167dae05dd702e3225f68443c675635d49f40",
+   "instruction_count": 4,
+   "signature": {
+    "raw_length": 5,
+    "raw_sha256": "5cc4183c63bf6bdbc321e9428395a058bb148309350e68d37cf4ba328347a2f7",
+    "resolved_sha256": "beb70a58bc20703a76d7edcc609e6a6068b3eb32877006a0b1368a0c794a28fb",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "class:4924",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "get_OpponentState",
+   "token": "0x060003b7",
+   "il_sha256": "950c6a7a134b46a3536d72a7faa4f798892beeb49c0aa20720e18fcbadf5a2d4",
+   "instruction_count": 4,
+   "signature": {
+    "raw_length": 5,
+    "raw_sha256": "5cc4183c63bf6bdbc321e9428395a058bb148309350e68d37cf4ba328347a2f7",
+    "resolved_sha256": "beb70a58bc20703a76d7edcc609e6a6068b3eb32877006a0b1368a0c794a28fb",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "class:4924",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "get_PlayerInput",
+   "token": "0x060003b8",
+   "il_sha256": "13286213d6ec2e066f51565422b8f0eca31f09b589894fcf95d2ed6f126906c6",
+   "instruction_count": 3,
+   "signature": {
+    "raw_length": 5,
+    "raw_sha256": "302df5de1ddceec16f1fd61bafdeb384c5d77b597c26150fb36c9418304d1894",
+    "resolved_sha256": "f350deba5085aa8914df07021ab90981b6d0ba518049d19a181fc9a339f2ef47",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "class:1088",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "set_PlayerInput",
+   "token": "0x060003b9",
+   "il_sha256": "5835348d8b315f901571fb1603f3b30271257accdbea921a1b8c1463870b09bf",
+   "instruction_count": 4,
+   "signature": {
+    "raw_length": 6,
+    "raw_sha256": "0dedd10a363d93782a466f3d6075070bf2cd75b4b3e3685da55c538e6fba2a91",
+    "resolved_sha256": "dc27e3c13fcc897518ae6c6c4fae8cde5003e2a8deface8b587fdd7e7fed8dc9",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "void",
+    "parameter_types": [
+     "class:1088"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "get_OpponentInput",
+   "token": "0x060003ba",
+   "il_sha256": "c716a2639a148a6c90a5e307d0cbbf8c35cdf0b45b9e1efc1ee5743910952046",
+   "instruction_count": 3,
+   "signature": {
+    "raw_length": 5,
+    "raw_sha256": "302df5de1ddceec16f1fd61bafdeb384c5d77b597c26150fb36c9418304d1894",
+    "resolved_sha256": "f350deba5085aa8914df07021ab90981b6d0ba518049d19a181fc9a339f2ef47",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "class:1088",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "set_OpponentInput",
+   "token": "0x060003bb",
+   "il_sha256": "f369b4c025c392c065120ba42fd1c5f466cc07b1902a3e2ea865103bb1b883c2",
+   "instruction_count": 4,
+   "signature": {
+    "raw_length": 6,
+    "raw_sha256": "0dedd10a363d93782a466f3d6075070bf2cd75b4b3e3685da55c538e6fba2a91",
+    "resolved_sha256": "dc27e3c13fcc897518ae6c6c4fae8cde5003e2a8deface8b587fdd7e7fed8dc9",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "void",
+    "parameter_types": [
+     "class:1088"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "get_Turn",
+   "token": "0x060003bc",
+   "il_sha256": "2576ac57eab3723835062c92e32a7a1e92fde358e252a5ab0d3bb5dc7d43b121",
+   "instruction_count": 3,
+   "signature": {
+    "raw_length": 3,
+    "raw_sha256": "19e1bd1daf2ae492b895802f55c905ef2d25aea509c6010868e218adb408c010",
+    "resolved_sha256": "19e1bd1daf2ae492b895802f55c905ef2d25aea509c6010868e218adb408c010",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "i4",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "set_Turn",
+   "token": "0x060003bd",
+   "il_sha256": "6d4bb581e3159c815a921654b91096133ce20c2d4a898f36452abde00a064566",
+   "instruction_count": 4,
+   "signature": {
+    "raw_length": 4,
+    "raw_sha256": "c889396c66b535112cb33472b6ecf61ad5f09860a1ea642fb8c31a4ed004296a",
+    "resolved_sha256": "c889396c66b535112cb33472b6ecf61ad5f09860a1ea642fb8c31a4ed004296a",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "void",
+    "parameter_types": [
+     "i4"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": ".ctor",
+   "token": "0x060003be",
+   "il_sha256": "8f43a9fe57d0ff88724c2d7c94b19926c8c6b86772d7302b9eabe80ba5190987",
+   "instruction_count": 58,
+   "signature": {
+    "raw_length": 3,
+    "raw_sha256": "0c9373898d2dd1c85902837a9e979cb88484e2548a008ad2b2176cc7119d09df",
+    "resolved_sha256": "0c9373898d2dd1c85902837a9e979cb88484e2548a008ad2b2176cc7119d09df",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "void",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "get_playerSide",
+   "token": "0x060003bf",
+   "il_sha256": "7d03959e19b3e6f9b979077ca216d86c726d70c18156147df96be9c126453645",
+   "instruction_count": 5,
+   "signature": {
+    "raw_length": 8,
+    "raw_sha256": "92e16c7c656ccc04b51ce9fcb0efb52a8cb2619cb80cbab88d06a9457ab7656e",
+    "resolved_sha256": "af2222273bee9f2229e5ed83a43c93a6937818985c807ab380504c9784df27a3",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "class:113<class:80>",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "get_opponentSide",
+   "token": "0x060003c0",
+   "il_sha256": "eafb9bc3878a185d42e800732ca4a2b3e2cc65b12daf161aa4e683ca2a878922",
+   "instruction_count": 5,
+   "signature": {
+    "raw_length": 8,
+    "raw_sha256": "92e16c7c656ccc04b51ce9fcb0efb52a8cb2619cb80cbab88d06a9457ab7656e",
+    "resolved_sha256": "af2222273bee9f2229e5ed83a43c93a6937818985c807ab380504c9784df27a3",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "class:113<class:80>",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "get_eitherSideWon",
+   "token": "0x060003c1",
+   "il_sha256": "4a92c9e4b86945ff72ca9f2a5254e470a1aa79773df930f5cb18f678583f285e",
+   "instruction_count": 12,
+   "signature": {
+    "raw_length": 3,
+    "raw_sha256": "59a9a8765c535212b9ad71c5c8e1e24ffadbd3331fd04b3bbe1b121ecf6004cc",
+    "resolved_sha256": "59a9a8765c535212b9ad71c5c8e1e24ffadbd3331fd04b3bbe1b121ecf6004cc",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "bool",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "get_noValidAttackers",
+   "token": "0x060003c2",
+   "il_sha256": "07888dfa68018045b86cd430e19455f1c86bf9160ea380076971eb13983909b9",
+   "instruction_count": 30,
+   "signature": {
+    "raw_length": 3,
+    "raw_sha256": "59a9a8765c535212b9ad71c5c8e1e24ffadbd3331fd04b3bbe1b121ecf6004cc",
+    "resolved_sha256": "59a9a8765c535212b9ad71c5c8e1e24ffadbd3331fd04b3bbe1b121ecf6004cc",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "bool",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "SetupSimulation",
+   "token": "0x060003c3",
+   "il_sha256": "8113d106d8daa32ab33bdaabc360bfcfac6bf064a92abdf18e5e3a2efb319443",
+   "instruction_count": 70,
+   "signature": {
+    "raw_length": 6,
+    "raw_sha256": "0c19c7530bf5d52a3f21c4cddf65fd723a45b9b9b4a8ee3f8dc4c941d9e8dfdc",
+    "resolved_sha256": "04bf4a9d0c7f45a61c7b2bbbf8988c605d70336fbcce4d565510d2297b77a14f",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "void",
+    "parameter_types": [
+     "class:1076"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "SetupPlayerCloningGallery",
+   "token": "0x060003c4",
+   "il_sha256": "51b7fedc52d4dc110dc418c8c825ab7492674c69860c18288b02f5c36fb4109e",
+   "instruction_count": 259,
+   "signature": {
+    "raw_length": 13,
+    "raw_sha256": "939f8dbbf1471fbf87eef637776063e0ab9618e9805f6beae8ca7c7116040463",
+    "resolved_sha256": "008ad476ce0f0485202c57ace598940e3749ff0863b84232bb90bdfee52813d4",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 4,
+    "return_type": "void",
+    "parameter_types": [
+     "class:1088",
+     "class:4924",
+     "class:1112",
+     "bool"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "ResetPlayerStateAndUnbuffCloningGallery",
+   "token": "0x060003c5",
+   "il_sha256": "c962de7bf838a0ea37534de8bd60ff1dd8f4924f4de19c72ae5b21072bee269c",
+   "instruction_count": 53,
+   "signature": {
+    "raw_length": 9,
+    "raw_sha256": "5ee3be4a8e9d5fd2997049a268e0c377c83531609fc7e4f16c3231fa9ec5a966",
+    "resolved_sha256": "220e40f895812835cb19a779e7a6f01ff8c949466d68a49be62d486a49f428c3",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 2,
+    "return_type": "void",
+    "parameter_types": [
+     "class:4924",
+     "class:1112"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "SetupPlayerBoard",
+   "token": "0x060003c6",
+   "il_sha256": "fe5283d7959cde04994854d29f4c90faa5f9bd7ded6d28e94f24a5dcaac1411a",
+   "instruction_count": 200,
+   "signature": {
+    "raw_length": 13,
+    "raw_sha256": "939f8dbbf1471fbf87eef637776063e0ab9618e9805f6beae8ca7c7116040463",
+    "resolved_sha256": "008ad476ce0f0485202c57ace598940e3749ff0863b84232bb90bdfee52813d4",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 4,
+    "return_type": "void",
+    "parameter_types": [
+     "class:1088",
+     "class:4924",
+     "class:1112",
+     "bool"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "SetupFight",
+   "token": "0x060003c7",
+   "il_sha256": "74b8cd875b3c9e0d54740c12538ba9f8ce2c5c407620cce72cfab71bfe20eba6",
+   "instruction_count": 88,
+   "signature": {
+    "raw_length": 6,
+    "raw_sha256": "0c19c7530bf5d52a3f21c4cddf65fd723a45b9b9b4a8ee3f8dc4c941d9e8dfdc",
+    "resolved_sha256": "04bf4a9d0c7f45a61c7b2bbbf8988c605d70336fbcce4d565510d2297b77a14f",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "void",
+    "parameter_types": [
+     "class:1076"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "SetupFight",
+   "token": "0x060003c8",
+   "il_sha256": "6e994db4d4199b3694ba56ec813bc61aae54a15bae6fa6e053d9070824e26f87",
+   "instruction_count": 36,
+   "signature": {
+    "raw_length": 14,
+    "raw_sha256": "e563b5db22777cad650294d2b0cd5f95ae48a4bf0bb377c93c17bd758ef183f4",
+    "resolved_sha256": "5f5d574ecf2b5198c6e253da108ce2dc86ded2369a3038693303d13f6831e130",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 5,
+    "return_type": "void",
+    "parameter_types": [
+     "class:1088",
+     "class:4924",
+     "class:1112",
+     "bool",
+     "bool"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "GetHeroPower",
+   "token": "0x060003c9",
+   "il_sha256": "feb279cd7092434cf68c8fa21cca764332a374e970f1e7cb6b8842f2bf729466",
+   "instruction_count": 336,
+   "signature": {
+    "raw_length": 9,
+    "raw_sha256": "03458affc8294c5f33788fb1534be367796905d879fc1acf457e8ee8faa658cb",
+    "resolved_sha256": "22d0bd7318c7c76b7fcc186bc9fa23bf1a70ebd8aab1648b35e4ce5e002e81f0",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 2,
+    "return_type": "class:3888",
+    "parameter_types": [
+     "class:1072",
+     "bool"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "SimulateForInput",
+   "token": "0x060003ca",
+   "il_sha256": "36709a6c94417b6bac4a602f2f8980fdb2ee20e21c5cf899d5b0dd8382c4ee5a",
+   "instruction_count": 54,
+   "signature": {
+    "raw_length": 10,
+    "raw_sha256": "e749b7c8bce769861bf0bb2c161e158c099aa163a9f7c53c73ace75aec4e5d39",
+    "resolved_sha256": "0e15005fe5a55179d010498ec1d4503f3256d01bf028c3f614b9451636dc064f",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 3,
+    "return_type": "class:1080",
+    "parameter_types": [
+     "class:1076",
+     "i4",
+     "i4"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "Fight",
+   "token": "0x060003cb",
+   "il_sha256": "ab7c472af9ec9e8cb9e36d6b5261afed7fcce89d058d17d294b187d19574878e",
+   "instruction_count": 36,
+   "signature": {
+    "raw_length": 3,
+    "raw_sha256": "0c9373898d2dd1c85902837a9e979cb88484e2548a008ad2b2176cc7119d09df",
+    "resolved_sha256": "0c9373898d2dd1c85902837a9e979cb88484e2548a008ad2b2176cc7119d09df",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "void",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "SetupDuoDuringRound",
+   "token": "0x060003cc",
+   "il_sha256": "796d59df4b341163079113a1f84fab0a6f5a20b877ff826c67f2c0e235596e71",
+   "instruction_count": 266,
+   "signature": {
+    "raw_length": 3,
+    "raw_sha256": "0c9373898d2dd1c85902837a9e979cb88484e2548a008ad2b2176cc7119d09df",
+    "resolved_sha256": "0c9373898d2dd1c85902837a9e979cb88484e2548a008ad2b2176cc7119d09df",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "void",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "SyncHealth",
+   "token": "0x060003cd",
+   "il_sha256": "1982b9053380dcd7b3bdd5ea05c1927a0e8dc9932ebfadfe8fc776a8a34db31d",
+   "instruction_count": 22,
+   "signature": {
+    "raw_length": 9,
+    "raw_sha256": "90b8f35b0a8f2211a1d69e15cee91914145e73fa730aec98f188dcd1ee89c700",
+    "resolved_sha256": "ca35a94459e332cabdac58c9e36919c87fff1b161391135acf08dfd3db87dd1d",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 2,
+    "return_type": "void",
+    "parameter_types": [
+     "class:1088",
+     "class:1088"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "SimulateFight",
+   "token": "0x060003ce",
+   "il_sha256": "9672edfd4bbebfca5ec12147e55fc288b8f9ce92d7eec6967d953f7ee93d2fa5",
+   "instruction_count": 165,
+   "signature": {
+    "raw_length": 6,
+    "raw_sha256": "5c1191d4b86fca75cccbeb8490fc71a956128985b95a4e5daf63c53ae84f6af5",
+    "resolved_sha256": "4d43355bd94ada46883c618edc02ae4556ab22a9993db3878baa203a4c6a9a8e",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "i4",
+    "parameter_types": [
+     "class:1076"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "OneRound",
+   "token": "0x060003cf",
+   "il_sha256": "b87f6e61cf6bff35042ee464191c6b4589a4496d877ad42b7843beb5657a5f05",
+   "instruction_count": 211,
+   "signature": {
+    "raw_length": 3,
+    "raw_sha256": "0c9373898d2dd1c85902837a9e979cb88484e2548a008ad2b2176cc7119d09df",
+    "resolved_sha256": "0c9373898d2dd1c85902837a9e979cb88484e2548a008ad2b2176cc7119d09df",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "void",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "XRounds",
+   "token": "0x060003d0",
+   "il_sha256": "658a2d4629e5787f65878dac80a8ca30bdf13662d7c8dfc11a25b5777f628c74",
+   "instruction_count": 13,
+   "signature": {
+    "raw_length": 4,
+    "raw_sha256": "c889396c66b535112cb33472b6ecf61ad5f09860a1ea642fb8c31a4ed004296a",
+    "resolved_sha256": "c889396c66b535112cb33472b6ecf61ad5f09860a1ea642fb8c31a4ed004296a",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "void",
+    "parameter_types": [
+     "i4"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "CheckForStealth",
+   "token": "0x060003d1",
+   "il_sha256": "02315c4401c027171f5d6cc7e5009ae8e0185b2d63701315a0f89b0a77e0baf6",
+   "instruction_count": 61,
+   "signature": {
+    "raw_length": 3,
+    "raw_sha256": "0c9373898d2dd1c85902837a9e979cb88484e2548a008ad2b2176cc7119d09df",
+    "resolved_sha256": "0c9373898d2dd1c85902837a9e979cb88484e2548a008ad2b2176cc7119d09df",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "void",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "ResolveAllDeathsAndTriggers",
+   "token": "0x060003d2",
+   "il_sha256": "4821ab9ba588530c041156dc9feb8361741826b4b9461501382ebb64ef487ea4",
+   "instruction_count": 51,
+   "signature": {
+    "raw_length": 4,
+    "raw_sha256": "7366e2ddae008ee5e5ba63f1c2504e9a452ccd8cc0f40fdd3d8d03430bae9e33",
+    "resolved_sha256": "7366e2ddae008ee5e5ba63f1c2504e9a452ccd8cc0f40fdd3d8d03430bae9e33",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "void",
+    "parameter_types": [
+     "bool"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "RegisterTrigger",
+   "token": "0x060003d3",
+   "il_sha256": "3698794bcae1f5bc1cfdc0f4efebab0db6a75424f42c207e6b6feb825df349e1",
+   "instruction_count": 36,
+   "signature": {
+    "raw_length": 6,
+    "raw_sha256": "d4a40bcc23dddebd2ccb3f406297b221154ca3e2946a3b09eb9b5a3a915ae36d",
+    "resolved_sha256": "e51163de167145c1cd8dde670be652c96a42207bb141acf0590fd22d0b55231f",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "void",
+    "parameter_types": [
+     "class:1124"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "RegisterTrigger",
+   "token": "0x060003d4",
+   "il_sha256": "d8abe29fc9ae7f9a56e0b02f80d353801db67a19f6df846569289636e68aecc4",
+   "instruction_count": 10,
+   "signature": {
+    "raw_length": 11,
+    "raw_sha256": "94ceac31f7fb5bd2a6eaed28d140e50ba5b5bfbcbb8fc87c40bae6bc795286d9",
+    "resolved_sha256": "a5b5b40653c4f82bb0faf7e79d752297a544c9da098779e1e0ab863243b800b8",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 4,
+    "return_type": "void",
+    "parameter_types": [
+     "class:141",
+     "class:796",
+     "bool",
+     "bool"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "ResolveTriggersInCurrentScope",
+   "token": "0x060003d5",
+   "il_sha256": "092940a940e4193747ae8faa8185e4a349f0c10421e3d577c56e950506bd5050",
+   "instruction_count": 7,
+   "signature": {
+    "raw_length": 3,
+    "raw_sha256": "59a9a8765c535212b9ad71c5c8e1e24ffadbd3331fd04b3bbe1b121ecf6004cc",
+    "resolved_sha256": "59a9a8765c535212b9ad71c5c8e1e24ffadbd3331fd04b3bbe1b121ecf6004cc",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "bool",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "ResolveCastSpellTriggersInCurrentScope",
+   "token": "0x060003d6",
+   "il_sha256": "b30b93824a09331d8d6362da2b9ef19c891db8f0e9147c9320cff755c32549b8",
+   "instruction_count": 18,
+   "signature": {
+    "raw_length": 3,
+    "raw_sha256": "59a9a8765c535212b9ad71c5c8e1e24ffadbd3331fd04b3bbe1b121ecf6004cc",
+    "resolved_sha256": "59a9a8765c535212b9ad71c5c8e1e24ffadbd3331fd04b3bbe1b121ecf6004cc",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "bool",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "ParentScopeHasDeathrattle",
+   "token": "0x060003d7",
+   "il_sha256": "40c0ff61072cd0bd7f98319b1489c722bac03c9a405984a187da5b4a05a3dc85",
+   "instruction_count": 26,
+   "signature": {
+    "raw_length": 15,
+    "raw_sha256": "83a3605914aad7253d4ac0b2eb564c5e44955c7a1fac72c3c5e2a2587fb52b85",
+    "resolved_sha256": "52c8d7121d707db4778ba7313b8499903bd39aaba52232d1442df4b75cfd86ae",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "bool",
+    "parameter_types": [
+     "class:4952<class:113<class:1124>>"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "ResolveTriggers",
+   "token": "0x060003d8",
+   "il_sha256": "04e85dfbff1c1f63e5e8e8b12cfcc1a5cd51bade738c4ed8771e8118969fcef7",
+   "instruction_count": 86,
+   "signature": {
+    "raw_length": 10,
+    "raw_sha256": "25e1c6e220c26a9e283276f7c0deda85033b16c1dc3c05b4e6d3d732e15b45b7",
+    "resolved_sha256": "91bc19841c02b6935af6a2f7585145e3a73f25d7cd3d6213b6e0723affc6688d",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "bool",
+    "parameter_types": [
+     "class:113<class:1124>"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "RemovePassiveEffectsSide",
+   "token": "0x060003d9",
+   "il_sha256": "4d396cf60a8b5cd0641804878c36d14f7d084b60eed8fb27fd8c0aeae311a694",
+   "instruction_count": 20,
+   "signature": {
+    "raw_length": 10,
+    "raw_sha256": "af978c5b44e246561936068fee981a0259b736f12fc8d7d3e81600e6d9a659b1",
+    "resolved_sha256": "1a8672be3f70ded9fd2f23029f5e52eaea65072b99ef611fa9122a46ff6d8773",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "void",
+    "parameter_types": [
+     "class:225<class:80>"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "RemovePassiveEffects",
+   "token": "0x060003da",
+   "il_sha256": "0838bf283e5c6e4f30044fff1af9d34937a28bc793b03a627f3b11857f066be6",
+   "instruction_count": 93,
+   "signature": {
+    "raw_length": 5,
+    "raw_sha256": "721d7c1a64b95ea3dcbfb88434a94c30a49fa48264157a211c05b58e7d94e7da",
+    "resolved_sha256": "80de9e049139ea9faf7902e9c57f5d0b0abd0f1ca71e1b5ef6c4e70dfcdc974f",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "void",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "RemovePassiveTavernSpellBuffsSide",
+   "token": "0x060003db",
+   "il_sha256": "905b9107d737fa7ed946357fa8d984b307ded7093cf76d0701e0982cfb852bb2",
+   "instruction_count": 61,
+   "signature": {
+    "raw_length": 13,
+    "raw_sha256": "f33420f5cc35e83af3854a1235159c3082b99cb71c35494dedba13c18fd690d0",
+    "resolved_sha256": "1a3e80984f57fb8c05e48843d340b1e0a9128d9020e00e5a902f12ed879e09d4",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 2,
+    "return_type": "void",
+    "parameter_types": [
+     "class:4924",
+     "class:225<class:80>"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "AddCardToHand",
+   "token": "0x060003dc",
+   "il_sha256": "5f636647e97aadcdc4c4d89656c14ce314d8cace38d0d438049622e8cb9360b9",
+   "instruction_count": 67,
+   "signature": {
+    "raw_length": 14,
+    "raw_sha256": "fd2254a2bab77938b0496108626b23b243c93518586d3cd4ed5cee22ac8fb622",
+    "resolved_sha256": "769a7b636c446d23c2523bf14cf003482414901d785cb2953b4ab4621a666a7e",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 3,
+    "return_type": "bool",
+    "parameter_types": [
+     "class:113<class:80>",
+     "class:44",
+     "class:800"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "GetLowestHealthMinion",
+   "token": "0x060003dd",
+   "il_sha256": "c67ddc2fd29bcfb5cb5ea4a390b33feed6e309d04208ffcb83fe398197477d70",
+   "instruction_count": 30,
+   "signature": {
+    "raw_length": 10,
+    "raw_sha256": "47fed153fdbb4ffd1d5a75963e0e9aa48f5979713544a47a1966c7f33583d8a3",
+    "resolved_sha256": "d2ecec94ea3ef649c9517948a14095f11f7d2bbf414ad44ea29dd6a8d5a500b1",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:80",
+    "parameter_types": [
+     "class:113<class:80>"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "GetHighestHealthMinion",
+   "token": "0x060003de",
+   "il_sha256": "4316ae4813d1b39b528c1dcebf15f2fbe0188c1c41eb4df317e91e76ae449f8c",
+   "instruction_count": 30,
+   "signature": {
+    "raw_length": 10,
+    "raw_sha256": "47fed153fdbb4ffd1d5a75963e0e9aa48f5979713544a47a1966c7f33583d8a3",
+    "resolved_sha256": "d2ecec94ea3ef649c9517948a14095f11f7d2bbf414ad44ea29dd6a8d5a500b1",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:80",
+    "parameter_types": [
+     "class:113<class:80>"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "GetLowestAttackMinion",
+   "token": "0x060003df",
+   "il_sha256": "52cd3ec898d7e41eab5e0c94ea2dcd73b8ee0c07fee84b7db15f58e8894b64ef",
+   "instruction_count": 30,
+   "signature": {
+    "raw_length": 10,
+    "raw_sha256": "47fed153fdbb4ffd1d5a75963e0e9aa48f5979713544a47a1966c7f33583d8a3",
+    "resolved_sha256": "d2ecec94ea3ef649c9517948a14095f11f7d2bbf414ad44ea29dd6a8d5a500b1",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:80",
+    "parameter_types": [
+     "class:113<class:80>"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "GetHighestAttackMinion",
+   "token": "0x060003e0",
+   "il_sha256": "805a6245f61e250dbc8a03f166766a42220c88b16ebccc52daf65ec996e93c13",
+   "instruction_count": 30,
+   "signature": {
+    "raw_length": 10,
+    "raw_sha256": "47fed153fdbb4ffd1d5a75963e0e9aa48f5979713544a47a1966c7f33583d8a3",
+    "resolved_sha256": "d2ecec94ea3ef649c9517948a14095f11f7d2bbf414ad44ea29dd6a8d5a500b1",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:80",
+    "parameter_types": [
+     "class:113<class:80>"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "OnMinionSummoned",
+   "token": "0x060003e1",
+   "il_sha256": "285374fde8d585592835bf7d4d4888ecdd24fdc3ce81d7524b7cc5ddc4fae7e6",
+   "instruction_count": 27,
+   "signature": {
+    "raw_length": 7,
+    "raw_sha256": "c50ee38af0d7fde587e3c89676478f111b37167856f799ffa78ecc66c7dbd32e",
+    "resolved_sha256": "7ed19b3fad5cee786bbdca7b09645c349c3fbdbad4e50bf27d32d2dc9cc3b5a6",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:141",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "GetAllEntities",
+   "token": "0x060003e2",
+   "il_sha256": "367e0609d89925e66cbb9e2adac6c4200a91135cbad263c44d478533010d094d",
+   "instruction_count": 7,
+   "signature": {
+    "raw_length": 16,
+    "raw_sha256": "0f4a47b6dc5a8486c249baa15ff6aa633dcfbf9a26584b9a5e968d268fcefa95",
+    "resolved_sha256": "4d95b84b314df603e0e57d8462cd8751631f66ba1ecdd417800f2a6b55d7ff3b",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:201<class:800>",
+    "parameter_types": [
+     "class:113<class:80>"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "GetAllEntities",
+   "token": "0x060003e3",
+   "il_sha256": "4ba216579c1a3804c6dcbba4d89a0528ada14373d25da641d16718d6bca31d57",
+   "instruction_count": 9,
+   "signature": {
+    "raw_length": 11,
+    "raw_sha256": "341708141d3e61ef61e68263240bbaffd73665caf08f36c2de4447db2ed512dc",
+    "resolved_sha256": "03ce332fa91fd79680a8b7d6a83619ee2208dc5cf3c426b63bb1b184543796af",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:201<class:800>",
+    "parameter_types": [
+     "bool"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "ProcessDamage",
+   "token": "0x060003e4",
+   "il_sha256": "f7e02a3a8bc609d8648b5d32872f09be1bcd9b9abe1d51674a92b8f7570b7948",
+   "instruction_count": 10,
+   "signature": {
+    "raw_length": 16,
+    "raw_sha256": "781b91a40a2e5332800f07e1f99b49c79da5a3fbaf25f2a884580d31828b5884",
+    "resolved_sha256": "32d39cd5b5ae73fad375e4d082793033bc8937871757f672bdb13ad91c543b41",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 3,
+    "return_type": "class:201<class:792>",
+    "parameter_types": [
+     "i4",
+     "class:80",
+     "class:800"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "ProcessDamage",
+   "token": "0x060003e5",
+   "il_sha256": "487ddd55a07c440aa8aff87d1465e6a37223d79bb6d7cb7af470622dde0a8183",
+   "instruction_count": 445,
+   "signature": {
+    "raw_length": 18,
+    "raw_sha256": "7a2b489d8b2089916996a78711e1b63385548e4cd1b9375c242eb140266a0c76",
+    "resolved_sha256": "01a0abdf354682532ca1865a42a341bcfb9da806282a573a335a28811deb31e9",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:201<class:792>",
+    "parameter_types": [
+     "class:201<class:792>"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "Destroy",
+   "token": "0x060003e6",
+   "il_sha256": "e7cdc1a8c3422e0d6ed58801ef0da86b946c8a5ed1af929b8628decaffcd4b4a",
+   "instruction_count": 78,
+   "signature": {
+    "raw_length": 8,
+    "raw_sha256": "4bb93afb2ad816fec14a307b69efd0bae6737f671c38489890d8e283345fd596",
+    "resolved_sha256": "8e83f0fad0de51c2b9fd42720c1b75e7a15a2d593e26329c9bc9884ea3cd2d8d",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 2,
+    "return_type": "void",
+    "parameter_types": [
+     "class:80",
+     "class:800"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "ResolveDeaths",
+   "token": "0x060003e7",
+   "il_sha256": "60b5a036d868e1b28801b617b08972c22fbeb07ec0296ee10f610afdf05b0472",
+   "instruction_count": 35,
+   "signature": {
+    "raw_length": 3,
+    "raw_sha256": "59a9a8765c535212b9ad71c5c8e1e24ffadbd3331fd04b3bbe1b121ecf6004cc",
+    "resolved_sha256": "59a9a8765c535212b9ad71c5c8e1e24ffadbd3331fd04b3bbe1b121ecf6004cc",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "bool",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "ResolveDeathsForSide",
+   "token": "0x060003e8",
+   "il_sha256": "e16af6eae5ce07d63b13eb388718a94e3a6dc56814011226137606c93bf8f528",
+   "instruction_count": 535,
+   "signature": {
+    "raw_length": 9,
+    "raw_sha256": "515f0a45c625f64bee6065ad2ec887c2b4012c72ed76c19562c5af5fbcdb3223",
+    "resolved_sha256": "95edc2054935cc6d715920cd3947ebedcecef738c26eaff38c465ed6d0b68e91",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "bool",
+    "parameter_types": [
+     "class:113<class:80>"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "TriggerDeathrattles",
+   "token": "0x060003e9",
+   "il_sha256": "f561191dc1094f0edfb3443423b85c5e338b682fc67ff14e8bb2696d19a20f57",
+   "instruction_count": 457,
+   "signature": {
+    "raw_length": 5,
+    "raw_sha256": "721d7c1a64b95ea3dcbfb88434a94c30a49fa48264157a211c05b58e7d94e7da",
+    "resolved_sha256": "80de9e049139ea9faf7902e9c57f5d0b0abd0f1ca71e1b5ef6c4e70dfcdc974f",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "void",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "ResolveReborn",
+   "token": "0x060003ea",
+   "il_sha256": "dd11793c2051e351f1a6f6390f2440e139cd2ce7b238cf0b9273da35fd37986d",
+   "instruction_count": 113,
+   "signature": {
+    "raw_length": 3,
+    "raw_sha256": "59a9a8765c535212b9ad71c5c8e1e24ffadbd3331fd04b3bbe1b121ecf6004cc",
+    "resolved_sha256": "59a9a8765c535212b9ad71c5c8e1e24ffadbd3331fd04b3bbe1b121ecf6004cc",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "bool",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "SourceHasPendingDeathrattle",
+   "token": "0x060003eb",
+   "il_sha256": "74edfd696d015c0cae505d69a1afcaa9f387e66fb948bc86e80938e2352b987f",
+   "instruction_count": 32,
+   "signature": {
+    "raw_length": 6,
+    "raw_sha256": "b2fee00dd77ed79abe843b97a00adc8c10a898fe1bd708b9fd5b33b5985361fb",
+    "resolved_sha256": "4c5008006107307d42caaf177ef1830e23324f05dcc3e2f2dcddfa9e80004582",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "bool",
+    "parameter_types": [
+     "class:800"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "HandleAvenge",
+   "token": "0x060003ec",
+   "il_sha256": "38016a19d307b0881b94bd7e924d4cc97faf5fb89204bfba7be61394b6797228",
+   "instruction_count": 26,
+   "signature": {
+    "raw_length": 8,
+    "raw_sha256": "668dec1c0b9a9f9c80b8fbf23120c067b6a558baa023c1e297281bc255a8118d",
+    "resolved_sha256": "043c77d4329802ae5d291e16d0b98a29081b78f4003b6d21c04fa45581847aa2",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 2,
+    "return_type": "void",
+    "parameter_types": [
+     "class:804",
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "CastBloodGem",
+   "token": "0x060003ed",
+   "il_sha256": "8178212d8ff46637a8f5e9b0681acf5455dc86591218dd16060ecac862fcebab",
+   "instruction_count": 108,
+   "signature": {
+    "raw_length": 8,
+    "raw_sha256": "4bb93afb2ad816fec14a307b69efd0bae6737f671c38489890d8e283345fd596",
+    "resolved_sha256": "8e83f0fad0de51c2b9fd42720c1b75e7a15a2d593e26329c9bc9884ea3cd2d8d",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 2,
+    "return_type": "void",
+    "parameter_types": [
+     "class:80",
+     "class:800"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "CastSpellcraftSpell",
+   "token": "0x060003ee",
+   "il_sha256": "b4af6cba2f12abd2fc748f2c06f448238778473e3490a722948641f829fb1441",
+   "instruction_count": 194,
+   "signature": {
+    "raw_length": 12,
+    "raw_sha256": "64bcae480d20e5d6f5d2721fdb6270d0bfcf6e6a7fab36f6a4df986d76b57488",
+    "resolved_sha256": "2a027f4aa922fc9a048e779e34a1d7eb60be41d04f2893ce57a87b43b017a7b0",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 4,
+    "return_type": "void",
+    "parameter_types": [
+     "class:740",
+     "class:800",
+     "bool",
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "CastTavernSpell",
+   "token": "0x060003ef",
+   "il_sha256": "3e3b8bea39892123caa0cca6e4f73c30cfa263f46f688b59759086a3012fd4b7",
+   "instruction_count": 237,
+   "signature": {
+    "raw_length": 11,
+    "raw_sha256": "2319ae60013199a2ec72f0e288afc63a75ffc4f21b761bbc7615cd18c2329e90",
+    "resolved_sha256": "7307c34f3ab3f59aeb6a6ec34c28dd2da01d0e779431644d753e0011536d0b5b",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 3,
+    "return_type": "void",
+    "parameter_types": [
+     "class:672",
+     "class:800",
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "InvokeBattlecry",
+   "token": "0x060003f0",
+   "il_sha256": "49e1577a64cb8ffc8d326c2661ae4ad7346e3beee509b4ffdb17109bae50c91f",
+   "instruction_count": 194,
+   "signature": {
+    "raw_length": 5,
+    "raw_sha256": "721d7c1a64b95ea3dcbfb88434a94c30a49fa48264157a211c05b58e7d94e7da",
+    "resolved_sha256": "80de9e049139ea9faf7902e9c57f5d0b0abd0f1ca71e1b5ef6c4e70dfcdc974f",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "void",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "DealDamageToPlayer",
+   "token": "0x060003f1",
+   "il_sha256": "50cebe39cc3bf4d6b916f9056cbd2960c5212c5c20cf6fb20e1ddd7056a1b4ef",
+   "instruction_count": 89,
+   "signature": {
+    "raw_length": 10,
+    "raw_sha256": "a05b7fd45693a28ea0148ed448f60f41aaf6c0f926f5d76251049984390d4e2c",
+    "resolved_sha256": "b1bb4b68fba27d20548d330996070026dc57ea9707a821fdef7b39068ffaf60a",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 3,
+    "return_type": "void",
+    "parameter_types": [
+     "class:4924",
+     "i4",
+     "class:800"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "MagnetizeMech",
+   "token": "0x060003f2",
+   "il_sha256": "ce04f23094540d839c994f82b9bb897149f91b07f50588476a6484270613e0e5",
+   "instruction_count": 138,
+   "signature": {
+    "raw_length": 11,
+    "raw_sha256": "d45bdeb6e3f619a334e4118380988dd68f98e938c1efdfbce7b38e06dcb7af93",
+    "resolved_sha256": "2761cf5c9d32e3895e9aebaf1c8b1289e8d92057b54ed8e7b79f366d6959dc6c",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 5,
+    "return_type": "void",
+    "parameter_types": [
+     "class:80",
+     "string",
+     "class:800",
+     "i4",
+     "i4"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "AddMagnetic",
+   "token": "0x060003f3",
+   "il_sha256": "31e83411eef6ec510bad32c191b24167498ee189f3ee3986e3ed638d8e11c76e",
+   "instruction_count": 113,
+   "signature": {
+    "raw_length": 9,
+    "raw_sha256": "f6dff829ef76ae2b371ab1ac389ef8aadf2d4828a8912fffd5155f73454be786",
+    "resolved_sha256": "3070811b61cf82002be3cb8ccdfeca4aeff3bf5f8e4658b9607f85bc8b2829d0",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default",
+    "generic_parameter_count": null,
+    "parameter_count": 4,
+    "return_type": "void",
+    "parameter_types": [
+     "class:80",
+     "class:117",
+     "i4",
+     "i4"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "ResolveStartOfCombatEffects",
+   "token": "0x060003f4",
+   "il_sha256": "1bc3c85b1c61e6603a6ed82632956cdcc38b4dcbaaa0b7e51a0ae5ee6392d002",
+   "instruction_count": 1382,
+   "signature": {
+    "raw_length": 3,
+    "raw_sha256": "0c9373898d2dd1c85902837a9e979cb88484e2548a008ad2b2176cc7119d09df",
+    "resolved_sha256": "0c9373898d2dd1c85902837a9e979cb88484e2548a008ad2b2176cc7119d09df",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "void",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "ResolveStartOfCombatEffects",
+   "token": "0x060003f5",
+   "il_sha256": "5c2586e0bc5f8d17a8b92e596c2b1a97fad257ecde66197ac7e4c5cb036ae8b1",
+   "instruction_count": 545,
+   "signature": {
+    "raw_length": 7,
+    "raw_sha256": "641bb981a406475bc8f90f53d29159f808b5410bd245b41ec0d06860900f6ce8",
+    "resolved_sha256": "1d428e6c47c631721b549cde234f1669af42e038621ed0dc085c769ffeec47d8",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 2,
+    "return_type": "void",
+    "parameter_types": [
+     "class:4924",
+     "bool"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "ContainsSpecialHeroPower",
+   "token": "0x060003f6",
+   "il_sha256": "55143bcabc6e4f61762532197453baee8d91fedd0add37c76645e1c786bdccb6",
+   "instruction_count": 12,
+   "signature": {
+    "raw_length": 11,
+    "raw_sha256": "051bb74107bf3b8944956a9215c1df2b36ed41e282154977e4ac75428468e6b6",
+    "resolved_sha256": "d96dfbe16364b3d699bf15743c2dc206da484d84b99a22e4e1e64ff1facf485a",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "bool",
+    "parameter_types": [
+     "class:201<class:3888>"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "GetOrderedHeroPowers",
+   "token": "0x060003f7",
+   "il_sha256": "34655786d44cc4534908a70c062accbf7e829e1d2fd9ea2878e8ef3ca8f14771",
+   "instruction_count": 170,
+   "signature": {
+    "raw_length": 30,
+    "raw_sha256": "c639c58aceeacde0aa96880b644b2e6db0d66eb3b68685a182a999fab8f836dc",
+    "resolved_sha256": "ceef49bfbd23b3085ebb60043dd126d051fa7071c2ada62d928072cdf74643cd",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 5,
+    "return_type": "valuetype:277<class:3888,class:472,class:576>[]",
+    "parameter_types": [
+     "bool",
+     "class:472",
+     "class:472",
+     "class:576",
+     "class:576"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "OrderStartOfCombatTrinkets",
+   "token": "0x060003f8",
+   "il_sha256": "25c76ba409040236c35f249f22ee9a4845609b29283e96803250f8a7dbccd024",
+   "instruction_count": 12,
+   "signature": {
+    "raw_length": 18,
+    "raw_sha256": "fd02edbb1e8bc0f291195afc60aadbe822bfa5a2ecc595fb7f567d9751998573",
+    "resolved_sha256": "9318e63cdeb03e040f5726f5907fbe2ab3576c2ef9b5cbd537cd5e8f3c5abe44",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:201<class:568>",
+    "parameter_types": [
+     "class:201<class:568>"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "TrySummonRandomMinions",
+   "token": "0x060003f9",
+   "il_sha256": "20d5f09500f3c18d38a9889490d144ba3e1ee03fcdf187c632c3ffe037d56ab0",
+   "instruction_count": 98,
+   "signature": {
+    "raw_length": 26,
+    "raw_sha256": "6ec8fd247af1ff23f9bdef323d135511598fffc70022d7b166ad9831e36cb294",
+    "resolved_sha256": "cf12929148183796b2a9d281065ac5bc37a97bcbe8ed31459c023444758b208d",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 5,
+    "return_type": "class:113<class:80>",
+    "parameter_types": [
+     "class:113<class:1116>",
+     "i4",
+     "class:113<class:80>",
+     "i4",
+     "class:800"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "TrySummonMinions",
+   "token": "0x060003fa",
+   "il_sha256": "a978a78bfee8000fe32f932e304e1ca0d9a542a0d021872129013da86458a86c",
+   "instruction_count": 31,
+   "signature": {
+    "raw_length": 26,
+    "raw_sha256": "aa82be3c8c6ebc2587f727da52ecebb0eb38baaa7b050f22e7d5eba6456eb29b",
+    "resolved_sha256": "afcfdd042e2943da1a19f37affcfc04184bc38187d44156e52ba3b4ab285e842",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 4,
+    "return_type": "class:113<class:80>",
+    "parameter_types": [
+     "class:201<class:1116>",
+     "class:113<class:80>",
+     "i4",
+     "class:800"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "TrySummonMinion",
+   "token": "0x060003fb",
+   "il_sha256": "04b94d275cd4a8481d0601d40ef70790eae9c4b0421ca327979995ecbf881b5a",
+   "instruction_count": 446,
+   "signature": {
+    "raw_length": 22,
+    "raw_sha256": "5fbdba60902f44a79f2a991bd8901f1b048f738fdeb0529078fb062582028c2e",
+    "resolved_sha256": "693272a045897411c2b9fa77b2cb36b8d57707e8761a1d40c9bf33df61e313c9",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 5,
+    "return_type": "class:113<class:80>",
+    "parameter_types": [
+     "class:1116",
+     "class:113<class:80>",
+     "i4",
+     "class:800",
+     "bool"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "UpdateSummonCounter",
+   "token": "0x060003fc",
+   "il_sha256": "869ebdf6434e961d7f0e473669a04cf663627a66e7062d65ceea308cd8536b5c",
+   "instruction_count": 55,
+   "signature": {
+    "raw_length": 11,
+    "raw_sha256": "865940ce6a1949344e34eeb34898cb527ff93db2efc24d8219e655518f0dd84f",
+    "resolved_sha256": "3e0bf426cde9223909ed921df99ccb166fb47a61f8ea1040579c19c3b989b413",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 3,
+    "return_type": "i4",
+    "parameter_types": [
+     "class:113<class:80>",
+     "i4",
+     "i4"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "TrySummonQuestReward",
+   "token": "0x060003fd",
+   "il_sha256": "9ec9215764313e20c9f21aef7cfdf81b7624c6e6d8877c2e702f7a035acc8a26",
+   "instruction_count": 48,
+   "signature": {
+    "raw_length": 7,
+    "raw_sha256": "71e4be71c16df8ad2ac15aa2bbf7cadf6277276b087520815a4098d2ceb4c8a1",
+    "resolved_sha256": "80a03e67f2fb76720cbf3112e999c85da2e035d7da704349d4e533d312c4e941",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 2,
+    "return_type": "void",
+    "parameter_types": [
+     "class:1192",
+     "bool"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "GetSecretSideSecrets",
+   "token": "0x060003fe",
+   "il_sha256": "3c408f41bcdda6e4480852075cd21b0bcefa43c577fb3df6b0c1bbf2853fc15e",
+   "instruction_count": 13,
+   "signature": {
+    "raw_length": 11,
+    "raw_sha256": "2b36781d0208725c19829834ab216838896928cca86bcc2dcee361e7940f533b",
+    "resolved_sha256": "52a5b4498d09a6478adc586db1ef1968b045c94005b697a4eaab07583cc3745c",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:113<valuetype:4768>",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "OnAttackSecretCheck",
+   "token": "0x060003ff",
+   "il_sha256": "e721b12d7e1490c71b3633087ba3262f32f5d413fcca0870198583ba20bb80b8",
+   "instruction_count": 89,
+   "signature": {
+    "raw_length": 5,
+    "raw_sha256": "721d7c1a64b95ea3dcbfb88434a94c30a49fa48264157a211c05b58e7d94e7da",
+    "resolved_sha256": "80de9e049139ea9faf7902e9c57f5d0b0abd0f1ca71e1b5ef6c4e70dfcdc974f",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "void",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "OnMinionDieSecretCheck",
+   "token": "0x06000400",
+   "il_sha256": "4d53b3489f8785735d8aa9c80078c6bae220dc4d1db3585cd67bc1d008eaf102",
+   "instruction_count": 54,
+   "signature": {
+    "raw_length": 5,
+    "raw_sha256": "721d7c1a64b95ea3dcbfb88434a94c30a49fa48264157a211c05b58e7d94e7da",
+    "resolved_sha256": "80de9e049139ea9faf7902e9c57f5d0b0abd0f1ca71e1b5ef6c4e70dfcdc974f",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "void",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "OnDamageSecretCheck",
+   "token": "0x06000401",
+   "il_sha256": "6c765ed1f98d9bcd897c27a23c78e412969b4ef77647089e27274d392c21f482",
+   "instruction_count": 32,
+   "signature": {
+    "raw_length": 6,
+    "raw_sha256": "faad814d34170b4b3bb79633be7d5581ac2c54e2d1154dd0af624e5e4fd07918",
+    "resolved_sha256": "4999f877f1464dd5f2d56453d9ab5cc86e4d18233aed99b5c9dc8399bda86429",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "void",
+    "parameter_types": [
+     "class:792"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "RegisterSecretTrigger",
+   "token": "0x06000402",
+   "il_sha256": "61b5327cb3a02a2040fec3fe59d48671eb1779f034f2b666443ea20e3a599738",
+   "instruction_count": 24,
+   "signature": {
+    "raw_length": 21,
+    "raw_sha256": "e7830888c76cd0b59dff4e3f5a3ffb61027c7b447301cd617d9ee01d8e9b5904",
+    "resolved_sha256": "8d04825b8de4c1330c8840e629174e1f0183a43a0d323bcd9e9d49a671f6ff6b",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 3,
+    "return_type": "void",
+    "parameter_types": [
+     "class:153<class:141>",
+     "class:113<valuetype:4768>",
+     "valuetype:4768"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "CheckAutodefenseMatrix",
+   "token": "0x06000403",
+   "il_sha256": "29c11a1dc0d0899d3e6219b1904a83908f3c2193dc54c3756b4911f9c5f0eacf",
+   "instruction_count": 7,
+   "signature": {
+    "raw_length": 12,
+    "raw_sha256": "f5392ac303df2fed81ba789e78c94b58576ea358459f7345a1c94ab8c3941040",
+    "resolved_sha256": "2e0549533714e65d8ce21f2ce84bafb14fcca07c1114e1e82bbf8cb515c07030",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:153<class:141>",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "CheckBetterAutodefenseMatrix",
+   "token": "0x06000404",
+   "il_sha256": "c2e0b9495b27e863559b7d935d879d11e6867f443bcae5d819472ae8bdf1abfb",
+   "instruction_count": 7,
+   "signature": {
+    "raw_length": 12,
+    "raw_sha256": "f5392ac303df2fed81ba789e78c94b58576ea358459f7345a1c94ab8c3941040",
+    "resolved_sha256": "2e0549533714e65d8ce21f2ce84bafb14fcca07c1114e1e82bbf8cb515c07030",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:153<class:141>",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "CheckPackTactics",
+   "token": "0x06000405",
+   "il_sha256": "854b392d7c4db369ec6866bef7b620f4cf64179ec681c582f5a713ab7907a98f",
+   "instruction_count": 10,
+   "signature": {
+    "raw_length": 12,
+    "raw_sha256": "f5392ac303df2fed81ba789e78c94b58576ea358459f7345a1c94ab8c3941040",
+    "resolved_sha256": "2e0549533714e65d8ce21f2ce84bafb14fcca07c1114e1e82bbf8cb515c07030",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:153<class:141>",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "CheckBetterPackTactics",
+   "token": "0x06000406",
+   "il_sha256": "406bbc773d6c128994e11324c8db6bcac24359e36fff44d27123439109262034",
+   "instruction_count": 10,
+   "signature": {
+    "raw_length": 12,
+    "raw_sha256": "f5392ac303df2fed81ba789e78c94b58576ea358459f7345a1c94ab8c3941040",
+    "resolved_sha256": "2e0549533714e65d8ce21f2ce84bafb14fcca07c1114e1e82bbf8cb515c07030",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:153<class:141>",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "CheckSnakeTrap",
+   "token": "0x06000407",
+   "il_sha256": "b67c15dbed0774952a6cf591d373d40b6a0fba7d06ae77ec4aa4840fec12b5fd",
+   "instruction_count": 10,
+   "signature": {
+    "raw_length": 12,
+    "raw_sha256": "f5392ac303df2fed81ba789e78c94b58576ea358459f7345a1c94ab8c3941040",
+    "resolved_sha256": "2e0549533714e65d8ce21f2ce84bafb14fcca07c1114e1e82bbf8cb515c07030",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:153<class:141>",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "CheckSplittingImage",
+   "token": "0x06000408",
+   "il_sha256": "f72668f6878c1d9ce2d6d5840ae8e98d017a0a5003a949f5a1a568c854767b70",
+   "instruction_count": 7,
+   "signature": {
+    "raw_length": 12,
+    "raw_sha256": "f5392ac303df2fed81ba789e78c94b58576ea358459f7345a1c94ab8c3941040",
+    "resolved_sha256": "2e0549533714e65d8ce21f2ce84bafb14fcca07c1114e1e82bbf8cb515c07030",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:153<class:141>",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "CheckVenomStrike",
+   "token": "0x06000409",
+   "il_sha256": "1f3061119ea157fd5d3be8dcdd45d94f3d4d93712f6c29ababcb9f2abebb8773",
+   "instruction_count": 10,
+   "signature": {
+    "raw_length": 12,
+    "raw_sha256": "f5392ac303df2fed81ba789e78c94b58576ea358459f7345a1c94ab8c3941040",
+    "resolved_sha256": "2e0549533714e65d8ce21f2ce84bafb14fcca07c1114e1e82bbf8cb515c07030",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:153<class:141>",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "CheckBetterVenomStrike",
+   "token": "0x0600040a",
+   "il_sha256": "7cae869e4d091aceda468e9147264d8ee8e709d0d6cdcb6df60ea32ca3c427db",
+   "instruction_count": 10,
+   "signature": {
+    "raw_length": 12,
+    "raw_sha256": "f5392ac303df2fed81ba789e78c94b58576ea358459f7345a1c94ab8c3941040",
+    "resolved_sha256": "2e0549533714e65d8ce21f2ce84bafb14fcca07c1114e1e82bbf8cb515c07030",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:153<class:141>",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "CheckAvenge",
+   "token": "0x0600040b",
+   "il_sha256": "a00b44d18011549a8f9267c4a266677d509e95fbb036f285f60f61524e885a3b",
+   "instruction_count": 7,
+   "signature": {
+    "raw_length": 12,
+    "raw_sha256": "f5392ac303df2fed81ba789e78c94b58576ea358459f7345a1c94ab8c3941040",
+    "resolved_sha256": "2e0549533714e65d8ce21f2ce84bafb14fcca07c1114e1e82bbf8cb515c07030",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:153<class:141>",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "CheckRedemption",
+   "token": "0x0600040c",
+   "il_sha256": "2aef876b2bb2acf500b5b8419416d362d9d4505b13f878169c739e45277f2ec2",
+   "instruction_count": 7,
+   "signature": {
+    "raw_length": 12,
+    "raw_sha256": "f5392ac303df2fed81ba789e78c94b58576ea358459f7345a1c94ab8c3941040",
+    "resolved_sha256": "2e0549533714e65d8ce21f2ce84bafb14fcca07c1114e1e82bbf8cb515c07030",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:153<class:141>",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "CheckBetterRedemption",
+   "token": "0x0600040d",
+   "il_sha256": "d730fae926bb96d9e6f34848d316e7b1a4283d1ec4c10e7d83ee5b730ec977e4",
+   "instruction_count": 10,
+   "signature": {
+    "raw_length": 12,
+    "raw_sha256": "f5392ac303df2fed81ba789e78c94b58576ea358459f7345a1c94ab8c3941040",
+    "resolved_sha256": "2e0549533714e65d8ce21f2ce84bafb14fcca07c1114e1e82bbf8cb515c07030",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:153<class:141>",
+    "parameter_types": [
+     "class:80"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "CheckReckoning",
+   "token": "0x0600040e",
+   "il_sha256": "999f3c9f2af8514611edf53688feed7a4a3c2e91f5131d3f5150c5d9a8577561",
+   "instruction_count": 10,
+   "signature": {
+    "raw_length": 13,
+    "raw_sha256": "54b02cb606d359c69ef90dc4dcb2cc106941203ff2167cf5bef51457a1925dd9",
+    "resolved_sha256": "faa1cddf10d79988d3a8d73ed3a8f14265004495e43413e2cf37af44c72ce61c",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "class:153<class:141>",
+    "parameter_types": [
+     "class:792"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "OnStartOfCombatSecretCheck",
+   "token": "0x0600040f",
+   "il_sha256": "e6e1962270b56b18305aefec5c05f3ba956ffaa8657a2ecfda03add7483ee65d",
+   "instruction_count": 58,
+   "signature": {
+    "raw_length": 4,
+    "raw_sha256": "7366e2ddae008ee5e5ba63f1c2504e9a452ccd8cc0f40fdd3d8d03430bae9e33",
+    "resolved_sha256": "7366e2ddae008ee5e5ba63f1c2504e9a452ccd8cc0f40fdd3d8d03430bae9e33",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "void",
+    "parameter_types": [
+     "bool"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": ".cctor",
+   "token": "0x06000410",
+   "il_sha256": "454bee83631dd642ba0659b799945a266ae496af88dafd6e994ce8efb9bf0ea6",
+   "instruction_count": 22,
+   "signature": {
+    "raw_length": 3,
+    "raw_sha256": "cf7605ed1bc735f6c825554154627467e1cac9df54cee8699218ed434603c568",
+    "resolved_sha256": "cf7605ed1bc735f6c825554154627467e1cac9df54cee8699218ed434603c568",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default",
+    "generic_parameter_count": null,
+    "parameter_count": 0,
+    "return_type": "void",
+    "parameter_types": [],
+    "field_type": null,
+    "issue": null
+   }
+  },
+  {
+   "name": "<ResolveReborn>b__93_0",
+   "token": "0x06000411",
+   "il_sha256": "6e31f488e154b11e330818a528b724d4c3e271b778b8569552fe4cc8d401082e",
+   "instruction_count": 7,
+   "signature": {
+    "raw_length": 6,
+    "raw_sha256": "b9ca21c021b49632d4ec0f4dac030c1c6c7d418901b2a724399e26a952ad3b96",
+    "resolved_sha256": "95b96196f751bb4e1efe02428e4fc64093b8887584270ea07ff9317061b277ab",
+    "kind": "method",
+    "parse_status": "decoded",
+    "calling_convention": "default has-this",
+    "generic_parameter_count": null,
+    "parameter_count": 1,
+    "return_type": "bool",
+    "parameter_types": [
+     "class:1096"
+    ],
+    "field_type": null,
+    "issue": null
+   }
+  }
+ ],
+ "user_strings": [
+  {
+   "token": "0x70002005",
+   "offset": 611329,
+   "value": "ActiveMinion minion={0}"
+  },
+  {
+   "token": "0x70002035",
+   "offset": 611377,
+   "value": "StealthTriggers"
+  },
+  {
+   "token": "0x70002055",
+   "offset": 611409,
+   "value": "BG34_Giant_376"
+  },
+  {
+   "token": "0x70002073",
+   "offset": 611439,
+   "value": "BG33_Reward_021"
+  },
+  {
+   "token": "0x70002093",
+   "offset": 611471,
+   "value": "DAL_742"
+  },
+  {
+   "token": "0x700020a3",
+   "offset": 611487,
+   "value": "BG35_Anomaly_007t"
+  },
+  {
+   "token": "0x700020c7",
+   "offset": 611523,
+   "value": "BG35_Anomaly_008t"
+  },
+  {
+   "token": "0x700020eb",
+   "offset": 611559,
+   "value": "BG22_HERO_305p"
+  },
+  {
+   "token": "0x70002109",
+   "offset": 611589,
+   "value": "BG20_HERO_100p"
+  },
+  {
+   "token": "0x70002127",
+   "offset": 611619,
+   "value": "BG22_HERO_200p"
+  },
+  {
+   "token": "0x70002145",
+   "offset": 611649,
+   "value": "BG22_HERO_003p"
+  },
+  {
+   "token": "0x70002163",
+   "offset": 611679,
+   "value": "BG25_HERO_103p"
+  },
+  {
+   "token": "0x70002181",
+   "offset": 611709,
+   "value": "BG22_HERO_002p"
+  },
+  {
+   "token": "0x7000219f",
+   "offset": 611739,
+   "value": "BG20_HERO_282p"
+  },
+  {
+   "token": "0x700021bd",
+   "offset": 611769,
+   "value": "BG23_HERO_201p"
+  },
+  {
+   "token": "0x700021db",
+   "offset": 611799,
+   "value": "TB_BaconShop_HP_037a"
+  },
+  {
+   "token": "0x70002205",
+   "offset": 611841,
+   "value": "TB_BaconShop_HP_061"
+  },
+  {
+   "token": "0x7000222d",
+   "offset": 611881,
+   "value": "TB_BaconShop_HP_069"
+  },
+  {
+   "token": "0x70002255",
+   "offset": 611921,
+   "value": "TB_BaconShop_HP_086"
+  },
+  {
+   "token": "0x7000227d",
+   "offset": 611961,
+   "value": "TB_BaconShop_HP_103"
+  },
+  {
+   "token": "0x700022a5",
+   "offset": 612001,
+   "value": "TB_BaconShop_HP_053"
+  },
+  {
+   "token": "0x700022cd",
+   "offset": 612041,
+   "value": "BG22_HERO_000p_Alt"
+  },
+  {
+   "token": "0x700022f3",
+   "offset": 612079,
+   "value": "BG22_HERO_000p_t1"
+  },
+  {
+   "token": "0x70002317",
+   "offset": 612115,
+   "value": "BG22_HERO_001p_t1"
+  },
+  {
+   "token": "0x7000233b",
+   "offset": 612151,
+   "value": "BG22_HERO_000p_t2"
+  },
+  {
+   "token": "0x7000235f",
+   "offset": 612187,
+   "value": "BG22_HERO_001p_t2"
+  },
+  {
+   "token": "0x70002383",
+   "offset": 612223,
+   "value": "BG22_HERO_000p_t3"
+  },
+  {
+   "token": "0x700023a7",
+   "offset": 612259,
+   "value": "BG22_HERO_001p_t3"
+  },
+  {
+   "token": "0x700023cb",
+   "offset": 612295,
+   "value": "BG22_HERO_000p_t4"
+  },
+  {
+   "token": "0x700023ef",
+   "offset": 612331,
+   "value": "BG22_HERO_001p_t4"
+  },
+  {
+   "token": "0x70002413",
+   "offset": 612367,
+   "value": "BGDUO_HERO_101p"
+  },
+  {
+   "token": "0x70002433",
+   "offset": 612399,
+   "value": "activeSide must be defined"
+  },
+  {
+   "token": "0x70002469",
+   "offset": 612453,
+   "value": "Skip (Parent Deathrattle)"
+  },
+  {
+   "token": "0x7000249d",
+   "offset": 612505,
+   "value": "DeathsAndTriggers reborn="
+  },
+  {
+   "token": "0x700024d1",
+   "offset": 612557,
+   "value": "DivineShieldTriggers"
+  },
+  {
+   "token": "0x700024fb",
+   "offset": 612599,
+   "value": "DamageTriggers"
+  },
+  {
+   "token": "0x70002519",
+   "offset": 612629,
+   "value": "DestroyTriggers"
+  },
+  {
+   "token": "0x70002539",
+   "offset": 612661,
+   "value": "TwilightHatchling"
+  },
+  {
+   "token": "0x7000255d",
+   "offset": 612697,
+   "value": "BG34_630t"
+  },
+  {
+   "token": "0x70002571",
+   "offset": 612717,
+   "value": "BG27_518"
+  },
+  {
+   "token": "0x70002583",
+   "offset": 612735,
+   "value": "BG25_354"
+  },
+  {
+   "token": "0x70002595",
+   "offset": 612753,
+   "value": "BG28_843"
+  },
+  {
+   "token": "0x700025a7",
+   "offset": 612771,
+   "value": "BG27_Reward_803"
+  },
+  {
+   "token": "0x700025c7",
+   "offset": 612803,
+   "value": "BG32_432"
+  },
+  {
+   "token": "0x700025d9",
+   "offset": 612821,
+   "value": "BG35_883"
+  },
+  {
+   "token": "0x700025eb",
+   "offset": 612839,
+   "value": "BG30_MagicItem_434"
+  },
+  {
+   "token": "0x70002611",
+   "offset": 612877,
+   "value": "BG34_922"
+  },
+  {
+   "token": "0x70002623",
+   "offset": 612895,
+   "value": "BG28_Reward_501"
+  },
+  {
+   "token": "0x70002643",
+   "offset": 612927,
+   "value": "BG_LOE_077"
+  },
+  {
+   "token": "0x70002659",
+   "offset": 612949,
+   "value": "BG28_509"
+  },
+  {
+   "token": "0x7000266b",
+   "offset": 612967,
+   "value": "BG27_Reward_802"
+  },
+  {
+   "token": "0x7000268b",
+   "offset": 612999,
+   "value": "BG34_177"
+  },
+  {
+   "token": "0x7000269d",
+   "offset": 613017,
+   "value": "BG26_350"
+  },
+  {
+   "token": "0x700026af",
+   "offset": 613035,
+   "value": "SummonOption must define Card or Minion"
+  },
+  {
+   "token": "0x700026ff",
+   "offset": 613115,
+   "value": "options"
+  },
+  {
+   "token": "0x7000270f",
+   "offset": 613131,
+   "value": "BG35_MagicItem_732"
+  },
+  {
+   "token": "0x70002735",
+   "offset": 613169,
+   "value": "EX1_554t"
+  }
+ ],
+ "call_edge_sample": [
+  {
+   "caller_token": "0x060003af",
+   "caller": "BobsBuddy.Simulation.Simulator.AttackWithMinion",
+   "opcode": "callvirt",
+   "target_token": "0x0a0000f9",
+   "target_kind": "member-ref",
+   "target_name": "Push",
+   "target_declaring_type": "System.Collections.Generic.Stack`1"
+  },
+  {
+   "caller_token": "0x060003af",
+   "caller": "BobsBuddy.Simulation.Simulator.AttackWithMinion",
+   "opcode": "call",
+   "target_token": "0x060003b4",
+   "target_kind": "method-def",
+   "target_name": "MinionHasMegaWindfury",
+   "target_declaring_type": "BobsBuddy.Simulation.Simulator"
+  },
+  {
+   "caller_token": "0x060003af",
+   "caller": "BobsBuddy.Simulation.Simulator.AttackWithMinion",
+   "opcode": "callvirt",
+   "target_token": "0x06000067",
+   "target_kind": "method-def",
+   "target_name": "get_windfury",
+   "target_declaring_type": "BobsBuddy.Minion"
+  },
+  {
+   "caller_token": "0x060003af",
+   "caller": "BobsBuddy.Simulation.Simulator.AttackWithMinion",
+   "opcode": "callvirt",
+   "target_token": "0x0600041b",
+   "target_kind": "method-def",
+   "target_name": "get_TriggerScope",
+   "target_declaring_type": "BobsBuddy.Simulation.GameState"
+  },
+  {
+   "caller_token": "0x060003af",
+   "caller": "BobsBuddy.Simulation.Simulator.AttackWithMinion",
+   "opcode": "call",
+   "target_token": "0x0a00003a",
+   "target_kind": "member-ref",
+   "target_name": "Format",
+   "target_declaring_type": "System.String"
+  },
+  {
+   "caller_token": "0x060003af",
+   "caller": "BobsBuddy.Simulation.Simulator.AttackWithMinion",
+   "opcode": "callvirt",
+   "target_token": "0x0a0000fa",
+   "target_kind": "member-ref",
+   "target_name": "New",
+   "target_declaring_type": "BobsBuddy.Simulation.Scope`1"
+  },
+  {
+   "caller_token": "0x060003af",
+   "caller": "BobsBuddy.Simulation.Simulator.AttackWithMinion",
+   "opcode": "call",
+   "target_token": "0x060003b2",
+   "target_kind": "method-def",
+   "target_name": "PerformAttack",
+   "target_declaring_type": "BobsBuddy.Simulation.Simulator"
+  },
+  {
+   "caller_token": "0x060003af",
+   "caller": "BobsBuddy.Simulation.Simulator.AttackWithMinion",
+   "opcode": "call",
+   "target_token": "0x060003d5",
+   "target_kind": "method-def",
+   "target_name": "ResolveTriggersInCurrentScope",
+   "target_declaring_type": "BobsBuddy.Simulation.Simulator"
+  },
+  {
+   "caller_token": "0x060003af",
+   "caller": "BobsBuddy.Simulation.Simulator.AttackWithMinion",
+   "opcode": "call",
+   "target_token": "0x060003ea",
+   "target_kind": "method-def",
+   "target_name": "ResolveReborn",
+   "target_declaring_type": "BobsBuddy.Simulation.Simulator"
+  },
+  {
+   "caller_token": "0x060003af",
+   "caller": "BobsBuddy.Simulation.Simulator.AttackWithMinion",
+   "opcode": "call",
+   "target_token": "0x060003d2",
+   "target_kind": "method-def",
+   "target_name": "ResolveAllDeathsAndTriggers",
+   "target_declaring_type": "BobsBuddy.Simulation.Simulator"
+  },
+  {
+   "caller_token": "0x060003af",
+   "caller": "BobsBuddy.Simulation.Simulator.AttackWithMinion",
+   "opcode": "callvirt",
+   "target_token": "0x0a000019",
+   "target_kind": "member-ref",
+   "target_name": "Dispose",
+   "target_declaring_type": "System.IDisposable"
+  },
+  {
+   "caller_token": "0x060003af",
+   "caller": "BobsBuddy.Simulation.Simulator.AttackWithMinion",
+   "opcode": "callvirt",
+   "target_token": "0x0600034d",
+   "target_kind": "method-def",
+   "target_name": "get_FriendlySide",
+   "target_declaring_type": "BobsBuddy.Simulation.Entity"
+  },
+  {
+   "caller_token": "0x060003af",
+   "caller": "BobsBuddy.Simulation.Simulator.AttackWithMinion",
+   "opcode": "call",
+   "target_token": "0x060003e2",
+   "target_kind": "method-def",
+   "target_name": "GetAllEntities",
+   "target_declaring_type": "BobsBuddy.Simulation.Simulator"
+  },
+  {
+   "caller_token": "0x060003af",
+   "caller": "BobsBuddy.Simulation.Simulator.AttackWithMinion",
+   "opcode": "callvirt",
+   "target_token": "0x0a000022",
+   "target_kind": "member-ref",
+   "target_name": "GetEnumerator",
+   "target_declaring_type": "System.Collections.Generic.IEnumerable`1"
+  },
+  {
+   "caller_token": "0x060003af",
+   "caller": "BobsBuddy.Simulation.Simulator.AttackWithMinion",
+   "opcode": "callvirt",
+   "target_token": "0x0a000021",
+   "target_kind": "member-ref",
+   "target_name": "get_Current",
+   "target_declaring_type": "System.Collections.Generic.IEnumerator`1"
+  }
+ ],
+ "counts": {
+  "fields": 25,
+  "methods": 99,
+  "member_refs": 787,
+  "call_edges": 2617,
+  "field_accesses": 660
+ }
+}

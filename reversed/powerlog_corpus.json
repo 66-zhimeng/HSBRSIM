@@ -1,0 +1,31 @@
+{
+  "replays_dir": "%USERPROFILE%\\AppData\\Roaming\\HearthstoneDeckTracker\\Replays",
+  "total_replays": 1365,
+  "player_count_distribution": {
+    "2": 1365
+  },
+  "battlegrounds_replays": 0,
+  "avg_lines_all": 9759,
+  "avg_bytes_all": 1302593,
+  "marker_totals_all": {
+    "create_game": 1365,
+    "full_entity": 221254,
+    "tag_change": 5608553,
+    "block_start": 491411,
+    "block_end": 491400,
+    "attack_blocks": 31323,
+    "bacon_8p_end": 0,
+    "tb_baconshop": 0,
+    "bacon_tags": 151,
+    "bg_card_ids": 5,
+    "power_tasklist_lines": 0,
+    "game_state_lines": 13319287
+  },
+  "bg_marker_totals": {},
+  "diagnostics": {
+    "files_with_TB_BaconShop": 0,
+    "files_with_BACON_tags": 103,
+    "files_with_BG_card_ids": 2
+  },
+  "note": "hdtreplay = zip；内含 output_log.txt = 完整 Power.log（仅 GameState 行）。本报告已剔除玩家名/账号 id，仅保留聚合统计。BG 判定 = CreateGame 后出现 ≥8 个 Player 实体。"
+}

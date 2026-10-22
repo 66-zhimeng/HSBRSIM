@@ -1,0 +1,187 @@
+{
+  "generated_at": "2026-10-18T07:53:15+00:00",
+  "xml": "C:\\HSagent\\reversed\\data_255130_input\\CardDefs.merged.xml",
+  "out_dir": "C:\\HSagent\\reversed\\data_255130",
+  "generator": "tools/generate_bg_data.py (未修改，经 importlib 猴补丁输入输出路径)",
+  "generated": {
+    "files": {
+      "bg_cards.json": 3534,
+      "bg_pool_minions.json": 273,
+      "bg_pool_spells.json": 76,
+      "bg_heroes.json": 118,
+      "bg_hero_powers.json": 165,
+      "bg_trinkets.json": 409,
+      "bg_anomalies.json": 108,
+      "bg_quest_rewards.json": 73,
+      "bg_tavern_spells.json": 205,
+      "bg_dark_gifts.json": 47,
+      "pool_minion_texts.json": 273
+    },
+    "summary": {
+      "patch": "37.0.0.255130.254477",
+      "total_bg_cards": 3534,
+      "pool_minions": {
+        "count": 273,
+        "by_tier": {
+          "1": 25,
+          "2": 37,
+          "3": 45,
+          "4": 62,
+          "5": 56,
+          "6": 35,
+          "7": 13
+        },
+        "by_race": {
+          "ALL": 4,
+          "BEAST": 21,
+          "DEMON": 20,
+          "DRAGON": 21,
+          "ELEMENTAL": 21,
+          "MECHANICAL": 23,
+          "MURLOC": 22,
+          "NAGA": 21,
+          "NONE": 49,
+          "PIRATE": 24,
+          "QUILBOAR": 25,
+          "UNDEAD": 22
+        },
+        "with_activate": 23
+      },
+      "pool_spells": {
+        "count": 76,
+        "by_tier": {
+          "1": 8,
+          "2": 7,
+          "3": 16,
+          "4": 18,
+          "5": 18,
+          "6": 5,
+          "7": 4
+        }
+      },
+      "dark_gifts": 47,
+      "heroes": {
+        "count": 118
+      },
+      "hero_powers": 165,
+      "tavern_spells": 205,
+      "quest_rewards": 73,
+      "anomalies": 108,
+      "trinkets": 409
+    }
+  },
+  "current_data": {
+    "files": {
+      "bg_cards.json": 3405,
+      "bg_pool_minions.json": 247,
+      "bg_pool_spells.json": 75,
+      "bg_heroes.json": 116,
+      "bg_hero_powers.json": 162,
+      "bg_trinkets.json": 379,
+      "bg_anomalies.json": 108,
+      "bg_quest_rewards.json": 73,
+      "bg_tavern_spells.json": 203,
+      "bg_dark_gifts.json": 43,
+      "pool_minion_texts.json": 247
+    },
+    "summary": {
+      "patch": "36.2.2.249896",
+      "total_bg_cards": 3405,
+      "pool_minions": {
+        "count": 247,
+        "by_tier": {
+          "1": 22,
+          "2": 34,
+          "3": 43,
+          "4": 55,
+          "5": 46,
+          "6": 35,
+          "7": 12
+        },
+        "by_race": {
+          "ALL": 4,
+          "BEAST": 21,
+          "DEMON": 20,
+          "DRAGON": 22,
+          "ELEMENTAL": 23,
+          "MECHANICAL": 21,
+          "MURLOC": 24,
+          "NAGA": 21,
+          "NONE": 24,
+          "PIRATE": 23,
+          "QUILBOAR": 23,
+          "UNDEAD": 21
+        },
+        "with_activate": 17
+      },
+      "pool_spells": {
+        "count": 75,
+        "by_tier": {
+          "1": 8,
+          "2": 7,
+          "3": 17,
+          "4": 17,
+          "5": 17,
+          "6": 5,
+          "7": 4
+        }
+      },
+      "dark_gifts": 43,
+      "heroes": {
+        "count": 116
+      },
+      "hero_powers": 162,
+      "tavern_spells": 203,
+      "quest_rewards": 73,
+      "anomalies": 108,
+      "trinkets": 379
+    }
+  },
+  "engine_load_new": {
+    "ok": true,
+    "cards": 3817,
+    "pool_minions": 273,
+    "pool_spells": 76,
+    "invalid_card_type_count": 14,
+    "invalid_card_type_sample": [
+      "BG22_BuddyMeter",
+      "BG36_Button_DarkGift",
+      "TB_BaconShopLockAll_Button",
+      "TB_BaconShopTechUp02_Button",
+      "TB_BaconShopTechUp03_Button",
+      "TB_BaconShopTechUp04_Button",
+      "TB_BaconShopTechUp05_Button",
+      "TB_BaconShopTechUp06_Button",
+      "TB_BaconShopTechUp07_Button",
+      "TB_BaconShop_1p_Reroll_Button",
+      "TB_BaconShop_8p_Reroll_Button",
+      "TB_BaconShop_DragBuy",
+      "TB_BaconShop_DragBuy_Spell",
+      "TB_BaconShop_DragSell"
+    ]
+  },
+  "engine_load_current": {
+    "ok": true,
+    "cards": 3683,
+    "pool_minions": 247,
+    "pool_spells": 75,
+    "invalid_card_type_count": 14,
+    "invalid_card_type_sample": [
+      "BG22_BuddyMeter",
+      "BG36_Button_DarkGift",
+      "TB_BaconShopLockAll_Button",
+      "TB_BaconShopTechUp02_Button",
+      "TB_BaconShopTechUp03_Button",
+      "TB_BaconShopTechUp04_Button",
+      "TB_BaconShopTechUp05_Button",
+      "TB_BaconShopTechUp06_Button",
+      "TB_BaconShopTechUp07_Button",
+      "TB_BaconShop_1p_Reroll_Button",
+      "TB_BaconShop_8p_Reroll_Button",
+      "TB_BaconShop_DragBuy",
+      "TB_BaconShop_DragBuy_Spell",
+      "TB_BaconShop_DragSell"
+    ]
+  },
+  "rc": 0
+}

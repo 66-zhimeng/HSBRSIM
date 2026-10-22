@@ -1,0 +1,401 @@
+{
+ "schema": "rea.damage_cap_evidence.v1",
+ "generated_by": "reversed/rea/scripts/damage_cap_evidence.py",
+ "sources_checked": {
+  "hdt_logs": "%USERPROFILE%\\AppData\\Roaming\\HearthstoneDeckTracker\\Logs",
+  "official_traces": "C:\\HSagent\\runs\\official_traces",
+  "client_assembly": "C:\\Program Files (x86)\\Hearthstone\\Hearthstone_Data\\Managed\\Assembly-CSharp.dll",
+  "client_strings": "C:\\Program Files (x86)\\Hearthstone\\Strings\\zhCN",
+  "engine": "hsrl2/constants.py, hsrl2/game.py"
+ },
+ "log_scan": {
+  "log_files": 27,
+  "log_file_names": [
+   "hdt_log.txt",
+   "hdt_log_1777989531.txt",
+   "hdt_log_1777990417.txt",
+   "hdt_log_1777990824.txt",
+   "hdt_log_1777990871.txt",
+   "hdt_log_1777991229.txt",
+   "hdt_log_1777991602.txt",
+   "hdt_log_1777992002.txt",
+   "hdt_log_1780061516.txt",
+   "hdt_log_1780061586.txt",
+   "hdt_log_1780061909.txt",
+   "hdt_log_1780064518.txt",
+   "hdt_log_1780064589.txt",
+   "hdt_log_1780064984.txt",
+   "hdt_log_1780066886.txt",
+   "hdt_log_1780574010.txt",
+   "hdt_log_1780825069.txt",
+   "hdt_log_1780924050.txt",
+   "hdt_log_1781094917.txt",
+   "hdt_log_1781183642.txt",
+   "hdt_log_1781265799.txt",
+   "hdt_log_1781348851.txt",
+   "hdt_log_1781440435.txt",
+   "hdt_log_1782559747.txt",
+   "hdt_log_1782639908.txt",
+   "hdt_log_1782732449.txt",
+   "hdt_log_1782824582.txt"
+  ],
+  "total_lines": 70984,
+  "simulation_input_blocks": 679,
+  "validate_result_lines": 536,
+  "validate_result_breakdown": {
+   "Loss/NoOneDied": 183,
+   "Tie/NoOneDied": 58,
+   "Win/NoOneDied": 267,
+   "Loss/FriendlyDied": 17,
+   "Win/OpponentDied": 11
+  },
+  "turn_label_histogram": {
+   "1": 148,
+   "2": 148,
+   "3": 148,
+   "4": 148,
+   "5": 145,
+   "6": 139,
+   "7": 140,
+   "8": 138,
+   "9": 130,
+   "10": 121,
+   "11": 105,
+   "12": 86,
+   "13": 69,
+   "14": 38,
+   "15": 19,
+   "16": 4,
+   "17": 4,
+   "18": 4
+  },
+  "token_counts": {
+   "DamageCap": 0,
+   "damage cap": 0,
+   "DAMAGE_CAP": 0,
+   "BACON_COMBAT_DAMAGE_CAP": 0
+  },
+  "health_token_lines": 105,
+  "health_token_interpretation": "全部为 SetupInputPlayer 的 pBeetleAtk/pBeetleHealth（甲虫累计加成），不是英雄生命值",
+  "health_samples": [
+   "hdt_log.txt:458: 21:17:11|Info|BobsBuddyInvoker.SetupInputPlayer >> pBeetleAtk=8, pBeetleHealth=4, friendly=False",
+   "hdt_log.txt:1201: 21:42:24|Info|BobsBuddyInvoker.SetupInputPlayer >> pBeetleAtk=10, pBeetleHealth=10, friendly=False",
+   "hdt_log.txt:1335: 21:48:00|Info|BobsBuddyInvoker.SetupInputPlayer >> pBeetleAtk=12, pBeetleHealth=6, friendly=False",
+   "hdt_log_1780825069.txt:832: 20:17:36|Info|BobsBuddyInvoker.SetupInputPlayer >> pBeetleAtk=2, pBeetleHealth=1, friendly=True",
+   "hdt_log_1780825069.txt:881: 20:18:48|Info|BobsBuddyInvoker.SetupInputPlayer >> pBeetleAtk=2, pBeetleHealth=1, friendly=True"
+  ],
+  "damage_or_armor_tokens": 0
+ },
+ "powerlog_scan": {
+  "candidates": [
+   "C:\\Program Files (x86)\\Hearthstone\\Logs\\Power.log",
+   "%USERPROFILE%\\AppData\\Local\\Blizzard\\Hearthstone\\Logs\\Power.log",
+   "%USERPROFILE%\\Documents\\Hearthstone\\Logs\\Power.log"
+  ],
+  "found": [],
+  "usable": false,
+  "note": "当前机器没有游戏侧 Power.log（游戏近期未运行）；拿到后运行 reversed/rea/scripts/damage_cap_extract.py 即可产出逐回合 cap 观察表。"
+ },
+ "observations": [],
+ "observation_blocker": {
+  "direct_cap_value": "HDT 日志不打印 input.DamageCap / GameEntity tag / 英雄血量 / 伤害事件；27 个日志、70984 行里 DamageCap 命中 0 次",
+  "damage_inference": "cap 只影响『战败方英雄掉多少血』，不影响 win/tie/loss；而本语料没有任何血量/伤害可观测项 → 无法反推。",
+  "alive_players": "HDT 日志没有玩家淘汰/存活数事件（GameEventHandler 只有回合/技能/胜负）。"
+ },
+ "corpus": {
+  "traces": 679,
+  "turn_histogram": {
+   "1": 53,
+   "2": 55,
+   "3": 53,
+   "4": 56,
+   "5": 54,
+   "6": 52,
+   "7": 53,
+   "8": 56,
+   "9": 54,
+   "10": 52,
+   "11": 42,
+   "12": 38,
+   "13": 31,
+   "14": 15,
+   "15": 9,
+   "16": 2,
+   "17": 2,
+   "18": 2
+  },
+  "turn_min": 1,
+  "turn_max": 18,
+  "official_result_counts": {
+   "win": 271,
+   "tie": 58,
+   "null": 156,
+   "loss": 195
+  }
+ },
+ "official_client_evidence": {
+  "client_version": "37.0.0.255130",
+  "assembly_sha256": "786376bddad544709639d4b3ab60ce8799d4b1c6c7d7fc4c225ce79fe07228c6",
+  "tag_ids": {
+   "BACON_COMBAT_DAMAGE_CAP": 2089,
+   "BACON_COMBAT_DAMAGE_CAP_ENABLED": 3403,
+   "source": "reversed/net/key_enums.json -> game_tag.values"
+  },
+  "client_applies_cap_in_lethal_check": {
+   "file": "reversed\\net\\decompiled\\TB_BaconShop.cs",
+   "line": 1695,
+   "snippet": [
+    "string line = null;",
+    "if (player != null && actor != null && (bool)actor.GetCard() && actor.GetCard().LegendaryHeroSkin != null && actor.GetCard().LegendaryHeroSkin.CheckKnockoutLine(out line))",
+    "{",
+    "int num = player.GetTag(GAME_TAG.PLAYER_TECH_LEVEL) + GetPlayerCombinedMinionsTechLevel(player);",
+    "int tag = GameState.Get().GetGameEntity().GetTag(GAME_TAG.BACON_COMBAT_DAMAGE_CAP);",
+    "if (tag != 0 && num > tag && GameState.Get().GetGameEntity().GetRealtimeBaconDamageCapEnabled())",
+    "{",
+    "num = tag;",
+    "}",
+    "if (num >= defense)",
+    "{",
+    "StartDuckingFx();",
+    "yield return PlayVOLineWithOffsetBubble(line, actor);",
+    "StopDuckingFx();",
+    "}",
+    "}"
+   ]
+  },
+  "client_listens_to_cap_tag_changes": {
+   "file": "reversed\\net\\decompiled\\GameState.cs",
+   "line": 1908,
+   "snippet": [
+    "OnTurnChanged(change.oldValue, change.newValue);",
+    "break;",
+    "case GAME_TAG.BACON_COMBAT_DAMAGE_CAP:",
+    "OnDamageCapChanged(change.oldValue, change.newValue);",
+    "break;",
+    "case GAME_TAG.BACON_DIABLO_FIGHT_DIABLO_PLAYER_ID:"
+   ]
+  },
+  "client_ui_members": [
+   "DamageCapPanel::SetText(System.String) -> System.Void",
+   "DamageCapPanel::ClearText() -> System.Void",
+   "DamageCapPanel::.ctor() -> System.Void",
+   "GameState::OnDamageCapChanged(System.Int32,System.Int32) -> System.Void",
+   "GameState::RegisterDamageCapChangedListener(GameState/DamageCapChangedCallback) -> System.Boolean",
+   "GameState::RegisterDamageCapChangedListener(GameState/DamageCapChangedCallback,System.Object) -> System.Boolean",
+   "GameState::UnregisterDamageCapChangedListener(GameState/DamageCapChangedCallback) -> System.Boolean",
+   "GameState::UnregisterDamageCapChangedListener(GameState/DamageCapChangedCallback,System.Object) -> System.Boolean",
+   "GameState::FireDamageCapChangedEvent(System.Int32,System.Int32) -> System.Void",
+   "GameState/DamageCapChangedCallback::.ctor(System.Object,System.IntPtr) -> System.Void",
+   "GameState/DamageCapChangedCallback::Invoke(System.Int32,System.Int32,System.Object) -> System.Void",
+   "GameState/DamageCapChangedCallback::BeginInvoke(System.Int32,System.Int32,System.Object,System.AsyncCallback,System.Object) -> System.IAsyncResult",
+   "GameState/DamageCapChangedCallback::EndInvoke(System.IAsyncResult) -> System.Void",
+   "GameState/DamageCapChangedListener::Fire(System.Int32,System.Int32) -> System.Void"
+  ],
+  "client_ui_code": {
+   "recent_combats_panel_reads_and_displays_tag": {
+    "file": "reversed\\rea\\client\\PlayerLeaderboardRecentCombatsPanel.cs",
+    "line": 158,
+    "snippet": [
+     "{",
+     "m_damageCapValue = GameState.Get().GetGameEntity().GetTag(GAME_TAG.BACON_COMBAT_DAMAGE_CAP);",
+     "m_damageCap.gameObject.SetActive(GameState.Get().GetGameEntity().GetRealtimeBaconDamageCapEnabled());",
+     "m_damageCap.SetText(m_damageCapValue.ToString());",
+     "}",
+     "}",
+     "private void UpdateTechLevelPlaymaker()",
+     "{",
+     "PlayMakerFSM component = m_techLevel.GetComponent<PlayMakerFSM>();"
+    ]
+   },
+   "leaderboard_manager_fx_on_cap_change": {
+    "file": "reversed\\rea\\client\\PlayerLeaderboardManager.cs",
+    "line": 722,
+    "snippet": [
+     "}",
+     "bool enabled = GameState.Get().GetGameEntity().HasTag(GAME_TAG.BACON_COMBAT_DAMAGE_CAP_ENABLED);",
+     "Spell damageCapSpell = Board.Get().m_leaderboardDamageCapFX;",
+     "if (!m_isLeaderboardDamageCapFXActive)",
+     "{",
+     "if (damageCapSpell != null)",
+     "{",
+     "m_wasLeaderboardDamageCapFXActive = false;",
+     "while (gameEntity.IsInBattlegroundsCombatPhase() || gameEntity.IsStateChangePopupVisible())"
+    ]
+   },
+   "entity_enabled_flag": {
+    "file": "reversed\\rea\\client\\Entity.cs",
+    "line": 2641,
+    "snippet": [
+     "{",
+     "m_realTimeBaconDamageCapEnabled = value > 0;",
+     "}",
+     "public bool GetRealtimeBaconDamageCapEnabled()",
+     "{",
+     "return m_realTimeBaconDamageCapEnabled;"
+    ]
+   },
+   "damage_cap_panel_settext": {
+    "file": "reversed\\rea\\client\\DamageCapPanel.cs",
+    "line": 7,
+    "snippet": [
+     "public void SetText(string text)",
+     "{",
+     "if (text == \"\")",
+     "{",
+     "ClearText();",
+     "}",
+     "else",
+     "{",
+     "m_text.gameObject.SetActive(value: true);",
+     "}",
+     "m_text.Text = text;",
+     "}"
+    ]
+   }
+  },
+  "official_rule_texts": {
+   "GLOBAL_KEYWORD_BACON_REBORN": {
+    "value": "复生",
+    "file": "GLOBAL.txt",
+    "line": 788
+   },
+   "GLOBAL_KEYWORD_BACON_REBORN_TEXT": {
+    "value": "在其首次死亡时召唤一个具有1点生命值的新的复制。",
+    "file": "GLOBAL.txt",
+    "line": 789
+   },
+   "GLUE_BACON_GAMEPLAYLABEL_DAMAGECAP": {
+    "value": "伤害上限：",
+    "file": "GLUE.txt",
+    "line": 384
+   },
+   "GLUE_BACON_INFO_POPUP_COMBAT_TIPS": {
+    "value": "<color=#C900FF>• 玩家顺序：</color> 随从数量多的玩家先攻击。\\n<color=#C900FF>• 随从顺序：</color> 场上随从会从左向右依次攻击。\\n<color=#C900FF>• 攻击目标：</color> 除非有敌方嘲讽随从，否则每次攻击的目标都是随机的。\\n<color=#C900FF>• 战斗胜利：</color> 战斗获胜后，你会对敌方英雄造成等同于你当前酒馆等级与场上随从等级总和的伤害。直到决出四强之前，单次伤害都有上限，具体数值请看左边栏。\\n<color=#C900FF>• 战斗增益：</color> 战斗阶段的增益效果都是临时的，战斗结束后你的随从会回到上一个招募阶段结束时的状态。\\n<color=#C900FF>• 手牌增益：</color> 手牌中卡牌的变化会保留到后续回合。",
+    "file": "GLUE.txt",
+    "line": 387
+   },
+   "GLUE_BACON_INFO_POPUP_COMBAT_TIPS_DUOS": {
+    "value": "<color=#C900FF>• 玩家顺序：</color> 随从数量多的玩家先攻击。\\n<color=#C900FF>• 随从顺序：</color> 场上随从会从左向右依次攻击。\\n<color=#C900FF>• 攻击目标：</color> 除非有敌方嘲讽随从，否则每次攻击的目标都是随机的。\\n<color=#C900FF>• 战斗胜利：</color> 战斗获胜后，你会对敌方英雄造成等同于你当前酒馆等级与场上随从等级总和的伤害。单次伤害上限为15点，该限制会在只剩4位玩家后解除\\n<color=#C900FF>• 战斗增益：</color> 战斗阶段的增益效果都是临时的，战斗结束后你的随从会回到上一个招募阶段结束时的状态。\\n<color=#C900FF>• 手牌增益：</color> 手牌中卡牌的变化会保留到后续回合。",
+    "file": "GLUE.txt",
+    "line": 388
+   },
+   "GLUE_TIP_BACON_11": {
+    "value": "只有招募阶段的增益效果会永久保留。\\n战斗阶段的增益效果会在战斗结束时消失。",
+    "file": "GLUE.txt",
+    "line": 3634
+   },
+   "GLUE_TIP_BACON_20": {
+    "value": "在战斗中，随从数量多的一方先攻击。如果随从数量相同，则随机决定先手。",
+    "file": "GLUE.txt",
+    "line": 3644
+   },
+   "GLUE_TIP_BACON_21": {
+    "value": "<b>亡语</b>会在<b>复生</b>之前触发。",
+    "file": "GLUE.txt",
+    "line": 3645
+   },
+   "GLUE_TIP_BACON_SOLO_1": {
+    "value": "英雄受到的单次伤害上限为15点。这一限制会在场上只剩4位玩家后解除。",
+    "file": "GLUE.txt",
+    "line": 3674
+   }
+  },
+  "interpretation": "客户端在判断『是否致命/播放击杀语音』时把伤害截到 GameEntity tag BACON_COMBAT_DAMAGE_CAP，且仅当 tag!=0 与 GetRealtimeBaconDamageCapEnabled()（tag 3403）为真；GameState 注册 BACON_COMBAT_DAMAGE_CAP 的 TAG_CHANGE 回调 → cap 在对局中会**变化**（服务器下发）；HUD 由 PlayerLeaderboardManager / DamageCapPanel 显示『伤害上限：』。客户端无任何 5/10/15 之类的本地档位表。"
+ },
+ "third_party_simulator_evidence": {
+  "host": "Hearthstone Deck Tracker (BobsBuddy plugin)",
+  "input_construction": {
+   "file": "reversed/rea/hdt_bobsbuddy/BobsBuddyInvoker.cs",
+   "line": 652,
+   "snippet": [
+    "}",
+    "input.availableRaces = BattlegroundsUtils.GetAvailableRaces(_currentGameId).ToList();",
+    "if (_game.GameEntity.GetTag(GameTag.BACON_COMBAT_DAMAGE_CAP_ENABLED) > 0)",
+    "{",
+    "input.DamageCap = _game.GameEntity.GetTag(GameTag.BACON_COMBAT_DAMAGE_CAP);",
+    "}",
+    "try",
+    "{"
+   ]
+  },
+  "simulator_field": "BobsBuddy.Simulation.Simulator.DamageCap（reversed/rea/bobsbuddy/src_full/BobsBuddy.decompiled.cs:6336/6680/7020-7030）"
+ },
+ "engine_rule": {
+  "file": "hsrl2/constants.py",
+  "constants": {
+   "DAMAGE_CAP_BY_TURN": {
+    "value": 5,
+    "line": 42
+   },
+   "DAMAGE_CAP_T4_T7": {
+    "value": 10,
+    "line": 43
+   },
+   "DAMAGE_CAP_T8_PLUS": {
+    "value": 15,
+    "line": 44
+   },
+   "DAMAGE_CAP_REMOVED_AT_PLAYERS": {
+    "value": 4,
+    "line": 45
+   }
+  },
+  "function": [
+   "def damage_cap(turn: int, alive_players: int) -> int | None:",
+   "\"\"\"单次战斗伤害上限; None = 无上限 (RULES §5.2)。\"\"\"",
+   "if alive_players <= DAMAGE_CAP_REMOVED_AT_PLAYERS:",
+   "return None",
+   "if turn <= 3:",
+   "return DAMAGE_CAP_BY_TURN",
+   "if turn <= 7:",
+   "return DAMAGE_CAP_T4_T7",
+   "return DAMAGE_CAP_T8_PLUS",
+   "# ── 战斗循环保护 ──────────────────────────────────────────────────",
+   "COMBAT_MAX_ATTACK_ROUNDS = 2000    # 超限抛异常（旧实现静默平局）"
+  ],
+  "behaviour": "alive_players <= 4 -> None（无上限）；turn<=3 -> 5；turn<=7 -> 10；否则 15（本地 turn 表，非服务器 tag）",
+  "override_hook": "hsrl2/game.py:3139-3140 `_damage_cap_override`"
+ },
+ "comparison": {
+  "cap_removal_threshold": {
+   "official_text": "场上只剩4位玩家后解除（GLUE_TIP_BACON_SOLO_1 / DUOS popup）",
+   "engine": "DAMAGE_CAP_REMOVED_AT_PLAYERS = 4（alive<=4 -> None）",
+   "verdict": "MATCH",
+   "confidence": "high（官方字符串 + 客户端 UI/逻辑）"
+  },
+  "cap_is_dynamic_server_tag": {
+   "official": "BACON_COMBAT_DAMAGE_CAP(2089) + ENABLED(3403)；GameState 监听 TAG_CHANGE；侧栏 DamageCapPanel 显示当前值",
+   "engine": "本地 turn 表（5/10/15）",
+   "verdict": "MECHANISM_MISMATCH（引擎是近似；权威值需从服务器 tag 获取）",
+   "confidence": "high（客户端代码+字符串，BobsBuddy 同机制）"
+  },
+  "cap_value_by_turn": {
+   "official_text_ceiling": "GLUE_TIP_BACON_SOLO_1：单次上限 15 点；COMBAT_TIPS：直到决出四强前有上限，具体数值看左边栏",
+   "engine": "turn<=3:5, turn<=7:10, turn>=8:15（另 alive<=4 无上限）",
+   "verdict": "UNVERIFIED（本地无可观测数据；官方文本只给上限 15 与动态显示）",
+   "confidence": "low（无逐场 tag 样本）"
+  },
+  "damage_formula": {
+   "official": "PLAYER_TECH_LEVEL + Σ 场上随从 TECH_LEVEL（TB_BaconShop.cs:1694 / GLUE_TIP_BACON_3）",
+   "engine": "winner.tavern_tier + Σ winner 存活随从 tech_level（hsrl2/game.py:3499-3504）",
+   "verdict": "MATCH",
+   "confidence": "high"
+  }
+ },
+ "confidence_summary": {
+  "cap_uses_server_tag": "high",
+  "cap_removed_at_4_players": "high",
+  "cap_ceiling_15": "high（官方 tip 文本；旧文本可能滞后）",
+  "turn_tier_values_5_10_15": "UNVERIFIED — 需要 Power.log tag 样本"
+ },
+ "next_steps": {
+  "capture": "下次运行游戏并开启 Power.log 后，采集 >=20 场 BG 对局",
+  "extract": "C:\\Python313\\python.exe reversed\\rea\\scripts\\damage_cap_extract.py --powerlog <Power.log 路径>",
+  "look_for": [
+   "GameEntity 初始化/变更中的 tag=2089 value=...（BACON_COMBAT_DAMAGE_CAP）",
+   "GameEntity 的 tag=3403 value=...（ENABLED）",
+   "TURN tag 变化以对齐『第 N 回合』",
+   "PLAYSTATE=LOST/PLAYING 以计算存活人数"
+  ]
+ }
+}

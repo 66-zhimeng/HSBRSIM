@@ -1,0 +1,58 @@
+﻿{
+    "generated_at_utc":  "2026-10-18T08:39:14.4783582Z",
+    "tool":  {
+                 "node":  "v24.13.0",
+                 "name":  "rea-agents",
+                 "version":  "6.7.0"
+             },
+    "dll":  "C:\\Program Files (x86)\\Hearthstone\\BepInEx\\plugins\\HsMod.dll",
+    "assembly":  "HsMod",
+    "output_dir":  "C:\\HSagent\\reversed\\rea\\hsmod\\rea_run",
+    "artifact":  {
+                     "sha256":  "6b3f26b7b8eee7f37af0ef2b098f127b097b049a8802de49888a963cabb32060",
+                     "byte_length":  745984,
+                     "format":  "pe",
+                     "machine":  332,
+                     "architecture":  "x86",
+                     "metadata":  "complete",
+                     "assembly":  {
+                                      "version":  "4.1.0.0",
+                                      "name":  "HsMod"
+                                  },
+                     "references":  [
+                                        "mscorlib 4.0.0.0",
+                                        "BepInEx 5.4.19.0",
+                                        "Assembly-CSharp 0.0.0.0",
+                                        "Blizzard.T5.GraphicsManagerInterface 0.0.0.0",
+                                        "0Harmony 2.9.0.0",
+                                        "UnityEngine.CoreModule 0.0.0.0",
+                                        "Blizzard.T5.Configuration 0.0.0.0",
+                                        "System 4.0.0.0",
+                                        "blizzard.bgsclient 0.0.0.0",
+                                        "Blizzard.T5.Core 0.0.0.0",
+                                        "Blizzard.T5.AssetLoader 0.0.0.0",
+                                        "Blizzard.T5.AssetManager 0.0.0.0",
+                                        "System.Core 4.0.0.0",
+                                        "Blizzard.T5.ServiceLocator 0.0.0.0",
+                                        "UnityEngine.InputLegacyModule 0.0.0.0",
+                                        "blizzard.bgssdk 0.0.0.0",
+                                        "UnityEngine.IMGUIModule 0.0.0.0",
+                                        "UnityEngine.TextRenderingModule 0.0.0.0",
+                                        "Blizzard.T5.Game 0.0.0.0",
+                                        "Blizzard.T5.Logging 0.0.0.0"
+                                    ],
+                     "coverage":  {
+                                      "state":  "complete",
+                                      "issues":  [
+
+                                                 ]
+                                  },
+                     "evidence_id":  "ev_13122e7b1bc5450d127f3f6c94cfc1852a0d8fee62858358e06e8b2112286852"
+                 },
+    "type_analyses":  [
+
+                      ],
+    "notes":  [
+
+              ]
+}

@@ -1,0 +1,696 @@
+{
+ "schema": "evidence_round2.v1",
+ "generated_at_utc": "2026-10-19T01:12:48+00:00",
+ "scope": [
+  "BG31_171",
+  "BGS_004",
+  "BG31_035",
+  "BG26_174",
+  "BG35_701",
+  "BG32_822",
+  "BG33_155",
+  "BG34_320",
+  "BGFYM_000",
+  "P2b"
+ ],
+ "sources": {
+  "raw_powerlog": [
+   "runs\\powerlog\\Power.log",
+   "runs\\powerlog_2214\\Power.log",
+   "runs\\powerlog_2240\\Power.log",
+   "runs\\live\\fix3_real\\Power.log",
+   "runs\\live\\live_final_powerlog\\Power.log",
+   "runs\\live\\collect_fix3_logs\\Power.log"
+  ],
+  "traces": "runs/official_traces*（powerlog/hdt/live 共 800+ trace JSON）",
+  "state_corpus": "runs/state_corpus/states.jsonl",
+  "hdt_logs": "runs/hdt_logs_2214/hdt_log.txt, runs/hdt_logs_2240/hdt_log.txt（无目标卡 id）",
+  "xml": "runs/bg_last_games_20261018.xml",
+  "live": "runs/live/（截图 + Power.log 采集）"
+ },
+ "coverage": {
+  "BG31_171": {
+   "name": "Moonsteel Juggernaut",
+   "raw_powerlog": 0,
+   "traces": 49,
+   "states": 181,
+   "hdt_logs": 0,
+   "xml": 0,
+   "trace_occurrences": "42 board / 7 hand; 7 golden"
+  },
+  "BGS_004": {
+   "name": "Wrath Weaver",
+   "raw_powerlog": 8600,
+   "traces": 79,
+   "states": 56,
+   "hdt_logs": 0,
+   "xml": 2,
+   "trace_occurrences": "78 board / 1 hand; 23 golden"
+  },
+  "BG31_035": {
+   "name": "Groundbreaker",
+   "raw_powerlog": 0,
+   "traces": 36,
+   "states": 36,
+   "hdt_logs": 0,
+   "xml": 0,
+   "trace_occurrences": "35 board / 1 hand; 14 golden"
+  },
+  "BG26_174": {
+   "name": "Soul Rewinder",
+   "raw_powerlog": 10800,
+   "traces": 111,
+   "states": 108,
+   "hdt_logs": 0,
+   "xml": 9,
+   "trace_occurrences": "106 board / 5 hand; 26 golden"
+  },
+  "BG35_701": {
+   "name": "Brazen Buccaneer",
+   "raw_powerlog": 0,
+   "traces": 61,
+   "states": 61,
+   "hdt_logs": 0,
+   "xml": 0,
+   "trace_occurrences": "55 board / 6 hand; 11 golden"
+  },
+  "BG32_822": {
+   "name": "Fire-forged Evoker",
+   "raw_powerlog": 0,
+   "traces": 46,
+   "states": 46,
+   "hdt_logs": 0,
+   "xml": 0,
+   "trace_occurrences": "40 board / 6 hand; 16 golden"
+  },
+  "BG33_155": {
+   "name": "Devout Hellcaller",
+   "raw_powerlog": 1400,
+   "traces": 30,
+   "states": 28,
+   "hdt_logs": 0,
+   "xml": 0,
+   "trace_occurrences": "29 board / 1 hand; 5 golden"
+  },
+  "BG34_320": {
+   "name": "The Last One Standing",
+   "raw_powerlog": 1617,
+   "traces": 19,
+   "states": 16,
+   "hdt_logs": 0,
+   "xml": 1,
+   "trace_occurrences": "13 board / 6 hand; 3 golden"
+  },
+  "BGFYM_000": {
+   "name": "C'Thun (Deity token)",
+   "raw_powerlog": 1052,
+   "traces": 22,
+   "states": 17,
+   "hdt_logs": 0,
+   "xml": 0,
+   "trace_occurrences": "3 hdt + 19 powerlog2 trace JSON occurrences"
+  },
+  "BG25_008": {
+   "name": "Eternal Knight",
+   "raw_powerlog": 3960,
+   "traces": 93,
+   "states": 88,
+   "hdt_logs": 0,
+   "xml": 1,
+   "trace_occurrences": "89 board / 4 hand; 21 golden"
+  },
+  "BG35_342": {
+   "name": "Falling Sky Golem",
+   "raw_powerlog": 299,
+   "traces": 66,
+   "states": 65,
+   "hdt_logs": 0,
+   "xml": 0,
+   "trace_occurrences": "54 board / 12 hand; 5 golden"
+  },
+  "BG35_921": {
+   "name": "Abyssal Bruiser",
+   "raw_powerlog": 0,
+   "traces": 21,
+   "states": 21,
+   "hdt_logs": 0,
+   "xml": 0,
+   "trace_occurrences": "19 board / 2 hand; 0 golden"
+  },
+  "BG_TTN_401": {
+   "name": "Ancestral Automaton",
+   "raw_powerlog": 0,
+   "traces": 35,
+   "states": 38,
+   "hdt_logs": 0,
+   "xml": 3,
+   "trace_occurrences": "34 board / 1 hand; 5 golden"
+  },
+  "BG26_537": {
+   "name": "Flourishing Frostling",
+   "raw_powerlog": 0,
+   "traces": 0,
+   "states": 2,
+   "hdt_logs": 0,
+   "xml": 2,
+   "trace_occurrences": "0（仅 corpus/XML 出现，无 trace 标签样本）"
+  },
+  "BG36_524": {
+   "name": "Maritime Extortionist",
+   "raw_powerlog": 267,
+   "traces": 4,
+   "states": 1,
+   "hdt_logs": 0,
+   "xml": 0,
+   "trace_occurrences": "1 board / 3 hand; 0 golden"
+  },
+  "BG25_013": {
+   "name": "Rot Hide Gnoll",
+   "raw_powerlog": 0,
+   "traces": 0,
+   "states": 0,
+   "hdt_logs": 0,
+   "xml": 0,
+   "trace_occurrences": "无样本"
+  },
+  "BG31_810": {
+   "name": "Ultraviolet Ascendant",
+   "raw_powerlog": 240,
+   "traces": 1,
+   "states": 0,
+   "hdt_logs": 0,
+   "xml": 0,
+   "trace_occurrences": "1 board（无 ScriptDataNum tag）"
+  }
+ },
+ "cards": {
+  "BG31_171": {
+   "name": "Moonsteel Juggernaut",
+   "category": "improve-this 数值序列",
+   "verdict": "can_implement",
+   "confidence": "high",
+   "summary": "HDT trace 配对样本显示：Moonsteel 的 ScriptDataNum1 = 当前 Satellite 数值，ScriptDataNum2 = 下一次 EoT 后的 Satellite 数值（普通 +6/+6、金色 +12/+12）；手牌 Satellite 常滞后于 SCN1，支持“每次 EoT 把未来 Satellite 提高一步”，不是给 Moonsteel 自己加属性。Power.log 无原始样本（0 行），因此没有逐事件 EoT 序列。",
+   "evidence": [
+    {
+     "source": "official_traces_hdt/258fe84214186d8a.json",
+     "trace_id": "258fe84214186d8a",
+     "turn": 10,
+     "side": "player",
+     "event": "combat boundary snapshot",
+     "values": "Moonsteel 595/589, SCN1=72, SCN2=78；hand Satellites=60/60,66/66,72/72",
+     "inference": "SCN1=72 等于最新 Satellite；SCN2=78=SCN1+6（普通步长）"
+    },
+    {
+     "source": "official_traces_hdt/652075ebff8d9242.json",
+     "trace_id": "652075ebff8d9242",
+     "turn": 7,
+     "side": "player",
+     "event": "combat boundary snapshot",
+     "values": "Moonsteel 8/8, SCN1=18, SCN2=24；hand Satellites=6/6,12/12,18/18",
+     "inference": "再次验证 SCN1=当前值18、SCN2=下次24；旧 Satellite 保留 6/12"
+    },
+    {
+     "source": "official_traces_hdt/0311764c97bfa869.json",
+     "trace_id": "0311764c97bfa869",
+     "turn": 15,
+     "side": "player",
+     "event": "combat boundary snapshot",
+     "values": "Golden Moonsteel 2803/2073, SCN1=102, SCN2=114；hand Satellites=102/102",
+     "inference": "金色步长为 +12（114-102），与 CardDef BG31_171_G SCN2=12 一致"
+    },
+    {
+     "source": "official_traces_hdt/571661347e3518c6.json",
+     "trace_id": "571661347e3518c6",
+     "turn": 14,
+     "side": "opponent",
+     "event": "combat boundary snapshot",
+     "values": "Golden Moonsteel 396/324, SCN1=42, SCN2=54, Enchantments=AutoAssembler(8,8)",
+     "inference": "金色 42→54（+12）；附魔是外源 buff，不改变 SCN1/SCN2 关系"
+    }
+   ],
+   "can_infer": [
+    "普通 Moonsteel: 当前 Satellite 数值 = SCN1；下一档 = SCN1+6",
+    "金色 Moonsteel: 下一档 = SCN1+12",
+    "手牌 Satellite 的多个档位 (=6,12,18,...) 与历史 EoT 序列一致，SCN2 是“下一次”而非已发放值"
+   ],
+   "cannot_infer": [
+    "Power.log 无原始 EoT 前后事件序列；无法直接观察 Moonsteel 自身 atk/health 是否变化（trace 中其高属性来自其它 buff）",
+    "SCN2 的 +6/+12 是否叠加其它 improve 来源（饰品/畸变）未测试；仅普通/金色基础步长有样本"
+   ],
+   "engine_action": "无需新原语：现有 create_minion/Buff/script-data 通道可实现“EoT 后未来 Satellite 数值 +6/+12”；实现前把该解释作为 Moonsteel 的 rule，不要用 trace 的 SCN2 直接当自身属性。"
+  },
+  "BGS_004": {
+   "name": "Wrath Weaver",
+   "category": "C 类 tag 槽位",
+   "verdict": "can_implement_official_slots",
+   "confidence": "high_for_base / medium_for_golden",
+   "summary": "Power.log 官方创建 tag 为 SCN1=2、SCN2=2（普通/金色均如此），实际每次恶魔触发后atk/health 各 +2（样本 7/9→9/11）；trace 的 ScriptDataNum2=1 是 HDT 侧槽位/版本差异，不能拿来当官方 +health 值。",
+   "evidence": [
+    {
+     "source": "runs/powerlog_2240/Power.log",
+     "line": 96451,
+     "event": "FULL_ENTITY - Creating ID=4768 CardID=BGS_004",
+     "values": "ATK=1, HEALTH=3, SCN1=2, SCN2=2",
+     "inference": "官方创建 tag 槽位 1/2 = 2/2（CardDef 同值）"
+    },
+    {
+     "source": "runs/powerlog_2240/Power.log",
+     "line": 96503,
+     "event": "TAG_CHANGE Entity=4768 tag=HEALTH value=9; line 96504 tag=ATK value=7",
+     "values": "7/9；随后 112151/112152 为 9/11，121536/121537 为 11/13",
+     "inference": "每次触发 atk/health 各 +2（不是 trace 的 +2/+1）"
+    },
+    {
+     "source": "runs/live/fix3_real/Power.log",
+     "line": 7119,
+     "event": "FULL_ENTITY Creating BGS_004",
+     "values": "ATK=1, HEALTH=3, SCN1=2, SCN2=2",
+     "inference": "同一官方槽位口径在另一局复现"
+    },
+    {
+     "source": "official_traces_hdt/02b2ef86c6f36613.json",
+     "trace_id": "02b2ef86c6f36613",
+     "turn": 6,
+     "side": "opponent",
+     "event": "combat boundary snapshot",
+     "values": "BGS_004 7/10, ScriptDataNum1=2, ScriptDataNum2=1",
+     "inference": "trace 的 SCN2=1 与 Power.log SCN2=2 冲突：HDT trace 槽位不能直读"
+    }
+   ],
+   "can_infer": [
+    "官方槽位1/2=+2/+2；基础触发为每次 +2/+2"
+   ],
+   "cannot_infer": [
+    "金色触发次数/是否 4/4 没有干净的连续样本（官方 SCN 仍 2/2，golden 文本使触发 twice）"
+   ],
+   "engine_action": "按官方 SCN1=2/SCN2=2 注入 +2/+2；不要采用 HDT trace 的 SCN2=1。金色需 engine 脚本按“twice”处理，tag 不能直接给出次数。"
+  },
+  "BG31_035": {
+   "name": "Groundbreaker",
+   "category": "C 类 tag 槽位",
+   "verdict": "deferred_no_raw",
+   "confidence": "low",
+   "summary": "Power.log 0 行；只有 36 个 HDT trace 快照。观察到 SCN1/SCN2/SCN3 三槽，但槽位语义与CardDef（NUM1=3 阈值、NUM2=1 增益）不对齐，且没有逐次打 Naga / 施法前后的连续序列，无法裁定 SCN2 到底是当前增益、Naga 次数还是法术进度。",
+   "evidence": [
+    {
+     "source": "official_traces_hdt/077d9ee1f9aff612.json",
+     "trace_id": "077d9ee1f9aff612",
+     "turn": 13,
+     "side": "player",
+     "values": "BG31_035 2268/2184, SCN1=2, SCN2=84, SCN3=2",
+     "inference": "SCN2 随面板数值增大，但 SCN1/SCN3 仍 2；无法唯一映射",
+     "event": "combat boundary snapshot"
+    },
+    {
+     "source": "official_traces_hdt/116c80e0c89b9dac.json",
+     "trace_id": "116c80e0c89b9dac",
+     "turn": 9,
+     "side": "player",
+     "values": "两张 BG31_035 161/61、86/36，均 SCN1=4, SCN2=10, SCN3=4",
+     "inference": "同卡同回合两个实体 tag 相同，SCN2=10 与面板差值的比例不固定",
+     "event": "combat boundary snapshot"
+    },
+    {
+     "source": "official_traces_hdt/0ebb9c23013a15e4.json",
+     "trace_id": "0ebb9c23013a15e4",
+     "turn": 11,
+     "side": "opponent",
+     "values": "BG31_035 22/12, SCN1=2, SCN2=6, SCN3=2",
+     "inference": "SCN2=6 更可能是已累计触发/增益，但缺触发前值",
+     "event": "combat boundary snapshot"
+    }
+   ],
+   "can_infer": [
+    "HDT 记录了三槽 ScriptDataNum1/2/3；SCN2 随成长显著变化，SCN1/SCN3 常为 1/2/4"
+   ],
+   "cannot_infer": [
+    "SCN2 与 Naga 次数、每 3 法术进度、当前 +X/+X 三者的对应关系",
+    "官方 Power.log 的槽位/是否存在 SCN1=3 的初始值（无样本）"
+   ],
+   "engine_action": "保持 DEFERRED；等 Power.log 真实触发序列或 engine-analyst 给槽位映射后再实现，不要用 HDT 快照猜。"
+  },
+  "BG26_174": {
+   "name": "Soul Rewinder",
+   "category": "C 类 tag 槽位",
+   "verdict": "deferred_slot_conflict",
+   "confidence": "medium",
+   "summary": "Power.log 官方创建槽位是 SCN3=2（base）/4（金色），与 CardDef NUM3=2/4、文本 `{2}` 一致；但 HDT trace 主要记录 ScriptDataNum2（如 5/9/20/21），槽位发生 2↔3 偏移，无法用 trace 裁定回血/计数增量。",
+   "evidence": [
+    {
+     "source": "runs/live/live_final_powerlog/Power.log",
+     "line": 76046,
+     "event": "FULL_ENTITY Creating BG26_174",
+     "values": "ATK=4,HEALTH=2, SCN3=2；line 76071 SCN2=7（战斗/回血过程中动态）",
+     "inference": "官方有 SCN2 动态值，但创建默认槽位是 SCN3=2；不能把 trace 的 SCN2 当 NUM3"
+    },
+    {
+     "source": "runs/powerlog_2240/Power.log",
+     "line": 120181,
+     "event": "FULL_ENTITY Creating BG26_174_G（金色）",
+     "values": "ATK=8,HEALTH=4, SCN3=4；line 120212 SCN3=2→ line 120359 SCN3=4",
+     "inference": "金色官方槽位 SCN3=4；HDT trace 却常见 SCN1/SCN2，需显式映射"
+    },
+    {
+     "source": "official_traces_hdt/1779cc01ecb9c134.json",
+     "trace_id": "1779cc01ecb9c134",
+     "turn": 8,
+     "side": "player",
+     "values": "BG26_174 8/7, ScriptDataNum2=21",
+     "inference": "trace 单槽 SCN2=21；与官方创建 SCN3=2 不直接对应",
+     "event": "combat boundary snapshot"
+    }
+   ],
+   "can_infer": [
+    "官方 Power.log 创建槽位 SCN3=2/4（base/golden），与 CardDef NUM3 对齐"
+   ],
+   "cannot_infer": [
+    "SCN2 动态值表示累计回血量、触发次数还是别的；无法裁定 HDT trace 槽位映射"
+   ],
+   "engine_action": "DEFERRED：先在 harness/traceizer 做显式 2↔3 槽位映射并验证；不要直接读 trace ScriptDataNum2 实现。"
+  },
+  "BG35_701": {
+   "name": "Brazen Buccaneer",
+   "category": "C 类 tag 槽位",
+   "verdict": "partial_deferred",
+   "confidence": "medium",
+   "summary": "无 Power.log 样本；61 个 HDT trace。SCN1/SCN2 与 CardDef 完全一致（base 2/3、golden 4/6），可裁定为每次 EoT buff 的 atk/health；SCN3（13–21）只在部分样本出现，数值与面板/回合不形成可验证关系，不能裁定是否为“本回合打出的牌数”。",
+   "evidence": [
+    {
+     "source": "official_traces_hdt/0f4c69f5a7355e6c.json",
+     "trace_id": "0f4c69f5a7355e6c",
+     "turn": 10,
+     "side": "player",
+     "values": "BG35_701 6/6, SCN1=3, SCN2=3, SCN3=13",
+     "inference": "SCN1/2=3/3 与 CardDef base 2/3 不完全一致（可能被其它效果改），SCN3=13 无法解释",
+     "event": "combat boundary snapshot"
+    },
+    {
+     "source": "official_traces_hdt/13420534fe921b0d.json",
+     "trace_id": "13420534fe921b0d",
+     "turn": 10,
+     "side": "player",
+     "values": "BG35_701 541/571, SCN1=2, SCN2=3, SCN3=20",
+     "inference": "大面板配 SCN1/2=2/3（基础 buff 量），SCN3=20 很可能是重复次数，但无触发序列",
+     "event": "combat boundary snapshot"
+    },
+    {
+     "source": "official_traces_hdt/10a617338f450c69.json",
+     "trace_id": "10a617338f450c69",
+     "turn": 12,
+     "side": "opponent",
+     "values": "BG35_701 22/36 golden, SCN1=4, SCN2=6",
+     "inference": "金色 SCN1/2=4/6 与 CardDef 一致；无 SCN3",
+     "event": "combat boundary snapshot"
+    }
+   ],
+   "can_infer": [
+    "SCN1/2 = 每次 EoT 给最左海盗的 +atk/+health（base 2/3，golden 4/6，部分样本 3/3 为其它修正）"
+   ],
+   "cannot_infer": [
+    "SCN3 是否 = 本回合已打出的牌数 / 触发次数；无逐 EoT 序列"
+   ],
+   "engine_action": "先按 CardDef 实现 SCN1/2；SCN3 仍 DEFERRED 或由引擎从本回合已打牌数内部推导，不要外部注入猜测。"
+  },
+  "BG32_822": {
+   "name": "Fire-forged Evoker",
+   "category": "C 类 tag 槽位",
+   "verdict": "can_implement_from_trace_relation",
+   "confidence": "high",
+   "summary": "无 Power.log 样本，但 46 个 HDT trace（20 个可校验样本）给出稳定的三槽关系：SCN3 = 已施放酒馆法术数；SCN1 = 当前 atk buff（base=2*SCN3+2，golden=2*SCN3+4）；SCN2 = 当前 health buff（base=SCN3+1，golden=SCN3+2）。20/20 校验通过。",
+   "evidence": [
+    {
+     "source": "official_traces_hdt/102114d8f8e698a0.json",
+     "trace_id": "102114d8f8e698a0",
+     "turn": 13,
+     "side": "opponent",
+     "values": "BG32_822 309/276, SCN1=62, SCN2=31, SCN3=30",
+     "inference": "base: atk 2*30+2=62；health 30+1=31",
+     "event": "combat boundary snapshot"
+    },
+    {
+     "source": "official_traces_hdt/0baf27326c6a4fb3.json",
+     "trace_id": "0baf27326c6a4fb3",
+     "turn": 13,
+     "side": "player",
+     "values": "Golden 49/38, SCN1=90, SCN2=45, SCN3=43",
+     "inference": "golden: atk 2*43+4=90；health 43+2=45",
+     "event": "combat boundary snapshot"
+    },
+    {
+     "source": "official_traces_hdt/370694182484bb4f.json",
+     "trace_id": "370694182484bb4f",
+     "turn": 8,
+     "side": "player",
+     "values": "Base 8/5, SCN1=4, SCN2=2, SCN3=1",
+     "inference": "base 初值：atk 2*1+2=4；health 1+1=2",
+     "event": "combat boundary snapshot"
+    },
+    {
+     "source": "official_traces_hdt/0502f1b15163d311.json",
+     "trace_id": "0502f1b15163d311",
+     "turn": 5,
+     "side": "opponent",
+     "values": "hand BG32_822 8/5, SCN1=2, SCN2=1（无 SCN3）",
+     "inference": "初始 buff 2/1（base）；与 0 法术公式一致",
+     "event": "combat boundary snapshot"
+    }
+   ],
+   "can_infer": [
+    "SCN3 = 本局已施放酒馆法术数（0..73 样本范围）",
+    "base: SCN1=2*SCN3+2, SCN2=SCN3+1；golden: +4 / +2 基值",
+    "每施放 1 个酒馆法术，atk buff +2、health buff +1"
+   ],
+   "cannot_infer": [
+    "没有 Power.log 逐次施法事件，无法验证“施法时立即更新”还是回合结束更新；也无 golden 初始 4/2 的独立样本"
+   ],
+   "engine_action": "可按上述公式实现或由引擎在 Tavern spell cast 事件累加；SCN3 可由引擎自己计数，不必外部注入。"
+  },
+  "BG33_155": {
+   "name": "Devout Hellcaller",
+   "category": "C 类 tag 槽位",
+   "verdict": "partial_base_confirmed",
+   "confidence": "high_for_base / no_golden_raw",
+   "summary": "Power.log 官方创建 SCN1=2、SCN2=2（base），每次另一友方恶魔造成伤害后 atk/health 各 +2（8/8→10/10→12/12）；HDT trace 记 SCN1=1、SCN2=2（base）/2、4（golden），与官方不一致。base 可裁定；金色无 raw 样本。",
+   "evidence": [
+    {
+     "source": "runs/live/fix3_real/Power.log",
+     "line": 26076,
+     "event": "FULL_ENTITY Creating BG33_155",
+     "values": "ATK=4,HEALTH=4, SCN1=2, SCN2=2",
+     "inference": "官方 base 槽位1/2 = 2/2"
+    },
+    {
+     "source": "runs/live/fix3_real/Power.log",
+     "line": 27762,
+     "event": "FULL_ENTITY Creating BG33_155; changes 27817/27818 8/8; 27977/27978 10/10; 28145/28146 12/12",
+     "values": "4/4 → 8/8 → 10/10 → 12/12",
+     "inference": "每次触发 +2/+2（不是 trace 的 1/2）"
+    },
+    {
+     "source": "official_traces_hdt/11177a238772476e.json",
+     "trace_id": "11177a238772476e",
+     "turn": 9,
+     "side": "player",
+     "values": "BG33_155 74/89, SCN1=1, SCN2=2",
+     "inference": "trace 槽位值 ≠ Power.log 官方 2/2；HDT 侧不可直读",
+     "event": "combat boundary snapshot"
+    }
+   ],
+   "can_infer": [
+    "官方 base 槽位1/2=+2/+2；每次触发 +2/+2"
+   ],
+   "cannot_infer": [
+    "金色 raw 样本缺失（HDT trace 金色 SCN1=2/SCN2=4 不可信）"
+   ],
+   "engine_action": "base 按 +2/+2 实现；金色保持 DEFERRED 或按卡面 twice 处理，等 Power.log 金色样本。"
+  },
+  "BG34_320": {
+   "name": "The Last One Standing",
+   "category": "Rally + ALL 多次选取",
+   "verdict": "partial_all_multiselect",
+   "confidence": "high_for_duplicate_ALL / medium_for_algorithm",
+   "summary": "Power.log 实测 Rally 触发时 Sub-spell TargetCount=3，目标同时包含两张 ALL 随从（BG32_111 与 BG34_320 自身）和一张 ABERRATION（BG36_103）；随后每目标各生成一张 BG34_320e 附魔（+15/+15，等于 CardDef），并对 SETASIDE 副本也生成镜像附魔。证明多张 ALL 随从会各自被选中（不合并成一个“ALL 槽”），但随机/顺序/重复选取规则仍不完整。",
+   "evidence": [
+    {
+     "source": "runs/powerlog_2214/Power.log",
+     "line": 159706,
+     "event": "BLOCK_START BlockType=TRIGGER ... cardId=BG34_320 player=3 TriggerKeyword=BACON_RALLY",
+     "values": "TargetCount=3；line 159709-159711 Targets=[BG32_111(ALL), BG36_103(ABERRATION), BG34_320(ALL)]",
+     "inference": "两张 ALL 都被选；自身也可被选"
+    },
+    {
+     "source": "runs/powerlog_2214/Power.log",
+     "line": 159712,
+     "event": "FULL_ENTITY Creating ID=10006 CardID=（随后 SHOW_ENTITY CardID=BG34_320e）",
+     "values": "line 159716/159719 BG34_320e ATTACHED=7469；NUM1=NUM2=15；后续 10007→9357、10008→7461、10009→9382、10010→8694、10011→9351",
+     "inference": "每个 play target 一个附魔（+15/+15），SETASIDE 镜像实体也各一个；不是同一实体重复叠加"
+    },
+    {
+     "source": "runs/powerlog_2214/Power.log",
+     "line": 214184,
+     "event": "turn20 另一次 Rally trigger (eid=9351) 同样出现",
+     "inference": "同一局可重复触发；支持 Rally 是每次攻击触发而非一次性"
+    }
+   ],
+   "can_infer": [
+    "Rally 对每种“类型”选取一个友好随从；多张 ALL 随从会分别被选中（两张 ALL 都拿到 +15/+15）",
+    "自身（BG34_320）可作为目标",
+    "SETASIDE 战斗副本会镜像获得同额附魔（日志层双写，不是额外多选一次）"
+   ],
+   "cannot_infer": [
+    "单张 ALL 随从是否会因匹配多个缺失类型而被重复选取（本样本有两张 ALL，无法区分“每个 ALL 一次”与“每个类型一次”）",
+    "多个同类型非 ALL 随从时的随机/最左/最高攻选择规则",
+    "空类型、满场、目标死亡等边界"
+   ],
+   "engine_action": "先实现“每张 ALL 随从各被选一次 + 自身可选取”的证据版；随机/重复选择留 DEFERRED，需更多带两张以上 ALL 的样本。"
+  },
+  "BGFYM_000": {
+   "name": "C'Thun (Deity token)",
+   "category": "C'Thun awaken split 分配",
+   "verdict": "can_implement_floor_equal_split",
+   "confidence": "high_for_n2_n3 / medium_for_edge",
+   "summary": "Power.log 两次 awaken split 显示：C'Thun 自身属性按“当前其它友方随从数量 N”均分，每目标得到 floor(atk/N)、floor(health/N)；余数不分配（191/2→95 每目标，138/2→69；33/3→11）。没有 ceil/随机加权的证据。",
+   "evidence": [
+    {
+     "source": "runs/powerlog_2214/Power.log",
+     "line": 172605,
+     "event": "BLOCK_START TRIGGER BGFYM_000 id=10064 player=11；SUB_SPELL Bacon_Cthun_Missile_Buff_Super",
+     "values": "C'Thun 191/138（172573/172574 最后状态）；10067→9775 NUM1=95/NUM2=69；10068→9780 NUM1=95/NUM2=69（172682 后续 96）",
+     "inference": "N=2 个 target；floor(191/2)=95、floor(138/2)=69；atk 余数1未分"
+    },
+    {
+     "source": "runs/powerlog_2214/Power.log",
+     "line": 174028,
+     "event": "BLOCK_START TRIGGER BGFYM_000 id=10097 player=3",
+     "values": "C'Thun 33/33；10101→8694=11/11、10103→7469=11/11、10104→7459=11/11",
+     "inference": "N=3；floor(33/3)=11/11 每目标"
+    },
+    {
+     "source": "runs/powerlog_2214/Power.log",
+     "line": 108099,
+     "event": "首次 awaken id=5941（C'Thun 1/1）；5943→3899=1/1",
+     "inference": "N=1 时目标得到全部 1/1"
+    }
+   ],
+   "can_infer": [
+    "split 只作用于“其它友方随从”（不含自身；token 自己随后死亡/移除）",
+    "每个目标独立计算 floor(stat/N)，各目标相同；余数未再分配"
+   ],
+   "cannot_infer": [
+    "N=0（满场/无其它随从）时是否无效果、是否保留 token 属性",
+    "atk/health 是否分别独立取整（样本 191/138 均为 floor；无奇数单维样本）",
+    "余数是否可能随机给某一目标（本样本没有；不能排除低概率）"
+   ],
+   "engine_action": "可实现 equal split: 对每个 other friendly minion 加 floor(atk/N)/floor(health/N)，余数丢弃；保留 N=0 边界 DEFERRED。"
+  }
+ },
+ "p2b": {
+  "issue": "8 族动态 ScriptDataNum 卡（P2b）：printed 面板含其它 buff，适配器 (printed-base)/step 不整除时保留缺口",
+  "cards": {
+   "BG25_008": {
+    "name": "Eternal Knight",
+    "traces": 93,
+    "states": 88,
+    "status": "已有 trace/raw；P2b 失败样本保留",
+    "sample": "official_traces_hdt/0a36546bf7a9fbd7.json: BG25_008 95/44 golden, tags SCN1=8/SCN2=4；base 8/4，step8/4 → atk (95-8)/8 不整除"
+   },
+   "BG35_342": {
+    "name": "Falling Sky Golem",
+    "traces": 66,
+    "states": 65,
+    "status": "新增 raw 实证（live Power.log）",
+    "sample": "runs/live/live_final_powerlog/Power.log:173216 BG35_342 初始 4/2 tags SCN1=4/SCN2=2；173294 变 64/30 → atk (64-4)/4=15，health (30-2)/2=14 不一致 → adapter_skip 合理"
+   },
+   "BG35_921": {
+    "name": "Abyssal Bruiser",
+    "traces": 21,
+    "states": 21,
+    "status": "仅 trace；P2b 失败",
+    "sample": "0834b4802acd88bb: BG35_921 116/107 tags SCN1=1/SCN2=1；base 2/1，step2/1 → atk57 vs health106 不一致"
+   },
+   "BG_TTN_401": {
+    "name": "Ancestral Automaton",
+    "traces": 35,
+    "states": 38,
+    "status": "trace 无 ScriptDataNum tag；raw 无样本；CardDef num 缺失",
+    "sample": "0b7c047cbff31dee: BG_TTN_401 3/4，无 tags；无法验证动态计数"
+   },
+   "BG26_537": {
+    "name": "Flourishing Frostling",
+    "traces": 0,
+    "states": 2,
+    "status": "无 trace/raw 样本；仅 XML/corpus 名称出现",
+    "sample": "XML/corpus 2 次；无 ScriptDataNum"
+   },
+   "BG36_524": {
+    "name": "Maritime Extortionist",
+    "traces": 4,
+    "states": 1,
+    "status": "少量样本；raw 有基础序列",
+    "sample": "runs/powerlog_2214/Power.log:92450 BG36_524 初始 7/7 tags SCN1=7/SCN2=7；92548 变 14/14（+7/+7）→ 步长与 tag 一致"
+   },
+   "BG25_013": {
+    "name": "Rot Hide Gnoll",
+    "traces": 0,
+    "states": 0,
+    "status": "无样本（Corpus/XML 也 0；仅 CardDef 文本）",
+    "sample": "无"
+   },
+   "BG31_810": {
+    "name": "Ultraviolet Ascendant",
+    "traces": 1,
+    "states": 0,
+    "status": "仅 1 个 raw 实体（live Power.log），无 ScriptDataNum tag；已知公式冲突仍 DEFERRED",
+    "sample": "runs/live/live_final_powerlog/Power.log:63050 BG31_810 6/6 初始，无 SCN tag；trace 17493f10 的 9/6 冲突仍未解"
+   }
+  }
+ },
+ "summary": {
+  "cards_with_raw_powerlog_evidence": [
+   "BGS_004",
+   "BG26_174",
+   "BG33_155",
+   "BG34_320",
+   "BGFYM_000",
+   "BG25_008",
+   "BG35_342",
+   "BG36_524",
+   "BG31_810"
+  ],
+  "cards_trace_only": [
+   "BG31_171",
+   "BG31_035",
+   "BG35_701",
+   "BG32_822",
+   "BG35_921",
+   "BG_TTN_401",
+   "BG25_013"
+  ],
+  "evidence_enough_to_implement": [
+   "BG31_171",
+   "BGS_004",
+   "BG32_822",
+   "BG33_155",
+   "BGFYM_000"
+  ],
+  "partial": [
+   "BG34_320",
+   "BG35_701",
+   "BG25_008",
+   "BG35_342",
+   "BG36_524"
+  ],
+  "deferred_no_sample_or_ambiguous": [
+   "BG31_035",
+   "BG26_174",
+   "BG_TTN_401",
+   "BG26_537",
+   "BG25_013",
+   "BG31_810"
+  ],
+  "no_sample": [
+   "BG26_537",
+   "BG25_013"
+  ]
+ }
+}

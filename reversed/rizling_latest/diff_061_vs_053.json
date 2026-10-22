@@ -1,0 +1,178 @@
+{
+ "schema": "hsbg.rizling_package_diff.v1",
+ "old": {
+  "root": "C:\\HSagent\\AgenticAssistant",
+  "version": "0.5.3",
+  "built": "20261018-001807",
+  "game_version": null,
+  "game_version_effective": "36.6.3.253932"
+ },
+ "new": {
+  "root": "C:\\HSagent\\reversed\\rizling_latest",
+  "version": "0.6.1",
+  "built": "20261018-160659",
+  "game_version": "36.6.3.253932",
+  "game_version_effective": "36.6.3.253932"
+ },
+ "version_changed": true,
+ "version_newer": true,
+ "game_version_changed": false,
+ "old_readme_rule_version": "36.6.3.253932",
+ "new_readme_rule_version": null,
+ "modules_added": [
+  "bgassistant.artwork",
+  "bgassistant.demo",
+  "bgassistant.desk",
+  "bgassistant.hotkeys",
+  "bgassistant.hud",
+  "bgassistant.overlay_calibration",
+  "bgassistant.overlay_host",
+  "bgassistant.tracker",
+  "bgassistant.widgets"
+ ],
+ "modules_removed": [],
+ "client_sources_added": [
+  "artwork.py",
+  "demo.py",
+  "desk.py",
+  "hotkeys.py",
+  "hud.py",
+  "overlay_calibration.py",
+  "overlay_host.py",
+  "tracker.py",
+  "widgets.py"
+ ],
+ "client_sources_removed": [],
+ "offline_smoke_old": {
+  "version": "0.5.3",
+  "catalog_cards": 3983,
+  "dpapi": true,
+  "ui": true,
+  "forbidden_imports": []
+ },
+ "offline_smoke_new": {
+  "version": "0.6.1",
+  "game_version": "36.6.3.253932",
+  "contract_id": "381dccf02ea037cee481a24dedcbc6c01405763094507d05cd87d11cdb08c045",
+  "catalog_cards": 3983,
+  "dpapi": true,
+  "ui": true,
+  "pages": [
+   "history",
+   "opponents",
+   "overview",
+   "settings"
+  ],
+  "overlay_panels": [
+   "advice",
+   "card",
+   "combat",
+   "disconnect",
+   "opponent",
+   "tracker"
+  ],
+  "synthetic_viewport": true,
+  "bundled_artwork": 64,
+  "combat_distribution": true,
+  "no_remote_or_reader": true,
+  "forbidden_imports": []
+ },
+ "files_count_old": 1012,
+ "files_count_new": 2031,
+ "catalog": {
+  "old_path": "C:\\HSagent\\AgenticAssistant\\_internal\\bgassistant\\data\\catalog.json",
+  "new_path": "C:\\HSagent\\reversed\\rizling_latest\\bgassistant\\data\\catalog.json",
+  "old_game_version": "36.6.3.253932",
+  "new_game_version": "36.6.3.253932",
+  "ids_identical": true,
+  "old_card_count": 3983,
+  "new_card_count": 3983,
+  "only_old_ids": [],
+  "only_new_ids": [],
+  "old_kind_counts": {
+   "dark_gift": 47,
+   "hero": 143,
+   "hero_power": 176,
+   "minion": 2596,
+   "quest": 23,
+   "quest_reward": 73,
+   "spell": 297,
+   "tavern_spell": 208,
+   "trinket_greater": 219,
+   "trinket_lesser": 201
+  },
+  "new_kind_counts": {
+   "dark_gift": 47,
+   "hero": 143,
+   "hero_power": 176,
+   "minion": 2596,
+   "quest": 23,
+   "quest_reward": 73,
+   "spell": 297,
+   "tavern_spell": 208,
+   "trinket_greater": 219,
+   "trinket_lesser": 201
+  },
+  "fields_added": [
+   "armor",
+   "associated_races",
+   "atk",
+   "available_in_duos_pool",
+   "available_in_solo_pool",
+   "available_via_special_effect",
+   "buddy",
+   "cost",
+   "golden",
+   "hero_power",
+   "hp",
+   "is_reference_only",
+   "lobby_races_required",
+   "pool_access",
+   "pool_identity_varies",
+   "spellcraft",
+   "text",
+   "text_alt",
+   "text_alt_zh",
+   "text_zh"
+  ],
+  "fields_removed": [],
+  "field_value_diffs": {},
+  "skins_identical": true
+ },
+ "game_tags": {
+  "path_a": "C:\\HSagent\\AgenticAssistant\\_internal\\bgcontroller\\data\\game_tags.json",
+  "path_b": "C:\\HSagent\\reversed\\rizling_latest\\bgcontroller\\data\\game_tags.json",
+  "sha_a": "1da4d310e5fb8c2bc9cf9b0334a91a7015a1dd08bd859cd27e43da0af3073ae6",
+  "sha_b": "1da4d310e5fb8c2bc9cf9b0334a91a7015a1dd08bd859cd27e43da0af3073ae6",
+  "identical": true,
+  "enum_counts_a": {
+   "GameTag": 1259,
+   "CardType": 22,
+   "Race": 47,
+   "Zone": 10,
+   "ChoiceType": 4,
+   "PlayState": 9,
+   "State": 4,
+   "Step": 21
+  },
+  "enum_counts_b": {
+   "GameTag": 1259,
+   "CardType": 22,
+   "Race": 47,
+   "Zone": 10,
+   "ChoiceType": 4,
+   "PlayState": 9,
+   "State": 4,
+   "Step": 21
+  },
+  "game_tag": {
+   "count_a": 1259,
+   "count_b": 1259,
+   "common": 1259,
+   "added": [],
+   "removed": [],
+   "value_mismatches": [],
+   "value_mismatch_count": 0
+  }
+ }
+}

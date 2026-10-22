@@ -1,0 +1,199 @@
+{
+  "meta": {
+    "generated_by": "rea-operator",
+    "generated_at_utc": "2026-10-18T09:00:00Z",
+    "purpose": "客户端（Assembly-CSharp 37.0.0.255130）可见的、与酒馆战棋战斗/规则相关的常量与枚举；每项附类型/字段/证据",
+    "game_dir": "C:\\Program Files (x86)\\Hearthstone",
+    "game_version": "37.0.0.255130",
+    "evidence_roots": {
+      "client_enums": "reversed/net/key_enums.json（ilspycmd/Mono.Cecil 导出，GAME_TAG 1214 项）",
+      "client_summary": "reversed/net/SUMMARY.json, reversed/net/SUMMARY.md",
+      "client_decompiled": "reversed/net/decompiled/*.cs（ilspycmd 反编译片段）",
+      "rea_client_artifact": "reversed/rea/client_official/rea_artifact.json（REA inspect-managed-artifact，sha256=786376bddad54470…）",
+      "rea_limitation": "reversed/rea/client_official/rea_summary.json（Assembly-CSharp 成员级 REA 分析不可用：metadata 表示超 64MiB 预算）",
+      "bobsbuddy_usage": "reversed/rea/hdt_bobsbuddy/BobsBuddyInvoker.cs（HDT 如何消费这些 tag）"
+    }
+  },
+
+  "combat_rules": {
+    "damage_cap": {
+      "kind": "server_provided_game_tag",
+      "tags": [
+        {
+          "name": "BACON_COMBAT_DAMAGE_CAP",
+          "value": 2089,
+          "evidence": "reversed/net/key_enums.json -> game_tag.values['BACON_COMBAT_DAMAGE_CAP'] = 2089"
+        },
+        {
+          "name": "BACON_COMBAT_DAMAGE_CAP_ENABLED",
+          "value": 3403,
+          "evidence": "reversed/net/key_enums.json -> game_tag.values['BACON_COMBAT_DAMAGE_CAP_ENABLED'] = 3403"
+        }
+      ],
+      "semantics": "GameEntity 上的两个 tag：ENABLED>0 时，战斗伤害上限 = BACON_COMBAT_DAMAGE_CAP 的值。数值由服务器下发（随回合/存活人数/赛季变化），客户端不包含档位表。",
+      "how_consumed": {
+        "who": "Hearthstone Deck Tracker 的 BobsBuddy 插件",
+        "code": "if (_game.GameEntity.GetTag(GameTag.BACON_COMBAT_DAMAGE_CAP_ENABLED) > 0) input.DamageCap = _game.GameEntity.GetTag(GameTag.BACON_COMBAT_DAMAGE_CAP);",
+        "evidence": "reversed/rea/hdt_bobsbuddy/BobsBuddyInvoker.cs:652-655"
+      },
+      "simulator_side": {
+        "type": "BobsBuddy.Simulation.Simulator",
+        "field": "public int DamageCap",
+        "evidence": "reversed/rea/bobsbuddy/src_full/BobsBuddy.decompiled.cs:6336（字段）、:6680（= input.DamageCap）、:7020-7030（clamp ±DamageCap）"
+      },
+      "engine_current_approximation": {
+        "module": "hsrl2/constants.py",
+        "lines": "42-57",
+        "table": "turn<=3 -> 5 ; turn<=7 -> 10 ; turn>=8 -> 15 ; alive_players<=4 -> None（无上限）",
+        "gap": "档位来自本地 turn 表，不是服务端 tag；bridge 应从 Power.log 抓 tag=2089/3403 注入（引擎已有 _damage_cap_override 注入点，hsrl2/game.py:3139-3140）"
+      }
+    },
+
+    "combat_sequence_client_enum": {
+      "kind": "client_enum",
+      "type": "Assets.Global/BaconCombatStep",
+      "evidence": "ilspycmd -t Assets.Global Assembly-CSharp.dll -> reversed/rea/client/Assets_Global.cs:478-487",
+      "values": {
+        "INVALID": 0,
+        "COPY_OPPONENT_BOARD": 1,
+        "END_OF_MINION_COMBAT": 2,
+        "END_OF_COMBAT": 3,
+        "DETERMINE_WINNER": 4,
+        "PREPARE_COPY_BOARD": 5,
+        "START_COMBAT_TRACKER": 6
+      },
+      "interpretation": "客户端的‘战斗步骤’只是：复制对手棋盘 -> 播放战斗表现 -> 判胜负，没有随从级模拟；进一步佐证客户端无战斗模拟器。"
+    },
+
+    "combat_phase_marker": {
+      "kind": "client_enum",
+      "type": "Assets.Global/BoardVisualState",
+      "evidence": "reversed/rea/client/Assets_Global.cs:471-476",
+      "values": ["NONE", "SHOP", "COMBAT"],
+      "interpretation": "仅 UI 视觉状态。"
+    },
+
+    "player_and_board_tags": [
+      {
+        "name": "FIRST_PLAYER",
+        "value": 24,
+        "evidence": "reversed/net/key_enums.json -> game_tag.values['FIRST_PLAYER']",
+        "note": "先手标记；BobsBuddy 不读它，而是自行用随从数/随机决定先攻（见 bobsbuddy_vs_hsrl2.md §6）。"
+      },
+      {
+        "name": "PLAYER_TECH_LEVEL",
+        "value": 1377,
+        "evidence": "reversed/net/key_enums.json -> game_tag.values['PLAYER_TECH_LEVEL']",
+        "note": "酒馆等级（= 引擎 Hero.tavern_tier 的数据源）。"
+      },
+      {
+        "name": "TECH_LEVEL",
+        "value": 1440,
+        "evidence": "reversed/net/key_enums.json -> game_tag.values['TECH_LEVEL']",
+        "note": "随从等级（伤害公式里 Σ tier 的数据源）。"
+      },
+      {
+        "name": "BACON_MAX_PLAYER_TECH_LEVEL",
+        "value": 1494,
+        "evidence": "reversed/net/key_enums.json -> game_tag.values['BACON_MAX_PLAYER_TECH_LEVEL']",
+        "note": "酒馆等级上限（按赛季/模式变化，服务端下发）。"
+      }
+    ],
+
+    "economy_and_shop_tags_seen_in_client": [
+      {"name": "BACON_OVERRIDE_BG_COST", "value": 2437, "evidence": "reversed/net/key_enums.json"},
+      {"name": "BACON_REDUCE_BUY_COST", "value": 2438, "evidence": "reversed/net/key_enums.json"},
+      {"name": "BACON_FREE_REFRESH_COUNT", "value": 4536, "evidence": "reversed/net/key_enums.json"},
+      {"name": "BACON_PLAYER_EXTRA_GOLD_NEXT_TURN", "value": 4286, "evidence": "reversed/net/key_enums.json"},
+      {"name": "BACON_PLAYER_OVERDRAWN_GOLD_NEXT_TURN", "value": 4287, "evidence": "reversed/net/key_enums.json"},
+      {"name": "BACON_BLOODGEMBUFFATKVALUE", "value": 1844, "evidence": "reversed/net/key_enums.json; 使用点 BobsBuddyInvoker.cs:624"},
+      {"name": "BACON_BLOODGEMBUFFHEALTHVALUE", "value": 2827, "evidence": "reversed/net/key_enums.json; 使用点 BobsBuddyInvoker.cs:625"},
+      {"name": "BACON_COSTS_HEALTH_TO_BUY", "value": 2911, "evidence": "reversed/net/key_enums.json"}
+    ],
+
+    "shop_cost_and_odds_source": {
+      "kind": "not_in_client_code",
+      "finding": "客户端没有酒馆升级费用/金币/刷新概率的数值常量或数据表；GameDbf 的 Battlegrounds* 表只有外观类数据。",
+      "client_dbf_tables_battlegrounds": [
+        "BATTLEGROUNDS_BOARD_SKIN",
+        "BATTLEGROUNDS_EMOTE",
+        "BATTLEGROUNDS_FINISHER",
+        "BATTLEGROUNDS_GUIDE_SKIN",
+        "BATTLEGROUNDS_HERO_SKIN",
+        "BATTLEGROUNDS_LANDING",
+        "BATTLEGROUNDS_SEASON"
+      ],
+      "evidence": "reversed/net/decompiled/GameDbf.cs:47-59（字段声明）、:567-591（Dbf.Load）、:1430（批量加载列表，无任何 SHOP_COST/SHOP_ODDS/TAVERN_TIER 类表）",
+      "conclusion": "升级费用与刷新权重由服务端逻辑/协议下发（购买时卡牌带 COST、商店刷新由服务器决定），客户端只负责显示。工程里应继续用 data/ 与 hsdata/CardDefs.xml 的数值，并靠 Power.log 校准；不要在客户端程序集里找档位表。",
+      "related_client_behaviour": "TB_BaconShop 只有交互/表现（刷新按钮、升级按钮、Bob 台词），见 reversed/net/decompiled/TB_BaconShop.cs"
+    },
+
+    "board_and_hand_limits": {
+      "board_size": {
+        "value": 7,
+        "evidence": "BobsBuddy.Simulation.Simulator.TrySummonMinion: 'if (side.Count >= 7)' -> reversed/rea/bobsbuddy/src_full/BobsBuddy.decompiled.cs:8857；引擎 hsrl2 亦为 7（BOARD_SIZE）",
+        "note": "客户端无直接常量（棋盘槽位由场景/Prefab 决定），此值以模拟器/引擎交叉验证为准。"
+      },
+      "hand_size": {
+        "value": 10,
+        "evidence": "未在本轮逆向中取证（客户端手牌上限由 ZoneHand/规则决定，不属本轮范围）",
+        "note": "待补：如需，可对 Assembly-CSharp 的 ZoneHand/GameState 用 ilspycmd 定点反编译。"
+      }
+    }
+  },
+
+  "no_official_combat_simulator": {
+    "claim": "官方客户端没有可离线调用的酒馆战棋战斗模拟器；战斗由服务器 PowerTaskList 驱动，客户端只播放/复制对手棋盘。",
+    "evidence": [
+      {
+        "kind": "method_name_scan",
+        "result": "Assembly-CSharp 全程序集 Simulate* 仅 5 个，且都与战斗无关：Network.SimulateUncleanDisconnectFromGameServer、Network.SimulateReceivedPacketFromServer、SelectorWheel.SimulateWheel、QuestManager.SimulateQuestProgress、QuestManager.SimulateQuestNotificationPopup",
+        "evidence": "reversed/net/SUMMARY.json -> surveys['Assembly-CSharp'].combat_simulation_methods"
+      },
+      {
+        "kind": "type_name_scan",
+        "result": "含 'simulation' 关键词的类型 0 个；含 'prediction' 关键词的类型 0 个（方法 22 个均为 UI/任务）；含 'combat' 的类型 15 个全是皮肤/UI/教程",
+        "evidence": "reversed/net/SUMMARY.md §2, reversed/net/SUMMARY.json"
+      },
+      {
+        "kind": "client_combat_step_enum",
+        "result": "Assets.Global/BaconCombatStep 只有 COPY_OPPONENT_BOARD / END_OF_MINION_COMBAT / DETERMINE_WINNER 等表现步骤",
+        "evidence": "reversed/rea/client/Assets_Global.cs:478-487"
+      },
+      {
+        "kind": "rea_managed_inspection",
+        "result": "REA 对 Assembly-CSharp 的成员级检查不可用（metadata 表示超 64MiB 预算），但 artifact 身份/metadata/引用完整；类型级结论沿用 reversed/net 的 ilspycmd 全量清单（14390 类型/113222 方法）",
+        "evidence": "reversed/rea/client_official/rea_summary.json"
+      }
+    ]
+  },
+
+  "rea_availability_for_client": {
+    "inspect_managed_artifact": {
+      "ok": true,
+      "sha256": "786376bddad544709639d4b3ab60ce8799d4b1c6c7d7fc4c225ce79fe07228c6",
+      "byte_length": 23114752,
+      "references": 75,
+      "evidence": "reversed/rea/client_official/rea_artifact.json"
+    },
+    "inspect_managed_members": {
+      "ok": false,
+      "reason": "resource-limit: Managed metadata exceeds the 67108864 byte representation budget (offset 9990872)",
+      "coverage_state": "unavailable",
+      "workaround": "ilspycmd -t <type> 定点反编译（本仓库已有 reversed/net/decompiled/*）",
+      "evidence": "reversed/rea/client_official/rea_summary.json -> type_analyses[0]"
+    }
+  },
+
+  "cross_reference": {
+    "engine_damage_formula": {
+      "module": "hsrl2/game.py",
+      "lines": "3499-3504",
+      "formula": "winner.tavern_tier + Σ(winner 存活随从 tech_level)",
+      "bobsbuddy_formula": "Σ(我方存活 tier) - Σ(对方存活 tier) + (num>0 ? Player.Tier : -Opponent.Tier)，再 clamp ±DamageCap，再加英雄技能掉血",
+      "bobsbuddy_evidence": "reversed/rea/bobsbuddy/src_full/BobsBuddy.decompiled.cs:6982-7041",
+      "verdict": "正常分出胜负时等价（败方存活为空）；僵局/双方有存活时 BobsBuddy 会给非 0 值（统计用途），引擎按规则给 0。"
+    },
+    "tags_dump": "reversed/net/key_enums.json（GAME_TAG 1214 项）、reversed/tag_diff.json"
+  }
+}

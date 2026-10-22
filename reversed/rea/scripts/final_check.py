@@ -1,0 +1,10 @@
+﻿import json
+d=json.load(open(r"reversed\rea\damage_cap_evidence.json",encoding="utf-8-sig"))
+print("JSON OK; size", __import__("os").path.getsize(r"reversed\rea\damage_cap_evidence.json"))
+print("top keys:", list(d.keys()))
+print("observations:", len(d["observations"]))
+print("log tokens:", d["log_scan"]["token_counts"], "| health lines:", d["log_scan"]["health_token_lines"])
+print("powerlog found:", d["powerlog_scan"]["found"])
+print("client ui code keys:", list(d["official_client_evidence"]["client_ui_code"].keys()))
+print("comparison verdicts:", {k:v["verdict"] for k,v in d["comparison"].items()})
+print("corpus:", d["corpus"]["traces"], d["corpus"]["official_result_counts"])

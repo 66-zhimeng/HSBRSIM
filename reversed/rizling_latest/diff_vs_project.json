@@ -1,0 +1,957 @@
+{
+ "schema": "hsbg.rizling_catalog_alignment.v1",
+ "catalog": {
+  "path": "C:\\HSagent\\reversed\\rizling_latest\\bgassistant\\data\\catalog.json",
+  "game_version": "36.6.3.253932",
+  "card_count": 3983,
+  "canonical_count": 2749,
+  "skin_count": 653
+ },
+ "project": {
+  "data_dir": "C:\\HSagent\\data",
+  "patch": "37.0.0.255130",
+  "file_counts": {
+   "bg_anomalies.json": 108,
+   "bg_cards.json": 3534,
+   "bg_dark_gifts.json": 47,
+   "bg_hero_powers.json": 165,
+   "bg_heroes.json": 118,
+   "bg_quest_rewards.json": 73,
+   "bg_tavern_spells.json": 205,
+   "bg_trinkets.json": 409
+  },
+  "raw_union": 3817,
+  "canonical_count": 2649
+ },
+ "ids": {
+  "intersection": 2526,
+  "only_catalog": 223,
+  "only_engine": 123,
+  "only_catalog_by_prefix": {
+   "AT": 1,
+   "AV": 1,
+   "BAR": 1,
+   "BG": 7,
+   "BG22": 1,
+   "BG27": 1,
+   "BG29": 2,
+   "BG34": 1,
+   "BGDUO": 97,
+   "BGS": 1,
+   "BOT": 2,
+   "CFM": 2,
+   "CORE": 6,
+   "CRED": 2,
+   "DAL": 3,
+   "EX1": 11,
+   "FP1": 1,
+   "GIL": 1,
+   "GVG": 5,
+   "HM": 1,
+   "ICC": 8,
+   "JAIL": 1,
+   "KAR": 3,
+   "LOE": 1,
+   "LOOT": 1,
+   "OG": 3,
+   "PVPDR": 1,
+   "RLK": 15,
+   "TB": 20,
+   "THD": 3,
+   "TLC": 3,
+   "TRL": 2,
+   "ULD": 3,
+   "ULDA": 1,
+   "UNG": 4,
+   "VAN": 5,
+   "WON": 1,
+   "tt": 1
+  },
+  "only_catalog_ids": [
+   "AT_121",
+   "AV_113t3t2",
+   "BAR_073",
+   "BG22_HERO_007t",
+   "BG27_514t_G",
+   "BG29_100_G",
+   "BG29_879t_G",
+   "BG34_Giant_035t_G",
+   "BGDUO20_GEM_No_Impact",
+   "BGDUO31_201",
+   "BGDUO31_201s",
+   "BGDUO31_202",
+   "BGDUO31_202s",
+   "BGDUO31_203",
+   "BGDUO31_205",
+   "BGDUO31_205_gs",
+   "BGDUO31_205s",
+   "BGDUO31_206",
+   "BGDUO31_206_Gs",
+   "BGDUO31_206s",
+   "BGDUO31_207",
+   "BGDUO31_207_Gs",
+   "BGDUO31_207s",
+   "BGDUO31_208",
+   "BGDUO31_208_Teammate_Trigger",
+   "BGDUO31_209",
+   "BGDUO31_209t",
+   "BGDUO31_209t_G",
+   "BGDUO31_210",
+   "BGDUO31_210s",
+   "BGDUO31_211",
+   "BGDUO31_212",
+   "BGDUO33_140",
+   "BGDUO33_150",
+   "BGDUO33_150t",
+   "BGDUO33_150t2",
+   "BGDUO_100",
+   "BGDUO_104",
+   "BGDUO_105",
+   "BGDUO_107",
+   "BGDUO_107_Gs",
+   "BGDUO_107s",
+   "BGDUO_108",
+   "BGDUO_109",
+   "BGDUO_109_Gs",
+   "BGDUO_109s",
+   "BGDUO_110",
+   "BGDUO_110_Gs",
+   "BGDUO_110s",
+   "BGDUO_111",
+   "BGDUO_112",
+   "BGDUO_113",
+   "BGDUO_114",
+   "BGDUO_115",
+   "BGDUO_117",
+   "BGDUO_118",
+   "BGDUO_118_Gs",
+   "BGDUO_118s",
+   "BGDUO_119",
+   "BGDUO_119s",
+   "BGDUO_120",
+   "BGDUO_120_Gt",
+   "BGDUO_120t",
+   "BGDUO_121",
+   "BGDUO_121_Gs",
+   "BGDUO_121s",
+   "BGDUO_122",
+   "BGDUO_123",
+   "BGDUO_124",
+   "BGDUO_125",
+   "BGDUO_700",
+   "BGDUO_701",
+   "BGDUO_701_Gs",
+   "BGDUO_701s",
+   "BGDUO_Anomaly_003t",
+   "BGDUO_Anomaly_007t",
+   "BGDUO_HERO_100",
+   "BGDUO_HERO_100_Buddy",
+   "BGDUO_HERO_100p",
+   "BGDUO_HERO_101",
+   "BGDUO_HERO_101_Buddy",
+   "BGDUO_HERO_101p",
+   "BGDUO_HERO_104",
+   "BGDUO_HERO_104_Buddy",
+   "BGDUO_HERO_104p",
+   "BGDUO_HERO_222",
+   "BGDUO_HERO_222_Buddy",
+   "BGDUO_HERO_222p",
+   "BGDUO_HERO_222t",
+   "BGDUO_HERO_223",
+   "BGDUO_HERO_223_Buddy",
+   "BGDUO_HERO_223p",
+   "BGDUO_MagicItem_001",
+   "BGDUO_MagicItem_002",
+   "BGDUO_MagicItem_002t",
+   "BGDUO_MagicItem_002t2",
+   "BGDUO_MagicItem_003",
+   "BGDUO_MagicItem_004",
+   "BGDUO_MagicItem_005",
+   "BGDUO_MagicItem_006",
+   "BGDUO_MagicItem_007",
+   "BGDUO_MagicItem_008",
+   "BGDUO_MagicItem_009",
+   "BGDUO_MagicItem_010",
+   "BGDUO_MagicItem_010t",
+   "BGS_039",
+   "BG_BT_258",
+   "BG_OG_044",
+   "BG_OG_145",
+   "BG_OG_256",
+   "BG_TSC_069",
+   "BG_TTN_732",
+   "BG_UNG_073",
+   "BOT_218t",
+   "BOT_445t",
+   "CFM_610",
+   "CFM_816",
+   "CORE_EX1_059",
+   "CORE_EX1_564",
+   "CORE_GVG_085",
+   "CORE_LOOT_013",
+   "CORE_YOD_026",
+   "CORE_tt_004",
+   "CRED_379",
+   "CRED_666",
+   "DAL_088t2",
+   "DAL_742",
+   "DAL_743t",
+   "EX1_062",
+   "EX1_093",
+   "EX1_162",
+   "EX1_170",
+   "EX1_185",
+   "EX1_506",
+   "EX1_506a",
+   "EX1_509",
+   "EX1_554t",
+   "EX1_564",
+   "EX1_finkle",
+   "FP1_010",
+   "GIL_655",
+   "GVG_021",
+   "GVG_055",
+   "GVG_062",
+   "GVG_085",
+   "GVG_106",
+   "HM_BG_001",
+   "ICC_029",
+   "ICC_032",
+   "ICC_038",
+   "ICC_092",
+   "ICC_094",
+   "ICC_099",
+   "ICC_099_Puzzle",
+   "ICC_858",
+   "JAIL_800hp2",
+   "KAR_005a",
+   "KAR_095",
+   "KAR_702",
+   "LOE_012",
+   "LOOT_013",
+   "OG_216",
+   "OG_216a",
+   "OG_300",
+   "PVPDR_YOP_WarPalT1",
+   "RLK_070",
+   "RLK_070t",
+   "RLK_117",
+   "RLK_119",
+   "RLK_538",
+   "RLK_824",
+   "RLK_833",
+   "RLK_833t",
+   "RLK_912",
+   "RLK_957",
+   "RLK_958",
+   "RLK_Prologue_EX1_185",
+   "RLK_Prologue_RLK_070",
+   "RLK_Prologue_RLK_070t",
+   "RLK_Prologue_RLK_957",
+   "TB_BaconShopBob",
+   "TB_BaconShopBob_TWT",
+   "TB_BaconShop_HERO_10_Tutorial",
+   "TB_BaconShop_HERO_11_Tutorial",
+   "TB_BaconShop_HERO_14_Tutorial",
+   "TB_BaconShop_HERO_19",
+   "TB_BaconShop_HERO_22_Tutorial",
+   "TB_BaconShop_HERO_27_Tutorial",
+   "TB_BaconShop_HERO_30",
+   "TB_BaconShop_HERO_30_Tutorial",
+   "TB_BaconShop_HERO_31",
+   "TB_BaconShop_HERO_35_Tutorial",
+   "TB_BaconShop_HERO_37_Tutorial",
+   "TB_BaconShop_HERO_47",
+   "TB_BaconShop_HERO_59t",
+   "TB_BaconShop_HERO_61",
+   "TB_BaconShop_HERO_Deathwhisper",
+   "TB_BaconShop_HERO_KelThuzad",
+   "TB_BaconShop_HERO_PH",
+   "TB_BaconUps_045t",
+   "THD_011hp",
+   "THD_018hp",
+   "THD_108hp2",
+   "TLC_817t",
+   "TLC_817t2",
+   "TLC_817t5",
+   "TRL_232",
+   "TRL_232t",
+   "ULDA_Finley_HP1t",
+   "ULD_179",
+   "ULD_205",
+   "ULD_275",
+   "UNG_010",
+   "UNG_037",
+   "UNG_201t",
+   "UNG_999t2t1",
+   "VAN_EX1_554t",
+   "VAN_EX1_564",
+   "VAN_EX1_577",
+   "VAN_EX1_finkle",
+   "VAN_skele21",
+   "WON_340",
+   "tt_004"
+  ],
+  "only_engine_ids": [
+   "BG22_BuddyMeter",
+   "BG27_Anomaly_000",
+   "BG27_Anomaly_001",
+   "BG27_Anomaly_002",
+   "BG27_Anomaly_005",
+   "BG27_Anomaly_006",
+   "BG27_Anomaly_100",
+   "BG27_Anomaly_101",
+   "BG27_Anomaly_102",
+   "BG27_Anomaly_103",
+   "BG27_Anomaly_104t",
+   "BG27_Anomaly_104t10",
+   "BG27_Anomaly_104t2",
+   "BG27_Anomaly_104t3",
+   "BG27_Anomaly_104t4",
+   "BG27_Anomaly_104t5",
+   "BG27_Anomaly_104t6",
+   "BG27_Anomaly_104t7",
+   "BG27_Anomaly_104t8",
+   "BG27_Anomaly_104t9",
+   "BG27_Anomaly_301",
+   "BG27_Anomaly_302",
+   "BG27_Anomaly_303",
+   "BG27_Anomaly_307",
+   "BG27_Anomaly_501",
+   "BG27_Anomaly_502",
+   "BG27_Anomaly_503",
+   "BG27_Anomaly_504",
+   "BG27_Anomaly_505",
+   "BG27_Anomaly_555",
+   "BG27_Anomaly_556",
+   "BG27_Anomaly_558",
+   "BG27_Anomaly_559",
+   "BG27_Anomaly_560",
+   "BG27_Anomaly_561",
+   "BG27_Anomaly_562",
+   "BG27_Anomaly_570",
+   "BG27_Anomaly_571",
+   "BG27_Anomaly_572",
+   "BG27_Anomaly_573",
+   "BG27_Anomaly_575",
+   "BG27_Anomaly_577",
+   "BG27_Anomaly_580",
+   "BG27_Anomaly_711",
+   "BG27_Anomaly_714",
+   "BG27_Anomaly_715",
+   "BG27_Anomaly_716",
+   "BG27_Anomaly_718",
+   "BG27_Anomaly_720",
+   "BG27_Anomaly_721",
+   "BG27_Anomaly_723",
+   "BG27_Anomaly_726",
+   "BG27_Anomaly_750",
+   "BG27_Anomaly_751",
+   "BG27_Anomaly_754",
+   "BG27_Anomaly_755",
+   "BG27_Anomaly_800",
+   "BG27_Anomaly_801",
+   "BG27_Anomaly_802",
+   "BG27_Anomaly_803",
+   "BG27_Anomaly_805",
+   "BG27_Anomaly_810",
+   "BG27_Anomaly_820",
+   "BG27_Anomaly_822",
+   "BG27_Anomaly_900",
+   "BG27_Anomaly_Buddies",
+   "BG27_Anomaly_Prizes2",
+   "BG27_Anomaly_Quests",
+   "BG29_100",
+   "BG31_Anomaly_101",
+   "BG31_Anomaly_102",
+   "BG31_Anomaly_104",
+   "BG31_Anomaly_105",
+   "BG31_Anomaly_106",
+   "BG31_Anomaly_109",
+   "BG31_Anomaly_111",
+   "BG31_Anomaly_112",
+   "BG31_Anomaly_114",
+   "BG31_Anomaly_115",
+   "BG31_Anomaly_116",
+   "BG31_Anomaly_117",
+   "BG31_Anomaly_120",
+   "BG31_Anomaly_123",
+   "BG31_Anomaly_124",
+   "BG31_Anomaly_126",
+   "BG31_Anomaly_127",
+   "BG32_Anomaly_001",
+   "BG32_Anomaly_002",
+   "BG32_Anomaly_003",
+   "BG33_Anomaly_001",
+   "BG33_Anomaly_002",
+   "BG33_Anomaly_003",
+   "BG33_Anomaly_005",
+   "BG33_Anomaly_008",
+   "BG33_Anomaly_009",
+   "BG34_Anomaly_800",
+   "BG34_Anomaly_800t",
+   "BG34_Anomaly_801",
+   "BG34_Anomaly_802",
+   "BG34_Anomaly_804",
+   "BG34_Anomaly_805",
+   "BG34_Anomaly_809",
+   "BG35_Anomaly_001",
+   "BG35_Anomaly_002",
+   "BG35_Anomaly_004",
+   "BG35_Anomaly_005",
+   "BG35_Anomaly_006",
+   "BG35_Anomaly_007",
+   "BG35_Anomaly_008",
+   "BG36_Anomaly_002",
+   "BG36_Button_DarkGift",
+   "TB_BaconShopLockAll_Button",
+   "TB_BaconShopTechUp02_Button",
+   "TB_BaconShopTechUp03_Button",
+   "TB_BaconShopTechUp04_Button",
+   "TB_BaconShopTechUp05_Button",
+   "TB_BaconShopTechUp06_Button",
+   "TB_BaconShopTechUp07_Button",
+   "TB_BaconShop_1p_Reroll_Button",
+   "TB_BaconShop_8p_Reroll_Button",
+   "TB_BaconShop_DragBuy",
+   "TB_BaconShop_DragBuy_Spell",
+   "TB_BaconShop_DragSell"
+  ],
+  "coverage": 0.9189
+ },
+ "by_kind": {
+  "dark_gift": {
+   "catalog_cards": 47,
+   "catalog_canonical": 47,
+   "matched": 47,
+   "engine_missing": 0
+  },
+  "hero": {
+   "catalog_cards": 143,
+   "catalog_canonical": 143,
+   "matched": 118,
+   "engine_missing": 25
+  },
+  "hero_power": {
+   "catalog_cards": 176,
+   "catalog_canonical": 176,
+   "matched": 165,
+   "engine_missing": 11
+  },
+  "minion": {
+   "catalog_cards": 2596,
+   "catalog_canonical": 1362,
+   "matched": 1227,
+   "engine_missing": 135
+  },
+  "quest": {
+   "catalog_cards": 23,
+   "catalog_canonical": 23,
+   "matched": 21,
+   "engine_missing": 2
+  },
+  "quest_reward": {
+   "catalog_cards": 73,
+   "catalog_canonical": 73,
+   "matched": 73,
+   "engine_missing": 0
+  },
+  "spell": {
+   "catalog_cards": 297,
+   "catalog_canonical": 297,
+   "matched": 261,
+   "engine_missing": 36
+  },
+  "tavern_spell": {
+   "catalog_cards": 208,
+   "catalog_canonical": 208,
+   "matched": 205,
+   "engine_missing": 3
+  },
+  "trinket_greater": {
+   "catalog_cards": 219,
+   "catalog_canonical": 219,
+   "matched": 215,
+   "engine_missing": 4
+  },
+  "trinket_lesser": {
+   "catalog_cards": 201,
+   "catalog_canonical": 201,
+   "matched": 194,
+   "engine_missing": 7
+  }
+ },
+ "bg36": {
+  "catalog_canonical": 262,
+  "matched": 262,
+  "missing": []
+ },
+ "numeric": {
+  "checked_cards": 2526,
+  "count": 11,
+  "by_field": {
+   "atk": 5,
+   "hp": 6
+  },
+  "reference_only_count": 11,
+  "non_reference_count": 0,
+  "samples": [
+   {
+    "id": "BOT_218",
+    "kind": "minion",
+    "field": "atk",
+    "catalog": 2,
+    "engine": 4,
+    "reference_only": true
+   },
+   {
+    "id": "BOT_218",
+    "kind": "minion",
+    "field": "hp",
+    "catalog": 6,
+    "engine": 12,
+    "reference_only": true
+   },
+   {
+    "id": "BOT_445",
+    "kind": "minion",
+    "field": "atk",
+    "catalog": 1,
+    "engine": 2,
+    "reference_only": true
+   },
+   {
+    "id": "BOT_445",
+    "kind": "minion",
+    "field": "hp",
+    "catalog": 1,
+    "engine": 2,
+    "reference_only": true
+   },
+   {
+    "id": "BOT_537",
+    "kind": "minion",
+    "field": "hp",
+    "catalog": 5,
+    "engine": 10,
+    "reference_only": true
+   },
+   {
+    "id": "BOT_537t",
+    "kind": "minion",
+    "field": "atk",
+    "catalog": 8,
+    "engine": 16,
+    "reference_only": true
+   },
+   {
+    "id": "BOT_537t",
+    "kind": "minion",
+    "field": "hp",
+    "catalog": 8,
+    "engine": 16,
+    "reference_only": true
+   },
+   {
+    "id": "EX1_577",
+    "kind": "minion",
+    "field": "atk",
+    "catalog": 9,
+    "engine": 18,
+    "reference_only": true
+   },
+   {
+    "id": "EX1_577",
+    "kind": "minion",
+    "field": "hp",
+    "catalog": 7,
+    "engine": 14,
+    "reference_only": true
+   },
+   {
+    "id": "YOD_026",
+    "kind": "minion",
+    "field": "atk",
+    "catalog": 2,
+    "engine": 4,
+    "reference_only": true
+   },
+   {
+    "id": "YOD_026",
+    "kind": "minion",
+    "field": "hp",
+    "catalog": 1,
+    "engine": 2,
+    "reference_only": true
+   }
+  ],
+  "notes": [
+   "catalog 的 cost 对酒馆随从是印刷费用（通常 0），与商店购买价口径不同；随从只比较 atk/hp，cost 只对法术/饰品/英雄技能比较。",
+   "is_reference_only=true 的是构造/历史引用卡（非当前酒馆池），其 BG CardDefs 覆盖值与卡面印刷值可能不同，不应算作本项目数据错误。"
+  ]
+ },
+ "text": {
+  "compared": 2372,
+  "equal": 1472,
+  "diff": 900,
+  "samples": [
+   {
+    "id": "BG20_206",
+    "catalog": "Whenever you spend 3 Gold, get a Blood Gem. (3 Gold left!)",
+    "engine": "[x]Whenever you spend\n3 Gold, get a <b>Blood Gem</b>.\n<i>(@ Gold left!)</i>"
+   },
+   {
+    "id": "BG20_GEM",
+    "catalog": "Give a minion +1/+1.",
+    "engine": "Give a minion +{0}/+{1}."
+   },
+   {
+    "id": "BG20_GEM_DivineShield",
+    "catalog": "Give a minion +1/+1. If it's a Quilboar, also give it Divine Shield.",
+    "engine": "Give a minion +{0}/+{1}. If it's a Quilboar, also give it <b>Divine Shield</b>."
+   },
+   {
+    "id": "BG20_GEM_Reborn",
+    "catalog": "Give a minion +1/+1. If it's a Quilboar, also give it Reborn.",
+    "engine": "Give a minion +{0}/+{1}. If it's a Quilboar, also give it <b>Reborn</b>."
+   },
+   {
+    "id": "BG20_GEM_Taunt",
+    "catalog": "Give a minion +1/+1. If it's a Quilboar, also give it Taunt.",
+    "engine": "Give a minion +{0}/+{1}. If it's a Quilboar, also give it <b>Taunt</b>."
+   },
+   {
+    "id": "BG20_GEMt",
+    "catalog": "Give all friendly minions +0/+0.",
+    "engine": "Give all friendly minions +{0}/+{1}."
+   },
+   {
+    "id": "BG20_HERO_101_Buddy",
+    "catalog": "Whenever you play a minion with less Attack than this, give it +1/+1 and improve this.",
+    "engine": "Whenever you play a minion with less Attack than this, give it +{0}/+{1} and improve this."
+   },
+   {
+    "id": "BG20_HERO_102p",
+    "catalog": "Minions in the Tavern have +1/+1. Improves after you buy 3 minions. (3 left!)",
+    "engine": "[x]Minions in the Tavern have\n+{1}/+{1}. Improves after\nyou buy 3 minions.\n<i>({0} left!)</i>"
+   },
+   {
+    "id": "BG20_HERO_201p2",
+    "catalog": "Choose a minion. Gain Attack with 0.",
+    "engine": "Choose a minion. Gain Attack with {0}."
+   },
+   {
+    "id": "BG20_HERO_242p",
+    "catalog": "After you buy 20 Tiers' worth of cards, get a Triple Reward. (20 left!)",
+    "engine": "[x]After you buy 20 Tiers'\nworth of cards, get a\nTriple Reward. <i>(@ left!)</i>"
+   },
+   {
+    "id": "BG20_HERO_280p5",
+    "catalog": "Once per turn, after you buy 3 minions, get a plain copy of one of them. (3 left!)",
+    "engine": "[x]Once per turn, after you\nbuy 3 minions, get a plain\ncopy of one of them.\n<i>({0} left!)</i>@[x]Once per turn, after you\nbuy 3 minions, get a plain\ncopy of one of them.\n<i>(Done!)</i>"
+   },
+   {
+    "id": "BG20_HERO_283p_t1",
+    "catalog": "In 1 turn, get a random 1-Cost Tavern spell. (1 turn left!)",
+    "engine": "[x]In 1 turn, get a random\n1-Cost Tavern spell.\n<i>(@ |4(turn, turns) left!)</i>"
+   },
+   {
+    "id": "BG20_HERO_283p_t2",
+    "catalog": "In 2 turns, gain 2 Gold. (2 turns left!)",
+    "engine": "[x]In 2 turns, gain 2 Gold.\n<i>(@ |4(turn, turns) left!)</i>"
+   },
+   {
+    "id": "BG20_HERO_283p_t3",
+    "catalog": "In 3 turns, Discover a minion of your Tier. (3 turns left!)",
+    "engine": "[x]In 3 turns, <b>Discover</b> a\nminion of your Tier.\n<i>(@ |4(turn, turns) left!)</i>"
+   },
+   {
+    "id": "BG20_HERO_301_Buddy",
+    "catalog": "When you 'Devour' this, spit its stats onto 1 extra minion.",
+    "engine": "When you 'Devour' this, spit its stats onto 1 extra_minion."
+   },
+   {
+    "id": "BG21_008",
+    "catalog": "After you summon a Murloc, give a friendly Murloc other than it +2 Health.",
+    "engine": "After you summon a Murloc, give a friendly Murloc other than it +{1} Health."
+   },
+   {
+    "id": "BG21_014",
+    "catalog": "Start of Combat: Give your Dragons +4/+4.",
+    "engine": "<b>Start of Combat:</b> Give your Dragons +{0}/+{1}."
+   },
+   {
+    "id": "BG21_018",
+    "catalog": "Whenever this gains Attack from other sources, gain +1 Health.",
+    "engine": "[x]Whenever this gains\nAttack from other sources,\ngain +{1} Health.@[x]Whenever this gains\nAttack from other sources,\ngain +{0}/+{1}."
+   },
+   {
+    "id": "BG21_030",
+    "catalog": "Avenge (3): Give adjacent minions +2/+2 permanently.",
+    "engine": "<b>Avenge ({2}):</b> Give\nadjacent minions\n+{0}/+{1} permanently."
+   },
+   {
+    "id": "BG21_036",
+    "catalog": "Taunt. After a friendly Elemental gains stats, gain +2/+2.",
+    "engine": "<b><b>Taunt</b>.</b> After a friendly Elemental gains stats, gain +{0}/+{1}."
+   }
+  ],
+  "notes": [
+   "catalog 文本是面向展示的'已替换值'版本（+1/+1、@ 计数等），引擎 text 是 CardDefs 原始模板（+{0}/+{1}、[x] 标记），规范化后仍有差异属预期；文本不能作为一致性判据，数值/枚举才是。"
+  ]
+ },
+ "golden": {
+  "catalog_golden_links": 1234,
+  "engine_missing": 63,
+  "engine_missing_by_prefix": {
+   "BG": 5,
+   "BGDUO": 38,
+   "TB": 20
+  },
+  "samples": [
+   "BGDUO31_201_G",
+   "BGDUO31_202_G",
+   "BGDUO31_203_G",
+   "BGDUO31_205_G",
+   "BGDUO31_206_G",
+   "BGDUO31_207_G",
+   "BGDUO31_208_G",
+   "BGDUO31_209_G",
+   "BGDUO31_210_G",
+   "BGDUO31_211_G",
+   "BGDUO31_212_G",
+   "BGDUO33_140_G",
+   "BGDUO33_150_G",
+   "BGDUO_100_G",
+   "BGDUO_104_G",
+   "BGDUO_105_G",
+   "BGDUO_107_G",
+   "BGDUO_108_G",
+   "BGDUO_109_G",
+   "BGDUO_110_G"
+  ],
+  "notes": [
+   "缺失集中在 BGDUO/TB 前缀：单人模式数据不含双人卡，属预期。"
+  ]
+ },
+ "pools": {
+  "catalog_pool_scope": "solo_snapshot",
+  "kinds": {
+   "minion": {
+    "catalog": 256,
+    "project": 273,
+    "intersection": 251,
+    "catalog_only": [
+     "BG36_360t3",
+     "BG36_360t4",
+     "BG36_360t5",
+     "BG36_360t6",
+     "BG36_360t9"
+    ],
+    "catalog_only_count": 5,
+    "project_only": [
+     "BG23_000",
+     "BG23_002",
+     "BG23_004",
+     "BG23_007",
+     "BG23_008",
+     "BG23_009",
+     "BG25_013",
+     "BG26_505",
+     "BG27_514",
+     "BG31_035",
+     "BG31_920",
+     "BG31_924",
+     "BG31_925",
+     "BG32_835",
+     "BG32_837",
+     "BG33_319",
+     "BG34_925",
+     "BG35_921",
+     "BG36_360",
+     "BG36_508"
+    ],
+    "project_only_count": 22
+   },
+   "tavern_spell": {
+    "catalog": 70,
+    "project": 76,
+    "intersection": 70,
+    "catalog_only": [],
+    "catalog_only_count": 0,
+    "project_only": [
+     "BG28_606",
+     "BG31_242",
+     "BG31_243",
+     "BG31_244",
+     "BG32_815",
+     "BG35_922"
+    ],
+    "project_only_count": 6
+   },
+   "hero": {
+    "catalog": 116,
+    "project": 118,
+    "intersection": 116,
+    "catalog_only": [],
+    "catalog_only_count": 0,
+    "project_only": [
+     "BG22_HERO_007",
+     "BG23_HERO_304"
+    ],
+    "project_only_count": 2
+   }
+  },
+  "trinkets": {
+   "catalog_solo_selection": 236,
+   "project_bg_trinkets": 409,
+   "note": "catalog 的库存池是'可被饰品选择'的子集，项目 bg_trinkets.json 是全部饰品定义；两者口径不同，只记录不做法判。"
+  }
+ },
+ "base_field_diffs": {
+  "name_mismatches": {
+   "count": 0,
+   "samples": [],
+   "ids": []
+  },
+  "dbf_mismatches": {
+   "count": 6,
+   "samples": [
+    {
+     "id": "BOT_218",
+     "catalog_dbf": 48100,
+     "engine_dbf": 58392
+    },
+    {
+     "id": "BOT_445",
+     "catalog_dbf": 48886,
+     "engine_dbf": 57336
+    },
+    {
+     "id": "BOT_537",
+     "catalog_dbf": 49169,
+     "engine_dbf": 58387
+    },
+    {
+     "id": "BOT_537t",
+     "catalog_dbf": 49168,
+     "engine_dbf": 58389
+    },
+    {
+     "id": "EX1_577",
+     "catalog_dbf": 962,
+     "engine_dbf": 58394
+    },
+    {
+     "id": "YOD_026",
+     "catalog_dbf": 56112,
+     "engine_dbf": 60671
+    }
+   ]
+  },
+  "tier_mismatches": {
+   "count": 0,
+   "samples": [],
+   "ids": []
+  },
+  "race_mismatches": {
+   "count": 1,
+   "samples": [
+    {
+     "id": "EX1_577",
+     "catalog_races": [
+      "BEAST",
+      "ELEMENTAL"
+     ],
+     "engine_races": [
+      "BEAST"
+     ]
+    }
+   ]
+  },
+  "keyword_mismatches": {
+   "checked_pairs": 17213,
+   "uncovered_pairs": 15625,
+   "count": 9,
+   "samples": [
+    {
+     "id": "BG26_963",
+     "keyword": "START_OF_COMBAT",
+     "engine_field": "start_of_combat",
+     "catalog_has": true,
+     "engine_has": false
+    },
+    {
+     "id": "BG27_556",
+     "keyword": "START_OF_COMBAT",
+     "engine_field": "start_of_combat",
+     "catalog_has": true,
+     "engine_has": false
+    },
+    {
+     "id": "BG30_117",
+     "keyword": "CHOOSE_ONE",
+     "engine_field": "choose_one",
+     "catalog_has": false,
+     "engine_has": true
+    },
+    {
+     "id": "BG31_323",
+     "keyword": "CHOOSE_ONE",
+     "engine_field": "choose_one",
+     "catalog_has": false,
+     "engine_has": true
+    },
+    {
+     "id": "BG31_327",
+     "keyword": "CHOOSE_ONE",
+     "engine_field": "choose_one",
+     "catalog_has": false,
+     "engine_has": true
+    },
+    {
+     "id": "BG31_329",
+     "keyword": "CHOOSE_ONE",
+     "engine_field": "choose_one",
+     "catalog_has": false,
+     "engine_has": true
+    },
+    {
+     "id": "BG31_892",
+     "keyword": "CHOOSE_ONE",
+     "engine_field": "choose_one",
+     "catalog_has": false,
+     "engine_has": true
+    },
+    {
+     "id": "BG34_Giant_042",
+     "keyword": "START_OF_COMBAT",
+     "engine_field": "start_of_combat",
+     "catalog_has": true,
+     "engine_has": false
+    },
+    {
+     "id": "BG36_331",
+     "keyword": "CHOOSE_ONE",
+     "engine_field": "choose_one",
+     "catalog_has": false,
+     "engine_has": true
+    }
+   ]
+  },
+  "dbf_id_changes": {
+   "count": 1,
+   "samples": [
+    {
+     "dbf": 107912,
+     "catalog_id": "BG29_100_G",
+     "engine_id": "BG29_100"
+    }
+   ]
+  }
+ },
+ "notes": [
+  "rizling catalog 是它自报 game_version 的快照；若落后于项目数据，only_catalog/only_engine 与卡池差异反映的是**两个版本之间**的差，不能直接当成项目数据错误。",
+  "真正的数据一致性验收以官方 CardDefs（build tag）为准；rizling 只做版本信号与公共元数据交叉校验。"
+ ]
+}

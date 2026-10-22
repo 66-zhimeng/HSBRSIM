@@ -1,0 +1,1948 @@
+{
+ "schema": "rea.official_implementation_audit.v1",
+ "generated_at": "2026-10-18T10:12:02.028829+00:00",
+ "generator": "reversed/rea/scripts/audit_official_impl.py",
+ "environment": {
+  "game_dir": "C:\\Program Files (x86)\\Hearthstone",
+  "managed_dir": "C:\\Program Files (x86)\\Hearthstone\\Hearthstone_Data\\Managed",
+  "managed_dll_count": 126,
+  "ilspycmd": "%USERPROFILE%\\.dotnet\\tools\\ilspycmd.EXE",
+  "hdt_app": "%USERPROFILE%\\AppData\\Local\\HearthstoneDeckTracker\\app-1.53.0",
+  "dotnet": "C:\\Program Files\\dotnet\\dotnet.exe"
+ },
+ "verdict": {
+  "official_complete_implementation_available": false,
+  "conclusion": "客户端只是服务器 PowerHistory 的『状态应用器 + 播放器 + UI』，不存在攻击轮转/目标随机/死亡结算/伤害计算/随机数等裁决实现；官方完整实现（服务端）不在本机。",
+  "confidence": "high"
+ },
+ "assemblies": [
+  {
+   "name": "AppsFlyer.dll",
+   "bytes": 19968,
+   "sha256_16": "a8e5afc6ad3b76c0",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Assembly-CSharp-firstpass.dll",
+   "bytes": 27136,
+   "sha256_16": "2a1a35f46d3a6c64",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Assembly-CSharp.dll",
+   "bytes": 23114752,
+   "sha256_16": "786376bddad54470",
+   "has_tsv_dump": true,
+   "types": 14390,
+   "methods": 113222
+  },
+  {
+   "name": "blizzard.bgsclient.dll",
+   "bytes": 2037248,
+   "sha256_16": "457ba351f6373c9b",
+   "has_tsv_dump": true,
+   "types": 1706,
+   "methods": 15874
+  },
+  {
+   "name": "blizzard.bgssdk.dll",
+   "bytes": 6564864,
+   "sha256_16": "06f361c6e4536e99",
+   "has_tsv_dump": true,
+   "types": 4372,
+   "methods": 49392
+  },
+  {
+   "name": "Blizzard.Commerce.Bindings.dll",
+   "bytes": 97792,
+   "sha256_16": "18c00f0d69f198d7",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.Commerce.Model.CSharp.dll",
+   "bytes": 26624,
+   "sha256_16": "b5894f7b788cc3a2",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.Commerce.Wrapper.dll",
+   "bytes": 41984,
+   "sha256_16": "ca2f1a0970e7f20b",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.AssetLoader.dll",
+   "bytes": 12288,
+   "sha256_16": "5d084bcad5e02f92",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.AssetManager.dll",
+   "bytes": 34816,
+   "sha256_16": "375db14d3414eba9",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.Configuration.dll",
+   "bytes": 11776,
+   "sha256_16": "3eddf4d3793ad9cd",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.Core.dll",
+   "bytes": 38912,
+   "sha256_16": "e80e8d96dfb67012",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.ErrorInterface.dll",
+   "bytes": 5120,
+   "sha256_16": "7105ee7266c6614d",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.FontService.dll",
+   "bytes": 7168,
+   "sha256_16": "b8570b005fc34f26",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.FXBuilder.dll",
+   "bytes": 52736,
+   "sha256_16": "dbe59e1ef76bd17f",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.Game.dll",
+   "bytes": 24576,
+   "sha256_16": "ef016f552918c101",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.GameStringsInterface.dll",
+   "bytes": 3584,
+   "sha256_16": "760835daa7fe9714",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.GraphicsManagerInterface.dll",
+   "bytes": 5120,
+   "sha256_16": "13bdbcd5493fd54d",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.iTween.dll",
+   "bytes": 68096,
+   "sha256_16": "04f0721435ac1cd1",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.JobQueue.dll",
+   "bytes": 45568,
+   "sha256_16": "5ac7b646c4260908",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.Json.dll",
+   "bytes": 5632,
+   "sha256_16": "c7324dfca3439caf",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.Localization.dll",
+   "bytes": 7168,
+   "sha256_16": "c8da5958a30d0d64",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.Logging.dll",
+   "bytes": 24064,
+   "sha256_16": "0346702868251bef",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.MaterialService.dll",
+   "bytes": 11776,
+   "sha256_16": "39fe8c32be546206",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.MiniJSON.dll",
+   "bytes": 8704,
+   "sha256_16": "31e05896caf2b875",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.NativeApis.dll",
+   "bytes": 10752,
+   "sha256_16": "2abcac617e4b8c76",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.Network-Core.dll",
+   "bytes": 25600,
+   "sha256_16": "4cf6d5a1a1f911fc",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.PerformanceMonitoring.dll",
+   "bytes": 40960,
+   "sha256_16": "4fe35e76481a9c25",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.PlayMaker.Runtime.dll",
+   "bytes": 1011712,
+   "sha256_16": "6737a12cc53a30ae",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.PlayMakerCustomActions.Runtime.dll",
+   "bytes": 120320,
+   "sha256_16": "e995499480cf2706",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.ServiceLocator.dll",
+   "bytes": 26112,
+   "sha256_16": "0c863df352c4091c",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.Tact3.Runtime.dll",
+   "bytes": 29184,
+   "sha256_16": "62e593a0f07b85dc",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.UberText.Runtime.dll",
+   "bytes": 83456,
+   "sha256_16": "09fb757690d86a43",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.UI.Core.dll",
+   "bytes": 5632,
+   "sha256_16": "03f3fbe5059a4ab0",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.T5.VFXManager.dll",
+   "bytes": 12800,
+   "sha256_16": "971e7b10e62a6069",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.Telemetry.Identity.dll",
+   "bytes": 18944,
+   "sha256_16": "2154086d1d3e6d7c",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.Telemetry.Sdk.dll",
+   "bytes": 36352,
+   "sha256_16": "73be2d1f26f4a4d9",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Blizzard.Telemetry.StandardProtos.BlizzPbc.dll",
+   "bytes": 52224,
+   "sha256_16": "0198fdbf5bfffdcc",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "com.blizzard.mobile-unity-auth-sdk.dll",
+   "bytes": 18432,
+   "sha256_16": "683b0ff4850a2d4b",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "ConditionalExpression.dll",
+   "bytes": 26112,
+   "sha256_16": "6145f7e37f91f5fd",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Google.Protobuf.dll",
+   "bytes": 390656,
+   "sha256_16": "d99ca85b3ac91cc7",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Hearthstone.AssetManifest.dll",
+   "bytes": 12288,
+   "sha256_16": "a4d19b29d51508a4",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Microsoft.Extensions.Logging.Abstractions.dll",
+   "bytes": 16896,
+   "sha256_16": "f20928ef165c0bf0",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Mono.Security.dll",
+   "bytes": 151040,
+   "sha256_16": "148b323cc07d798f",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "mscorlib.dll",
+   "bytes": 2790912,
+   "sha256_16": "220b8b91bf7a04bc",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Newtonsoft.Json.dll",
+   "bytes": 388608,
+   "sha256_16": "a7967c072bccbd27",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "PlayMaker.dll",
+   "bytes": 229888,
+   "sha256_16": "dcec5049cffe9fc9",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Polly.dll",
+   "bytes": 22016,
+   "sha256_16": "a8559648649d6a7f",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "System.Configuration.dll",
+   "bytes": 124416,
+   "sha256_16": "42612376ded5ee53",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "System.Core.dll",
+   "bytes": 428544,
+   "sha256_16": "8e957b8f9f1d011c",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "System.Data.dll",
+   "bytes": 626176,
+   "sha256_16": "ae805229665720d5",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "System.dll",
+   "bytes": 1434112,
+   "sha256_16": "b0786073ce522b78",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "System.Drawing.dll",
+   "bytes": 69632,
+   "sha256_16": "125c7210edaa00ac",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "System.IO.Pipelines.dll",
+   "bytes": 10240,
+   "sha256_16": "a67fc9b222a91e1b",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "System.Net.Http.dll",
+   "bytes": 80896,
+   "sha256_16": "7f0e06ea08cf7f29",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "System.Numerics.dll",
+   "bytes": 38912,
+   "sha256_16": "f33491f2ca7599b7",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "System.Runtime.CompilerServices.Unsafe.dll",
+   "bytes": 5632,
+   "sha256_16": "3a10fa79d9d5cf4d",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "System.Runtime.Serialization.dll",
+   "bytes": 5632,
+   "sha256_16": "ae8b5b9d11b35e12",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "System.Security.dll",
+   "bytes": 81920,
+   "sha256_16": "90887c562de8b814",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "System.Text.Encodings.Web.dll",
+   "bytes": 35840,
+   "sha256_16": "b02c41fa1f04dc92",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "System.Text.Json.dll",
+   "bytes": 376320,
+   "sha256_16": "8ee1c7824d3cd9d8",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "System.Xml.dll",
+   "bytes": 2159616,
+   "sha256_16": "41ee47f46d882345",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "System.Xml.Linq.dll",
+   "bytes": 38400,
+   "sha256_16": "94b608334c085f0d",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UniSDK.NgWebView.Runtime.dll",
+   "bytes": 18944,
+   "sha256_16": "f84bf8c76b8dc74e",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UniTask.dll",
+   "bytes": 89600,
+   "sha256_16": "c9e10855534738cf",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Unity.Burst.dll",
+   "bytes": 29184,
+   "sha256_16": "73909cf340b1ba83",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Unity.Burst.Unsafe.dll",
+   "bytes": 3072,
+   "sha256_16": "3fe5f2054f0233c9",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Unity.Collections.dll",
+   "bytes": 75776,
+   "sha256_16": "41d493b756aa431c",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Unity.InternalAPIEngineBridge.004.dll",
+   "bytes": 3584,
+   "sha256_16": "a56f0d2bc3f1a9ef",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Unity.Mathematics.dll",
+   "bytes": 28160,
+   "sha256_16": "e80717a85fc60833",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Unity.MemoryProfiler.dll",
+   "bytes": 6144,
+   "sha256_16": "36879a23957b5347",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Unity.RenderPipeline.Universal.ShaderLibrary.dll",
+   "bytes": 7168,
+   "sha256_16": "9bb7dfc2065e9687",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Unity.RenderPipelines.Core.Runtime.dll",
+   "bytes": 546304,
+   "sha256_16": "50712f2b5f14be30",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Unity.RenderPipelines.Core.Runtime.Shared.dll",
+   "bytes": 4096,
+   "sha256_16": "30a2619078d98b8f",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Unity.RenderPipelines.GPUDriven.Runtime.dll",
+   "bytes": 201216,
+   "sha256_16": "a8577031079971f8",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Unity.RenderPipelines.Universal.Runtime.dll",
+   "bytes": 516096,
+   "sha256_16": "7be1b273b6b6807d",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Unity.SharpZipLib.dll",
+   "bytes": 77824,
+   "sha256_16": "4c9c2108c65f661c",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Unity.TextMeshPro.dll",
+   "bytes": 341504,
+   "sha256_16": "110947b69c3f9b3c",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Unity.Timeline.dll",
+   "bytes": 127488,
+   "sha256_16": "8497487abca0976d",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Unity.UnifiedRayTracing.Runtime.dll",
+   "bytes": 8192,
+   "sha256_16": "b17eedb0d06675d6",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "Unity.ZombieObjectDetector.Runtime.dll",
+   "bytes": 15360,
+   "sha256_16": "e35c41e6b6099fd2",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.AccessibilityModule.dll",
+   "bytes": 23040,
+   "sha256_16": "659fa3ac05eea89a",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.AdaptivePerformanceModule.dll",
+   "bytes": 105984,
+   "sha256_16": "4c5b83668d191add",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.AIModule.dll",
+   "bytes": 15360,
+   "sha256_16": "e94c7a126de5e018",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.AndroidJNIModule.dll",
+   "bytes": 70656,
+   "sha256_16": "2f78fb8ad8373081",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.AnimationModule.dll",
+   "bytes": 107520,
+   "sha256_16": "984a24d6372b2cba",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.AssetBundleModule.dll",
+   "bytes": 18944,
+   "sha256_16": "43cd43a532df416a",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.AudioModule.dll",
+   "bytes": 60928,
+   "sha256_16": "7b6f69aeddb492da",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.CoreModule.dll",
+   "bytes": 1041408,
+   "sha256_16": "5dd728506e17b1eb",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.DirectorModule.dll",
+   "bytes": 30720,
+   "sha256_16": "72ce3eeb86c52adb",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.dll",
+   "bytes": 106496,
+   "sha256_16": "29264571105e718a",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.GridModule.dll",
+   "bytes": 14336,
+   "sha256_16": "91f705c31e4b29c3",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.HierarchyCoreModule.dll",
+   "bytes": 38912,
+   "sha256_16": "37c9ee1ce672ffc7",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.ImageConversionModule.dll",
+   "bytes": 14336,
+   "sha256_16": "64fcd7819af77981",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.IMGUIModule.dll",
+   "bytes": 144896,
+   "sha256_16": "5940d0e2d90cfc81",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.InputForUIModule.dll",
+   "bytes": 39936,
+   "sha256_16": "63e28505903ddf38",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.InputLegacyModule.dll",
+   "bytes": 26112,
+   "sha256_16": "98991bbb87e0082f",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.InputModule.dll",
+   "bytes": 15360,
+   "sha256_16": "89a2d8050a0c25b1",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.JSONSerializeModule.dll",
+   "bytes": 15872,
+   "sha256_16": "098094e12d02404c",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.MultiplayerModule.dll",
+   "bytes": 4608,
+   "sha256_16": "2b1ba0e8534c2c0f",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.ParticleSystemModule.dll",
+   "bytes": 160768,
+   "sha256_16": "f7a7567bea3eed3c",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.Physics2DModule.dll",
+   "bytes": 89088,
+   "sha256_16": "8fdce1de72dd9b78",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.PhysicsModule.dll",
+   "bytes": 76800,
+   "sha256_16": "c5df3f043b7201b4",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.PropertiesModule.dll",
+   "bytes": 95232,
+   "sha256_16": "f9b8bd6662a9d014",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.ScreenCaptureModule.dll",
+   "bytes": 14848,
+   "sha256_16": "80ad6c8aec20de07",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.SharedInternalsModule.dll",
+   "bytes": 20992,
+   "sha256_16": "46576e8a3abba3b8",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.SpriteShapeModule.dll",
+   "bytes": 13824,
+   "sha256_16": "948df3132ce34ffa",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.SubsystemsModule.dll",
+   "bytes": 22528,
+   "sha256_16": "ecb5227015886f72",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.TerrainModule.dll",
+   "bytes": 24064,
+   "sha256_16": "f44631f736222142",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.TextCoreFontEngineModule.dll",
+   "bytes": 32256,
+   "sha256_16": "67ca9eeb16ad8619",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.TextCoreTextEngineModule.dll",
+   "bytes": 293888,
+   "sha256_16": "ad326932b579fc01",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.TextRenderingModule.dll",
+   "bytes": 19968,
+   "sha256_16": "8b76c1efd425a50b",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.TilemapModule.dll",
+   "bytes": 23552,
+   "sha256_16": "6a7c264da262b984",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.UI.dll",
+   "bytes": 247808,
+   "sha256_16": "79209dbe33dfc8aa",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.UIElementsModule.dll",
+   "bytes": 1868288,
+   "sha256_16": "4cd947b14b918bc6",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.UIModule.dll",
+   "bytes": 37888,
+   "sha256_16": "b84b35f28c354ff9",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.UnityAnalyticsCommonModule.dll",
+   "bytes": 22016,
+   "sha256_16": "d472f01d71ce6aa5",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.UnityAnalyticsModule.dll",
+   "bytes": 16384,
+   "sha256_16": "5a1ded46ad115e0d",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.UnityConsentModule.dll",
+   "bytes": 4608,
+   "sha256_16": "5e793a83f721a6db",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.UnityWebRequestModule.dll",
+   "bytes": 41984,
+   "sha256_16": "95f90e66ec3adabf",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.UnityWebRequestTextureModule.dll",
+   "bytes": 15872,
+   "sha256_16": "238d98730029be5b",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.VFXModule.dll",
+   "bytes": 20480,
+   "sha256_16": "b127a331cded915e",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.VideoModule.dll",
+   "bytes": 24576,
+   "sha256_16": "0d6a1eb49ef7256b",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.VRModule.dll",
+   "bytes": 14336,
+   "sha256_16": "4cc48d36f3836732",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.WindModule.dll",
+   "bytes": 15872,
+   "sha256_16": "41cde112dbd537a7",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  },
+  {
+   "name": "UnityEngine.XRModule.dll",
+   "bytes": 25600,
+   "sha256_16": "2c7698a5583fc2f5",
+   "has_tsv_dump": false,
+   "types": null,
+   "methods": null
+  }
+ ],
+ "dll_symbol_scan": {
+  "dlls_scanned": 126,
+  "adjudicator_keyword_dlls": [],
+  "per_dll_hits": [
+   {
+    "dll": "Assembly-CSharp.dll",
+    "hits": {
+     "BaconCombat": 9,
+     "BattlegroundsCombat": 1,
+     "BaconBoardTester": 5,
+     "DamageCap": 21,
+     "LocalGame": 1,
+     "PowerHistory": 29,
+     "Simulate": 7
+    }
+   },
+   {
+    "dll": "blizzard.bgsclient.dll",
+    "hits": {
+     "PowerHistory": 51
+    }
+   },
+   {
+    "dll": "Blizzard.T5.PlayMakerCustomActions.Runtime.dll",
+    "hits": {
+     "Simulate": 6
+    }
+   },
+   {
+    "dll": "Unity.Timeline.dll",
+    "hits": {
+     "Simulate": 1
+    }
+   },
+   {
+    "dll": "UnityEngine.dll",
+    "hits": {
+     "Simulate": 1
+    }
+   },
+   {
+    "dll": "UnityEngine.ParticleSystemModule.dll",
+    "hits": {
+     "Simulate": 3
+    }
+   },
+   {
+    "dll": "UnityEngine.Physics2DModule.dll",
+    "hits": {
+     "Simulate": 5
+    }
+   },
+   {
+    "dll": "UnityEngine.UIElementsModule.dll",
+    "hits": {
+     "Simulate": 1
+    }
+   }
+  ],
+  "conclusion": "126 个托管 DLL 中没有任何 CombatSimulator/SimulateCombat/ResolveCombat/CalculateCombat/PredictCombat/CombatResolver/CombatAdjudicator/BattleSimulator/CombatEngine/CombatLogic 符号"
+ },
+ "bg_symbol_semantics": {
+  "counts": {
+   "types_total": 14390,
+   "methods_total": 113222,
+   "bacon_battleground_types": 381,
+   "bacon_battleground_methods": 3705,
+   "bacon_battleground_monobehaviour_types": 53,
+   "combat_types": 15,
+   "combat_methods": 131,
+   "power_pipeline_methods": 227,
+   "simulate_methods": 5,
+   "predict_methods": 11
+  },
+  "bacon_combat_step": {
+   "type": "Assets.Global/BaconCombatStep",
+   "judgement": "presentation（战斗播放步骤枚举；DBF 列 baconcombatstep）",
+   "members": [
+    "GlobalDbfRecord::get_Baconcombatstep() -> Assets.Global/BaconCombatStep",
+    "GlobalDbfRecord::SetBaconcombatstep(Assets.Global/BaconCombatStep) -> System.Void",
+    "Assets.Global::ParseBaconCombatStepValue(System.String) -> Assets.Global/BaconCombatStep"
+   ]
+  },
+  "battlegrounds_combat_phase": {
+   "type": "GameEntity/TB_BaconShop/Entity",
+   "judgement": "presentation（服务器 tag BACON_IN_COMBAT_PHASE/阶段标志驱动 UI）",
+   "members": [
+    "GameEntity::IsInBattlegroundsCombatPhase() -> System.Boolean",
+    "TB_BaconShop::IsInBattlegroundsCombatPhase() -> System.Boolean",
+    "Entity::SetRealTimeBaconCombatPhaseHero(System.Int32) -> System.Void",
+    "Entity::GetRealTimeBaconCombatPhaseHero() -> System.Boolean",
+    "Entity::SetRealtimeBaconCombatPhase(System.Int32) -> System.Void"
+   ]
+  },
+  "damage_cap": {
+   "types": [
+    "class\tDamageCapPanel\tUnityEngine.MonoBehaviour\tPublic, BeforeFieldInit",
+    "delegate\tGameState/DamageCapChangedCallback\tSystem.MulticastDelegate\tNestedPublic, Sealed",
+    "class\tGameState/DamageCapChangedListener\tEventListener`1<GameState/DamageCapChangedCallback>\tNestedPrivate, BeforeFieldInit",
+    "class\tPlayerLeaderboardManager/<UpdateDamageCapFX>d__58\tSystem.Object\tNestedPrivate, Sealed, BeforeFieldInit"
+   ],
+   "methods": [
+    "DamageCapPanel::SetText(System.String) -> System.Void",
+    "DamageCapPanel::ClearText() -> System.Void",
+    "DamageCapPanel::.ctor() -> System.Void",
+    "GameState::OnDamageCapChanged(System.Int32,System.Int32) -> System.Void",
+    "GameState::RegisterDamageCapChangedListener(GameState/DamageCapChangedCallback) -> System.Boolean",
+    "GameState::RegisterDamageCapChangedListener(GameState/DamageCapChangedCallback,System.Object) -> System.Boolean",
+    "GameState::UnregisterDamageCapChangedListener(GameState/DamageCapChangedCallback) -> System.Boolean",
+    "GameState::UnregisterDamageCapChangedListener(GameState/DamageCapChangedCallback,System.Object) -> System.Boolean",
+    "GameState::FireDamageCapChangedEvent(System.Int32,System.Int32) -> System.Void",
+    "GameState/DamageCapChangedCallback::.ctor(System.Object,System.IntPtr) -> System.Void",
+    "GameState/DamageCapChangedCallback::Invoke(System.Int32,System.Int32,System.Object) -> System.Void",
+    "GameState/DamageCapChangedCallback::BeginInvoke(System.Int32,System.Int32,System.Object,System.AsyncCallback,System.Object) -> System.IAsyncResult",
+    "GameState/DamageCapChangedCallback::EndInvoke(System.IAsyncResult) -> System.Void",
+    "GameState/DamageCapChangedListener::Fire(System.Int32,System.Int32) -> System.Void",
+    "GameState/DamageCapChangedListener::.ctor() -> System.Void",
+    "MulliganManager::EnableDamageCapFX(System.Boolean) -> System.Void",
+    "PlayerLeaderboardManager::OnDamageCapChanged(System.Int32,System.Int32,System.Object) -> System.Void",
+    "PlayerLeaderboardManager::EnableDamageCapFX(System.Boolean) -> System.Void",
+    "PlayerLeaderboardManager::UpdateDamageCap() -> System.Void",
+    "PlayerLeaderboardManager::UpdateDamageCapFX(System.Int32,System.Int32,System.Boolean) -> System.Collections.IEnumerator",
+    "PlayerLeaderboardManager/<UpdateDamageCapFX>d__58::.ctor(System.Int32) -> System.Void",
+    "PlayerLeaderboardManager/<UpdateDamageCapFX>d__58::System.IDisposable.Dispose() -> System.Void",
+    "PlayerLeaderboardManager/<UpdateDamageCapFX>d__58::MoveNext() -> System.Boolean",
+    "PlayerLeaderboardManager/<UpdateDamageCapFX>d__58::System.Collections.Generic.IEnumerator<System.Object>.get_Current() -> System.Object",
+    "PlayerLeaderboardManager/<UpdateDamageCapFX>d__58::System.Collections.IEnumerator.Reset() -> System.Void",
+    "PlayerLeaderboardManager/<UpdateDamageCapFX>d__58::System.Collections.IEnumerator.get_Current() -> System.Object",
+    "PlayerLeaderboardPlayerOverlay::UpdateDamageCapState() -> System.Void",
+    "PlayerLeaderboardRecentCombatsPanel::UpdateDamageCap() -> System.Void",
+    "Entity::SetRealtimeBaconDamageCapEnabled(System.Int32) -> System.Void",
+    "Entity::GetRealtimeBaconDamageCapEnabled() -> System.Boolean"
+   ],
+   "judgement": "UI/tag 显示（无本地公式；值来自 GameEntity tag 2089）"
+  },
+  "simulate": {
+   "methods": [
+    "Network::SimulateUncleanDisconnectFromGameServer() -> System.Void",
+    "Network::SimulateReceivedPacketFromServer(PegasusPacket) -> System.Void",
+    "SelectorWheel::SimulateWheel(System.Single) -> System.Void",
+    "Hearthstone.Progression.QuestManager::SimulateQuestProgress(System.Int32) -> System.Void",
+    "Hearthstone.Progression.QuestManager::SimulateQuestNotificationPopup(Assets.QuestPool/QuestPoolType) -> System.Void"
+   ],
+   "judgement": "网络/UI 模拟（断线、收包、转盘、任务进度），与战斗裁决无关"
+  },
+  "predict": {
+   "methods": [
+    "InputManager::PredictSpentMana(Entity) -> System.Void",
+    "ZoneMgr::PredictZonePosition(Entity,Zone,System.Int32) -> System.Int32",
+    "ZoneMgr::PredictZoneFromPowerProcessor(ZoneMgr/TempZone) -> System.Void",
+    "ZoneMgr::PredictZoneFromPowerTaskList(ZoneMgr/TempZone,PowerTaskList) -> System.Void",
+    "ZoneMgr::PredictZoneFromPower(ZoneMgr/TempZone,Network/PowerHistory) -> System.Void",
+    "ZoneMgr::PredictZoneFromFullEntity(ZoneMgr/TempZone,Network/HistFullEntity) -> System.Void",
+    "ZoneMgr::PredictZoneFromShowEntity(ZoneMgr/TempZone,Network/HistShowEntity) -> System.Void",
+    "ZoneMgr::PredictZoneFromHideEntity(ZoneMgr/TempZone,Network/HistHideEntity) -> System.Void",
+    "ZoneMgr::PredictZoneFromTagChange(ZoneMgr/TempZone,Network/HistTagChange) -> System.Void",
+    "ZoneMgr::PredictZoneByApplyingTag(ZoneMgr/TempZone,Entity,GAME_TAG,System.Int32) -> System.Void",
+    "ZoneMgr/<>c__DisplayClass71_0::<PredictZoneFromPowerProcessor>b__0(System.Int32,PowerTaskList) -> System.Void"
+   ],
+   "judgement": "ZoneMgr/InputManager 的表现预测（区域/费用），不是战斗裁决"
+  },
+  "cheat_debug": {
+   "sample": [
+    "BaconBoard::CheatSetWinstreak(System.Int32) -> System.Void",
+    "BaconBoard::CheatSetDefeatedMinionCount(System.Int32) -> System.Void",
+    "BaconBoard::CheatSetHasDefeatedOpponent() -> System.Void",
+    "BaconBoard::CheatAddDefeatedRace(TAG_RACE) -> System.Void",
+    "BaconBoard::CheatAddDefeatedMinion(System.String) -> System.Void",
+    "BaconBoard::CheatTriggerDefeatedMinion(System.String) -> System.Boolean",
+    "BaconBoard::CheatTriggerHeroHeavyHitEffects() -> System.Boolean",
+    "BaconBoard::CheatTriggerMinionHeavyHitEffects() -> System.Boolean",
+    "BaconBoard::CheatTriggerAllBoardEffects() -> System.Boolean",
+    "BaconBoardSkinBehaviour::CheatTriggerHeroHeavyHitBoardEffects() -> System.Void",
+    "BaconBoardSkinBehaviour::CheatTriggerMinionHeavyHitBoardEffects() -> System.Void",
+    "BaconBoardSkinBehaviour::CheatTriggerAllBoardEffects() -> System.Void",
+    "BaconBoardSkinBehaviour::CheatTriggerDefeatMinion(System.String) -> System.Void",
+    "BaconBoardSkinBehaviour::DebugTriggerFSMState(System.String) -> System.Void"
+   ],
+   "judgement": "棋盘皮肤/特效调试（MonoBehaviour/PlayMaker FSM），非战斗逻辑"
+  },
+  "bacon_board_tester": {
+   "type": "BaconBoardTester",
+   "judgement": "MonoBehaviour 棋盘皮肤 authoring/预览工具（PlayMaker FSM 状态切换）"
+  }
+ },
+ "bgs_assemblies": {
+  "blizzard.bgsclient": {
+   "types": 1706,
+   "methods": 15874,
+   "battleground_types": 108,
+   "battleground_methods": 1007,
+   "bacon": 4,
+   "combat_types": 2,
+   "combat_methods": 38,
+   "simulate": 0,
+   "powerhistory_types": 19,
+   "powerhistory_methods": 333,
+   "sample_powerhistory": [
+    "PegasusGame.PowerHistoryCreateGame::Deserialize(System.IO.Stream) -> System.Void",
+    "PegasusGame.PowerHistoryCreateGame::Deserialize(System.IO.Stream,PegasusGame.PowerHistoryCreateGame) -> PegasusGame.PowerHistoryCreateGame",
+    "PegasusGame.PowerHistoryCreateGame::DeserializeLengthDelimited(System.IO.Stream) -> PegasusGame.PowerHistoryCreateGame",
+    "PegasusGame.PowerHistoryCreateGame::DeserializeLengthDelimited(System.IO.Stream,PegasusGame.PowerHistoryCreateGame) -> PegasusGame.PowerHistoryCreateG",
+    "PegasusGame.PowerHistoryCreateGame::Deserialize(System.IO.Stream,PegasusGame.PowerHistoryCreateGame,System.Int64) -> PegasusGame.PowerHistoryCreateGam"
+   ],
+   "judgement": "Battle.net Game Service 协议/序列化（PegasusUtil/PegasusGame protobuf Serialize/Deserialize），不含裁决实现"
+  },
+  "blizzard.bgssdk": {
+   "types": 4372,
+   "methods": 49392,
+   "battleground_types": 0,
+   "battleground_methods": 0,
+   "bacon": 0,
+   "combat_types": 0,
+   "combat_methods": 0,
+   "simulate": 0,
+   "powerhistory_types": 0,
+   "powerhistory_methods": 0,
+   "sample_powerhistory": [],
+   "judgement": "Battle.net Game Service 协议/序列化（PegasusUtil/PegasusGame protobuf Serialize/Deserialize），不含裁决实现"
+  }
+ },
+ "native_plugins": {
+  "plugin_dir": "C:\\Program Files (x86)\\Hearthstone\\Hearthstone_Data\\Plugins\\x86_64",
+  "libraries": [
+   {
+    "name": "blz_commerce_sdk_plugin.dll",
+    "bytes": 1563344,
+    "battleground": 0,
+    "combat": 0,
+    "powerhistory": 0,
+    "anticheat": 0,
+    "simulate": 0
+   },
+   {
+    "name": "commerce_http_client.dll",
+    "bytes": 503296,
+    "battleground": 0,
+    "combat": 0,
+    "powerhistory": 0,
+    "anticheat": 0,
+    "simulate": 1
+   },
+   {
+    "name": "libacsdk_x64.dll",
+    "bytes": 7333888,
+    "battleground": 0,
+    "combat": 0,
+    "powerhistory": 0,
+    "anticheat": 43,
+    "simulate": 0
+   },
+   {
+    "name": "tracert_plugin.dll",
+    "bytes": 294912,
+    "battleground": 0,
+    "combat": 0,
+    "powerhistory": 0,
+    "anticheat": 0,
+    "simulate": 0
+   },
+   {
+    "name": "W8TouchDLL.dll",
+    "bytes": 14336,
+    "battleground": 0,
+    "combat": 0,
+    "powerhistory": 0,
+    "anticheat": 0,
+    "simulate": 0
+   }
+  ]
+ },
+ "bobsbuddy_inventory": {
+  "hdt_app": "%USERPROFILE%\\AppData\\Local\\HearthstoneDeckTracker\\app-1.53.0",
+  "assemblies": [
+   {
+    "name": "BobsBuddy.dll",
+    "exists": true,
+    "bytes": 1282560,
+    "sha256_16": "26dd65ca3db6eb54"
+   },
+   {
+    "name": "BobsBuddy.Common.dll",
+    "exists": true,
+    "bytes": 4096,
+    "sha256_16": "8f045a7727f3e913"
+   },
+   {
+    "name": "HearthDb.dll",
+    "exists": true,
+    "bytes": 36744704,
+    "sha256_16": "8d7df8b6de00fa50"
+   }
+  ],
+  "note": "BobsBuddy.dll 为第三方完整战斗实现（非官方），可作为 .NET 桥接/第二实现参照"
+ },
+ "assets": {
+  "path": "C:\\Program Files (x86)\\Hearthstone\\Data\\Win",
+  "bundle_count": 5155,
+  "total_gb": 13.06,
+  "categories": {
+   "prefab": 1429,
+   "material": 957,
+   "texture": 688,
+   "sound": 588,
+   "initial": 465,
+   "cardasset": 423,
+   "carddef": 283,
+   "cardtexture": 262,
+   "essential": 26,
+   "video": 16,
+   "hero": 7,
+   "music": 7,
+   "asset_manifest": 2,
+   "other": 1,
+   "portpremium": 1
+  },
+  "sample_code_markers": [
+   {
+    "name": "asset_manifest.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "asset_manifest_zhcn.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_adventure_global-11ad5280-material-0.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_adventure_global-2ebe64b8-prefab-0.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_adventure_global-75c96a85-material-0.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_adventure_global-eda2efe1-prefab-0.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-03fa71e7-prefab-0.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0516e06c-material-0.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0516e06c-material-1.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0516e06c-material-2.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0516e06c-material-3.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0516e06c-material-4.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0516e06c-prefab-0.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0647217b-material-0.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0647217b-material-1.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0647217b-material-2.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0647217b-material-3.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0647217b-material-4.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0647217b-material-5.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0647217b-prefab-0.unity3d",
+    "assembly_csharp": 1,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-06d41e57-material-0.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-06d41e57-prefab-0.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0bb4d88a-prefab-0.unity3d",
+    "assembly_csharp": 1,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0dbe0cab-material-0.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0dbe0cab-material-1.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0dbe0cab-material-2.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0dbe0cab-material-3.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0dbe0cab-material-4.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0dbe0cab-prefab-0.unity3d",
+    "assembly_csharp": 1,
+    "monoscript": 0,
+    "combat_sim": 0
+   },
+   {
+    "name": "cardasset_base_global-0fde4609-material-0.unity3d",
+    "assembly_csharp": 0,
+    "monoscript": 0,
+    "combat_sim": 0
+   }
+  ],
+  "conclusion": "Unity Mono 工程：C# 代码只存在于 Hearthstone_Data/Managed/*.dll；Data/Win 的 5155 个 .unity3d 均为资源（cardasset/prefab/material/texture/sound/video 等），抽样无 Assembly-CSharp/MonoScript/CombatSimulator 代码标记。"
+ },
+ "evidence": [
+  {
+   "id": "network_power_history_from_protocol",
+   "found": true,
+   "file": "C:\\HSagent\\reversed\\rea\\audit\\Network.cs",
+   "line": 10578,
+   "needle_lines": {
+    "public List<PowerHistory> GetPowerHistory\\(\\)": 10578,
+    "m_connectApi\\.GetPowerHistory\\(\\)": 10580,
+    "PowerHistoryData": 10588
+   },
+   "snippet": [
+    "public List<PowerHistory> GetPowerHistory()",
+    "{",
+    "PegasusGame.PowerHistory powerHistory = m_connectApi.GetPowerHistory();",
+    "if (powerHistory == null)",
+    "{",
+    "return null;",
+    "}",
+    "List<PowerHistory> list = new List<PowerHistory>();",
+    "for (int i = 0; i < powerHistory.List.Count; i++)",
+    "{"
+   ]
+  },
+  {
+   "id": "gameplay_registers_power_history_packet",
+   "found": true,
+   "file": "C:\\HSagent\\reversed\\rea\\audit\\Gameplay.cs",
+   "line": 245,
+   "needle_lines": {
+    "PowerHistory\\.PacketID\\.ID": 245,
+    "private void OnPowerHistory\\(\\)": 706,
+    "Network\\.Get\\(\\)\\.GetPowerHistory\\(\\)": 708,
+    "GameState\\.Get\\(\\)\\.OnPowerHistory\\(": 712
+   },
+   "snippet": [
+    "network.AddBnetErrorListener(OnBnetError);",
+    "network.RegisterNetHandler(PowerHistory.PacketID.ID, OnPowerHistory);",
+    "network.RegisterNetHandler(AllOptions.PacketID.ID, OnAllOptions);",
+    "network.RegisterNetHandler(EntityChoices.PacketID.ID, OnEntityChoices);",
+    "network.RegisterNetHandler(EntitiesChosen.PacketID.ID, OnEntitiesChosen);",
+    "network.RegisterNetHandler(UserUI.PacketID.ID, OnUserUI);",
+    "network.RegisterNetHandler(NAckOption.PacketID.ID, OnOptionRejected);",
+    "network.RegisterNetHandler(PegasusGame.TurnTimer.PacketID.ID, OnTurnTimerUpdate);",
+    "network.RegisterNetHandler(SpectatorNotify.PacketID.ID, OnSpectatorNotify);",
+    "network.RegisterNetHandler(AIDebugInformation.PacketID.ID, OnAIDebugInformation);",
+    "network.RegisterNetHandler(RopeTimerDebugInformation.PacketID.ID, OnRopeTimerDebugInformation);"
+   ]
+  },
+  {
+   "id": "gameplay_queued_power_history",
+   "found": true,
+   "file": "C:\\HSagent\\reversed\\rea\\audit\\Gameplay.cs",
+   "line": 1155,
+   "needle_lines": {
+    "ProcessQueuedPowerHistory\\(\\)": 1155,
+    "m_queuedPowerHistory\\.Dequeue\\(\\)": 1697
+   },
+   "snippet": [
+    "PostGameplayContextIfNeeded();",
+    "ProcessQueuedPowerHistory();",
+    "return true;",
+    "}",
+    "private void PostGameplayContextIfNeeded()",
+    "{",
+    "if (!m_hasReportedGameContext)",
+    "{",
+    "IContextManager contextManager = ServiceManager.Get<IContextManager>();",
+    "if (contextManager != null)"
+   ]
+  },
+  {
+   "id": "power_processor_builds_tasks_from_history",
+   "found": true,
+   "file": "C:\\HSagent\\reversed\\rea\\audit\\PowerProcessor.cs",
+   "line": 329,
+   "needle_lines": {
+    "public void OnPowerHistory\\(List<Network\\.PowerHistory> powerList\\)": 329,
+    "private void BuildTaskList\\(List<Network\\.PowerHistory> powerList": 696
+   },
+   "snippet": [
+    "public void OnPowerHistory(List<Network.PowerHistory> powerList)",
+    "{",
+    "m_totalSlushTime = 0;",
+    "m_buildingTaskList = true;",
+    "m_powerHistoryFirstTaskList = null;",
+    "m_powerHistoryLastTaskList = null;",
+    "m_currentTimeline = new PowerHistoryTimeline();",
+    "for (int i = 0; i < powerList.Count; i++)",
+    "{",
+    "PowerTaskList powerTaskList = new PowerTaskList();"
+   ]
+  },
+  {
+   "id": "power_task_dispatches_server_history",
+   "found": true,
+   "file": "C:\\HSagent\\reversed\\rea\\audit\\PowerTask.cs",
+   "line": 62,
+   "needle_lines": {
+    "public void DoTask\\(\\)": 162,
+    "gameState\\.OnTagChange\\(": 198,
+    "Network\\.HistTagChange": 62
+   },
+   "snippet": [
+    "{",
+    "Network.HistTagChange histTagChange = (Network.HistTagChange)power;",
+    "Entity entity2 = GameState.Get().GetEntity(histTagChange.Entity);",
+    "if (entity2 != null && histTagChange.Tag == 49 && entity2.GetZone() == fromZone && histTagChange.Value == (int)toZone)",
+    "{",
+    "return true;",
+    "}",
+    "}",
+    "return false;",
+    "}"
+   ]
+  },
+  {
+   "id": "power_tasklist_create_task_wraps_history",
+   "found": true,
+   "file": "C:\\HSagent\\reversed\\net\\decompiled\\PowerTaskList.cs",
+   "line": 496,
+   "needle_lines": {
+    "public PowerTask CreateTask\\(Network\\.PowerHistory netPower\\)": 496,
+    "powerTask\\.SetPower\\(netPower\\)": 500
+   },
+   "snippet": [
+    "public PowerTask CreateTask(Network.PowerHistory netPower)",
+    "{",
+    "m_pendingTasks++;",
+    "PowerTask powerTask = new PowerTask();",
+    "powerTask.SetPower(netPower);",
+    "powerTask.SetTaskCompleteCallback(OnTaskCompleted);",
+    "m_tasks.Add(powerTask);",
+    "return powerTask;",
+    "}"
+   ]
+  },
+  {
+   "id": "gamestate_on_tag_change_uses_server_value",
+   "found": true,
+   "file": "C:\\HSagent\\reversed\\net\\decompiled\\GameState.cs",
+   "line": 4539,
+   "needle_lines": {
+    "public bool OnTagChange\\(Network\\.HistTagChange netChange\\)": 4631,
+    "tagDelta\\.newValue = netChange\\.Value": 4646,
+    "entity\\.SetTag\\(": 4539
+   },
+   "snippet": [
+    "}",
+    "entity.SetTag(GAME_TAG.ZONE, hideEntity.Zone);",
+    "return true;",
+    "}",
+    "public bool OnRealTimeChangeEntity(List<Network.PowerHistory> powerList, int index, Network.HistChangeEntity changeEntity)",
+    "{",
+    "if (EntityRemovedFromGame(changeEntity.Entity.ID))",
+    "{",
+    "return false;",
+    "}"
+   ]
+  },
+  {
+   "id": "gameutils_apply_power_from_network",
+   "found": true,
+   "file": "C:\\HSagent\\reversed\\rea\\audit\\GameUtils.cs",
+   "line": 1722,
+   "needle_lines": {
+    "public static void ApplyPower\\(Entity entity, Network\\.PowerHistory power\\)": 1722,
+    "ApplyShowEntity": 1727,
+    "entity\\.SetTag\\(tag\\.Name, tag\\.Value\\)": 1742
+   },
+   "snippet": [
+    "public static void ApplyPower(Entity entity, Network.PowerHistory power)",
+    "{",
+    "switch (power.Type)",
+    "{",
+    "case Network.PowerType.SHOW_ENTITY:",
+    "ApplyShowEntity(entity, (Network.HistShowEntity)power);",
+    "break;",
+    "case Network.PowerType.HIDE_ENTITY:",
+    "ApplyHideEntity(entity, (Network.HistHideEntity)power);",
+    "break;"
+   ]
+  },
+  {
+   "id": "tb_shop_combat_events_are_server_blocks",
+   "found": true,
+   "file": "C:\\HSagent\\reversed\\net\\decompiled\\TB_BaconShop.cs",
+   "line": 2914,
+   "needle_lines": {
+    "private void GetRemainingCombatEvents": 2914,
+    "HistoryBlock\\.Type\\.ATTACK": 2924,
+    "HistoryBlock\\.Type\\.DEATHS": 2924
+   },
+   "snippet": [
+    "private void GetRemainingCombatEvents(out int outRemainingEvents, out int outRemainingAttacks)",
+    "{",
+    "PowerProcessor powerProcessor = GameState.Get().GetPowerProcessor();",
+    "int remainingEvents = 0;",
+    "int remainingAttacks = 0;",
+    "powerProcessor.ForEachTaskList(delegate(int index, PowerTaskList taskList)",
+    "{",
+    "if (taskList.IsStartOfBlock())",
+    "{",
+    "Network.HistBlockStart blockStart = taskList.GetBlockStart();"
+   ]
+  },
+  {
+   "id": "tb_shop_combat_speed_uses_server_tags",
+   "found": true,
+   "file": "C:\\HSagent\\reversed\\net\\decompiled\\TB_BaconShop.cs",
+   "line": 2938,
+   "needle_lines": {
+    "private IEnumerator HandleCombatSpeedUp\\(\\)": 2938,
+    "BG_COMBAT_SPEED_START_TIME": 2940,
+    "BG_COMBAT_SPEED_ACCELERATION": 2941
+   },
+   "snippet": [
+    "private IEnumerator HandleCombatSpeedUp()",
+    "{",
+    "int startTime = GetTag(GAME_TAG.BG_COMBAT_SPEED_START_TIME);",
+    "float acceleration = (float)GetTag(GAME_TAG.BG_COMBAT_SPEED_ACCELERATION) / 1000f;",
+    "float deceleration = (float)GetTag(GAME_TAG.BG_COMBAT_SPEED_DECELERATION) / 1000f;",
+    "float maxSpeed = (float)GetTag(GAME_TAG.BG_COMBAT_SPEED_MAX_SPEED) / 1000f;",
+    "int tag = GetTag(GAME_TAG.BG_COMBAT_SPEED_ATTACKS_REMAINING_BEFORE_SLOW_DOWN_MIN);",
+    "int tag2 = GetTag(GAME_TAG.BG_COMBAT_SPEED_ATTACKS_REMAINING_BEFORE_SLOW_DOWN_MAX);",
+    "int attacksRemainingBeforeSlowDown = UnityEngine.Random.Range(tag, tag2);",
+    "int minEvenntsRemainingToStart = GetTag(GAME_TAG.BG_COMBAT_SPEED_MIN_COMBAT_EVENTS_REMAINING_TO_START);"
+   ]
+  },
+  {
+   "id": "tb_shop_combat_phase_is_ui_state",
+   "found": true,
+   "file": "C:\\HSagent\\reversed\\net\\decompiled\\TB_BaconShop.cs",
+   "line": 2538,
+   "needle_lines": {
+    "public override bool IsInBattlegroundsCombatPhase\\(\\)": 2538,
+    "return IsBattlePhase\\(\\)": 2540
+   },
+   "snippet": [
+    "public override bool IsInBattlegroundsCombatPhase()",
+    "{",
+    "return IsBattlePhase();",
+    "}",
+    "private static void StopCoroutine(Coroutine coroutine)",
+    "{",
+    "if (coroutine != null)",
+    "{",
+    "GameEntity.Coroutines.StopCoroutine(coroutine);"
+   ]
+  },
+  {
+   "id": "gameentity_bacon_tags_drive_ui",
+   "found": true,
+   "file": "C:\\HSagent\\reversed\\rea\\audit\\GameEntity.cs",
+   "line": 659,
+   "needle_lines": {
+    "BACON_COMBAT_DAMAGE_CAP_ENABLED": 659,
+    "BACON_IN_COMBAT_PHASE": 662,
+    "SetRealtimeBaconCombatPhase": 663
+   },
+   "snippet": [
+    "break;",
+    "case GAME_TAG.BACON_COMBAT_DAMAGE_CAP_ENABLED:",
+    "SetRealtimeBaconDamageCapEnabled(change.Value);",
+    "break;",
+    "case GAME_TAG.BACON_IN_COMBAT_PHASE:",
+    "SetRealtimeBaconCombatPhase(change.Value);",
+    "break;",
+    "}",
+    "}",
+    "public override void OnTagChanged(TagDelta change)"
+   ]
+  },
+  {
+   "id": "damagecap_applied_for_vo_only",
+   "found": true,
+   "file": "C:\\HSagent\\reversed\\net\\decompiled\\TB_BaconShop.cs",
+   "line": 1689,
+   "needle_lines": {
+    "private IEnumerator PlayVOIfLethal": 1689,
+    "GetTag\\(GAME_TAG\\.BACON_COMBAT_DAMAGE_CAP\\)": 1695
+   },
+   "snippet": [
+    "private IEnumerator PlayVOIfLethal(Actor actor, Player player, int defense)",
+    "{",
+    "string line = null;",
+    "if (player != null && actor != null && (bool)actor.GetCard() && actor.GetCard().LegendaryHeroSkin != null && actor.GetCard().LegendaryHeroSkin.CheckKnockoutLine(out line))",
+    "{",
+    "int num = player.GetTag(GAME_TAG.PLAYER_TECH_LEVEL) + GetPlayerCombinedMinionsTechLevel(player);",
+    "int tag = GameState.Get().GetGameEntity().GetTag(GAME_TAG.BACON_COMBAT_DAMAGE_CAP);",
+    "if (tag != 0 && num > tag && GameState.Get().GetGameEntity().GetRealtimeBaconDamageCapEnabled())",
+    "{",
+    "num = tag;"
+   ]
+  },
+  {
+   "id": "gamestate_damagecap_tag_change",
+   "found": true,
+   "file": "C:\\HSagent\\reversed\\net\\decompiled\\GameState.cs",
+   "line": 1908,
+   "needle_lines": {
+    "case GAME_TAG\\.BACON_COMBAT_DAMAGE_CAP:": 1908,
+    "OnDamageCapChanged\\(change\\.oldValue, change\\.newValue\\)": 1909
+   },
+   "snippet": [
+    "break;",
+    "case GAME_TAG.BACON_COMBAT_DAMAGE_CAP:",
+    "OnDamageCapChanged(change.oldValue, change.newValue);",
+    "break;",
+    "case GAME_TAG.BACON_DIABLO_FIGHT_DIABLO_PLAYER_ID:",
+    "OnDiabloFightPlayerIDChanged(change.oldValue, change.newValue);",
+    "break;",
+    "case GAME_TAG.PLAYSTATE:",
+    "if (GameUtils.IsGameOverTag((Player)entity, change.tag, change.newValue))",
+    "{",
+    "OnGameOver((TAG_PLAYSTATE)change.newValue);"
+   ]
+  },
+  {
+   "id": "reconnect_reloads_game_from_server",
+   "found": true,
+   "file": "C:\\HSagent\\reversed\\rea\\audit\\ReconnectMgr.cs",
+   "line": 43,
+   "needle_lines": {
+    "ReconnectGame\\(": 704,
+    "LoadGame": 43
+   },
+   "snippet": [
+    "public bool LoadGame;",
+    "public override string ToString()",
+    "{",
+    "return $\"GameType: {GameType}, FormatType: {FormatType}, ReconnectType: {gameReconnectType}, ScenarioId: {ScenarioId}, LoadGame: {LoadGame}\";",
+    "}",
+    "}",
+    "private class OpResult",
+    "{"
+   ]
+  }
+ ],
+ "migration": {
+  "verdict": "OFFICIAL_IMPLEMENTATION_NOT_IN_CLIENT",
+  "confidence": "high",
+  "one_line": "客户端只是服务器 PowerHistory 的『状态应用器 + 播放器 + UI』，不存在攻击轮转/目标随机/死亡结算/伤害计算/随机数等裁决实现；官方完整实现（服务端）不在本机。",
+  "evidence_ids": [
+   "damagecap_applied_for_vo_only",
+   "gameentity_bacon_tags_drive_ui",
+   "gameplay_queued_power_history",
+   "gameplay_registers_power_history_packet",
+   "gamestate_damagecap_tag_change",
+   "gamestate_on_tag_change_uses_server_value",
+   "gameutils_apply_power_from_network",
+   "network_power_history_from_protocol",
+   "power_processor_builds_tasks_from_history",
+   "power_task_dispatches_server_history",
+   "power_tasklist_create_task_wraps_history",
+   "reconnect_reloads_game_from_server",
+   "tb_shop_combat_events_are_server_blocks",
+   "tb_shop_combat_phase_is_ui_state",
+   "tb_shop_combat_speed_uses_server_tags"
+  ],
+  "client_code_surface_for_migration": {
+   "assembly_csharp_types": 14390,
+   "assembly_csharp_methods": 113222,
+   "bg_types": 381,
+   "bg_methods": 3705,
+   "bg_monobehaviour_types": 53,
+   "note": "即便把 381 个 BG 类型/3705 个方法全部移植，得到的也只是UI/动画/状态应用；战斗裁决仍需另写（=当前 hsrl2 + 差分校准）。"
+  },
+  "assets_available_from_client": [
+   "CardDefs/DBF 卡牌与 tag 数据（data/ 生成源）",
+   "GAME_TAG 等 893 个枚举（reversed/net/key_enums.json）",
+   "官方规则文本（Strings/zhCN/*.txt：伤害公式、上限解除、亡语先于复生、毒/烈毒定义）",
+   "Power 协议 schema（blizzard.bgsclient 的 PegasusGame.PowerHistory* protobuf 序列化器）",
+   "战斗历史块类型（HistoryBlock.Type: ATTACK/DEATHS/TRIGGER/PLAY…）",
+   "UI 侧伤害公式（TB_BaconShop.PlayVOIfLethal：PLAYER_TECH_LEVEL+Σ TECH_LEVEL）",
+   "伤害上限 tag 2089/3403 与显示逻辑"
+  ],
+  "assets_not_available": [
+   "服务端战斗裁决器（攻击顺序/目标随机/亡语/复生/Avenge/伤害上限值）",
+   "服务端随机数（攻击目标、随机效果、酒馆刷新）",
+   "服务端卡牌脚本实现（客户端只有卡面文本，脚本在服务器）",
+   "服务端伤害上限档位的逐回合下发值（只有运行期 tag）",
+   "匹配/淘汰/隐藏信息等服务器状态"
+  ],
+  "highest_consistency_route": {
+   "route": "官方 Power.log 事件级轨迹 + 官方数据/文本 + 差分校准（现有路线）+ BobsBuddy 作第二实现参照",
+   "why": "Power.log 是服务器下发的权威 PowerHistory（客户端只接收/打印），因此事件级轨迹 = 官方裁决的可观测真值；这是不接触服务端时能达到的最高一致性。",
+   "current_corpus": "679 场 BG 战斗（HDT BobsBuddy 会话日志）；Power.log 采集后升级为事件级"
+  },
+  "alternatives": [
+   {
+    "option": "BobsBuddy .NET 桥接（第三方完整战斗实现，非官方）",
+    "feasible": true,
+    "how": "本机有 dotnet SDK 9.0.101；BobsBuddy.dll/BobsBuddy.Common.dll/HearthDb.dll 在 HDT app-1.53.0。建一个小 C# console（netstandard/ 或 net9.0 引用 netstandard2.0）构造 Input→SimulateForInput→JSON，Python 侧 subprocess 调用。",
+    "effort": "1-3 天（不含逐卡校验）",
+    "caveat": "第三方实现，不等于官方；许可证/来源需确认；只覆盖它已实现的卡"
+   },
+   {
+    "option": "BobsBuddy C#→Python 全量移植",
+    "feasible": true,
+    "how": "1817 类型/5991 方法/约 29,200 行反编译代码（reversed/rea/bobsbuddy）",
+    "effort": "数周~数月，回归风险高",
+    "caveat": "同上，非官方；不推荐"
+   },
+   {
+    "option": "客户端 C# 逻辑迁移（把 Assembly-CSharp 的 BG 代码搬到 Python）",
+    "feasible": false,
+    "how": "381 类型/3705 方法，依赖 Unity/PlayMaker/UI/网络；且不含裁决",
+    "effort": "不可行/无意义",
+    "caveat": "移植后仍需自写裁决"
+   },
+   {
+    "option": "服务端二进制分析（若用户能合法提供服务器程序）",
+    "feasible": "unknown",
+    "how": "REA 可做 native 分析，但本机未安装 Ghidra/IDA/Hopper（doctor: missing_analysis_engine）；需用户提供服务端 build + 合法访问权；服务端通常为 Linux 原生、符号剥离，工作量极大且不确定性高",
+    "effort": "极高",
+    "caveat": "通常不可得/有法律与 ToS 风险；不建议"
+   }
+  ]
+ }
+}

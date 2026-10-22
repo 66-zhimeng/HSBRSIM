@@ -1,0 +1,54 @@
+{
+ "source_url": "https://rizling.top/assistant/updates/latest.zip",
+ "downloaded_utc": "2026-10-18T08:37:00Z",
+ "zip_size": 53852237,
+ "zip_sha256": "b3c3ffefcbd4a7b33e19b876a580844135c2af120ce5e486290f4505efa3bc1f",
+ "zip_entries": 2083,
+ "note": "只保留关键文件（清单/说明/数据）；exe 未入库，仅在临时目录做只读静态分析。",
+ "files": {
+  "release-manifest.json": {
+   "size": 270873,
+   "sha256": "89f196f7decb669bcc8e22b4bc2ef1f5d66164d896d4cc68875bb8260864f1c0"
+  },
+  "使用说明.txt": {
+   "size": 3807,
+   "sha256": "6794b43013acbb7ddd849100cd43923cbdfab17d024112c4445a06ede096d714"
+  },
+  "战斗预测说明.txt": {
+   "size": 740,
+   "sha256": "d2a12a05023bd5db10f87f966d4002e402d995151d0162d7a4dd01a1a9933220"
+  },
+  "启动离线预览.cmd": {
+   "size": 78,
+   "sha256": "a1608f39444d695bb99da174c4dfba887f9d22cab111aecbbd60e021f29a53b4"
+  },
+  "bgassistant/data/catalog.json": {
+   "size": 2614867,
+   "sha256": "f80c5822dc4b70c7dfbfb0ca4b47d0532a989f0f005d7ff025716369f5735eb6"
+  },
+  "bgassistant/data/demo-combat.json": {
+   "size": 1406,
+   "sha256": "556cea8c1af7bdb1d14228fd0b56a656776331bad7819bf739fdf00c4b6d4145"
+  },
+  "bgassistant/data/artwork/web/card-art.json": {
+   "size": 41874,
+   "sha256": "d87dac0a681a999ae0939c0c863f6fc726b027a5058f2ea61ff2b85b52ed1041"
+  },
+  "bgcontroller/data/game_tags.json": {
+   "size": 49104,
+   "sha256": "1da4d310e5fb8c2bc9cf9b0334a91a7015a1dd08bd859cd27e43da0af3073ae6"
+  },
+  "bgcontroller/data/BGTRACKER_LICENSE.txt": {
+   "size": 1430,
+   "sha256": "84853e30d4f9cccaaed700f563c7f7e2261d9d109fbacd5735a0d741802937f0"
+  },
+  "bgcontroller/data/PYTHON_HEARTHSTONE_LICENSE.txt": {
+   "size": 1055,
+   "sha256": "8fd54fb1d9484de69b15a7fdc87295cb7b377ff0efa0a7f63db05743a2ffdc7e"
+  }
+ },
+ "zip_retained": false,
+ "retention_note": "54MB 的 latest.zip 未保留在仓库（避免误提交整包）；需要复现时按 source_url 重新下载，并用 zip_size/zip_sha256 校验。",
+ "key_file_hashes_verified_against_manifest": true,
+ "static_analysis": "STATIC_ANALYSIS.json（PyInstaller PYZ 只读静态分析）"
+}

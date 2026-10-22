@@ -1,0 +1,2296 @@
+{
+  "old": {
+    "path": "C:\\HSagent\\hsdata\\CardDefs.xml",
+    "total_entities": 35713,
+    "bg_entities": 5612,
+    "bg_pool_minions": 275,
+    "bg_card_type_counts": {
+      "6": 1128,
+      "4": 2375,
+      "5": 356,
+      "3": 789,
+      "10": 169,
+      "24": 1,
+      "40": 73,
+      "42": 206,
+      "43": 112,
+      "44": 390,
+      "12": 10,
+      "22": 3
+    },
+    "per_file": {
+      "CardDefs.xml": 35713
+    }
+  },
+  "new": {
+    "path": "C:\\HSagent\\reversed\\hsdata_255130\\CardDefs.xml + C:\\HSagent\\reversed\\hsdata_255130\\CardDefs.Bacon.xml",
+    "total_entities": 29239,
+    "bg_entities": 5787,
+    "bg_pool_minions": 303,
+    "bg_card_type_counts": {
+      "6": 1157,
+      "4": 2469,
+      "5": 365,
+      "3": 797,
+      "10": 172,
+      "24": 1,
+      "40": 73,
+      "42": 208,
+      "43": 112,
+      "44": 420,
+      "12": 10,
+      "22": 3
+    },
+    "per_file": {
+      "CardDefs.xml": 23452,
+      "CardDefs.Bacon.xml": 5787
+    },
+    "duplicate_card_ids": []
+  },
+  "delta": {
+    "total_entities": -6474,
+    "bg_entities": 175,
+    "bg_pool_minions": 28
+  },
+  "bg_added": [
+    "BG21_HERO_010_SKIN_E",
+    "BG27_000",
+    "BG27_000_G",
+    "BG30_HERO_304_SKIN_B",
+    "BG30_HERO_304_SKIN_C",
+    "BG33_Reward_010pe",
+    "BG35_MagicItem_711e",
+    "BG36_097",
+    "BG36_097_G",
+    "BG36_097e",
+    "BG36_098",
+    "BG36_098_G",
+    "BG36_099",
+    "BG36_099_G",
+    "BG36_100",
+    "BG36_100_G",
+    "BG36_101",
+    "BG36_101_G",
+    "BG36_102",
+    "BG36_102_G",
+    "BG36_103",
+    "BG36_103_G",
+    "BG36_104",
+    "BG36_104_G",
+    "BG36_106",
+    "BG36_106_G",
+    "BG36_106e",
+    "BG36_108",
+    "BG36_108_G",
+    "BG36_108e",
+    "BG36_109",
+    "BG36_109_G",
+    "BG36_110",
+    "BG36_110_G",
+    "BG36_111",
+    "BG36_111_G",
+    "BG36_111e",
+    "BG36_112",
+    "BG36_112_G",
+    "BG36_113",
+    "BG36_113_G",
+    "BG36_114",
+    "BG36_114_G",
+    "BG36_114e",
+    "BG36_115",
+    "BG36_115_G",
+    "BG36_116",
+    "BG36_116_G",
+    "BG36_116e",
+    "BG36_300",
+    "BG36_300_G",
+    "BG36_301t",
+    "BG36_301te",
+    "BG36_303",
+    "BG36_307e",
+    "BG36_307pe",
+    "BG36_308",
+    "BG36_308_G",
+    "BG36_308e",
+    "BG36_311",
+    "BG36_311_G",
+    "BG36_312",
+    "BG36_312_G",
+    "BG36_318",
+    "BG36_318_G",
+    "BG36_320",
+    "BG36_320_G",
+    "BG36_320e",
+    "BG36_360",
+    "BG36_360_G",
+    "BG36_360_Gt3",
+    "BG36_360_Gt4",
+    "BG36_360_Gt5",
+    "BG36_360_Gt6",
+    "BG36_360_Gt9",
+    "BG36_360t3",
+    "BG36_360t4",
+    "BG36_360t5",
+    "BG36_360t6",
+    "BG36_360t9",
+    "BG36_362",
+    "BG36_362_G",
+    "BG36_364",
+    "BG36_364_G",
+    "BG36_364e",
+    "BG36_366",
+    "BG36_366_G",
+    "BG36_367",
+    "BG36_367_G",
+    "BG36_369",
+    "BG36_369_G",
+    "BG36_370",
+    "BG36_370_G",
+    "BG36_371",
+    "BG36_372",
+    "BG36_372_G",
+    "BG36_372e",
+    "BG36_700",
+    "BG36_700_G",
+    "BG36_700e",
+    "BG36_848",
+    "BG36_848_G",
+    "BG36_849",
+    "BG36_849_G",
+    "BG36_849e",
+    "BG36_HERO_000",
+    "BG36_HERO_000p",
+    "BG36_HERO_002",
+    "BG36_HERO_002p",
+    "BG36_MagicItem_216pe",
+    "BG36_MagicItem_400",
+    "BG36_MagicItem_402",
+    "BG36_MagicItem_403",
+    "BG36_MagicItem_403e",
+    "BG36_MagicItem_403t",
+    "BG36_MagicItem_404",
+    "BG36_MagicItem_404t",
+    "BG36_MagicItem_406",
+    "BG36_MagicItem_407",
+    "BG36_MagicItem_408",
+    "BG36_MagicItem_409",
+    "BG36_MagicItem_410",
+    "BG36_MagicItem_411",
+    "BG36_MagicItem_412",
+    "BG36_MagicItem_412t",
+    "BG36_MagicItem_412t2",
+    "BG36_MagicItem_412t3",
+    "BG36_MagicItem_414",
+    "BG36_MagicItem_414e",
+    "BG36_MagicItem_416",
+    "BG36_MagicItem_417",
+    "BG36_MagicItem_417t",
+    "BG36_MagicItem_417te",
+    "BG36_MagicItem_418",
+    "BG36_MagicItem_423",
+    "BG36_MagicItem_423t",
+    "BG36_MagicItem_424",
+    "BG36_MagicItem_430",
+    "BG36_MagicItem_450",
+    "BG36_MagicItem_450e",
+    "BG36_MagicItem_600",
+    "BG36_MagicItem_602",
+    "BG36_MagicItem_606",
+    "BG36_MagicItem_606e",
+    "BG36_MagicItem_609",
+    "BG36_MagicItem_610",
+    "BG36_MagicItem_611",
+    "BG36_MagicItem_852",
+    "BG36_MidGameEffect_000t78",
+    "BG36_MidGameEffect_000t78e",
+    "BG36_MidGameEffect_000t88",
+    "BG36_MidGameEffect_000t88e",
+    "BG36_MidGameEffect_000t89",
+    "BG36_MidGameEffect_000t89e",
+    "BG36_MidGameEffect_000t89e2",
+    "BG36_MidGameEffect_000t90",
+    "BG36_MidGameEffect_000t90e",
+    "BGDUO_700",
+    "BGDUO_700_G",
+    "BGDUO_701",
+    "BGDUO_701_G",
+    "BGDUO_701_Gs",
+    "BGDUO_701s",
+    "BGFYM_000",
+    "BGFYM_000_G",
+    "BGFYM_000e",
+    "BGFYM_002t",
+    "BGFYM_002t_G",
+    "BGFYM_005",
+    "BGFYM_005_G",
+    "BGFYM_011",
+    "BGFYM_011_G",
+    "BGFYM_011e",
+    "BG_OldGod",
+    "BG_OldGod_e",
+    "TB_BaconShopBob_SKIN_CA",
+    "TB_BaconShop_HERO_71_SKIN_I",
+    "TB_BaconShop_HERO_75_SKIN_J",
+    "TB_BaconShop_HP_041l"
+  ],
+  "bg_added_by_prefix": {
+    "BG": 169,
+    "BGDUO": 6,
+    "TB_Bacon": 4
+  },
+  "bg_removed": [
+    "BG28_521t2",
+    "BG36_815e",
+    "BG36_MidGameEffect_000",
+    "BG36_MidGameEffect_000t6e2"
+  ],
+  "bg_removed_by_prefix": {
+    "BG": 4
+  },
+  "id_renumbers": [],
+  "name_changed_count": 0,
+  "name_changed": [],
+  "value_change_counts": {
+    "ARMOR": 27,
+    "ATK": 40,
+    "HEALTH": 60,
+    "NUM_1": 70,
+    "NUM_2": 49,
+    "TECH_LEVEL": 19,
+    "NUM_3": 14,
+    "NUM_4": 4,
+    "COST": 98,
+    "SPELL_SCHOOL": 2,
+    "NUM_5": 1
+  },
+  "value_changes": {
+    "ARMOR": [
+      {
+        "id": "BG20_HERO_101",
+        "old": 12,
+        "new": 14
+      },
+      {
+        "id": "BG20_HERO_280",
+        "old": 14,
+        "new": 16
+      },
+      {
+        "id": "BG21_HERO_000",
+        "old": 14,
+        "new": 10
+      },
+      {
+        "id": "BG21_HERO_010",
+        "old": 15,
+        "new": 18
+      },
+      {
+        "id": "BG21_HERO_030",
+        "old": 20,
+        "new": 15
+      },
+      {
+        "id": "BG22_HERO_003",
+        "old": 12,
+        "new": 10
+      },
+      {
+        "id": "BG23_HERO_305",
+        "old": 14,
+        "new": 16
+      },
+      {
+        "id": "BG25_HERO_105",
+        "old": 14,
+        "new": 16
+      },
+      {
+        "id": "BG26_HERO_101",
+        "old": 12,
+        "new": 14
+      },
+      {
+        "id": "BG26_HERO_102",
+        "old": 17,
+        "new": 10
+      },
+      {
+        "id": "BG28_HERO_400",
+        "old": 5,
+        "new": 8
+      },
+      {
+        "id": "BG31_HERO_005",
+        "old": 18,
+        "new": 12
+      },
+      {
+        "id": "BG32_HERO_001",
+        "old": 16,
+        "new": 13
+      },
+      {
+        "id": "BG33_HERO_001",
+        "old": 17,
+        "new": 19
+      },
+      {
+        "id": "BG34_HERO_001",
+        "old": 12,
+        "new": 14
+      },
+      {
+        "id": "BG36_HERO_101",
+        "old": 10,
+        "new": 15
+      },
+      {
+        "id": "TB_BaconShop_HERO_12",
+        "old": 12,
+        "new": 14
+      },
+      {
+        "id": "TB_BaconShop_HERO_18",
+        "old": 18,
+        "new": 19
+      },
+      {
+        "id": "TB_BaconShop_HERO_27",
+        "old": 7,
+        "new": 10
+      },
+      {
+        "id": "TB_BaconShop_HERO_28",
+        "old": 10,
+        "new": 15
+      },
+      {
+        "id": "TB_BaconShop_HERO_36",
+        "old": 16,
+        "new": 18
+      },
+      {
+        "id": "TB_BaconShop_HERO_41",
+        "old": 16,
+        "new": 12
+      },
+      {
+        "id": "TB_BaconShop_HERO_56",
+        "old": 10,
+        "new": 8
+      },
+      {
+        "id": "TB_BaconShop_HERO_60",
+        "old": 16,
+        "new": 18
+      },
+      {
+        "id": "TB_BaconShop_HERO_62",
+        "old": 17,
+        "new": 18
+      },
+      {
+        "id": "TB_BaconShop_HERO_90",
+        "old": 14,
+        "new": 16
+      },
+      {
+        "id": "TB_BaconShop_HERO_92",
+        "old": 18,
+        "new": 20
+      }
+    ],
+    "ATK": [
+      {
+        "id": "BG22_403",
+        "old": 9,
+        "new": 8
+      },
+      {
+        "id": "BG22_403_G",
+        "old": 18,
+        "new": 16
+      },
+      {
+        "id": "BG26_523",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG26_523_G",
+        "old": 6,
+        "new": 8
+      },
+      {
+        "id": "BG26_524",
+        "old": 2,
+        "new": 4
+      },
+      {
+        "id": "BG26_524_G",
+        "old": 4,
+        "new": 8
+      },
+      {
+        "id": "BG28_707",
+        "old": 6,
+        "new": 8
+      },
+      {
+        "id": "BG28_707_G",
+        "old": 12,
+        "new": 16
+      },
+      {
+        "id": "BG31_323",
+        "old": 5,
+        "new": 6
+      },
+      {
+        "id": "BG31_323_G",
+        "old": 10,
+        "new": 12
+      },
+      {
+        "id": "BG32_873",
+        "old": 5,
+        "new": 6
+      },
+      {
+        "id": "BG32_873_G",
+        "old": 10,
+        "new": 12
+      },
+      {
+        "id": "BG33_155",
+        "old": 2,
+        "new": 4
+      },
+      {
+        "id": "BG33_155_G",
+        "old": 4,
+        "new": 8
+      },
+      {
+        "id": "BG33_430",
+        "old": 1,
+        "new": 2
+      },
+      {
+        "id": "BG33_430_G",
+        "old": 2,
+        "new": 4
+      },
+      {
+        "id": "BG33_828",
+        "old": 10,
+        "new": 8
+      },
+      {
+        "id": "BG33_828_G",
+        "old": 20,
+        "new": 16
+      },
+      {
+        "id": "BG33_883",
+        "old": 5,
+        "new": 4
+      },
+      {
+        "id": "BG33_883_G",
+        "old": 10,
+        "new": 8
+      },
+      {
+        "id": "BG33_885",
+        "old": 2,
+        "new": 3
+      },
+      {
+        "id": "BG33_885_G",
+        "old": 4,
+        "new": 6
+      },
+      {
+        "id": "BG34_682",
+        "old": 6,
+        "new": 5
+      },
+      {
+        "id": "BG34_682_G",
+        "old": 12,
+        "new": 10
+      },
+      {
+        "id": "BG36_202",
+        "old": 1,
+        "new": 2
+      },
+      {
+        "id": "BG36_202_G",
+        "old": 2,
+        "new": 4
+      },
+      {
+        "id": "BG36_210",
+        "old": 5,
+        "new": 4
+      },
+      {
+        "id": "BG36_210_G",
+        "old": 10,
+        "new": 8
+      },
+      {
+        "id": "BG36_242",
+        "old": 2,
+        "new": 4
+      },
+      {
+        "id": "BG36_242_G",
+        "old": 4,
+        "new": 8
+      },
+      {
+        "id": "BG36_509",
+        "old": 2,
+        "new": 5
+      },
+      {
+        "id": "BG36_509_G",
+        "old": 4,
+        "new": 10
+      },
+      {
+        "id": "BG36_514",
+        "old": 7,
+        "new": 8
+      },
+      {
+        "id": "BG36_514_G",
+        "old": 14,
+        "new": 16
+      },
+      {
+        "id": "BG36_851",
+        "old": 5,
+        "new": 6
+      },
+      {
+        "id": "BG36_851_G",
+        "old": 10,
+        "new": 12
+      },
+      {
+        "id": "BGDUO31_211",
+        "old": 1,
+        "new": 3
+      },
+      {
+        "id": "BGDUO31_211_G",
+        "old": 2,
+        "new": 6
+      },
+      {
+        "id": "BGS_018",
+        "old": 8,
+        "new": 7
+      },
+      {
+        "id": "TB_BaconUps_085",
+        "old": 16,
+        "new": 14
+      }
+    ],
+    "HEALTH": [
+      {
+        "id": "BG22_403",
+        "old": 6,
+        "new": 5
+      },
+      {
+        "id": "BG22_403_G",
+        "old": 12,
+        "new": 10
+      },
+      {
+        "id": "BG23_017",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG23_017_G",
+        "old": 6,
+        "new": 8
+      },
+      {
+        "id": "BG26_152",
+        "old": 6,
+        "new": 5
+      },
+      {
+        "id": "BG26_152_G",
+        "old": 12,
+        "new": 10
+      },
+      {
+        "id": "BG26_174",
+        "old": 1,
+        "new": 2
+      },
+      {
+        "id": "BG26_174_G",
+        "old": 2,
+        "new": 4
+      },
+      {
+        "id": "BG26_523",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG26_523_G",
+        "old": 6,
+        "new": 8
+      },
+      {
+        "id": "BG26_524",
+        "old": 1,
+        "new": 3
+      },
+      {
+        "id": "BG26_524_G",
+        "old": 2,
+        "new": 6
+      },
+      {
+        "id": "BG26_810",
+        "old": 6,
+        "new": 5
+      },
+      {
+        "id": "BG26_810_G",
+        "old": 12,
+        "new": 10
+      },
+      {
+        "id": "BG26_814",
+        "old": 2,
+        "new": 4
+      },
+      {
+        "id": "BG26_814_G",
+        "old": 4,
+        "new": 8
+      },
+      {
+        "id": "BG28_707",
+        "old": 5,
+        "new": 6
+      },
+      {
+        "id": "BG28_707_G",
+        "old": 10,
+        "new": 12
+      },
+      {
+        "id": "BG31_323",
+        "old": 7,
+        "new": 8
+      },
+      {
+        "id": "BG31_323_G",
+        "old": 14,
+        "new": 16
+      },
+      {
+        "id": "BG31_810",
+        "old": 3,
+        "new": 6
+      },
+      {
+        "id": "BG31_810_G",
+        "old": 6,
+        "new": 12
+      },
+      {
+        "id": "BG31_815",
+        "old": 2,
+        "new": 3
+      },
+      {
+        "id": "BG31_815_G",
+        "old": 4,
+        "new": 6
+      },
+      {
+        "id": "BG32_324",
+        "old": 9,
+        "new": 7
+      },
+      {
+        "id": "BG32_324_G",
+        "old": 18,
+        "new": 14
+      },
+      {
+        "id": "BG32_822",
+        "old": 5,
+        "new": 6
+      },
+      {
+        "id": "BG32_822_G",
+        "old": 10,
+        "new": 12
+      },
+      {
+        "id": "BG32_846",
+        "old": 5,
+        "new": 9
+      },
+      {
+        "id": "BG32_846_G",
+        "old": 10,
+        "new": 18
+      },
+      {
+        "id": "BG33_155",
+        "old": 2,
+        "new": 4
+      },
+      {
+        "id": "BG33_155_G",
+        "old": 4,
+        "new": 8
+      },
+      {
+        "id": "BG33_430",
+        "old": 3,
+        "new": 5
+      },
+      {
+        "id": "BG33_430_G",
+        "old": 6,
+        "new": 10
+      },
+      {
+        "id": "BG33_828",
+        "old": 5,
+        "new": 3
+      },
+      {
+        "id": "BG33_828_G",
+        "old": 10,
+        "new": 6
+      },
+      {
+        "id": "BG33_883",
+        "old": 5,
+        "new": 4
+      },
+      {
+        "id": "BG33_883_G",
+        "old": 10,
+        "new": 8
+      },
+      {
+        "id": "BG34_140",
+        "old": 4,
+        "new": 5
+      },
+      {
+        "id": "BG34_140_G",
+        "old": 8,
+        "new": 10
+      },
+      {
+        "id": "BG34_682",
+        "old": 2,
+        "new": 3
+      },
+      {
+        "id": "BG34_682_G",
+        "old": 4,
+        "new": 6
+      },
+      {
+        "id": "BG34_692",
+        "old": 10,
+        "new": 8
+      },
+      {
+        "id": "BG34_692_G",
+        "old": 20,
+        "new": 16
+      },
+      {
+        "id": "BG35_602",
+        "old": 8,
+        "new": 9
+      },
+      {
+        "id": "BG35_602_G",
+        "old": 16,
+        "new": 18
+      },
+      {
+        "id": "BG36_242",
+        "old": 9,
+        "new": 5
+      },
+      {
+        "id": "BG36_242_G",
+        "old": 18,
+        "new": 10
+      },
+      {
+        "id": "BG36_509",
+        "old": 4,
+        "new": 6
+      },
+      {
+        "id": "BG36_509_G",
+        "old": 8,
+        "new": 12
+      },
+      {
+        "id": "BG36_514",
+        "old": 7,
+        "new": 8
+      },
+      {
+        "id": "BG36_514_G",
+        "old": 14,
+        "new": 16
+      },
+      {
+        "id": "BG36_733",
+        "old": 6,
+        "new": 8
+      },
+      {
+        "id": "BG36_733_G",
+        "old": 12,
+        "new": 16
+      },
+      {
+        "id": "BG36_851",
+        "old": 5,
+        "new": 8
+      },
+      {
+        "id": "BG36_851_G",
+        "old": 10,
+        "new": 16
+      },
+      {
+        "id": "BGDUO31_211",
+        "old": 1,
+        "new": 3
+      },
+      {
+        "id": "BGDUO31_211_G",
+        "old": 2,
+        "new": 6
+      },
+      {
+        "id": "BGS_018",
+        "old": 8,
+        "new": 7
+      },
+      {
+        "id": "TB_BaconUps_085",
+        "old": 16,
+        "new": 14
+      }
+    ],
+    "NUM_1": [
+      {
+        "id": "BG23_017",
+        "old": null,
+        "new": 2
+      },
+      {
+        "id": "BG23_017_G",
+        "old": null,
+        "new": 4
+      },
+      {
+        "id": "BG26_523",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG26_523_G",
+        "old": 6,
+        "new": 8
+      },
+      {
+        "id": "BG26_810",
+        "old": 5,
+        "new": 6
+      },
+      {
+        "id": "BG26_810_G",
+        "old": 5,
+        "new": 6
+      },
+      {
+        "id": "BG28_582",
+        "old": null,
+        "new": 3
+      },
+      {
+        "id": "BG28_582_G",
+        "old": null,
+        "new": 6
+      },
+      {
+        "id": "BG28_604",
+        "old": 5,
+        "new": 8
+      },
+      {
+        "id": "BG28_707",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG28_707_G",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG28_845",
+        "old": 3,
+        "new": 2
+      },
+      {
+        "id": "BG30_MagicItem_544",
+        "old": 2,
+        "new": 3
+      },
+      {
+        "id": "BG30_MagicItem_919",
+        "old": null,
+        "new": 2
+      },
+      {
+        "id": "BG30_MagicItem_989t",
+        "old": 15,
+        "new": 20
+      },
+      {
+        "id": "BG31_148",
+        "old": 1,
+        "new": 3
+      },
+      {
+        "id": "BG31_148_G",
+        "old": 2,
+        "new": 6
+      },
+      {
+        "id": "BG31_323",
+        "old": null,
+        "new": 2
+      },
+      {
+        "id": "BG31_323_G",
+        "old": null,
+        "new": 4
+      },
+      {
+        "id": "BG32_846",
+        "old": 4,
+        "new": 2
+      },
+      {
+        "id": "BG32_846_G",
+        "old": 4,
+        "new": 2
+      },
+      {
+        "id": "BG32_873",
+        "old": 1,
+        "new": 2
+      },
+      {
+        "id": "BG32_873_G",
+        "old": 2,
+        "new": 4
+      },
+      {
+        "id": "BG32_MagicItem_200",
+        "old": 2,
+        "new": 3
+      },
+      {
+        "id": "BG32_MagicItem_232",
+        "old": 10,
+        "new": 7
+      },
+      {
+        "id": "BG32_MagicItem_930",
+        "old": 7,
+        "new": 8
+      },
+      {
+        "id": "BG33_155",
+        "old": 1,
+        "new": 2
+      },
+      {
+        "id": "BG33_155_G",
+        "old": 2,
+        "new": 4
+      },
+      {
+        "id": "BG33_828",
+        "old": 8,
+        "new": 6
+      },
+      {
+        "id": "BG33_828_G",
+        "old": 8,
+        "new": 6
+      },
+      {
+        "id": "BG33_883",
+        "old": null,
+        "new": 4
+      },
+      {
+        "id": "BG33_883_G",
+        "old": null,
+        "new": 8
+      },
+      {
+        "id": "BG34_444",
+        "old": 8,
+        "new": 9
+      },
+      {
+        "id": "BG34_689",
+        "old": 1,
+        "new": 2
+      },
+      {
+        "id": "BG34_692",
+        "old": 2,
+        "new": 3
+      },
+      {
+        "id": "BG34_692_G",
+        "old": 4,
+        "new": 6
+      },
+      {
+        "id": "BG35_MagicItem_300t",
+        "old": 3,
+        "new": 2
+      },
+      {
+        "id": "BG35_MagicItem_302",
+        "old": 8,
+        "new": 6
+      },
+      {
+        "id": "BG35_MagicItem_710",
+        "old": 2,
+        "new": 3
+      },
+      {
+        "id": "BG35_MagicItem_713",
+        "old": 12,
+        "new": 16
+      },
+      {
+        "id": "BG35_MagicItem_861",
+        "old": 10,
+        "new": 11
+      },
+      {
+        "id": "BG35_MagicItem_920",
+        "old": 12,
+        "new": 14
+      },
+      {
+        "id": "BG36_202",
+        "old": 1,
+        "new": 2
+      },
+      {
+        "id": "BG36_202_G",
+        "old": 2,
+        "new": 4
+      },
+      {
+        "id": "BG36_246",
+        "old": 2,
+        "new": 3
+      },
+      {
+        "id": "BG36_352",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG36_352_G",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG36_356",
+        "old": 2,
+        "new": 50
+      },
+      {
+        "id": "BG36_356_G",
+        "old": 2,
+        "new": 100
+      },
+      {
+        "id": "BG36_514",
+        "old": 7,
+        "new": 8
+      },
+      {
+        "id": "BG36_514_G",
+        "old": 14,
+        "new": 16
+      },
+      {
+        "id": "BG36_523",
+        "old": 5,
+        "new": 6
+      },
+      {
+        "id": "BG36_523_G",
+        "old": 5,
+        "new": 6
+      },
+      {
+        "id": "BG36_733",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG36_733_G",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG36_762",
+        "old": 2,
+        "new": 1
+      },
+      {
+        "id": "BG36_762_G",
+        "old": 4,
+        "new": 2
+      },
+      {
+        "id": "BG36_HERO_105p",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG36_MagicItem_201",
+        "old": 2,
+        "new": 4
+      },
+      {
+        "id": "BG36_MagicItem_302",
+        "old": 2,
+        "new": 1
+      },
+      {
+        "id": "BG36_MagicItem_305",
+        "old": 15,
+        "new": 18
+      },
+      {
+        "id": "BG36_MagicItem_370",
+        "old": null,
+        "new": 2
+      },
+      {
+        "id": "BG36_MagicItem_810t",
+        "old": 8,
+        "new": 12
+      },
+      {
+        "id": "BGDUO_121",
+        "old": null,
+        "new": 3
+      },
+      {
+        "id": "BGDUO_121_G",
+        "old": null,
+        "new": 6
+      },
+      {
+        "id": "BGS_008",
+        "old": null,
+        "new": 2
+      },
+      {
+        "id": "BGS_018",
+        "old": 8,
+        "new": 7
+      },
+      {
+        "id": "TB_BaconShop_HP_106",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "TB_BaconUps_057",
+        "old": null,
+        "new": 4
+      },
+      {
+        "id": "TB_BaconUps_085",
+        "old": 16,
+        "new": 14
+      }
+    ],
+    "NUM_2": [
+      {
+        "id": "BG23_017",
+        "old": null,
+        "new": 1
+      },
+      {
+        "id": "BG23_017_G",
+        "old": null,
+        "new": 2
+      },
+      {
+        "id": "BG26_152",
+        "old": 4,
+        "new": 5
+      },
+      {
+        "id": "BG26_152_G",
+        "old": 8,
+        "new": 10
+      },
+      {
+        "id": "BG26_523",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG26_523_G",
+        "old": 6,
+        "new": 8
+      },
+      {
+        "id": "BG26_814",
+        "old": 1,
+        "new": 2
+      },
+      {
+        "id": "BG26_814_G",
+        "old": 1,
+        "new": 2
+      },
+      {
+        "id": "BG28_707",
+        "old": 2,
+        "new": 3
+      },
+      {
+        "id": "BG28_707_G",
+        "old": 2,
+        "new": 3
+      },
+      {
+        "id": "BG28_845",
+        "old": 3,
+        "new": 1
+      },
+      {
+        "id": "BG31_810",
+        "old": 2,
+        "new": 3
+      },
+      {
+        "id": "BG31_810_G",
+        "old": 4,
+        "new": 6
+      },
+      {
+        "id": "BG32_822",
+        "old": 1,
+        "new": 2
+      },
+      {
+        "id": "BG32_822_G",
+        "old": 2,
+        "new": 4
+      },
+      {
+        "id": "BG32_846",
+        "old": 4,
+        "new": 3
+      },
+      {
+        "id": "BG32_846_G",
+        "old": 4,
+        "new": 3
+      },
+      {
+        "id": "BG32_873",
+        "old": 1,
+        "new": 2
+      },
+      {
+        "id": "BG32_873_G",
+        "old": 2,
+        "new": 4
+      },
+      {
+        "id": "BG32_MagicItem_930",
+        "old": 7,
+        "new": 8
+      },
+      {
+        "id": "BG33_828",
+        "old": 8,
+        "new": 6
+      },
+      {
+        "id": "BG33_828_G",
+        "old": 8,
+        "new": 6
+      },
+      {
+        "id": "BG33_885",
+        "old": 1,
+        "new": 2
+      },
+      {
+        "id": "BG33_885_G",
+        "old": 2,
+        "new": 4
+      },
+      {
+        "id": "BG34_444",
+        "old": 8,
+        "new": 9
+      },
+      {
+        "id": "BG34_689",
+        "old": 1,
+        "new": 2
+      },
+      {
+        "id": "BG35_602",
+        "old": 2,
+        "new": 3
+      },
+      {
+        "id": "BG35_602_G",
+        "old": 4,
+        "new": 6
+      },
+      {
+        "id": "BG35_MagicItem_302",
+        "old": 8,
+        "new": 6
+      },
+      {
+        "id": "BG35_MagicItem_710",
+        "old": 2,
+        "new": 3
+      },
+      {
+        "id": "BG35_MagicItem_713",
+        "old": 12,
+        "new": 16
+      },
+      {
+        "id": "BG35_MagicItem_861",
+        "old": 10,
+        "new": 11
+      },
+      {
+        "id": "BG35_MagicItem_920",
+        "old": 12,
+        "new": 14
+      },
+      {
+        "id": "BG36_246",
+        "old": 1,
+        "new": 2
+      },
+      {
+        "id": "BG36_352",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG36_352_G",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG36_509",
+        "old": 3,
+        "new": 2
+      },
+      {
+        "id": "BG36_509_G",
+        "old": 6,
+        "new": 4
+      },
+      {
+        "id": "BG36_514",
+        "old": 7,
+        "new": 8
+      },
+      {
+        "id": "BG36_514_G",
+        "old": 14,
+        "new": 16
+      },
+      {
+        "id": "BG36_733",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG36_733_G",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG36_MagicItem_810t",
+        "old": 8,
+        "new": 12
+      },
+      {
+        "id": "BGDUO31_211",
+        "old": null,
+        "new": 3
+      },
+      {
+        "id": "BGDUO31_211_G",
+        "old": null,
+        "new": 6
+      },
+      {
+        "id": "BGDUO_121",
+        "old": null,
+        "new": 2
+      },
+      {
+        "id": "BGDUO_121_G",
+        "old": null,
+        "new": 4
+      },
+      {
+        "id": "BGS_018",
+        "old": 8,
+        "new": 7
+      },
+      {
+        "id": "TB_BaconUps_085",
+        "old": 16,
+        "new": 14
+      }
+    ],
+    "TECH_LEVEL": [
+      {
+        "id": "BG25_009",
+        "old": 6,
+        "new": 5
+      },
+      {
+        "id": "BG25_009_G",
+        "old": 6,
+        "new": 5
+      },
+      {
+        "id": "BG30_123",
+        "old": 4,
+        "new": 3
+      },
+      {
+        "id": "BG30_123_G",
+        "old": 4,
+        "new": 3
+      },
+      {
+        "id": "BG31_327",
+        "old": 4,
+        "new": 3
+      },
+      {
+        "id": "BG31_327_G",
+        "old": 4,
+        "new": 3
+      },
+      {
+        "id": "BG33_828",
+        "old": 6,
+        "new": 5
+      },
+      {
+        "id": "BG33_828_G",
+        "old": 6,
+        "new": 5
+      },
+      {
+        "id": "BG34_689",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG36_210",
+        "old": 5,
+        "new": 4
+      },
+      {
+        "id": "BG36_210_G",
+        "old": 5,
+        "new": 4
+      },
+      {
+        "id": "BG36_508",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG36_508_G",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BGS_008",
+        "old": 6,
+        "new": 5
+      },
+      {
+        "id": "BGS_018",
+        "old": 6,
+        "new": 5
+      },
+      {
+        "id": "BGS_034",
+        "old": 3,
+        "new": 2
+      },
+      {
+        "id": "TB_BaconUps_057",
+        "old": 6,
+        "new": 5
+      },
+      {
+        "id": "TB_BaconUps_085",
+        "old": 6,
+        "new": 5
+      },
+      {
+        "id": "TB_BaconUps_149",
+        "old": 3,
+        "new": 2
+      }
+    ],
+    "NUM_3": [
+      {
+        "id": "BG26_174",
+        "old": null,
+        "new": 2
+      },
+      {
+        "id": "BG26_174_G",
+        "old": null,
+        "new": 4
+      },
+      {
+        "id": "BG26_810",
+        "old": 2,
+        "new": 3
+      },
+      {
+        "id": "BG26_810_G",
+        "old": 2,
+        "new": 3
+      },
+      {
+        "id": "BG36_209",
+        "old": 5,
+        "new": 4
+      },
+      {
+        "id": "BG36_209_G",
+        "old": 10,
+        "new": 8
+      },
+      {
+        "id": "BG36_356",
+        "old": 50,
+        "new": 1
+      },
+      {
+        "id": "BG36_356_G",
+        "old": 100,
+        "new": 1
+      },
+      {
+        "id": "BG36_523",
+        "old": 5,
+        "new": 6
+      },
+      {
+        "id": "BG36_523_G",
+        "old": 5,
+        "new": 6
+      },
+      {
+        "id": "BG36_851",
+        "old": null,
+        "new": 3
+      },
+      {
+        "id": "BG36_851_G",
+        "old": null,
+        "new": 6
+      },
+      {
+        "id": "BGDUO31_211",
+        "old": null,
+        "new": 3
+      },
+      {
+        "id": "BGDUO31_211_G",
+        "old": null,
+        "new": 6
+      }
+    ],
+    "NUM_4": [
+      {
+        "id": "BG26_810",
+        "old": null,
+        "new": 1
+      },
+      {
+        "id": "BG26_810_G",
+        "old": null,
+        "new": 1
+      },
+      {
+        "id": "BG36_209",
+        "old": 5,
+        "new": 4
+      },
+      {
+        "id": "BG36_209_G",
+        "old": 10,
+        "new": 8
+      }
+    ],
+    "COST": [
+      {
+        "id": "BG28_507",
+        "old": null,
+        "new": 4
+      },
+      {
+        "id": "BG28_604",
+        "old": 2,
+        "new": 3
+      },
+      {
+        "id": "BG28_845",
+        "old": 4,
+        "new": 2
+      },
+      {
+        "id": "BG30_MagicItem_303",
+        "old": 1,
+        "new": null
+      },
+      {
+        "id": "BG30_MagicItem_403",
+        "old": 4,
+        "new": 1
+      },
+      {
+        "id": "BG30_MagicItem_406",
+        "old": 3,
+        "new": 1
+      },
+      {
+        "id": "BG30_MagicItem_410t2",
+        "old": 2,
+        "new": null
+      },
+      {
+        "id": "BG30_MagicItem_423",
+        "old": 1,
+        "new": null
+      },
+      {
+        "id": "BG30_MagicItem_437",
+        "old": 5,
+        "new": 3
+      },
+      {
+        "id": "BG30_MagicItem_540",
+        "old": 3,
+        "new": 5
+      },
+      {
+        "id": "BG30_MagicItem_544t",
+        "old": 4,
+        "new": 1
+      },
+      {
+        "id": "BG30_MagicItem_545",
+        "old": 4,
+        "new": null
+      },
+      {
+        "id": "BG30_MagicItem_547",
+        "old": 3,
+        "new": null
+      },
+      {
+        "id": "BG30_MagicItem_707",
+        "old": 3,
+        "new": 2
+      },
+      {
+        "id": "BG30_MagicItem_713",
+        "old": 3,
+        "new": 2
+      },
+      {
+        "id": "BG30_MagicItem_804",
+        "old": 2,
+        "new": null
+      },
+      {
+        "id": "BG30_MagicItem_821",
+        "old": 2,
+        "new": 1
+      },
+      {
+        "id": "BG30_MagicItem_841",
+        "old": 1,
+        "new": null
+      },
+      {
+        "id": "BG30_MagicItem_868",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG30_MagicItem_879t",
+        "old": 1,
+        "new": null
+      },
+      {
+        "id": "BG30_MagicItem_886",
+        "old": 3,
+        "new": 1
+      },
+      {
+        "id": "BG30_MagicItem_902",
+        "old": 1,
+        "new": null
+      },
+      {
+        "id": "BG30_MagicItem_914",
+        "old": 1,
+        "new": null
+      },
+      {
+        "id": "BG30_MagicItem_919",
+        "old": 7,
+        "new": 2
+      },
+      {
+        "id": "BG30_MagicItem_924",
+        "old": 3,
+        "new": 2
+      },
+      {
+        "id": "BG30_MagicItem_924t",
+        "old": 2,
+        "new": 1
+      },
+      {
+        "id": "BG30_MagicItem_931",
+        "old": 1,
+        "new": null
+      },
+      {
+        "id": "BG30_MagicItem_952",
+        "old": 3,
+        "new": 2
+      },
+      {
+        "id": "BG30_MagicItem_962",
+        "old": 2,
+        "new": 3
+      },
+      {
+        "id": "BG30_MagicItem_973",
+        "old": 1,
+        "new": null
+      },
+      {
+        "id": "BG30_MagicItem_988t",
+        "old": 2,
+        "new": null
+      },
+      {
+        "id": "BG30_MagicItem_993",
+        "old": 4,
+        "new": 3
+      },
+      {
+        "id": "BG30_MagicItem_999",
+        "old": 3,
+        "new": null
+      },
+      {
+        "id": "BG32_MagicItem_170",
+        "old": 2,
+        "new": null
+      },
+      {
+        "id": "BG32_MagicItem_200",
+        "old": null,
+        "new": 2
+      },
+      {
+        "id": "BG32_MagicItem_205",
+        "old": 4,
+        "new": 5
+      },
+      {
+        "id": "BG32_MagicItem_276",
+        "old": 1,
+        "new": null
+      },
+      {
+        "id": "BG32_MagicItem_278",
+        "old": 2,
+        "new": null
+      },
+      {
+        "id": "BG32_MagicItem_283",
+        "old": 3,
+        "new": 1
+      },
+      {
+        "id": "BG32_MagicItem_284",
+        "old": null,
+        "new": 2
+      },
+      {
+        "id": "BG32_MagicItem_300",
+        "old": 2,
+        "new": 1
+      },
+      {
+        "id": "BG32_MagicItem_360",
+        "old": 4,
+        "new": 3
+      },
+      {
+        "id": "BG32_MagicItem_361",
+        "old": 6,
+        "new": 5
+      },
+      {
+        "id": "BG32_MagicItem_363",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG32_MagicItem_367",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG32_MagicItem_801t",
+        "old": 4,
+        "new": 3
+      },
+      {
+        "id": "BG32_MagicItem_808",
+        "old": null,
+        "new": 1
+      },
+      {
+        "id": "BG32_MagicItem_821",
+        "old": 2,
+        "new": 3
+      },
+      {
+        "id": "BG32_MagicItem_822",
+        "old": null,
+        "new": 1
+      },
+      {
+        "id": "BG32_MagicItem_831",
+        "old": 5,
+        "new": 4
+      },
+      {
+        "id": "BG32_MagicItem_894",
+        "old": null,
+        "new": 2
+      },
+      {
+        "id": "BG32_MagicItem_925",
+        "old": 5,
+        "new": 6
+      },
+      {
+        "id": "BG32_MagicItem_957",
+        "old": 3,
+        "new": 2
+      },
+      {
+        "id": "BG32_MagicItem_998",
+        "old": 2,
+        "new": null
+      },
+      {
+        "id": "BG35_MagicItem_152",
+        "old": 1,
+        "new": 2
+      },
+      {
+        "id": "BG35_MagicItem_156",
+        "old": 6,
+        "new": 7
+      },
+      {
+        "id": "BG35_MagicItem_301",
+        "old": 4,
+        "new": 1
+      },
+      {
+        "id": "BG35_MagicItem_306",
+        "old": 4,
+        "new": 2
+      },
+      {
+        "id": "BG35_MagicItem_710",
+        "old": 3,
+        "new": 1
+      },
+      {
+        "id": "BG35_MagicItem_711",
+        "old": 3,
+        "new": 2
+      },
+      {
+        "id": "BG35_MagicItem_712",
+        "old": 5,
+        "new": 1
+      },
+      {
+        "id": "BG35_MagicItem_732",
+        "old": 5,
+        "new": 6
+      },
+      {
+        "id": "BG35_MagicItem_733",
+        "old": 4,
+        "new": 2
+      },
+      {
+        "id": "BG35_MagicItem_742",
+        "old": 5,
+        "new": 3
+      },
+      {
+        "id": "BG35_MagicItem_743",
+        "old": 5,
+        "new": 1
+      },
+      {
+        "id": "BG35_MagicItem_753",
+        "old": 2,
+        "new": null
+      },
+      {
+        "id": "BG35_MagicItem_754",
+        "old": 5,
+        "new": 6
+      },
+      {
+        "id": "BG35_MagicItem_821",
+        "old": 1,
+        "new": null
+      },
+      {
+        "id": "BG35_MagicItem_823",
+        "old": 1,
+        "new": null
+      },
+      {
+        "id": "BG35_MagicItem_840",
+        "old": 2,
+        "new": 3
+      },
+      {
+        "id": "BG35_MagicItem_850t",
+        "old": 1,
+        "new": null
+      },
+      {
+        "id": "BG35_MagicItem_851",
+        "old": 1,
+        "new": null
+      },
+      {
+        "id": "BG35_MagicItem_861",
+        "old": 6,
+        "new": 5
+      },
+      {
+        "id": "BG35_MagicItem_872",
+        "old": 5,
+        "new": 4
+      },
+      {
+        "id": "BG35_MagicItem_924",
+        "old": 5,
+        "new": 6
+      },
+      {
+        "id": "BG35_MagicItem_931",
+        "old": 2,
+        "new": 1
+      },
+      {
+        "id": "BG36_MagicItem_200",
+        "old": 1,
+        "new": 3
+      },
+      {
+        "id": "BG36_MagicItem_202",
+        "old": 2,
+        "new": 4
+      },
+      {
+        "id": "BG36_MagicItem_203",
+        "old": 3,
+        "new": 2
+      },
+      {
+        "id": "BG36_MagicItem_206",
+        "old": null,
+        "new": 3
+      },
+      {
+        "id": "BG36_MagicItem_208",
+        "old": 3,
+        "new": 4
+      },
+      {
+        "id": "BG36_MagicItem_212",
+        "old": 5,
+        "new": 4
+      },
+      {
+        "id": "BG36_MagicItem_213",
+        "old": 1,
+        "new": null
+      },
+      {
+        "id": "BG36_MagicItem_214",
+        "old": 3,
+        "new": 2
+      },
+      {
+        "id": "BG36_MagicItem_220",
+        "old": 1,
+        "new": null
+      },
+      {
+        "id": "BG36_MagicItem_301",
+        "old": 2,
+        "new": 1
+      },
+      {
+        "id": "BG36_MagicItem_361",
+        "old": 1,
+        "new": 3
+      },
+      {
+        "id": "BG36_MagicItem_363",
+        "old": 6,
+        "new": 7
+      },
+      {
+        "id": "BG36_MagicItem_370",
+        "old": 7,
+        "new": 6
+      },
+      {
+        "id": "BG36_MagicItem_371",
+        "old": 1,
+        "new": 5
+      },
+      {
+        "id": "BG36_MagicItem_373",
+        "old": 2,
+        "new": 5
+      },
+      {
+        "id": "BG36_MagicItem_390",
+        "old": 3,
+        "new": 2
+      },
+      {
+        "id": "BG36_MagicItem_800",
+        "old": 2,
+        "new": 3
+      },
+      {
+        "id": "BG36_MagicItem_810",
+        "old": 2,
+        "new": null
+      },
+      {
+        "id": "BG36_MagicItem_810t",
+        "old": 2,
+        "new": null
+      },
+      {
+        "id": "BG36_MagicItem_812",
+        "old": 2,
+        "new": null
+      },
+      {
+        "id": "BG36_MagicItem_841",
+        "old": 3,
+        "new": 2
+      },
+      {
+        "id": "BG36_MagicItem_850",
+        "old": 2,
+        "new": null
+      }
+    ],
+    "SPELL_SCHOOL": [
+      {
+        "id": "BG31_326t",
+        "old": 9,
+        "new": null
+      },
+      {
+        "id": "BG31_326t2",
+        "old": 9,
+        "new": null
+      }
+    ],
+    "NUM_5": [
+      {
+        "id": "BG32_MagicItem_232",
+        "old": 10,
+        "new": 7
+      }
+    ]
+  },
+  "card_type_changed": [],
+  "new_tag_enum_ids": [
+    {
+      "enumID": 230,
+      "cards": 1
+    },
+    {
+      "enumID": 1508,
+      "cards": 11
+    },
+    {
+      "enumID": 3880,
+      "cards": 10
+    },
+    {
+      "enumID": 4744,
+      "cards": 4
+    },
+    {
+      "enumID": 4757,
+      "cards": 47
+    },
+    {
+      "enumID": 4916,
+      "cards": 1
+    },
+    {
+      "enumID": 4921,
+      "cards": 8
+    },
+    {
+      "enumID": 4922,
+      "cards": 1
+    },
+    {
+      "enumID": 4929,
+      "cards": 2
+    },
+    {
+      "enumID": 4933,
+      "cards": 2
+    },
+    {
+      "enumID": 4934,
+      "cards": 2
+    },
+    {
+      "enumID": 4935,
+      "cards": 2
+    },
+    {
+      "enumID": 4940,
+      "cards": 5
+    },
+    {
+      "enumID": 4946,
+      "cards": 1
+    },
+    {
+      "enumID": 4953,
+      "cards": 18
+    },
+    {
+      "enumID": 4955,
+      "cards": 63
+    }
+  ],
+  "gone_tag_enum_ids": [
+    {
+      "enumID": 4050,
+      "cards": 1
+    },
+    {
+      "enumID": 4315,
+      "cards": 1
+    },
+    {
+      "enumID": 4324,
+      "cards": 1
+    },
+    {
+      "enumID": 4588,
+      "cards": 1
+    }
+  ],
+  "_generated_at": "2026-10-18T07:54:34+00:00"
+}

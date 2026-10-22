@@ -1,0 +1,218 @@
+﻿===== 441-568 =====
+441: class TeronReanimationScript:
+442:     """
+443:     Natural language: [x]Choose a friendly minion.
+444:     <b>Start of Combat:</b> Destroy it.
+445:     When you have space,
+446:     ___resummon an exact copy.
+447: 
+448:     依据（2026-09-01 查证）: wiki Battlegrounds/Rapid_Reanimation——
+449:     27.6 起 "When you have space"（此前 "Once"）→ 战斗内腾位补召唤
+450:     族（batch_soc Diremuck Evidence 同族: 官方 33.6 patch notes 同款
+451:     句式）; mechanics: Copy / Destroy / Start of Combat / Summon;
+452:     tags [Targeted]; 33.4 bugfix "summoned minions in the wrong place"
+453:     （官方位置语义敏感，引擎取板尾——Summon 默认位先例）。
+454: 
+455:     Formal spec:
+456:       1. 主动面: needs_target（友方棋盘存活随从）、cost=0（XML 无
+457:          COST tag; defs 缺省 0）、每回合 1 次——每次使用覆写
+458:          hero._teron_uuid（最新选择生效，可每回合重选）
+459:       2. SoC（持久监听）: 按 uuid 定位当前棋盘目标; 已离场（售出/
+460:          三连消耗）→ 落空; 快照 (card_id, golden, snapshot_state)
+461:          → HEALTH=0 + check_deaths（Destroy 语义: 亡语/复生照常，
+462:          Jailer 先例）
+463:       3. 复活: "when you have space"——摧毁释放板位（亡语召唤可能回
+464:          填）后有空位即召唤精确副本（_exact_copy: 同 id/golden/
+465:          buff 并集; 满血入场）; 仍满板 → AFTER_ATTACK 战斗内腾位
+466:          补召（Diremuck 模式; persistent 监听 + in_combat 守卫）
+467:       4. 每场战斗至多一次（选择在下一场 SoC 重新结算; 亡语触发是
+468:          本卡核心收益——Destroy 官方语义触发亡语）
+469: 
+470:     Test: test_batch_hero_combat3.py — 选定→战斗摧毁+亡语触发+副本
+471:     回归（保 buff/金色）/ 满亡语回填板位时 AFTER_ATTACK 腾位补召 /
+472:     目标已售出落空 / 每回合可重选
+473: 
+474:     Params: cost=0（raw 权威——XML 无 COST tag; defs card_type=10
+475:             缺省 0）/ 次数=每回合 1（引擎默认）
+476:     """
+477: 
+478:     needs_target = True
+479: 
+480:     @staticmethod
+481:     def hero_power(hero: "Hero", game: "Game", ctx):
+482:         target = ctx.get("target") if ctx else None
+483:         if not isinstance(target, Minion) or target not in hero.board:
+484:             raise GameStateError("Rapid Reanimation: bad target")
+485:         hero._teron_uuid = target.uuid
+486:         return None
+487: 
+488:     @staticmethod
+489:     def on_bind(hero: "Hero", game: "Game"):
+490:         state: dict = {"pending": None}
+491: 
+492:         def _try_resummon(g) -> None:
+493:             pending = state["pending"]
+494:             if pending is not None and not hero.board_full():
+495:                 copy = g.create_minion(pending["card_id"],
+496:                                        controller=hero,
+497:                                        golden=pending["golden"])
+498:                 copy.restore_state(pending["snap"])
+499:                 if g.summon(hero, copy):
+500:                     state["pending"] = None
+501:             # 满板: 留待 AFTER_ATTACK 腾位（in_combat 守卫在监听器内）
+502: 
+503:         def on_soc(g, hero=None, _owner=hero, **kw):
+504:             if hero is not _owner:
+505:                 return
+506:             uuid = getattr(_owner, "_teron_uuid", None)
+507:             if uuid is None:
+508:                 return
+509:             target = next((m for m in _owner.board
+510:                            if m.uuid == uuid and not m.dead), None)
+511:             if target is None:
+512:                 return
+513:             state["pending"] = {
+514:                 "card_id": target.card_id,
+515:                 "golden": target.is_golden,
+516:                 "snap": target.snapshot_state(),
+517:             }
+518:             # Destroy 统一入口（minion_destroyed 广播; in_combat=True
+519:             # 由监听方自行过滤 "outside combat"）
+520:             g.destroy_minion(target, hero=_owner)
+521:             _try_resummon(g)
+522: 
+523:         def on_after_attack(g, **kw):
+524:             if g.in_combat and state["pending"] is not None:
+525:                 _try_resummon(g)
+526: 
+527:         game.events.register(Listener(
+528:             event=START_OF_COMBAT, owner=hero, callback=on_soc))
+529:         game.events.register(Listener(
+530:             event=AFTER_ATTACK, owner=hero, callback=on_after_attack))
+531: 
+532: 
+533: # ══════════════════ BG22_HERO_002p / BG22_HERO_003p Drek'Thar / Vanndar ══════════════════
+534: 
+535: 
+536: def _space_in_combat_bind(hero: "Hero", game: "Game",
+537:                           pick_fn, gate_turn: Optional[int]):
+538:     """Drek'Thar/Vanndar 共用: "When you have space in combat, summon
+539:     a copy of your highest-X minion"（33.6 重做族; wiki mechanics Copy
+540:     = 精确副本含附魔——Zerek 口径）。
+541: 
+542:     **Start of Combat 单检查点**（2026-09-01 修复）: 依据 = CardDefs.xml
+543:     权威标签 `START_OF_COMBAT=1`（wiki Frostwolf Fervor / Stormpike
+544:     Strength 页 XML tags 同）——文本 "When you have space in combat"
+545:     不等于 AFTER_ATTACK 循环补位。旧实现按文本字面追加 AFTER_ATTACK
+546:     补位 → 双方该族英雄时"每次攻击死一只→立刻补一只"永不终止
+547:     （压测 2001 轮 CombatLoopError，双方各 ~1990 次重生）。
+548:     """
+549: 
+550:     def _try_fill(g) -> None:
+551:         if gate_turn is not None and g.turn < gate_turn:
+552:             return
+553:         while not hero.board_full():
+554:             src = pick_fn(g, hero)
+555:             if src is None:
+556:                 return
+557:             if not g.summon(hero, _exact_copy(g, hero, src)):
+558:                 return
+559: 
+560:     def on_soc(g, hero=None, _owner=hero, **kw):
+561:         if hero is _owner:
+562:             _try_fill(g)
+563: 
+564:     game.events.register(Listener(
+565:         event=START_OF_COMBAT, owner=hero, callback=on_soc))
+566: 
+567: 
+568: class DrekTharScript:
+===== 646-733 =====
+646: class OzumatScript:
+647:     """
+648:     Natural language: [x]When you have space in
+649:     combat, summon a @/@
+650:     Tentacle with <b>Taunt</b>. <i>(Gains
+651:     +1/+1 after you sell a minion!)</i>
+652: 
+653:     依据（2026-09-01 查证）: wiki Battlegrounds/Tentacular——30.4.3
+654:     起 "When you have space in combat"（此前 SoC 一次性）+ 2/2 Tentacle
+655:     （30.4.3 1/1→2/2; 36.2.2 现行）; token BG23_HERO_201pt XML 2/2
+656:     Taunt Beast（pt2..pt6 为皮肤变体同值）; num(0)=2（Tentacle 基值，
+657:     @/@ 双占位同参——wiki 渲染 "2/2" 实证）、num(1)=1（"+1/+1 after
+658:     you sell" 增量）。
+659: 
+660:     Formal spec:
+661:       1. on_bind 注册持久监听器（owner=hero）: minion_sold（controller
+662:          is hero，含卖 Tentacle 自身）→ hero._ozumat_bonus += num(1)
+663:          （攻/血双分量同值——文本 "+1/+1"; 跨战斗持久）
+664:       2. 腾位召唤（**Start of Combat 单检查点** while-空位）: Tentacle
+665:          副本 = create token（XML 2/2 Taunt 基值）+ Buff 差值至
+666:          (num(0)+B, num(0)+B)，B = 已累积出售次数 × num(1)（数据驱动
+667:          ——token 基值经 db 读取）。依据: XML 权威标签 START_OF_COMBAT
+668:          （文本 "When you have space in combat" 不等于 AFTER_ATTACK
+669:          循环补位——后者致无限战斗, 见注册处注释）
+670:       3. 无 Turn/Tier 门槛（30.4.3 起战斗开始即触发）
+671: 
+672:     Test: test_batch_hero_combat3.py — 空位被 2/2 Taunt Tentacle 填
+673:     满 / 卖 2 只后下一场战斗 Tentacle 4/4 / 卖出计数含 Tentacle 自身
+674: 
+675:     Params: {0}=2（Tentacle 基值 script_data_num_1）/ {1}=1（每出售
+676:             增量 script_data_num_2）
+677:     """
+678: 
+679:     passive = True
+680: 
+681:     @staticmethod
+682:     def on_bind(hero: "Hero", game: "Game"):
+683:         d = _power_def(game, "BG23_HERO_201p")
+684: 
+685:         def on_sold(g, minion=None, **kw):
+686:             if not isinstance(minion, Minion) or minion.controller is \
+687:                     not hero:
+688:                 return
+689:             hero._ozumat_bonus = getattr(hero, "_ozumat_bonus", 0) + \
+690:                 (d.num(1) or 0)
+691: 
+692:         def pick(g, owner):
+693:             living = [m for m in owner.board if not m.dead]
+694:             return living[0] if living else None
+695: 
+696:         def _try_fill(g) -> None:
+697:             improved = getattr(hero, "_ozumat_bonus", 0)
+698:             t_def = g.db.get(TENTACLE_ID)
+699:             target_stat = (d.num(0) or 0) + improved
+700:             while not hero.board_full():
+701:                 src = pick(g, hero)
+702:                 if src is None:
+703:                     return
+704:                 tentacle = g.create_minion(TENTACLE_ID, controller=hero)
+705:                 delta = target_stat - t_def.atk
+706:                 delta_h = target_stat - t_def.health
+707:                 if delta > 0 or delta_h > 0:
+708:                     tentacle.add_buff(BuffEnchant(atk=max(0, delta),
+709:                                                   health=max(0, delta_h)))
+710:                 if not g.summon(hero, tentacle):
+711:                     return
+712: 
+713:         def on_soc(g, hero=None, _owner=hero, **kw):
+714:             if hero is _owner:
+715:                 _try_fill(g)
+716: 
+717:         game.events.register(Listener(
+718:             event=MINION_SOLD, owner=hero, callback=on_sold))
+719:         game.events.register(Listener(
+720:             event=START_OF_COMBAT, owner=hero, callback=on_soc))
+721:         # 2026-09-01 修复: 删除 AFTER_ATTACK 补位监听。依据 = CardDefs.xml
+722:         # 权威标签仅有 `START_OF_COMBAT=1`（wiki Tentacular 页 XML tags
+723:         # 同），30.4.3 起文本改为 "When you have space in combat" 但标签
+724:         # 未变。旧实现按文本字面追加 AFTER_ATTACK 补位 → 双方各 7 只嘲讽
+725:         # Tentacle 时"每次攻击死一只→立刻补一只"永不终止（压测 2001 轮
+726:         # 触发 CombatLoopError，3998 次死亡）。SoC 单次补位既能终止又
+727:         # 与权威标签一致。
+728: 
+729: 
+730: # ══════════════════ BG22_HERO_007p(+p2) Queen Azshara ══════════════════
+731: 
+732: 
+733: class AzsharaScript:

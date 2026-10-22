@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head><script>window.BG_PUBLIC = true;</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>酒馆 · AI 对战</title>
+<meta name="theme-color" content="#17191c">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/static/base.css">
+<link rel="stylesheet" href="/assets/arena.css">
+<link rel="stylesheet" href="/static/board.css">
+<link rel="stylesheet" href="/assets/tavern-board.css?v=20261016-effects-left">
+<link rel="stylesheet" href="/assets/mobile-board.css?v=20261016-compact-1">
+</head>
+<body>
+<nav id="support-tools" aria-label="全局导航"><span class="nav-brand">酒馆 · AI 对战</span><button id="rankings-open" type="button">排行榜</button><button id="guide-open" type="button">新手引导</button><button id="game-abandon" class="danger" type="button" hidden>放弃对局</button></nav>
+<button id="feedback-open" type="button" aria-label="反馈问题" title="反馈问题（按住可以拖到别处）"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4Z"/><path d="M8 9h8M8 12h5"/></svg><span>反馈</span></button>
+
+<div class="modal" id="guide-modal" role="dialog" aria-modal="true" aria-labelledby="guide-title"><div class="modal-box support-box">
+  <h3 id="guide-title">欢迎来到酒馆战棋模拟器</h3>
+  <ol>
+    <li><b>开一局：</b>在大厅选择六种计分预设之一，各预设独立排行；或用自定义模式设置对手、英雄和种族。也可以创建房间邀请朋友。</li>
+    <li><b>买牌与出牌：</b>电脑和手机都可拖酒馆牌到手牌购买、拖手牌到战队打出，拖动战队随从换位或拖到上方鲍勃出售。你也能点击卡牌和按钮操作。点牌的详情可查看技能和身材来源。</li>
+    <li><b>结束回合：</b>花完金币后结束回合，等待对手行动并观看战斗。自定义单人对局可使用 AI 提示，点“执行第一项”才会执行建议；计分模式需自行操作。</li>
+  </ol>
+  <p class="small">“反馈”悬浮按钮一直可用，可按住拖到不挡操作的位置。遇到数值异常、操作无效或卡顿，请描述发生的回合和操作步骤；随时也能重新打开这份引导。</p>
+  <div class="bar" style="justify-content:flex-end"><button class="primary" id="guide-close" type="button">知道了，开始体验</button></div>
+</div></div>
+<div class="modal" id="feedback-modal" role="dialog" aria-modal="true" aria-labelledby="feedback-title"><div class="modal-box support-box">
+  <h3 id="feedback-title">反馈问题</h3>
+  <form id="feedback-form">
+    <label for="feedback-category">问题类型</label><select id="feedback-category"><option value="bug">卡牌 / 游戏逻辑</option><option value="performance">卡顿 / 等待过久</option><option value="ui">界面 / 操作</option><option value="other">其他</option></select>
+    <label for="feedback-message">发生了什么？</label><textarea id="feedback-message" minlength="5" maxlength="4000" required placeholder="例如：第 8 回合，对某张随从使用法术后生命值不符合预期。请写下操作步骤、实际结果和你期待的结果。"></textarea>
+    <div class="small">会附带当前昵称、回合和页面错误，便于定位。不需要离开对局；提交失败会保留内容。</div>
+    <p class="support-status" id="feedback-status" role="status" aria-live="polite"></p>
+    <div class="bar" style="justify-content:flex-end"><button id="feedback-close" type="button">关闭</button><button class="primary" id="feedback-send" type="submit">提交反馈</button></div>
+  </form>
+</div></div>
+<div class="modal" id="rankings-modal" role="dialog" aria-modal="true" aria-labelledby="rankings-title"><div class="modal-box rankings-box">
+  <div class="rankings-head"><h3 id="rankings-title">玩家排行榜</h3><div class="bar"><button id="rankings-refresh" type="button">刷新</button><button id="rankings-close" type="button" aria-label="关闭排行榜">关闭</button></div></div>
+  <div class="ranking-filters"><div class="tabs" id="rankings-tabs"><button class="on" data-category="ranked">计分模式</button><button data-category="other">其他模式 · 全部对局</button></div><label id="rankings-preset-control">计分预设 <select id="rankings-preset"><option value="ai6_7">全 AI6.7</option><option value="ai6_6">全 AI6.6</option><option value="ai6_5">全 AI6.5</option><option value="mixed">混合阵容</option><option value="ai4">全 AI4.0</option><option value="ai6_1">全 AI6.1</option><option value="ai5">全 AI5.0</option></select></label><label>排行依据 <select id="rankings-metric"><option value="score">总分</option><option value="wins">吃鸡数</option></select></label></div>
+  <p class="rankings-rule">第 1～8 名分别获得 10、7、5、4、3、2、1、0 分。计分榜只收录固定计分规则的自行操作对局；其他榜包含全部模式的已完成对局与历史成绩。</p>
+  <div id="rankings-status" class="small" role="status" aria-live="polite"></div>
+  <div id="rankings-list"></div>
+</div></div>
+<div class="modal" id="announce-modal" role="dialog" aria-modal="true" aria-labelledby="announce-title"><div class="modal-box support-box">
+  <h3 id="announce-title">公告</h3>
+  <div id="announce-text"></div>
+  <p class="small" id="announce-time"></p>
+  <div class="bar" style="justify-content:flex-end"><button class="primary" id="announce-close" type="button">知道了</button></div>
+</div></div>
+<div class="modal" id="collection-modal" role="dialog" aria-modal="true" aria-label="我的收藏"><div class="modal-box collection-box" id="collection-box"></div></div>
+<div id="lobby"><div class="lobby-box" id="lobby-box"></div></div>
+
+<div id="app" class="nodebug">
+  <div class="panel" id="leaderboard"></div>
+  <div id="main">
+    <div class="panel bar" id="topbar"></div>
+    <div id="spectator-badge" hidden aria-live="polite"></div>
+    <div id="banner"></div>
+    <div id="turn-notice" role="status" aria-live="polite"></div>
+    <div id="arena" aria-label="酒馆棋盘">
+    <div id="sell-zone" aria-hidden="true"><span>拖至商店上方 · 松开出售</span></div>
+    <div id="tavern-host" class="portrait-dock" data-drop="松开出售">
+      <div id="bob-portrait" role="img" aria-label="酒馆老板鲍勃">
+        <img class="bob-art" src="/assets/bob-original.jpg" alt="调酒师鲍勃" decoding="async">
+      </div>
+      <span class="portrait-name">鲍勃的酒馆</span><span id="bob-status" class="small">欢迎来到酒馆</span>
+    </div>
+    <div class="zone" id="tavern-zone" data-drop="松开出售">
+      <div class="zone-title"><span id="tavern-title"></span><span class="bar" id="tavern-buttons"></span><span class="small" id="tavern-races"></span><span class="small" id="tavern-bonus"></span></div>
+      <div class="row" id="shop" data-empty="酒馆是空的"></div>
+    </div>
+    <div class="zone" id="board-zone" data-drop="松开放下">
+      <div class="zone-title"><span><b>你的战队</b> <span class="small" id="board-count"></span></span><span class="small" id="board-hint"></span></div>
+      <div class="row" id="board" data-empty="将随从放到这里，组建你的战队"></div>
+    </div>
+    <div id="bottom">
+      <section class="panel" id="hero-effects" aria-label="饰品、任务与本局效果"><div class="effects-heading"><h3>饰品 · 本局效果 <span id="effects-count"></span></h3><div id="global-bonuses"></div></div><div id="info-strip"></div></section>
+      <div class="panel" id="hero-area"></div>
+      <div class="zone" id="hand-zone" data-drop="松开购买">
+        <div class="zone-title"><span><b id="hand-title">手牌</b></span><span class="small"><span class="hint-mouse">悬停查看 · 拖动出牌 · Esc 取消</span><span class="hint-touch">点牌选择 · 点空位出牌 · 按住拖动</span></span></div>
+        <div class="row" id="hand" data-empty="没有手牌"></div>
+      </div>
+    </div>
+    <div class="panel" id="ctl"></div>
+    <div id="interaction-hint" role="status" aria-live="polite"></div>
+    <div id="command-status" role="status">正在结算…</div>
+    <svg id="target-line" aria-hidden="true"><path></path></svg>
+    <div class="modal stage-replay" id="combat-modal"><div class="modal-box" id="combat-box"></div></div>
+    </div>
+    <details class="panel" id="log-panel">
+      <summary>对局日志　<span class="small"><label><input type="checkbox" id="log-mine"> 只看我的</label>　<label><input type="checkbox" id="log-follow" checked> 自动滚动</label></span></summary>
+      <div id="log"></div>
+    </details>
+  </div>
+  <div class="panel" id="debug"></div>
+</div>
+
+<div class="modal" id="modal"><div class="modal-box" id="modal-box"></div></div>
+<div class="modal" id="opp-modal"><div class="modal-box" id="opp-box" style="width:1000px"></div></div>
+<div class="modal" id="settings-modal"><div class="modal-box" id="settings-box" style="width:460px"></div></div>
+<div class="modal" id="detail-modal"><div class="modal-box" id="detail-box" style="width:640px"></div></div>
+<div id="fx"></div>
+<div id="ins-marker"></div>
+<div id="toast"></div>
+<div id="ai-hint" role="dialog" aria-label="AI 建议"></div>
+<div id="ai-watch"></div>
+<div id="card-preview" class="card-preview" aria-hidden="true"></div>
+<div id="card-actions" class="card-action-dock" role="toolbar" aria-label="所选随从操作"></div>
+
+<script src="/assets/tavern.js?v=20261016-tavern-board"></script>
+<script src="/assets/collection.js?v=20261016-ai67"></script>
+<script src="/assets/social.js?v=20261016-tavern-board"></script>
+<script src="/static/runtime.js"></script>
+<script src="/static/app.js"></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"fdb5134e49e94c9b91b9bd35a0119326","r":1,"spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>

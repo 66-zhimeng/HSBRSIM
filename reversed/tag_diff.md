@@ -1,0 +1,197 @@
+# 官方客户端枚举 vs `hsrl2/tags.py` 差异报告
+
+> 自动生成，勿手改。复现命令：`python tools/rea_net_extract.py` → `python tools/rea_tag_compare.py`
+
+- 生成时间: 2026-10-18T08:05:05+00:00
+- 官方程序集: `C:\Program Files (x86)\Hearthstone\Hearthstone_Data\Managed\Assembly-CSharp.dll`
+- 官方枚举: `GAME_TAG`（1214 个成员）
+- 引擎枚举: `C:\HSagent\hsrl2\tags.py`（126 个成员）
+
+## 1. GameTag 汇总
+
+| 指标 | 数量 |
+|------|------|
+| 官方成员 | 1214 |
+| 引擎成员 | 126 |
+| 同名成员 | 33 |
+| **同名数值不一致** | **11** |
+| 官方有 / 引擎无（缺失） | 1181 |
+| 引擎有 / 官方无（多余） | 93 |
+| 其中引擎内部 tag（注释标注） | 46 |
+| 多余 tag 与官方数值撞号 | 36 |
+
+## 2. 同名数值不一致（真正的协议 bug 面）
+
+| tag | 官方值 | 引擎值 | 差值 |
+|-----|--------|--------|------|
+| `BONUS_KEYWORDS` | 3423 | 1097 | -2326 |
+| `CHOOSE_BOTH` | 419 | 1058 | +639 |
+| `CHOOSE_ONE` | 443 | 1050 | +607 |
+| `DARK_GIFT` | 3627 | 4855 | +1228 |
+| `ENTITY_ID` | 53 | 12 | -41 |
+| `EXHAUSTED` | 43 | 1026 | +983 |
+| `FROZEN` | 260 | 1035 | +775 |
+| `IMMUNE_WHILE_ATTACKING` | 373 | 1044 | +671 |
+| `MEGA_WINDFURY` | 1207 | 826 | -381 |
+| `SILENCED` | 188 | 3309 | +3121 |
+| `STEALTH` | 191 | 19 | -172 |
+
+## 3. 引擎多余 tag（官方枚举无此名）
+
+共 93 个（其中 46 个在源码注释里标注为「引擎内部/非协议」）。前 10 个（按数值）：
+
+| tag | 引擎值 |
+|-----|--------|
+| `RACE` | 200 |
+| `NAME` | 1000 |
+| `TEXT` | 1001 |
+| `BASE_ATK` | 1010 |
+| `BASE_HEALTH` | 1011 |
+| `MAX_HEALTH` | 1012 |
+| `GOLD` | 1013 |
+| `TAVERN_TIER` | 1014 |
+| `UPGRADE_COST` | 1015 |
+| `HEALTH2` | 1016 |
+
+### 3.1 数值撞号（引擎 tag 的数值 = 另一个官方 tag）
+
+| 引擎 tag | 值 | 撞到的官方 tag |
+|---------|----|---------------|
+| `RACE` | 200 | `CARDRACE` |
+| `NAME` | 1000 | `END_TURN_BUTTON_ALTERNATIVE_APPEARANCE` |
+| `UPGRADE_COST` | 1015 | `WAND` |
+| `HEALTH2` | 1016 | `TREAT_AS_PLAYED_HERO_CARD` |
+| `AVENGE_TARGET` | 1020 | `LITERALLY_UNPLAYABLE` |
+| `GOLDEN_NO_TRIPLE_REWARD` | 1025 | `NUM_HERO_POWER_DAMAGE_THIS_GAME` |
+| `WINDFURY_ATTACKS` | 1027 | `TURN_INDICATOR_ALTERNATIVE_APPEARANCE` |
+| `AVENGE_COUNTER` | 1042 | `PREVIOUS_PUZZLE_COMPLETED` |
+| `COUNTER_BATTLECRIES` | 1046 | `HEALTH_DISPLAY_COLOR` |
+| `COUNTER_DEATHRATTLES` | 1047 | `HEALTH_DISPLAY_NEGATIVE` |
+| `LOCKBOX_TURNS_LEFT` | 1048 | `WHIZBANG_DECK_ID` |
+| `BLOOD_GEM_BONUS_HEALTH` | 1052 | `GEARS` |
+| `TAVERN_SPELL_EXTRA_HEALTH` | 1054 | `LUNAHIGHLIGHTHINT` |
+| `ELEMENTAL_EXTRA_HEALTH` | 1055 | `SUPPRESS_JOBS_DONE_VO` |
+| `ELEMENTAL_EXTRA_ATK` | 1057 | `SHRINE` |
+| `HERO_POWER_USED_THIS_TURN` | 1071 | `BLOCK_ALL_INPUT` |
+| `TAVERN_MINION_COST_OVERRIDE` | 1073 | `PUZZLE_MODE` |
+| `FREE_MINION_BUYS_THIS_TURN` | 1075 | `CARD_DOES_NOTHING` |
+| `TRIPLE_REWARD_COINS` | 1077 | `CASTS_WHEN_DRAWN` |
+| `TURN_SKIPPED` | 1078 | `DISPLAY_CARD_ON_MOUSEOVER` |
+
+> 共 36 个撞号。引擎内部 tag 段（1000–1099）与官方协议 tag 大面积重叠，真实日志桥必须按 **tag 名** 映射，绝不能按数值互转。
+
+## 4. 官方有而引擎缺（前 30，按数值）
+
+| 官方 tag | 值 |
+|---------|----|
+| `TAG_NOT_SET` | 0 |
+| `TAG_SCRIPT_DATA_NUM_1` | 2 |
+| `TAG_SCRIPT_DATA_NUM_2` | 3 |
+| `TAG_SCRIPT_DATA_ENT_1` | 4 |
+| `TAG_SCRIPT_DATA_ENT_2` | 5 |
+| `MISSION_EVENT` | 6 |
+| `TIMEOUT` | 7 |
+| `TURN_START` | 8 |
+| `TURN_TIMER_SLUSH` | 9 |
+| `PREMIUM` | 12 |
+| `PLAYSTATE` | 17 |
+| `LAST_AFFECTED_BY` | 18 |
+| `STEP` | 19 |
+| `TURN` | 20 |
+| `FATIGUE` | 22 |
+| `CURRENT_PLAYER` | 23 |
+| `FIRST_PLAYER` | 24 |
+| `RESOURCES_USED` | 25 |
+| `RESOURCES` | 26 |
+| `HERO_ENTITY` | 27 |
+| `MAXHANDSIZE` | 28 |
+| `STARTHANDSIZE` | 29 |
+| `PLAYER_ID` | 30 |
+| `TEAM_ID` | 31 |
+| `TRIGGER_VISUAL` | 32 |
+| `RECENTLY_ARRIVED` | 33 |
+| `PROTECTING` | 34 |
+| `PROTECTED` | 35 |
+| `DEFENDING` | 36 |
+| `PROPOSED_DEFENDER` | 37 |
+
+**酒馆战棋相关缺失 236 个**（名称含 BACON/BATTLEGROUND/TAVERN/TRINKET/QUEST/ANOMALY/SPELLCRAFT/DUO）：
+
+| 官方 tag | 值 |
+|---------|----|
+| `QUEST` | 462 |
+| `QUEST_PROGRESS` | 534 |
+| `QUEST_PROGRESS_TOTAL` | 535 |
+| `QUEST_CONTRIBUTOR` | 541 |
+| `QUEST_REWARD_DATABASE_ID` | 1089 |
+| `SIDE_QUEST` | 1192 |
+| `BACON_DUMMY_PLAYER` | 1349 |
+| `BACON_HERO_POWER_ACTIVATED` | 1398 |
+| `BACON_ODD_PLAYER_OUT` | 1415 |
+| `BACON_WON_LAST_COMBAT` | 1422 |
+| `BACON_IS_KEL_THUZAD` | 1423 |
+| `BACON_TRIPLE_UPGRADE_MINION_ID` | 1429 |
+| `BACON_ACTION_CARD` | 1437 |
+| `IS_BACON_POOL_MINION` | 1456 |
+| `BACON_TRIPLE_CANDIDATE` | 1460 |
+| `BATTLEGROUNDS_PREMIUM_EMOTES` | 1463 |
+| `BACON_COIN_ON_ENEMY_MINIONS` | 1467 |
+| `BACON_TRIPLED_BASE_MINION_ID` | 1471 |
+| `BACON_HERO_CAN_BE_DRAFTED` | 1491 |
+| `BACON_MAX_PLAYER_TECH_LEVEL` | 1494 |
+| `BACON_IN_COMBAT_PHASE` | 1522 |
+| `BACON_HERO_EARLY_ACCESS` | 1554 |
+| `BATTLEGROUNDS_HERO_OVERRIDE_1` | 1577 |
+| `BATTLEGROUNDS_HERO_OVERRIDE_2` | 1578 |
+| `BATTLEGROUNDS_HERO_OVERRIDE_3` | 1579 |
+| `BATTLEGROUNDS_HERO_OVERRIDE_4` | 1580 |
+| `BACON_SELL_VALUE` | 1587 |
+| `BACON_SUBSET_DRAGON` | 1591 |
+| `BACON_SUBSET_MURLOC` | 1592 |
+| `BACON_SUBSET_DEMON` | 1593 |
+| `BACON_SUBSET_BEAST` | 1594 |
+| `BACON_SUBSET_MECH` | 1595 |
+| `BACON_SUBSET_PIRATE` | 1596 |
+| `BACON_VERDANTSPHERES` | 1598 |
+| `BACON_MUKLA_BANANA_SPAWN_COUNT` | 1629 |
+| `BACON_PLAYER_RESULTS_HERO_OVERRIDE` | 1649 |
+| `BACON_SUBSET_ELEMENTALS` | 1688 |
+| `QUESTLINE` | 1725 |
+| `BACON_AVALANCHE` | 1744 |
+| `BACON_COMEONECOMEALL` | 1789 |
+
+## 5. 其它关键枚举
+
+### CardType（TAG_CARDTYPE）
+
+- 官方 22 / 引擎 15，同名 15，数值不一致 0，官方独有 7
+
+### Zone（TAG_ZONE）
+
+- 官方 10 / 引擎 7，同名 6，数值不一致 3，官方独有 4
+
+| 名称 | 官方值 | 引擎值 |
+|------|--------|--------|
+| `HAND` | 3 | 2 |
+| `REMOVEDFROMGAME` | 5 | 6 |
+| `SETASIDE` | 6 | 5 |
+
+引擎独有：`TAVERN`
+
+### Race（TAG_RACE）
+
+- 官方 46 / 引擎 12，同名 12，数值不一致 0，官方独有 34
+
+### SpellSchool / PlayState / Step / Premium（引擎未定义枚举，仅参考）
+
+- **TAG_SPELL_SCHOOL**: NONE=0, ARCANE=1, FIRE=2, FROST=3, NATURE=4, HOLY=5, SHADOW=6, FEL=7, PHYSICAL_COMBAT=8, TAVERN=9, SPELLCRAFT=10, LESSER_TRINKET=11, GREATER_TRINKET=12, UPGRADE=13
+- **TAG_PLAYSTATE**: INVALID=0, PLAYING=1, WINNING=2, LOSING=3, WON=4, LOST=5, TIED=6, DISCONNECTED=7, CONCEDED=8
+- **TAG_STEP**: INVALID=0, BEGIN_FIRST=1, BEGIN_SHUFFLE=2, BEGIN_DRAW=3, BEGIN_MULLIGAN=4, MAIN_BEGIN=5, MAIN_READY=6, MAIN_RESOURCE=7, MAIN_DRAW=8, MAIN_START=9, MAIN_ACTION=10, MAIN_COMBAT=11, MAIN_END=12, MAIN_NEXT=13, FINAL_WRAPUP=14, FINAL_GAMEOVER=15, MAIN_CLEANUP=16, MAIN_START_TRIGGERS=17, MAIN_SET_ACTION_STEP_TYPE=18, MAIN_PRE_ACTION=19, MAIN_POST_ACTION=20
+- **TAG_PREMIUM**: NORMAL=0, GOLDEN=1, DIAMOND=2, SIGNATURE=3, MAX=4
+
+## 6. 结论
+
+- 引擎 `GameTag` 只是官方 1214 个 tag 的**小子集**；模拟器实际用到的 tag 名基本存在，但新版 BG tag 大量未收录。
+- 同名数值不一致是**可执行的 bug 清单**：协议 numeric tag 一旦取值错误，Power.log 差分/真实对局桥会直接对不上。
+- 引擎内部 tag 段（1000+）与官方协议 tag **撞号**，因此真实日志桥必须按 **tag 名**而非数值映射（详见 `docs/OFFICIAL_EXACTNESS.md`）。
+
